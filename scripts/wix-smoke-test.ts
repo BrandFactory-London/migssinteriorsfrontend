@@ -5,7 +5,7 @@
  *
  * Run with: pnpm wix:check
  *
- * Note on the read: this queries the ShowroomProjects collection rather than
+ * Note on the read: this queries the ShowcaseProjects collection rather than
  * calling collections.listDataCollections(). Listing collections is an admin
  * operation — it always 403s for a visitor token by design, not because of a
  * misconfiguration — so it can't tell us anything about the connection. A
@@ -15,7 +15,7 @@
 import { createClient, OAuthStrategy } from "@wix/sdk";
 import { items } from "@wix/data";
 
-const COLLECTION_ID = "ShowroomProjects";
+const COLLECTION_ID = "ShowcaseProjects";
 
 const clientId = process.env.WIX_CLIENT_ID;
 

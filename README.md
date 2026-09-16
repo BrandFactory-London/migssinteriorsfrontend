@@ -25,7 +25,7 @@ Verify the connection:
 pnpm wix:check
 ```
 
-It requests a visitor token and then reads the `ShowroomProjects` collection —
+It requests a visitor token and then reads the `ShowcaseProjects` collection —
 the same kind of call the live pages make. Note that it deliberately does not
 call `listDataCollections`: that is an admin operation and always 403s for a
 visitor token, so it says nothing about whether the connection works.
