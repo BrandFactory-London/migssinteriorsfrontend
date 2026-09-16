@@ -25,9 +25,10 @@ Verify the connection:
 pnpm wix:check
 ```
 
-It requests a visitor token and then calls `listDataCollections`. Exit code `2`
-means the token worked but the headless client lacks Data read permission —
-grant it in the Wix dashboard under the client's permissions.
+It requests a visitor token and then reads the `ShowroomProjects` collection —
+the same kind of call the live pages make. Note that it deliberately does not
+call `listDataCollections`: that is an admin operation and always 403s for a
+visitor token, so it says nothing about whether the connection works.
 
 ## Routes
 

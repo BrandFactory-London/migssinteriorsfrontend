@@ -1,12 +1,21 @@
 /**
  * Verifies the Wix Headless connection end to end:
  *   1. exchanges the client ID for an anonymous visitor token
- *   2. calls the Data API with that token
+ *   2. reads real CMS content with that token
  *
  * Run with: pnpm wix:check
+ *
+ * Note on the read: this queries the ShowroomProjects collection rather than
+ * calling collections.listDataCollections(). Listing collections is an admin
+ * operation — it always 403s for a visitor token by design, not because of a
+ * misconfiguration — so it can't tell us anything about the connection. A
+ * public-collection read is also what the live site actually does, so a pass
+ * here means the pages will work.
  */
 import { createClient, OAuthStrategy } from "@wix/sdk";
-import { collections } from "@wix/data";
+import { items } from "@wix/data";
+
+const COLLECTION_ID = "ShowroomProjects";
 
 const clientId = process.env.WIX_CLIENT_ID;
 
@@ -16,33 +25,22 @@ if (!clientId) {
 }
 
 const client = createClient({
-  modules: { collections },
+  modules: { items },
   auth: OAuthStrategy({ clientId }),
 });
 
 async function main() {
   const tokens = await client.auth.generateVisitorTokens();
-  console.log(
-    `✓ Visitor token issued (expires in ${tokens.accessToken.expiresAt - Math.floor(Date.now() / 1000)}s)`,
-  );
+  const ttl = tokens.accessToken.expiresAt - Math.floor(Date.now() / 1000);
+  console.log(`✓ Visitor token issued (expires in ${ttl}s)`);
 
-  try {
-    const { collections: found } = await client.collections.listDataCollections();
-    console.log(`✓ Data API reachable — ${found?.length ?? 0} collection(s):`);
-    for (const collection of found ?? []) {
-      console.log(`    · ${collection._id} — ${collection.displayName ?? "unnamed"}`);
-    }
-  } catch (error) {
-    // A permissions error still proves the token and transport work — it just
-    // means the headless client has no Data read permission yet.
-    console.warn(
-      "! Token works, but listDataCollections was rejected. Check the headless",
-    );
-    console.warn(
-      "  client's permissions in the Wix dashboard (Manage Data Collections).",
-    );
-    console.warn(`  ${error instanceof Error ? error.message : String(error)}`);
-    process.exitCode = 2;
+  const results = await client.items.query(COLLECTION_ID).find();
+
+  console.log(
+    `✓ Read ${COLLECTION_ID}: ${results.items.length} of ${results.totalCount} item(s)`,
+  );
+  for (const item of results.items.slice(0, 5)) {
+    console.log(`    · ${item._id}`);
   }
 }
 

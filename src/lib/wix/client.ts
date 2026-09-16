@@ -1,7 +1,7 @@
 import "server-only";
 
 import { createClient, OAuthStrategy } from "@wix/sdk";
-import { collections, items } from "@wix/data";
+import { items } from "@wix/data";
 
 /**
  * Server-side Wix Headless client.
@@ -22,7 +22,7 @@ export function getWixClient() {
   }
 
   return createClient({
-    modules: { collections, items },
+    modules: { items },
     auth: OAuthStrategy({ clientId }),
   });
 }
