@@ -9,14 +9,19 @@ export const SITE = {
 } as const;
 
 /**
- * Registered company details.
+ * Registered company details, for formal use — the Contact page's
+ * registered-address block.
  *
- * Taken from the legal pages, which were transcribed from the live site. The
- * Contact artboard carried a different company number and address; these are
- * the verified ones. No VAT number has been verified, so none is shown.
+ * `registeredName` carries the Ltd suffix deliberately, and is named so that
+ * it cannot be mistaken for a general-purpose company name: the legal pages
+ * refer to the company in prose without the suffix, matching the live site,
+ * and keep their own wording rather than reading from here.
+ *
+ * The Contact artboard carried a different company number and address; these
+ * are the verified ones. No VAT number has been verified, so none is shown.
  */
 export const COMPANY = {
-  name: "Migss Tiles & Luxury Interiors",
+  registeredName: "Migss Tiles & Luxury Interiors Ltd",
   number: "16508162",
   address: [
     "Gable House, 1 Balfour Road",

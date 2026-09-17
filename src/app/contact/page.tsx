@@ -121,7 +121,7 @@ export default function ContactPage() {
                 Registered address
               </span>
               <address className="font-heading text-[clamp(19px,4.2vw,23px)] leading-[1.3] not-italic">
-                {COMPANY.name}
+                {COMPANY.registeredName}
                 {COMPANY.address.map((line) => (
                   <span key={line} className="block">
                     {line}
