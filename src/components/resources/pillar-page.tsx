@@ -110,7 +110,18 @@ export const PILLAR_COPY: Record<Pillar, PillarCopy> = {
 /** Shared layout for /resources/bathroom and /resources/kitchen. */
 export function PillarPage({ pillar }: { pillar: Pillar }) {
   const copy = PILLAR_COPY[pillar];
-  const articles = articlesFor(pillar);
+
+  // ArticleLibrary is a client component, so everything handed to it is
+  // serialised across the boundary. An article's `body` holds JSX — including
+  // a list whose items are bare fragments — and React checks those elements
+  // for keys as it serialises them, warning once per item even though nothing
+  // here renders them. The library only ever shows card-level fields, so the
+  // body stays on the server: no warning, and no article text in the payload
+  // of a page that does not display it.
+  const articles = articlesFor(pillar).map((article) => ({
+    ...article,
+    body: undefined,
+  }));
 
   return (
     <>
