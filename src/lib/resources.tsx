@@ -11,9 +11,14 @@ import type * as React from "react";
  * swap is a change of source rather than a reshape of every consumer.
  *
  * Only the featured article carries a full body, matching the one worked
- * example in the Blog Post artboard. The rest are listing-level entries: the
- * article template renders an honest short state for them rather than an empty
- * page, and they disappear the moment real posts arrive.
+ * example in the Blog Post artboard. Everything published — routes, listings,
+ * counts, related reading — flows through `PUBLISHED`, which is the subset
+ * that has one. The remaining entries stay in this file as the content plan
+ * they came from, but the site does not route to them or list them anywhere:
+ * an unwritten slug 404s rather than rendering a thin page.
+ *
+ * When the Wix feed lands, every post arrives with a body, so PUBLISHED
+ * becomes the whole set and the listings fill up on their own.
  */
 
 export type ArticleBlock =
@@ -496,23 +501,31 @@ export const ARTICLES: Article[] = [
   },
 ];
 
+/**
+ * The single source of truth for anything visitor-facing. An article is
+ * published when it has a body; nothing else is routed to or listed.
+ */
+export const PUBLISHED = ARTICLES.filter(
+  (article) => article.body !== undefined,
+);
+
 /** Newest first, the order the blog index and Wix both use. */
-export const ARTICLES_BY_DATE = [...ARTICLES].sort((a, b) =>
+export const ARTICLES_BY_DATE = [...PUBLISHED].sort((a, b) =>
   b.publishedDate.localeCompare(a.publishedDate),
 );
 
 export function getArticle(slug: string) {
-  return ARTICLES.find((article) => article.slug === slug);
+  return PUBLISHED.find((article) => article.slug === slug);
 }
 
 export function articlesFor(category: Pillar) {
-  return ARTICLES.filter((article) => article.category === category).sort(
+  return PUBLISHED.filter((article) => article.category === category).sort(
     (a, b) => b.publishedDate.localeCompare(a.publishedDate),
   );
 }
 
 export function relatedTo(article: Article, count = 3) {
-  return ARTICLES.filter(
+  return PUBLISHED.filter(
     (other) =>
       other.slug !== article.slug && other.category === article.category,
   ).slice(0, count);

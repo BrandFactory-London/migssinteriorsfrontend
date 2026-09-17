@@ -5,6 +5,7 @@ import * as React from "react";
 import { ArticleCard } from "@/components/resources/article-card";
 import { Reveal } from "@/components/reveal";
 import { TAGS, type Article, type Tag } from "@/lib/resources";
+import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type Filter = "All" | Tag;
@@ -13,8 +14,20 @@ type Filter = "All" | Tag;
  * Tag filter over a pillar's articles. The chip row scrolls horizontally —
  * five chips do not fit at 390px, and wrapping pushes the grid down the page.
  */
-export function ArticleLibrary({ articles }: { articles: Article[] }) {
+export function ArticleLibrary({
+  articles,
+  emptyLine,
+}: {
+  articles: Article[];
+  /** Shown when this library has nothing published yet. */
+  emptyLine: string;
+}) {
   const [filter, setFilter] = React.useState<Filter>("All");
+
+  // Filtering one article by five tags is noise. The chips come back on their
+  // own once the feed brings enough articles to span more than one tag.
+  const showFilters =
+    new Set(articles.flatMap((article) => article.tags)).size > 1;
 
   const shown =
     filter === "All"
@@ -26,8 +39,22 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
       ? `${shown.length} articles`
       : `${shown.length} articles in ${filter}`;
 
+  if (articles.length === 0) {
+    return (
+      <div className="border-t border-[var(--migss-divider)] py-[clamp(28px,5vw,56px)]">
+        <p className="mb-[18.4px] max-w-[52ch] text-[15.5px] leading-[1.75] text-migss-text/78">
+          {emptyLine}
+        </p>
+        <ButtonLink href="/contact" className="font-body font-medium">
+          Ask us your question →
+        </ButtonLink>
+      </div>
+    );
+  }
+
   return (
     <>
+      {showFilters ? (
       <div
         role="group"
         aria-label="Filter articles"
@@ -53,6 +80,7 @@ export function ArticleLibrary({ articles }: { articles: Article[] }) {
           );
         })}
       </div>
+      ) : null}
 
       <p
         aria-live="polite"

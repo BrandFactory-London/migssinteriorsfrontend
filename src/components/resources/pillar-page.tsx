@@ -20,6 +20,7 @@ type PillarCopy = {
   otherHref: string;
   otherLabel: string;
   moreLine: string;
+  emptyLine: string;
   next: { href: string; kicker: string; title: string; body: string }[];
 };
 
@@ -41,6 +42,8 @@ export const PILLAR_COPY: Record<Pillar, PillarCopy> = {
     otherHref: "/resources/kitchen",
     otherLabel: "Switch to the kitchen library →",
     moreLine: "More bathroom writing is added most months.",
+    emptyLine:
+      "The bathroom library is being written and the first articles are published as they are finished. In the meantime, ask us anything you would have looked up here — we answer the same way we write.",
     next: [
       {
         href: "/renovation-services/bathroom",
@@ -79,6 +82,8 @@ export const PILLAR_COPY: Record<Pillar, PillarCopy> = {
     otherHref: "/resources/bathroom",
     otherLabel: "Switch to the bathroom library →",
     moreLine: "More kitchen writing is added most months.",
+    emptyLine:
+      "The kitchen library is being written and the first articles are published as they are finished. In the meantime, ask us anything you would have looked up here — we answer the same way we write.",
     next: [
       {
         href: "/renovation-services/kitchen",
@@ -138,10 +143,12 @@ export function PillarPage({ pillar }: { pillar: Pillar }) {
           id="articles"
           className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)]"
         >
-          <ArticleLibrary articles={articles} />
+          <ArticleLibrary articles={articles} emptyLine={copy.emptyLine} />
 
           <div className="mt-7 flex flex-wrap items-center justify-between gap-2.5 border-t border-[var(--migss-divider)] pt-[18.4px]">
-            <p className="text-sm text-migss-text/65">{copy.moreLine}</p>
+            <p className="text-sm text-migss-text/65">
+              {articles.length > 0 ? copy.moreLine : "Writing in progress."}
+            </p>
             <Link
               href={copy.otherHref}
               className="text-sm font-medium text-migss-accent-700 no-underline"

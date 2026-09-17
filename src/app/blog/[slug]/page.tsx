@@ -10,8 +10,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
 import {
-  ARTICLES,
   ARTICLE_AUTHOR,
+  PUBLISHED,
   bylineMeta,
   getArticle,
   relatedTo,
@@ -20,11 +20,11 @@ import { telHref } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
+/** Only articles with a body. An unwritten slug is not a route at all. */
 export function generateStaticParams() {
-  return ARTICLES.map(({ slug }) => ({ slug }));
+  return PUBLISHED.map(({ slug }) => ({ slug }));
 }
 
-/** Only the articles we know about; anything else is a genuine 404. */
 export const dynamicParams = false;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -42,7 +42,9 @@ export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
   const article = getArticle(slug);
 
-  if (!article) notFound();
+  // getArticle only returns published articles, so a missing body here would
+  // mean the data and the route list had drifted apart.
+  if (!article?.body) notFound();
 
   const pillarHref =
     article.category === "Bathroom"
@@ -122,74 +124,53 @@ export default async function ArticlePage({ params }: Props) {
           site — this is the one page meant for sustained reading at 390px.
         */}
         <article className="mx-auto max-w-[680px] px-[clamp(18px,6vw,48px)] pt-[clamp(26px,6vw,52px)]">
-          {article.body ? (
-            article.body.map((block, index) => {
-              if (block.kind === "h2") {
-                return (
-                  <h2
-                    key={index}
-                    className="font-heading mt-[2.1em] mb-[0.55em] text-[clamp(27px,6.6vw,34px)] leading-[1.12] font-normal tracking-[-0.02em] first:mt-0"
-                  >
-                    {block.text}
-                  </h2>
-                );
-              }
-              if (block.kind === "h3") {
-                return (
-                  <h3
-                    key={index}
-                    className="font-heading mt-[1.7em] mb-[0.4em] text-[clamp(21px,5vw,25px)] leading-[1.2] font-normal"
-                  >
-                    {block.text}
-                  </h3>
-                );
-              }
-              if (block.kind === "ul") {
-                return (
-                  <ul
-                    key={index}
-                    className="mb-[1.3em] list-disc pl-[1.15em] marker:text-migss-accent"
-                  >
-                    {block.items.map((item, itemIndex) => (
-                      <li
-                        key={itemIndex}
-                        className="mb-[0.55em] text-[clamp(16.5px,4.4vw,18px)] leading-[1.72] text-migss-text/85"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                );
-              }
+          {article.body.map((block, index) => {
+            if (block.kind === "h2") {
               return (
-                <p
+                <h2
                   key={index}
-                  className="mb-[1.15em] text-[clamp(17px,4.6vw,19px)] leading-[1.78] tracking-[-0.003em] text-pretty text-migss-text/88"
+                  className="font-heading mt-[2.1em] mb-[0.55em] text-[clamp(27px,6.6vw,34px)] leading-[1.12] font-normal tracking-[-0.02em] first:mt-0"
                 >
-                  {block.content}
-                </p>
+                  {block.text}
+                </h2>
               );
-            })
-          ) : (
-            /* Listing-level entry: the full piece has not been written yet, and
-               these disappear entirely when the Wix Blog feed lands. Saying so
-               beats padding the page with filler. */
-            <div className="rounded-[4px] border border-[var(--migss-divider)] border-l-2 border-l-migss-accent p-[18.4px]">
-              <p className="mb-[13.8px] text-[clamp(16.5px,4.4vw,18px)] leading-[1.72] text-migss-text/85">
-                This article is on the writing list and is not published in full
-                yet. If it is the question you are actually trying to answer,
-                ask us directly — we will give you the same answer we would have
-                written.
-              </p>
-              <ButtonLink
-                href="/contact"
-                size="md"
-                className="font-body font-medium"
+            }
+            if (block.kind === "h3") {
+              return (
+                <h3
+                  key={index}
+                  className="font-heading mt-[1.7em] mb-[0.4em] text-[clamp(21px,5vw,25px)] leading-[1.2] font-normal"
+                >
+                  {block.text}
+                </h3>
+              );
+            }
+            if (block.kind === "ul") {
+              return (
+                <ul
+                  key={index}
+                  className="mb-[1.3em] list-disc pl-[1.15em] marker:text-migss-accent"
+                >
+                  {block.items.map((item, itemIndex) => (
+                    <li
+                      key={itemIndex}
+                      className="mb-[0.55em] text-[clamp(16.5px,4.4vw,18px)] leading-[1.72] text-migss-text/85"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              );
+            }
+            return (
+              <p
+                key={index}
+                className="mb-[1.15em] text-[clamp(17px,4.6vw,19px)] leading-[1.78] tracking-[-0.003em] text-pretty text-migss-text/88"
               >
-                Ask us this question →
-              </ButtonLink>
-            </div>
-          )}
+                {block.content}
+              </p>
+            );
+          })}
 
           {article.filedUnder ? (
             <div className="mt-7 flex flex-wrap items-center gap-2 border-t border-[var(--migss-divider)] pt-[18.4px]">

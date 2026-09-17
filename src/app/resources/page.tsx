@@ -16,6 +16,12 @@ export const metadata: Metadata = {
     "Twenty-five years of bathroom and kitchen answers, written down in plain language — costs, construction, layouts and lead times.",
 };
 
+/** Reads correctly at nought and one, not just at the plural. */
+function countLabel(count: number) {
+  if (count === 0) return "In progress";
+  return count === 1 ? "1 article" : `${count} articles`;
+}
+
 const PILLARS = [
   {
     href: "/resources/bathroom",
@@ -23,7 +29,7 @@ const PILLARS = [
     body: "Costs, wet-room construction, tile setting-out, ventilation, underfloor heating and the small-room layouts that actually work. Written for people about to spend twenty to forty thousand pounds on one room.",
     cover: "Bathroom library cover image",
     tags: ["Costs & budgets", "Wet rooms"],
-    count: articlesFor("Bathroom").length,
+    countLabel: countLabel(articlesFor("Bathroom").length),
   },
   {
     href: "/resources/kitchen",
@@ -31,7 +37,7 @@ const PILLARS = [
     body: "Layouts, cabinetry construction, worktop materials, structural openings, appliance planning and the lead times that decide your programme. For anyone weighing up a showroom quote against a builder's.",
     cover: "Kitchen library cover image",
     tags: ["Layouts", "Cabinetry"],
-    count: articlesFor("Kitchen").length,
+    countLabel: countLabel(articlesFor("Kitchen").length),
   },
 ];
 
@@ -69,6 +75,15 @@ const FEATURED_SLUG = "what-a-luxury-bathroom-really-costs-in-2026";
 
 export default function ResourcesPage() {
   const featured = getArticle(FEATURED_SLUG);
+
+  // A stage with nothing published yet is a heading over an empty list, so it
+  // is dropped rather than shown empty. Restores itself as articles land.
+  const stages = STAGES.map((stage) => ({
+    ...stage,
+    articles: stage.slugs
+      .map((slug) => getArticle(slug))
+      .filter((article) => article !== undefined),
+  })).filter((stage) => stage.articles.length > 0);
 
   return (
     <>
@@ -122,7 +137,7 @@ export default function ResourcesPage() {
                     </p>
                     <ul className="flex list-none flex-wrap gap-1.5">
                       <li className="inline-flex items-center rounded-[3px] border border-migss-accent px-2.5 py-[3px] text-[11.5px] text-migss-accent">
-                        {pillar.count} articles
+                        {pillar.countLabel}
                       </li>
                       {pillar.tags.map((tag) => (
                         <li
@@ -157,58 +172,59 @@ export default function ResourcesPage() {
           </ul>
         </section>
 
-        <section
-          id="stages"
-          className="mx-auto mt-[clamp(34px,7vw,80px)] max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)]"
-        >
-          <Reveal>
-            <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
-              Browse by stage
-            </p>
-            <h2 className="mb-7 max-w-[22ch] text-[clamp(28px,6.8vw,44px)] leading-[1.05] font-normal tracking-[-0.02em]">
-              Where are you in this, exactly?
-            </h2>
-          </Reveal>
+        {stages.length > 0 ? (
+          <section
+            id="stages"
+            className="mx-auto mt-[clamp(34px,7vw,80px)] max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)]"
+          >
+            <Reveal>
+              <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+                Browse by stage
+              </p>
+              <h2 className="mb-7 max-w-[22ch] text-[clamp(28px,6.8vw,44px)] leading-[1.05] font-normal tracking-[-0.02em]">
+                Where are you in this, exactly?
+              </h2>
+            </Reveal>
 
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(20px,3.5vw,44px)]">
-            {STAGES.map((stage, index) => (
-              <Reveal key={stage.title} delay={index * 90}>
-                <div className="flex items-baseline gap-2.5 border-b-2 border-migss-accent pb-2.5">
-                  <span className="font-heading text-[13px] text-migss-accent-700 tabular-nums">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="text-[25px] leading-[1.1] font-normal">
-                    {stage.title}
-                  </h3>
-                </div>
-                <p className="mt-[13.8px] mb-[9.2px] text-sm leading-[1.7] text-migss-text/70">
-                  {stage.body}
-                </p>
-                <ul className="list-none">
-                  {stage.slugs.map((slug) => {
-                    const article = getArticle(slug);
-                    if (!article) return null;
-                    return (
-                      <li key={slug}>
-                        <Link
-                          href={`/blog/${slug}`}
-                          className="group flex items-baseline gap-3 border-t border-[var(--migss-divider)] py-[13px] text-inherit no-underline transition-[background-color,padding-left] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/7 [@media(hover:hover)]:hover:pl-2.5"
-                        >
-                          <span className="flex-1 text-[15px] leading-[1.4]">
-                            {article.title}
-                          </span>
-                          <span className="flex-none text-xs text-migss-text/55 tabular-nums transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
-                            {article.minutesToRead} min
-                          </span>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </Reveal>
-            ))}
-          </div>
-        </section>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(20px,3.5vw,44px)]">
+              {stages.map((stage, index) => (
+                <Reveal key={stage.title} delay={index * 90}>
+                  <div className="flex items-baseline gap-2.5 border-b-2 border-migss-accent pb-2.5">
+                    <span className="font-heading text-[13px] text-migss-accent-700 tabular-nums">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="text-[25px] leading-[1.1] font-normal">
+                      {stage.title}
+                    </h3>
+                  </div>
+                  <p className="mt-[13.8px] mb-[9.2px] text-sm leading-[1.7] text-migss-text/70">
+                    {stage.body}
+                  </p>
+                  <ul className="list-none">
+                    {stage.articles.map((article) => {
+                      const slug = article.slug;
+                      return (
+                        <li key={slug}>
+                          <Link
+                            href={`/blog/${slug}`}
+                            className="group flex items-baseline gap-3 border-t border-[var(--migss-divider)] py-[13px] text-inherit no-underline transition-[background-color,padding-left] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/7 [@media(hover:hover)]:hover:pl-2.5"
+                          >
+                            <span className="flex-1 text-[15px] leading-[1.4]">
+                              {article.title}
+                            </span>
+                            <span className="flex-none text-xs text-migss-text/55 tabular-nums transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
+                              {article.minutesToRead} min
+                            </span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </Reveal>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         {featured ? (
           <section
