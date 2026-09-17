@@ -62,12 +62,17 @@ export default function LocationsPage() {
           <h2 className="mb-[13.8px] text-[clamp(24px,5.6vw,32px)] leading-[1.1] font-normal tracking-[-0.02em]">
             Service areas
           </h2>
-          <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-px border border-[var(--migss-divider)] bg-[var(--migss-divider)]">
+          <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] border-t border-l border-[var(--migss-divider)]">
             {LOCATIONS.map((location, index) => (
-              <Reveal as="li" key={location.slug} delay={Math.min(index, 6) * 50}>
+              <Reveal
+                as="li"
+                key={location.slug}
+                delay={Math.min(index, 6) * 50}
+                className="border-r border-b border-[var(--migss-divider)]"
+              >
                 <Link
                   href={`/locations/${location.slug}`}
-                  className="group flex min-h-[104px] items-start gap-3.5 bg-migss-bg p-[clamp(16px,2.6vw,22px)] text-inherit no-underline transition-colors duration-300 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/7"
+                  className="group flex h-full min-h-[104px] items-start gap-3.5 p-[clamp(16px,2.6vw,22px)] text-inherit no-underline transition-colors duration-300 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/7"
                 >
                   <span className="font-heading pt-[5px] text-[13px] text-migss-accent-700 tabular-nums">
                     {String(index + 1).padStart(2, "0")}

@@ -95,11 +95,11 @@ export default async function ProjectDetailPage({ params }: Props) {
         </section>
 
         <section className="relative z-3 mx-auto max-w-[1280px] px-[clamp(16px,4.5vw,48px)]">
-          <dl className="mt-[clamp(-46px,-3.5vw,-30px)] grid grid-cols-[repeat(auto-fit,minmax(min(50%,180px),1fr))] gap-px border border-[var(--migss-divider)] bg-[var(--migss-divider)] shadow-migss-md">
+          <dl className="mt-[clamp(-46px,-3.5vw,-30px)] grid grid-cols-[repeat(auto-fit,minmax(min(50%,180px),1fr))] border-t border-l border-[var(--migss-divider)] bg-migss-bg shadow-migss-md">
             {facts.map((fact) => (
               <div
                 key={fact.label}
-                className="bg-migss-bg px-[clamp(14px,2vw,24px)] py-[18.4px]"
+                className="border-r border-b border-[var(--migss-divider)] px-[clamp(14px,2vw,24px)] py-[18.4px]"
               >
                 <dt className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-text/55">
                   {fact.label}

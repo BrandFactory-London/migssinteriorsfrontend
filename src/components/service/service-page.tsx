@@ -127,13 +127,13 @@ export function ServicePage({ service }: { service: Service }) {
             </ButtonLink>
           </Reveal>
 
-          <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-px border border-[var(--migss-divider)] bg-[var(--migss-divider)]">
+          <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] border-t border-l border-[var(--migss-divider)]">
             {service.spec.items.map((item, index) => (
               <Reveal
                 as="li"
                 key={item.n}
                 delay={index * 50}
-                className="flex flex-col gap-1.5 bg-migss-bg p-[clamp(14px,2.4vw,20px)] transition-colors duration-300 [@media(hover:hover)]:hover:bg-migss-accent/6"
+                className="flex flex-col gap-1.5 border-r border-b border-[var(--migss-divider)] p-[clamp(14px,2.4vw,20px)] transition-colors duration-300 [@media(hover:hover)]:hover:bg-migss-accent/6"
               >
                 <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700 tabular-nums">
                   {item.n}
