@@ -62,7 +62,12 @@ export default function LocationsPage() {
           <h2 className="mb-[13.8px] text-[clamp(24px,5.6vw,32px)] leading-[1.1] font-normal tracking-[-0.02em]">
             Service areas
           </h2>
-          <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] border-t border-l border-[var(--migss-divider)]">
+          {/* auto-rows-fr sizes every row to the tallest card, so Theydon Bois
+              wrapping to two lines does not make row 1 taller than the rest.
+              Gated at 620px because that is where the auto-fit track first
+              yields two columns — below it each card is its own row, and
+              equalising would only add dead space on a phone. */}
+          <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] border-t border-l border-[var(--migss-divider)] min-[620px]:auto-rows-fr">
             {LOCATIONS.map((location, index) => (
               <Reveal
                 as="li"
