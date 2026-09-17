@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/reveal";
 
 const AREAS = [
-  { name: "Wanstead", postcode: "IG8", slug: "wanstead" },
+  { name: "Wanstead", postcode: "E11", slug: "wanstead" },
   { name: "South Woodford", postcode: "E18", slug: "woodford" },
   { name: "Chingford", postcode: "E4", slug: "chingford" },
   { name: "Loughton", postcode: "IG10", slug: "loughton" },
