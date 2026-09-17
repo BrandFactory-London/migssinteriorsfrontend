@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5bab0769-2729-4098-87c3-fef0da1900aa/styles.css">
+<script src="_ds/classical-5bab0769-2729-4098-87c3-fef0da1900aa/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+  :root { --font-body: "Instrument Sans", system-ui, sans-serif; }
+  body { margin: 0; -webkit-text-size-adjust: 100%; letter-spacing: -0.005em; }
+  a { color: var(--color-accent-700); }
+  a:hover { color: var(--color-accent); }
+  @keyframes migssFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .migss-scroll::-webkit-scrollbar { height: 0; }
+  .migss-scroll { scrollbar-width: none; }
+  [data-chip] { transition: background-color .3s ease, color .3s ease, border-color .3s ease; }
+  [data-chip][data-active="true"] { border-color: var(--color-accent); color: var(--color-accent-700); background-color: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+  [data-chip]:focus-visible, [data-card]:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+  @media (hover: hover) {
+    [data-chip]:hover { border-color: var(--color-accent); color: var(--color-accent-700); }
+    [data-card]:hover [data-zoom] { transform: scale(1.05); }
+    [data-card]:hover [data-title] { color: var(--color-accent-700); }
+    [data-card]:hover [data-go] { transform: translateX(4px); opacity: 1; }
+  }
+  [data-card] [data-zoom] { transition: transform .8s cubic-bezier(.2,.65,.2,1); }
+  [data-card] [data-title] { transition: color .3s ease; }
+  [data-card] [data-go] { opacity: .5; transition: transform .35s cubic-bezier(.2,.65,.2,1), opacity .3s ease; }
+</style>
+</helmet>
+
+<div style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden;">
+
+  <header style="position: relative; z-index: 30; border-bottom: 1px solid var(--color-divider);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 14px clamp(16px, 4.5vw, 48px); display: flex; align-items: center; gap: var(--space-4);">
+      <a href="Migss%20Interiors%20Homepage.dc.html" style="margin-right: auto; text-decoration: none; color: var(--color-text); display: flex; align-items: center; gap: 10px;">
+        <span style="width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--color-accent-400); border-radius: 50%; font-family: var(--font-heading); font-size: 15px; color: var(--color-accent-700);">M</span>
+        <span style="display: flex; flex-direction: column; line-height: 1;">
+          <span style="font-family: var(--font-heading); font-size: clamp(18px, 4.8vw, 22px); letter-spacing: 0.05em;">MIGSS</span>
+          <span style="font-size: 8px; letter-spacing: 0.32em; color: var(--color-accent-700); margin-top: 3px;">INTERIORS</span>
+        </span>
+      </a>
+      <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--color-text); text-decoration: none; font-size: 13.5px; letter-spacing: 0.02em;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-700)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 3.5h-3a1.7 1.7 0 0 0-1.7 1.9c.6 5.3 3 9.6 7 12.9 2.1 1.7 4.2 2.7 6.2 3.1a1.7 1.7 0 0 0 1.9-1.7v-2.9a1.7 1.7 0 0 0-1.4-1.7l-2.5-.4a1.7 1.7 0 0 0-1.5.5l-.9.9a14.5 14.5 0 0 1-4.6-4.6l.9-.9a1.7 1.7 0 0 0 .5-1.5l-.4-2.5a1.7 1.7 0 0 0-1.7-1.4z"/></svg>
+        {{ phone }}
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 6vw, 68px) clamp(16px, 4.5vw, 48px) clamp(20px, 4vw, 40px); animation: migssFade .5s ease-out both;">
+      <nav aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: var(--space-4); color: color-mix(in srgb, var(--color-text) 55%, transparent);">
+        <a href="Migss%20Interiors%20Homepage.dc.html" style="color: inherit; text-decoration: none;">Home</a>
+        <span aria-hidden="true">/</span>
+        <span style="color: var(--color-accent-700);">Our Projects</span>
+      </nav>
+      <p style="margin: 0 0 var(--space-3); display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700);">
+        <span style="width: 34px; height: 1px; background: var(--color-accent); display: block;"></span>Portfolio · London &amp; Essex
+      </p>
+      <h1 style="margin: 0 0 var(--space-4); max-width: 22ch; font-weight: 400; font-size: clamp(38px, 9vw, 76px); line-height: 1; letter-spacing: -0.03em; text-wrap: balance;">Finished work, photographed the week we handed it over.</h1>
+      <div style="display: grid; gap: clamp(14px, 3vw, 40px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: end; border-top: 1px solid var(--color-divider); padding-top: var(--space-4);">
+        <p style="margin: 0; font-size: clamp(15px, 4vw, 17.5px); line-height: 1.75; color: color-mix(in srgb, var(--color-text) 80%, transparent); text-wrap: pretty;">Every project below was designed and built by our own team. No styling props, no borrowed photography — these are real homes in Chigwell, Wanstead, Loughton and across Essex, most of which you could visit if the owners are willing.</p>
+        <dl style="margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);">
+          <div><dt style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Completed</dt><dd style="margin: 4px 0 0; font-family: var(--font-heading); font-size: clamp(28px, 7vw, 40px); line-height: 1; font-feature-settings: 'tnum';">600+</dd></div>
+          <div><dt style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Years</dt><dd style="margin: 4px 0 0; font-family: var(--font-heading); font-size: clamp(28px, 7vw, 40px); line-height: 1; font-feature-settings: 'tnum';">25</dd></div>
+          <div><dt style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Google</dt><dd style="margin: 4px 0 0; font-family: var(--font-heading); font-size: clamp(28px, 7vw, 40px); line-height: 1; font-feature-settings: 'tnum';">5.0</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section aria-label="Featured projects" style="max-width: 1280px; margin: 0 auto;">
+      <div class="migss-scroll" style="display: flex; gap: clamp(10px, 2vw, 18px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: clamp(16px, 4.5vw, 48px); -webkit-overflow-scrolling: touch; padding: 0 clamp(16px, 4.5vw, 48px);">
+        <a href="Project%20Detail.dc.html" data-card style="flex: 0 0 min(88vw, 620px); scroll-snap-align: start; position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius-md); text-decoration: none; color: var(--color-neutral-100); display: block;">
+          <div data-zoom style="position: absolute; inset: 0;"><image-slot id="pl-feat-1" shape="rect" placeholder="Featured: Manor Road, Chigwell — marble wet room" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot></div>
+          <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to top, color-mix(in srgb, var(--color-neutral-900) 82%, transparent) 0%, transparent 62%);"></div>
+          <div style="position: absolute; inset: auto 0 0 0; padding: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-300);">Featured · Bathroom</span>
+            <h2 data-title style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(26px, 5.5vw, 38px); line-height: 1.05; letter-spacing: -0.02em; color: inherit;">Book-matched marble wet room</h2>
+            <span style="font-size: 13.5px; color: color-mix(in srgb, var(--color-neutral-100) 78%, transparent);">Manor Road, Chigwell · 4 weeks</span>
+          </div>
+        </a>
+        <a href="Project%20Detail.dc.html" data-card style="flex: 0 0 min(88vw, 620px); scroll-snap-align: start; position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius-md); text-decoration: none; color: var(--color-neutral-100); display: block;">
+          <div data-zoom style="position: absolute; inset: 0;"><image-slot id="pl-feat-2" shape="rect" placeholder="Featured: Nightingale Lane, Wanstead — open-plan kitchen" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot></div>
+          <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to top, color-mix(in srgb, var(--color-neutral-900) 82%, transparent) 0%, transparent 62%);"></div>
+          <div style="position: absolute; inset: auto 0 0 0; padding: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-300);">Featured · Kitchen</span>
+            <h2 data-title style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(26px, 5.5vw, 38px); line-height: 1.05; letter-spacing: -0.02em; color: inherit;">Open-plan kitchen &amp; dining</h2>
+            <span style="font-size: 13.5px; color: color-mix(in srgb, var(--color-neutral-100) 78%, transparent);">Nightingale Lane, Wanstead · 7 weeks</span>
+          </div>
+        </a>
+        <a href="Project%20Detail.dc.html" data-card style="flex: 0 0 min(88vw, 620px); scroll-snap-align: start; position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius-md); text-decoration: none; color: var(--color-neutral-100); display: block;">
+          <div data-zoom style="position: absolute; inset: 0;"><image-slot id="pl-feat-3" shape="rect" placeholder="Featured: Hermitage Walk, South Woodford — whole home" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot></div>
+          <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to top, color-mix(in srgb, var(--color-neutral-900) 82%, transparent) 0%, transparent 62%);"></div>
+          <div style="position: absolute; inset: auto 0 0 0; padding: clamp(16px, 3vw, 28px); display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-300);">Featured · Interior</span>
+            <h2 data-title style="margin: 0; font-family: var(--font-heading); font-weight: 400; font-size: clamp(26px, 5.5vw, 38px); line-height: 1.05; letter-spacing: -0.02em; color: inherit;">Four-bedroom home, top to bottom</h2>
+            <span style="font-size: 13.5px; color: color-mix(in srgb, var(--color-neutral-100) 78%, transparent);">Hermitage Walk, S. Woodford · 14 weeks</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section id="all" style="max-width: 1280px; margin: 0 auto; padding: clamp(30px, 6vw, 68px) clamp(16px, 4.5vw, 48px) 0;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-divider);">
+        <h2 style="margin: 0; font-weight: 400; font-size: clamp(26px, 6vw, 38px); line-height: 1.05; letter-spacing: -0.02em;">All projects</h2>
+        <span style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 58%, transparent); font-feature-settings: 'tnum';">{{ countLabel }}</span>
+      </div>
+
+      <div role="group" aria-label="Filter by category" class="migss-scroll" style="display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: var(--space-3) 0 var(--space-1);">
+        <button type="button" data-chip data-active="{{ isAll }}" onClick="{{ showAll }}" style="flex: none; min-height: 46px; padding: 0 18px; border: 1px solid var(--color-divider); border-radius: 999px; background: transparent; color: inherit; font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer;">All work</button>
+        <button type="button" data-chip data-active="{{ isBath }}" onClick="{{ showBath }}" style="flex: none; min-height: 46px; padding: 0 18px; border: 1px solid var(--color-divider); border-radius: 999px; background: transparent; color: inherit; font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer;">Bathroom</button>
+        <button type="button" data-chip data-active="{{ isKitchen }}" onClick="{{ showKitchen }}" style="flex: none; min-height: 46px; padding: 0 18px; border: 1px solid var(--color-divider); border-radius: 999px; background: transparent; color: inherit; font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer;">Kitchen</button>
+        <button type="button" data-chip data-active="{{ isInterior }}" onClick="{{ showInterior }}" style="flex: none; min-height: 46px; padding: 0 18px; border: 1px solid var(--color-divider); border-radius: 999px; background: transparent; color: inherit; font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer;">Interior</button>
+      </div>
+
+      <div style="margin-top: var(--space-4); display: grid; gap: clamp(20px, 3.5vw, 40px) clamp(14px, 2.5vw, 28px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));">
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="10">
+          <a href="Project%20Detail.dc.html" data-card style="text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: var(--space-3);">
+            <div style="position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius-md);">
+              <div data-zoom style="position: absolute; inset: 0;">
+                <image-slot id="{{ p.slot }}" shape="rect" placeholder="{{ p.placeholder }}" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot>
+              </div>
+              <span style="position: absolute; top: 12px; left: 12px; background: var(--color-bg); border: 1px solid var(--color-divider); border-radius: 2px; padding: 5px 10px; font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent-700);">{{ p.category }}</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <div style="flex: 1;">
+                <h3 data-title style="margin: 0 0 5px; font-weight: 400; font-size: 23px; line-height: 1.15; letter-spacing: -0.01em;">{{ p.title }}</h3>
+                <p style="margin: 0 0 6px; font-size: 13px; letter-spacing: 0.02em; color: color-mix(in srgb, var(--color-text) 58%, transparent);">{{ p.location }}</p>
+                <p style="margin: 0; font-size: 14px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 72%, transparent);">{{ p.blurb }}</p>
+              </div>
+              <span data-go style="flex: none; width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--color-accent); border-radius: 50%; color: var(--color-accent-700);">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+
+      <p style="margin: var(--space-6) 0 0; padding-top: var(--space-4); border-top: 1px solid var(--color-divider); font-size: 14.5px; line-height: 1.75; color: color-mix(in srgb, var(--color-text) 72%, transparent);">Looking for something specific — a wet room in a loft, a kitchen in a listed building? <a href="#enquire" style="color: var(--color-accent-700);">Tell us what you are planning</a> and we will send photographs of the closest projects we have done.</p>
+    </section>
+
+    <section id="enquire" style="margin-top: clamp(36px, 7.5vw, 84px); border-top: 1px solid var(--color-divider); background: color-mix(in srgb, var(--color-surface) 60%, transparent);">
+      <div style="max-width: 1280px; margin: 0 auto; padding: clamp(30px, 6vw, 72px) clamp(16px, 4.5vw, 48px); display: grid; gap: clamp(20px, 3.5vw, 48px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); align-items: start;">
+        <div>
+          <p style="margin: 0 0 var(--space-2); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700);">Start your project</p>
+          <h2 style="margin: 0 0 var(--space-3); font-weight: 400; font-size: clamp(30px, 7.2vw, 46px); line-height: 1.05; letter-spacing: -0.02em;">Like what you have seen? Let's talk about yours.</h2>
+          <p style="margin: 0 0 var(--space-4); font-size: 15px; line-height: 1.75; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Two short steps. We reply the same working day, and we are happy to put you in touch with the owners of any project above.</p>
+          <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: color-mix(in srgb, var(--color-text) 75%, transparent);">
+            <li style="display: flex; gap: 10px; align-items: center;"><svg width="16" height="16" style="flex:none" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>References from past clients on request</li>
+            <li style="display: flex; gap: 10px; align-items: center;"><svg width="16" height="16" style="flex:none" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Fixed written quote, no sales pressure</li>
+            <li style="display: flex; gap: 10px; align-items: center;"><svg width="16" height="16" style="flex:none" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Or call us now on <a href="{{ telHref }}" style="color: var(--color-accent-700);">{{ phone }}</a></li>
+          </ul>
+        </div>
+        <dc-import name="Enquiry Form" phone="{{ phone }}" focus="none" hint-size="100%,620px"></dc-import>
+      </div>
+    </section>
+  </main>
+
+  <dc-import name="Site Footer" phone="{{ phone }}" email="{{ email }}" hint-size="100%,560px"></dc-import>
+  <dc-import name="Site Dock" phone="{{ phone }}" email="{{ email }}" hint-size="100%,0px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;0208 243 2903&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;info@migssinteriors.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
+const ALL_PROJECTS = [
+  { slot: 'pl-1', category: 'Bathroom', title: 'Book-matched marble wet room', location: 'Manor Road, Chigwell', blurb: 'Linear drain, concealed brassware and a matched slab behind the vanity.', placeholder: 'Manor Road, Chigwell — marble wet room' },
+  { slot: 'pl-2', category: 'Kitchen', title: 'Open-plan kitchen & dining', location: 'Nightingale Lane, Wanstead', blurb: 'Structural opening, in-frame cabinetry and a quartz island seating five.', placeholder: 'Nightingale Lane, Wanstead — open-plan kitchen' },
+  { slot: 'pl-3', category: 'Interior', title: 'Four-bedroom home, top to bottom', location: 'Hermitage Walk, S. Woodford', blurb: 'Kitchen, two bathrooms, rewire, joinery and decoration in fourteen weeks.', placeholder: 'Hermitage Walk, South Woodford — whole home' },
+  { slot: 'pl-4', category: 'Bathroom', title: 'Family bathroom & landing', location: 'Forest Drive, Loughton', blurb: 'Two rooms in four weeks with the family in residence throughout.', placeholder: 'Forest Drive, Loughton — family bathroom' },
+  { slot: 'pl-5', category: 'Kitchen', title: 'Handleless kitchen in smoked oak', location: 'Bury Lane, Epping', blurb: 'Full-height pantry run, boiling tap and a mitred porcelain waterfall end.', placeholder: 'Bury Lane, Epping — handleless kitchen' },
+  { slot: 'pl-6', category: 'Interior', title: 'Victorian terrace, restored', location: 'Kings Road, Chingford', blurb: 'Cornice and joinery repaired rather than replaced, parquet relaid.', placeholder: 'Kings Road, Chingford — Victorian terrace' },
+  { slot: 'pl-7', category: 'Bathroom', title: 'Guest ensuite in 4.1 m²', location: 'Nightingale Lane, Wanstead', blurb: 'Wall-hung sanitaryware and a walk-in screen in a former boxroom.', placeholder: 'Wanstead — compact guest ensuite' },
+  { slot: 'pl-8', category: 'Kitchen', title: 'Kitchen opened to the garden', location: 'Shenfield, Brentwood', blurb: 'Rear wall removed, steel goalpost frame, sliding doors and bench seating.', placeholder: 'Shenfield, Brentwood — kitchen with garden doors' },
+  { slot: 'pl-9', category: 'Interior', title: 'Bedroom floor reconfigured', location: 'Coppice Row, Theydon Bois', blurb: 'Four rooms into three, fitted oak dressing room and a new ensuite.', placeholder: 'Theydon Bois — principal bedroom and dressing room' },
+  { slot: 'pl-10', category: 'Bathroom', title: 'Twin-vanity master ensuite', location: 'Hermitage Walk, S. Woodford', blurb: 'Bespoke vanity, backlit mirrors and separately zoned underfloor heating.', placeholder: 'South Woodford — twin-vanity master ensuite' },
+  { slot: 'pl-11', category: 'Interior', title: 'Ground floor opened up', location: 'Butts Green, Hornchurch', blurb: 'Two walls out, media wall joinery, zoned lighting, one continuous stone floor.', placeholder: 'Butts Green, Hornchurch — open-plan ground floor' },
+  { slot: 'pl-12', category: 'Kitchen', title: 'Galley with hidden utility', location: 'Manor Road, Chigwell', blurb: 'A narrow Victorian return, with the laundry behind pocket doors.', placeholder: 'Chigwell — galley kitchen with pantry' }
+];
+
+class Component extends DCLogic {
+  state = { filter: 'All' };
+  renderVals() {
+    const phone = this.props.phone ?? '0208 243 2903';
+    const email = this.props.email ?? 'info@migssinteriors.com';
+    const f = this.state.filter;
+    const projects = f === 'All' ? ALL_PROJECTS : ALL_PROJECTS.filter(p => p.category === f);
+    return {
+      phone, email,
+      telHref: 'tel:' + phone.replace(/\s+/g, ''),
+      projects,
+      countLabel: projects.length + (f === 'All' ? ' projects' : ' ' + f.toLowerCase() + ' projects'),
+      isAll: f === 'All', isBath: f === 'Bathroom', isKitchen: f === 'Kitchen', isInterior: f === 'Interior',
+      showAll: () => this.setState({ filter: 'All' }),
+      showBath: () => this.setState({ filter: 'Bathroom' }),
+      showKitchen: () => this.setState({ filter: 'Kitchen' }),
+      showInterior: () => this.setState({ filter: 'Interior' })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

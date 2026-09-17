@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5bab0769-2729-4098-87c3-fef0da1900aa/styles.css">
+<script src="_ds/classical-5bab0769-2729-4098-87c3-fef0da1900aa/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+  :root { --font-body: "Instrument Sans", system-ui, sans-serif; }
+  body { margin: 0; -webkit-text-size-adjust: 100%; letter-spacing: -0.005em; }
+  a { color: var(--color-accent-700); }
+  a:hover { color: var(--color-accent); }
+  @keyframes migssFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .migss-scroll::-webkit-scrollbar { height: 0; }
+  .migss-scroll { scrollbar-width: none; }
+  [data-dot] { transition: background-color .3s ease, transform .3s ease; }
+  [data-dot][data-on="true"] { background-color: var(--color-accent); transform: scale(1.5); }
+  [data-xlink] { transition: border-color .4s ease, box-shadow .4s ease; }
+  [data-xlink] [data-zoom] { transition: transform .7s cubic-bezier(.2,.65,.2,1); }
+  @media (hover: hover) {
+    [data-xlink]:hover { border-color: var(--color-accent); box-shadow: var(--shadow-md); }
+    [data-xlink]:hover [data-zoom] { transform: scale(1.05); }
+  }
+  [data-shot]:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+</style>
+</helmet>
+
+<div style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden;">
+
+  <header style="position: absolute; top: 0; left: 0; right: 0; z-index: 30; color: var(--color-neutral-100);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 18px clamp(16px, 4.5vw, 48px); display: flex; align-items: center; gap: var(--space-4);">
+      <a href="Migss%20Interiors%20Homepage.dc.html" style="margin-right: auto; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+        <span style="width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid color-mix(in srgb, var(--color-neutral-100) 60%, transparent); border-radius: 50%; font-family: var(--font-heading); font-size: 15px;">M</span>
+        <span style="display: flex; flex-direction: column; line-height: 1;">
+          <span style="font-family: var(--font-heading); font-size: clamp(18px, 4.8vw, 22px); letter-spacing: 0.05em;">MIGSS</span>
+          <span style="font-size: 8px; letter-spacing: 0.32em; color: var(--color-accent-300); margin-top: 3px;">INTERIORS</span>
+        </span>
+      </a>
+      <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: inherit; text-decoration: none; font-size: 13.5px; letter-spacing: 0.02em;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 3.5h-3a1.7 1.7 0 0 0-1.7 1.9c.6 5.3 3 9.6 7 12.9 2.1 1.7 4.2 2.7 6.2 3.1a1.7 1.7 0 0 0 1.9-1.7v-2.9a1.7 1.7 0 0 0-1.4-1.7l-2.5-.4a1.7 1.7 0 0 0-1.5.5l-.9.9a14.5 14.5 0 0 1-4.6-4.6l.9-.9a1.7 1.7 0 0 0 .5-1.5l-.4-2.5a1.7 1.7 0 0 0-1.7-1.4z"/></svg>
+        {{ phone }}
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section style="position: relative; min-height: clamp(480px, 76svh, 860px); display: flex; align-items: flex-end; overflow: hidden;">
+      <div style="position: absolute; inset: 0;">
+        <image-slot id="pd-hero" shape="rect" placeholder="Hero: finished wet room, wide shot" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot>
+      </div>
+      <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to top, color-mix(in srgb, var(--color-neutral-900) 88%, transparent) 0%, color-mix(in srgb, var(--color-neutral-900) 52%, transparent) 44%, color-mix(in srgb, var(--color-neutral-900) 22%, transparent) 100%);"></div>
+      <div style="position: relative; z-index: 2; width: 100%; max-width: 1280px; margin: 0 auto; padding: clamp(96px, 16vh, 150px) clamp(16px, 4.5vw, 48px) clamp(44px, 7vw, 80px); color: var(--color-neutral-100); animation: migssFade 0.6s ease-out both;">
+        <nav aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: var(--space-3); color: color-mix(in srgb, var(--color-neutral-100) 70%, transparent);">
+          <a href="Migss%20Interiors%20Homepage.dc.html" style="color: inherit; text-decoration: none;">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="Our%20Projects.dc.html" style="color: inherit; text-decoration: none;">Projects</a>
+          <span aria-hidden="true">/</span>
+          <span style="color: var(--color-accent-300);">Manor Road, Chigwell</span>
+        </nav>
+        <p style="margin: 0 0 var(--space-3); display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-300);">
+          <span style="width: 34px; height: 1px; background: var(--color-accent-300); display: block;"></span>Bathroom renovation
+        </p>
+        <h1 style="margin: 0 0 var(--space-3); max-width: 20ch; font-weight: 400; font-size: clamp(36px, 8.4vw, 74px); line-height: 1; letter-spacing: -0.03em; text-wrap: balance;">Book-matched marble wet room</h1>
+        <p style="margin: 0; font-size: clamp(14px, 3.6vw, 16px); color: color-mix(in srgb, var(--color-neutral-100) 80%, transparent);">Manor Road, Chigwell · Completed March 2026</p>
+      </div>
+    </section>
+
+    <section style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4.5vw, 48px); position: relative; z-index: 3;">
+      <dl style="margin: clamp(-30px, -3.5vw, -46px) 0 0; background: var(--color-bg); border: 1px solid var(--color-divider); box-shadow: var(--shadow-md); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(50%, 180px), 1fr)); gap: 1px;">
+        <div style="background: var(--color-bg); outline: 1px solid var(--color-divider); padding: var(--space-4) clamp(14px, 2vw, 24px);">
+          <dt style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Category</dt>
+          <dd style="margin: 6px 0 0; font-family: var(--font-heading); font-size: 21px;">Bathroom</dd>
+        </div>
+        <div style="background: var(--color-bg); outline: 1px solid var(--color-divider); padding: var(--space-4) clamp(14px, 2vw, 24px);">
+          <dt style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Location</dt>
+          <dd style="margin: 6px 0 0; font-family: var(--font-heading); font-size: 21px;">Chigwell, IG7</dd>
+        </div>
+        <div style="background: var(--color-bg); outline: 1px solid var(--color-divider); padding: var(--space-4) clamp(14px, 2vw, 24px);">
+          <dt style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Programme</dt>
+          <dd style="margin: 6px 0 0; font-family: var(--font-heading); font-size: 21px; font-feature-settings: 'tnum';">4 weeks</dd>
+        </div>
+        <div style="background: var(--color-bg); outline: 1px solid var(--color-divider); padding: var(--space-4) clamp(14px, 2vw, 24px);">
+          <dt style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Scope</dt>
+          <dd style="margin: 6px 0 0; font-family: var(--font-heading); font-size: 21px;">Strip-out &amp; rebuild</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="story" style="max-width: 1280px; margin: 0 auto; padding: clamp(32px, 6.5vw, 76px) clamp(16px, 4.5vw, 48px) 0;">
+      <div style="display: grid; gap: clamp(20px, 3.5vw, 48px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); align-items: start;">
+        <div>
+          <p style="margin: 0 0 var(--space-2); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700);">The brief</p>
+          <h2 style="margin: 0 0 var(--space-3); font-weight: 400; font-size: clamp(27px, 6.4vw, 40px); line-height: 1.08; letter-spacing: -0.02em;">“A hotel bathroom, but one we can actually clean.”</h2>
+          <p style="margin: 0 0 var(--space-3); font-size: 15.5px; line-height: 1.8; color: color-mix(in srgb, var(--color-text) 82%, transparent); text-wrap: pretty;">The owners had lived with a 1990s ensuite for eleven years: a corner bath nobody used, a shower cubicle that leaked into the ceiling below, and storage in a freestanding cabinet. They wanted one large walk-in shower, twin basins, and no grout lines running through the middle of the room.</p>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.8; color: color-mix(in srgb, var(--color-text) 82%, transparent); text-wrap: pretty;">We moved the doorway 400mm to square off the room, formed a fully tanked wet area with a linear drain, and set out a book-matched Calacatta slab so the veining mirrors across the shower wall. Brassware is concealed, the heating is underfloor and zoned, and every service is accessible behind a removable panel in the adjoining cupboard.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <div style="border: 1px solid var(--color-divider); border-left: 2px solid var(--color-accent); padding: var(--space-4);">
+            <p style="margin: 0 0 8px; font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Before</p>
+            <p style="margin: 0 0 var(--space-3); font-size: 14.5px; line-height: 1.75; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Corner bath, leaking cubicle and a boxed-in soil stack eating 600mm of floor. The stack was re-boxed tight and clad in matching stone, recovering enough width for the second basin.</p>
+            <div style="aspect-ratio: 4 / 3;">
+              <image-slot id="pd-before" shape="rounded" radius="4" placeholder="Before: original 1990s ensuite" style="width: 100%; height: 100%;"></image-slot>
+            </div>
+          </div>
+          <ul style="margin: 0; padding: 0; list-style: none; display: grid; gap: 0;">
+            <li style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 2px; border-top: 1px solid var(--color-divider); font-size: 14.5px;"><span style="color: color-mix(in srgb, var(--color-text) 62%, transparent);">Stone</span><span style="text-align: right;">Calacatta Viola, book-matched</span></li>
+            <li style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 2px; border-top: 1px solid var(--color-divider); font-size: 14.5px;"><span style="color: color-mix(in srgb, var(--color-text) 62%, transparent);">Brassware</span><span style="text-align: right;">Concealed thermostatic, brushed brass</span></li>
+            <li style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 2px; border-top: 1px solid var(--color-divider); font-size: 14.5px;"><span style="color: color-mix(in srgb, var(--color-text) 62%, transparent);">Heating</span><span style="text-align: right;">Wet underfloor, separate zone</span></li>
+            <li style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 2px; border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); font-size: 14.5px;"><span style="color: color-mix(in srgb, var(--color-text) 62%, transparent);">Joinery</span><span style="text-align: right;">Bespoke vanity in oiled oak</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" style="margin-top: clamp(32px, 6.5vw, 76px);">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4.5vw, 48px); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2) var(--space-4);">
+        <h2 style="margin: 0; font-weight: 400; font-size: clamp(26px, 6vw, 38px); line-height: 1.05; letter-spacing: -0.02em;">The finished room</h2>
+        <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent); font-feature-settings: 'tnum';">{{ shotLabel }}</span>
+      </div>
+
+      <div class="migss-scroll" onScroll="{{ onGalleryScroll }}" style="margin-top: var(--space-4); display: flex; gap: clamp(10px, 2vw, 18px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: clamp(16px, 4.5vw, 48px); -webkit-overflow-scrolling: touch; padding: 0 clamp(16px, 4.5vw, 48px);">
+        <figure data-shot style="margin: 0; flex: 0 0 min(88vw, 720px); scroll-snap-align: center;">
+          <div style="aspect-ratio: 3 / 2;"><image-slot id="pd-g1" shape="rounded" radius="4" class="plate" placeholder="01 — Wide view of the wet area" style="width: 100%; height: 100%;"></image-slot></div>
+          <figcaption style="margin-top: 10px; font-size: 13px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">01 · The wet area, seen from the doorway</figcaption>
+        </figure>
+        <figure data-shot style="margin: 0; flex: 0 0 min(88vw, 720px); scroll-snap-align: center;">
+          <div style="aspect-ratio: 3 / 2;"><image-slot id="pd-g2" shape="rounded" radius="4" class="plate" placeholder="02 — Book-matched slab detail" style="width: 100%; height: 100%;"></image-slot></div>
+          <figcaption style="margin-top: 10px; font-size: 13px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">02 · Veining mirrored across the shower wall</figcaption>
+        </figure>
+        <figure data-shot style="margin: 0; flex: 0 0 min(88vw, 720px); scroll-snap-align: center;">
+          <div style="aspect-ratio: 3 / 2;"><image-slot id="pd-g3" shape="rounded" radius="4" class="plate" placeholder="03 — Twin vanity and mirrors" style="width: 100%; height: 100%;"></image-slot></div>
+          <figcaption style="margin-top: 10px; font-size: 13px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">03 · Bespoke oak vanity with backlit mirrors</figcaption>
+        </figure>
+        <figure data-shot style="margin: 0; flex: 0 0 min(88vw, 720px); scroll-snap-align: center;">
+          <div style="aspect-ratio: 3 / 2;"><image-slot id="pd-g4" shape="rounded" radius="4" class="plate" placeholder="04 — Brassware close-up" style="width: 100%; height: 100%;"></image-slot></div>
+          <figcaption style="margin-top: 10px; font-size: 13px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">04 · Concealed thermostatic brassware in brushed brass</figcaption>
+        </figure>
+        <figure data-shot style="margin: 0; flex: 0 0 min(88vw, 720px); scroll-snap-align: center;">
+          <div style="aspect-ratio: 3 / 2;"><image-slot id="pd-g5" shape="rounded" radius="4" class="plate" placeholder="05 — Linear drain and floor setting-out" style="width: 100%; height: 100%;"></image-slot></div>
+          <figcaption style="margin-top: 10px; font-size: 13px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">05 · Linear drain, with falls formed in the screed</figcaption>
+        </figure>
+        <figure data-shot style="margin: 0; flex: 0 0 min(88vw, 720px); scroll-snap-align: center;">
+          <div style="aspect-ratio: 3 / 2;"><image-slot id="pd-g6" shape="rounded" radius="4" class="plate" placeholder="06 — Niche and storage detail" style="width: 100%; height: 100%;"></image-slot></div>
+          <figcaption style="margin-top: 10px; font-size: 13px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">06 · Recessed niche cut from the same slab</figcaption>
+        </figure>
+      </div>
+
+      <div aria-hidden="true" style="max-width: 1280px; margin: var(--space-3) auto 0; padding: 0 clamp(16px, 4.5vw, 48px); display: flex; gap: 7px; align-items: center;">
+        <span data-dot data-on="{{ on1 }}" style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-neutral-300); display: block;"></span>
+        <span data-dot data-on="{{ on2 }}" style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-neutral-300); display: block;"></span>
+        <span data-dot data-on="{{ on3 }}" style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-neutral-300); display: block;"></span>
+        <span data-dot data-on="{{ on4 }}" style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-neutral-300); display: block;"></span>
+        <span data-dot data-on="{{ on5 }}" style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-neutral-300); display: block;"></span>
+        <span data-dot data-on="{{ on6 }}" style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-neutral-300); display: block;"></span>
+        <span style="margin-left: 10px; font-size: 12px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Swipe for more</span>
+      </div>
+    </section>
+
+    <section style="margin-top: clamp(32px, 6.5vw, 76px); background: var(--color-neutral-900); color: var(--color-neutral-200);">
+      <div style="max-width: 1280px; margin: 0 auto; padding: clamp(28px, 5.5vw, 64px) clamp(16px, 4.5vw, 48px); display: grid; gap: clamp(18px, 3vw, 40px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); align-items: center;">
+        <blockquote style="margin: 0; padding: 0 0 0 var(--space-4); border-left: 2px solid var(--color-accent-400);">
+          <p style="margin: 0 0 var(--space-3); font-family: var(--font-heading); font-size: clamp(21px, 5.2vw, 30px); line-height: 1.3; font-style: italic; color: var(--color-neutral-100);">“They set the stone out on the floor and walked us through every cut before anything went on the wall. Four weeks, to the day.”</p>
+          <footer style="font-size: 11.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-neutral-400);">Homeowner · Manor Road, Chigwell</footer>
+        </blockquote>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.8; color: var(--color-neutral-400);">Guaranteed for ten years on labour, with 0% interest finance available over five.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <a href="#enquire" class="btn" style="flex: 1 1 190px; min-height: 54px; font-family: var(--font-body); font-weight: 500; font-size: 14.5px; color: var(--color-neutral-900); background: var(--color-neutral-100); border-color: var(--color-neutral-100);">Start a similar project</a>
+            <a href="Bathroom%20Renovation.dc.html" class="btn" style="flex: 1 1 190px; min-height: 54px; font-family: var(--font-body); font-weight: 500; font-size: 14.5px; color: var(--color-accent-300); border-color: var(--color-accent-400);">About bathroom renovation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="more" style="max-width: 1280px; margin: 0 auto; padding: clamp(32px, 6.5vw, 76px) clamp(16px, 4.5vw, 48px) 0;">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-6);">
+        <div>
+          <p style="margin: 0 0 var(--space-2); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700);">More projects</p>
+          <h2 style="margin: 0; font-weight: 400; font-size: clamp(26px, 6vw, 38px); line-height: 1.05; letter-spacing: -0.02em;">Keep looking</h2>
+        </div>
+        <a href="Our%20Projects.dc.html" style="font-size: 14px; font-weight: 500; text-decoration: none;">All projects →</a>
+      </div>
+      <div style="display: grid; gap: clamp(14px, 3vw, 28px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));">
+        <a href="Project%20Detail.dc.html" data-xlink style="border: 1px solid var(--color-divider); border-radius: var(--radius-md); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column;">
+          <div style="position: relative; aspect-ratio: 16 / 11; overflow: hidden;">
+            <div data-zoom style="position: absolute; inset: 0;"><image-slot id="pd-m1" shape="rect" placeholder="Forest Drive, Loughton — family bathroom" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot></div>
+          </div>
+          <div style="padding: var(--space-4); display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Bathroom</span>
+            <h3 style="margin: 0; font-weight: 400; font-size: 23px; line-height: 1.15;">Family bathroom &amp; landing</h3>
+            <p style="margin: 0; font-size: 13px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">Forest Drive, Loughton</p>
+          </div>
+        </a>
+        <a href="Project%20Detail.dc.html" data-xlink style="border: 1px solid var(--color-divider); border-radius: var(--radius-md); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column;">
+          <div style="position: relative; aspect-ratio: 16 / 11; overflow: hidden;">
+            <div data-zoom style="position: absolute; inset: 0;"><image-slot id="pd-m2" shape="rect" placeholder="Nightingale Lane, Wanstead — open-plan kitchen" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot></div>
+          </div>
+          <div style="padding: var(--space-4); display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Kitchen</span>
+            <h3 style="margin: 0; font-weight: 400; font-size: 23px; line-height: 1.15;">Open-plan kitchen &amp; dining</h3>
+            <p style="margin: 0; font-size: 13px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">Nightingale Lane, Wanstead</p>
+          </div>
+        </a>
+        <a href="Project%20Detail.dc.html" data-xlink style="border: 1px solid var(--color-divider); border-radius: var(--radius-md); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column;">
+          <div style="position: relative; aspect-ratio: 16 / 11; overflow: hidden;">
+            <div data-zoom style="position: absolute; inset: 0;"><image-slot id="pd-m3" shape="rect" placeholder="Hermitage Walk, South Woodford — whole home" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot></div>
+          </div>
+          <div style="padding: var(--space-4); display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Interior</span>
+            <h3 style="margin: 0; font-weight: 400; font-size: 23px; line-height: 1.15;">Four-bedroom home, top to bottom</h3>
+            <p style="margin: 0; font-size: 13px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">Hermitage Walk, S. Woodford</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section id="enquire" style="margin-top: clamp(36px, 7.5vw, 84px); border-top: 1px solid var(--color-divider); background: color-mix(in srgb, var(--color-surface) 60%, transparent);">
+      <div style="max-width: 1280px; margin: 0 auto; padding: clamp(30px, 6vw, 72px) clamp(16px, 4.5vw, 48px); display: grid; gap: clamp(20px, 3.5vw, 48px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); align-items: start;">
+        <div>
+          <p style="margin: 0 0 var(--space-2); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700);">Start your project</p>
+          <h2 style="margin: 0 0 var(--space-3); font-weight: 400; font-size: clamp(30px, 7.2vw, 46px); line-height: 1.05; letter-spacing: -0.02em;">Book your free consultation</h2>
+          <p style="margin: 0 0 var(--space-4); font-size: 15px; line-height: 1.75; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Two short steps. We reply the same working day, and we can send the full photo set from this project if it helps you picture yours.</p>
+          <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: color-mix(in srgb, var(--color-text) 75%, transparent);">
+            <li style="display: flex; gap: 10px; align-items: center;"><svg width="16" height="16" style="flex:none" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Fixed written quote, no sales pressure</li>
+            <li style="display: flex; gap: 10px; align-items: center;"><svg width="16" height="16" style="flex:none" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>10-year labour guarantee, 0% finance available</li>
+            <li style="display: flex; gap: 10px; align-items: center;"><svg width="16" height="16" style="flex:none" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Or call us now on <a href="{{ telHref }}" style="color: var(--color-accent-700);">{{ phone }}</a></li>
+          </ul>
+        </div>
+        <dc-import name="Enquiry Form" phone="{{ phone }}" focus="bathroom" hint-size="100%,620px"></dc-import>
+      </div>
+    </section>
+  </main>
+
+  <div style="margin-top: clamp(36px, 7.5vw, 84px);">
+    <dc-import name="Site Footer" phone="{{ phone }}" email="{{ email }}" hint-size="100%,560px"></dc-import>
+  </div>
+  <dc-import name="Site Dock" phone="{{ phone }}" email="{{ email }}" hint-size="100%,0px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;0208 243 2903&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;info@migssinteriors.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
+class Component extends DCLogic {
+  state = { shot: 1 };
+  renderVals() {
+    const phone = this.props.phone ?? '0208 243 2903';
+    const email = this.props.email ?? 'info@migssinteriors.com';
+    const n = this.state.shot;
+    return {
+      phone, email,
+      telHref: 'tel:' + phone.replace(/\s+/g, ''),
+      shotLabel: n + ' / 6',
+      on1: n === 1, on2: n === 2, on3: n === 3, on4: n === 4, on5: n === 5, on6: n === 6,
+      onGalleryScroll: (e) => {
+        const el = e.currentTarget;
+        const kids = Array.from(el.children);
+        const mid = el.scrollLeft + el.clientWidth / 2;
+        let best = 0, bestD = Infinity;
+        kids.forEach((k, i) => {
+          const c = k.offsetLeft + k.offsetWidth / 2;
+          const d = Math.abs(c - mid);
+          if (d < bestD) { bestD = d; best = i; }
+        });
+        if (best + 1 !== this.state.shot) this.setState({ shot: best + 1 });
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>
