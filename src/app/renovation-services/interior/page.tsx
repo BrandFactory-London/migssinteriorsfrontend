@@ -1,14 +1,25 @@
 import type { Metadata } from "next";
 
+import { ServicePage } from "@/components/service/service-page";
+import { SiteChrome } from "@/components/site-chrome";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { SERVICES } from "@/lib/services";
+
+const service = SERVICES.interior;
+
 export const metadata: Metadata = {
-  title: "Interior Renovation",
+  title: service.title,
+  description: service.metaDescription,
 };
 
 export default function Page() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-16">
-      <h1 className="text-2xl font-semibold tracking-tight">Interior Renovation</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Placeholder.</p>
-    </main>
+    <>
+      <SiteHeader />
+      <ServicePage service={service} />
+      <SiteFooter />
+      <SiteChrome />
+    </>
   );
 }

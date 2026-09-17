@@ -7,6 +7,18 @@ import { SITE, telHref } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const PROJECT_TYPES = ["Bathroom", "Kitchen", "Whole home", "Something else"];
+
+/**
+ * Which radio a service page pre-selects. `interior` maps to "Whole home":
+ * the page is about whole-home work, the option is worded for the visitor.
+ */
+const FOCUS_TO_TYPE = {
+  bathroom: "Bathroom",
+  kitchen: "Kitchen",
+  interior: "Whole home",
+} as const;
+
+export type EnquiryFocus = keyof typeof FOCUS_TO_TYPE;
 const BUDGETS = [
   "Not sure yet",
   "£15k – £30k",
@@ -30,7 +42,7 @@ type Step = 1 | 2 | 3;
  * state without a backend. Wiring it to a Wix Data collection or a form
  * endpoint is a follow-up, and deliberately not bundled into this design pass.
  */
-export function EnquiryForm() {
+export function EnquiryForm({ focus }: { focus?: EnquiryFocus }) {
   const [step, setStep] = React.useState<Step>(1);
   const headingRef = React.useRef<HTMLHeadingElement>(null);
   const previousStep = React.useRef(step);
@@ -180,6 +192,9 @@ export function EnquiryForm() {
                       type="radio"
                       name="projectType"
                       value={type}
+                      defaultChecked={
+                        focus !== undefined && FOCUS_TO_TYPE[focus] === type
+                      }
                       className="peer sr-only"
                     />
                     <span

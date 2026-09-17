@@ -1,14 +1,21 @@
+import Link from "next/link";
+
 import { SITE, telHref, mailHref } from "@/lib/site";
 import { Wordmark } from "@/components/wordmark";
 
-const EXPLORE = [
-  { href: "#top", label: "Home" },
+const SERVICES_LINKS = [
   { href: "/renovation-services", label: "Renovation Services" },
+  { href: "/renovation-services/bathroom", label: "Bathroom Renovation" },
+  { href: "/renovation-services/kitchen", label: "Kitchen Renovation" },
+  { href: "/renovation-services/interior", label: "Interior Renovation" },
+];
+
+const EXPLORE = [
+  { href: "/", label: "Home" },
   { href: "/our-projects", label: "Our Projects" },
   { href: "/resources", label: "Resources & Insights" },
   { href: "/locations", label: "Locations" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "#enquire", label: "Contact" },
 ];
 
 const LEGAL = [
@@ -39,7 +46,11 @@ export function SiteFooter() {
           </p>
         </div>
 
+        <FooterNav heading="Services" links={SERVICES_LINKS} />
         <FooterNav heading="Explore" links={EXPLORE} />
+        {/* The new shared footer drops the Legal column. Kept here because
+            removing the only route to the policy pages is a compliance
+            regression rather than a design change. */}
         <FooterNav heading="Legal" links={LEGAL} />
       </div>
 
@@ -54,6 +65,9 @@ export function SiteFooter() {
   );
 }
 
+const footerLinkClass =
+  "flex min-h-[44px] items-center text-[15px] text-inherit no-underline transition-colors [@media(hover:hover)]:hover:text-migss-accent-300";
+
 function FooterNav({
   heading,
   links,
@@ -66,15 +80,18 @@ function FooterNav({
       <h2 className="font-body mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-neutral-400">
         {heading}
       </h2>
-      {links.map((link) => (
-        <a
-          key={link.label}
-          href={link.href}
-          className="flex min-h-[44px] items-center text-[15px] text-inherit no-underline transition-colors [@media(hover:hover)]:hover:text-migss-accent-300"
-        >
-          {link.label}
-        </a>
-      ))}
+      {links.map((link) =>
+        // In-page anchors stay plain <a>; they never change route.
+        link.href.startsWith("#") ? (
+          <a key={link.label} href={link.href} className={footerLinkClass}>
+            {link.label}
+          </a>
+        ) : (
+          <Link key={link.label} href={link.href} className={footerLinkClass}>
+            {link.label}
+          </Link>
+        ),
+      )}
     </nav>
   );
 }

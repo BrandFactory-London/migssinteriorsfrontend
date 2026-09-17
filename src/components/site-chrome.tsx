@@ -2,12 +2,15 @@
 
 import * as React from "react";
 
-import { SITE, telHref, SECTIONS } from "@/lib/site";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { SITE, telHref, NAV } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type DockItem = {
-  id: string;
+  href: string;
   label: string;
   /** Hidden below 1000px, where the Menu button takes over. */
   desktopOnly?: boolean;
@@ -29,7 +32,7 @@ const iconProps = {
 
 const DOCK_ITEMS: DockItem[] = [
   {
-    id: "top",
+    href: "/",
     label: "Home",
     icon: (
       <svg {...iconProps}>
@@ -38,9 +41,8 @@ const DOCK_ITEMS: DockItem[] = [
     ),
   },
   {
-    id: "services",
+    href: "/renovation-services",
     label: "Services",
-    desktopOnly: true,
     icon: (
       <svg {...iconProps}>
         <path d="M4 20V8l8-4 8 4v12" />
@@ -49,45 +51,35 @@ const DOCK_ITEMS: DockItem[] = [
     ),
   },
   {
-    id: "work",
-    label: "Projects",
-    icon: (
-      <svg {...iconProps}>
-        <rect x="4" y="4" width="7" height="16" />
-        <rect x="14" y="4" width="6" height="7" />
-        <rect x="14" y="14" width="6" height="6" />
-      </svg>
-    ),
-  },
-  {
-    id: "resources",
-    label: "Insights",
+    href: "/renovation-services/bathroom",
+    label: "Bathrooms",
     desktopOnly: true,
     icon: (
       <svg {...iconProps}>
-        <path d="M5 4h14v16H5z" />
-        <path d="M9 9h6M9 13h6" />
+        <path d="M4 12h16v4a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z" />
+        <path d="M7 12V6a2.5 2.5 0 0 1 5 0" />
       </svg>
     ),
   },
   {
-    id: "areas",
-    label: "Locations",
-    icon: (
-      <svg {...iconProps}>
-        <path d="M19 10.2c0 5.3-7 10.8-7 10.8s-7-5.5-7-10.8a7 7 0 0 1 14 0z" />
-        <circle cx="12" cy="10" r="2.4" />
-      </svg>
-    ),
-  },
-  {
-    id: "about",
-    label: "About",
+    href: "/renovation-services/kitchen",
+    label: "Kitchens",
     desktopOnly: true,
     icon: (
       <svg {...iconProps}>
-        <circle cx="12" cy="8.5" r="3.6" />
-        <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
+        <rect x="4" y="4" width="16" height="16" />
+        <path d="M4 10h16M9 4v6" />
+      </svg>
+    ),
+  },
+  {
+    href: "/renovation-services/interior",
+    label: "Interiors",
+    desktopOnly: true,
+    icon: (
+      <svg {...iconProps}>
+        <path d="M3 20h18M6 20V9l6-4 6 4v11" />
+        <path d="M10 20v-5h4v5" />
       </svg>
     ),
   },
@@ -100,7 +92,7 @@ const DOCK_ITEMS: DockItem[] = [
  */
 export function SiteChrome() {
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const active = useActiveSection();
+  const pathname = usePathname();
   const closeButtonRef = React.useRef<HTMLButtonElement>(null);
 
   // Lock the page behind the overlay, and restore scroll on close.
@@ -158,10 +150,10 @@ export function SiteChrome() {
           </div>
 
           <nav className="flex flex-1 flex-col overflow-y-auto px-[clamp(16px,4.5vw,48px)] pt-[18px] pb-7">
-            {SECTIONS.map((section, index) => (
-              <a
-                key={section.id}
-                href={`#${section.id}`}
+            {NAV.map((item, index) => (
+              <Link
+                key={item.href}
+                href={item.href}
                 onClick={() => setMenuOpen(false)}
                 className="flex min-h-[64px] items-baseline gap-3.5 border-b border-migss-neutral-100/15 pt-3.5 text-inherit no-underline transition-colors active:text-migss-accent-300"
               >
@@ -169,9 +161,9 @@ export function SiteChrome() {
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="font-heading text-[28px] leading-[1.1]">
-                  {section.label}
+                  {item.label}
                 </span>
-              </a>
+              </Link>
             ))}
 
             <div className="mt-auto flex flex-col gap-2.5 pt-7">
@@ -201,9 +193,9 @@ export function SiteChrome() {
         >
           {DOCK_ITEMS.map((item) => (
             <DockLink
-              key={item.id}
+              key={item.href}
               item={item}
-              active={active === item.id}
+              active={isActive(pathname, item.href)}
             />
           ))}
 
@@ -277,10 +269,10 @@ function DockLabel({ children }: { children: React.ReactNode }) {
 
 function DockLink({ item, active }: { item: DockItem; active: boolean }) {
   return (
-    <a
-      href={`#${item.id}`}
+    <Link
+      href={item.href}
       title={item.label}
-      aria-current={active ? "true" : undefined}
+      aria-current={active ? "page" : undefined}
       className={cn(
         dockItemClass,
         item.desktopOnly && "hidden min-[1000px]:flex",
@@ -289,49 +281,16 @@ function DockLink({ item, active }: { item: DockItem; active: boolean }) {
     >
       {item.icon}
       <DockLabel>{item.label}</DockLabel>
-    </a>
+    </Link>
   );
 }
 
 /**
- * Marks the section currently in view. On a touch device this is the only
- * feedback the dock can give — there is no hover to indicate "you are here".
+ * The dock now navigates between pages, so "you are here" is the current
+ * route. On touch this is the only position feedback the dock can give —
+ * there is no hover state to enter.
  */
-function useActiveSection() {
-  const [active, setActive] = React.useState<string>("top");
-
-  React.useEffect(() => {
-    if (!("IntersectionObserver" in window)) return;
-
-    const ids = [...DOCK_ITEMS.map((item) => item.id), "enquire"];
-    const nodes = ids
-      .map((id) => document.getElementById(id))
-      .filter((node): node is HTMLElement => node !== null);
-
-    if (nodes.length === 0) return;
-
-    const visible = new Map<string, number>();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          visible.set(entry.target.id, entry.intersectionRatio);
-        }
-        let best = "";
-        let bestRatio = 0;
-        for (const [id, ratio] of visible) {
-          if (ratio > bestRatio) {
-            best = id;
-            bestRatio = ratio;
-          }
-        }
-        if (best) setActive(best);
-      },
-      { threshold: [0.15, 0.4, 0.7], rootMargin: "-20% 0px -35% 0px" },
-    );
-
-    for (const node of nodes) observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  return active;
+function isActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href;
 }
