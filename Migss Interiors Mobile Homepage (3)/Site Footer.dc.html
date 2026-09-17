@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5bab0769-2729-4098-87c3-fef0da1900aa/styles.css">
+<script src="_ds/classical-5bab0769-2729-4098-87c3-fef0da1900aa/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
+</helmet>
+
+<footer style="background: var(--color-neutral-900); color: var(--color-neutral-200); font-family: var(--font-body);">
+  <div style="max-width: 1280px; margin: 0 auto; padding: clamp(30px, 6vw, 60px) clamp(16px, 4.5vw, 48px); display: grid; gap: clamp(22px, 3.5vw, 44px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));">
+    <div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--color-accent-400); border-radius: 50%; font-family: var(--font-heading); font-size: 16px; color: var(--color-accent-300);">M</span>
+        <span style="display: flex; flex-direction: column; line-height: 1;">
+          <span style="font-family: var(--font-heading); font-size: 24px; letter-spacing: 0.05em;">MIGSS</span>
+          <span style="font-size: 8px; letter-spacing: 0.32em; color: var(--color-accent-300); margin-top: 3px;">INTERIORS</span>
+        </span>
+      </div>
+      <p style="margin: var(--space-4) 0 0; font-size: 14.5px; line-height: 1.9;">
+        <a href="{{ telHref }}" style="color: var(--color-accent-300); text-decoration: none;">{{ phone }}</a><br>
+        <a href="{{ mailHref }}" style="color: var(--color-accent-300); text-decoration: none;">{{ email }}</a>
+      </p>
+      <p style="margin: var(--space-3) 0 0; font-size: 13px; line-height: 1.75; color: var(--color-neutral-400);">Luxury bathroom, kitchen and interior renovation across London &amp; Essex.</p>
+    </div>
+    <nav style="display: flex; flex-direction: column;">
+      <h4 style="margin: 0 0 var(--space-2); font-family: var(--font-body); font-weight: 500; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-neutral-400);">Services</h4>
+      <a href="Renovation%20Services.dc.html" style="color: inherit; text-decoration: none; font-size: 15px; min-height: 44px; display: flex; align-items: center;">Renovation Services</a>
+      <a href="Bathroom%20Renovation.dc.html" style="color: inherit; text-decoration: none; font-size: 15px; min-height: 44px; display: flex; align-items: center;">Bathroom Renovation</a>
+      <a href="Kitchen%20Renovation.dc.html" style="color: inherit; text-decoration: none; font-size: 15px; min-height: 44px; display: flex; align-items: center;">Kitchen Renovation</a>
+      <a href="Interior%20Renovation.dc.html" style="color: inherit; text-decoration: none; font-size: 15px; min-height: 44px; display: flex; align-items: center;">Interior Renovation</a>
+    </nav>
+    <nav style="display: flex; flex-direction: column;">
+      <h4 style="margin: 0 0 var(--space-2); font-family: var(--font-body); font-weight: 500; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-neutral-400);">Explore</h4>
+      <a href="Migss%20Interiors%20Homepage.dc.html" style="color: inherit; text-decoration: none; font-size: 15px; min-height: 44px; display: flex; align-items: center;">Home</a>
+      <a href="Our%20Projects.dc.html" style="color: inherit; text-decoration: none; font-size: 15px; min-height: 44px; display: flex; align-items: center;">Our Projects</a>
+      <a href="Migss%20Interiors%20Homepage.dc.html#resources" style="color: inherit; text-decoration: none; font-size: 15px; min-height: 44px; display: flex; align-items: center;">Resources &amp; Insights</a>
+      <a href="Locations.dc.html" style="color: inherit; text-decoration: none; font-size: 15px; min-height: 44px; display: flex; align-items: center;">Locations</a>
+      <a href="#enquire" style="color: inherit; text-decoration: none; font-size: 15px; min-height: 44px; display: flex; align-items: center;">Contact</a>
+    </nav>
+  </div>
+  <div style="border-top: 1px solid color-mix(in srgb, var(--color-neutral-200) 18%, transparent);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: var(--space-4) clamp(16px, 4.5vw, 48px) calc(var(--space-4) + 72px); display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: space-between; font-size: 12.5px; color: var(--color-neutral-400);">
+      <span>© 2026 Migss Interiors. All rights reserved.</span>
+      <span>Powered by BrandFactory London.</span>
+    </div>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:620},&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;0208 243 2903&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;info@migssinteriors.com&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const phone = this.props.phone ?? '0208 243 2903';
+    const email = this.props.email ?? 'info@migssinteriors.com';
+    return { phone, email, telHref: 'tel:' + phone.replace(/\s+/g, ''), mailHref: 'mailto:' + email };
+  }
+}
+
+</script>
+</body>
+</html>
