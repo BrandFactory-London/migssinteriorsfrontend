@@ -47,6 +47,7 @@ export const NAV = [
   { href: "/renovation-services/interior", label: "Interior Renovation" },
   { href: "/our-projects", label: "Our Projects" },
   { href: "/locations", label: "Locations" },
+  { href: "/resources", label: "Resources" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
