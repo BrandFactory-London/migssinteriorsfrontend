@@ -30,11 +30,9 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
             <h1 className="text-[clamp(32px,7vw,58px)] leading-[1.02] font-normal tracking-[-0.03em] text-balance">
               {doc.title}
             </h1>
-            {doc.lastUpdated ? (
-              <p className="mt-[13.8px] text-[12.5px] tracking-[0.06em] text-migss-text/58">
-                Last updated: {doc.lastUpdated}
-              </p>
-            ) : null}
+            <p className="mt-[13.8px] text-[12.5px] tracking-[0.06em] text-migss-text/58">
+              Last updated: {doc.lastUpdated}
+            </p>
           </header>
 
           {/* ~68 characters is the readable measure for body copy at this size. */}

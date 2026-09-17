@@ -24,11 +24,14 @@ export type LegalDoc = {
   slug: string;
   title: string;
   description: string;
-  lastUpdated?: string;
+  lastUpdated: string;
   sections: LegalSection[];
 };
 
 const EMAIL = "info@migssinteriors.com";
+
+/** All four documents are revised together, so the date lives in one place. */
+const LAST_UPDATED = "17th September 2026";
 
 function Email() {
   return (
@@ -64,7 +67,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
     title: "Website Terms of Use",
     description:
       "The terms governing your use of the Migss Interiors website.",
-    lastUpdated: "16th August 2026",
+    lastUpdated: LAST_UPDATED,
     sections: [
       {
         heading: "About us",
@@ -205,7 +208,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
     title: "Privacy Policy",
     description:
       "How Migss Interiors collects, uses and protects your personal information.",
-    lastUpdated: "16th August 2026",
+    lastUpdated: LAST_UPDATED,
     sections: [
       {
         heading: "Who we are",
@@ -376,6 +379,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
     title: "Labour Guarantee",
     description:
       "The ten-year workmanship guarantee covering every installation carried out by Migss Interiors.",
+    lastUpdated: LAST_UPDATED,
     sections: [
       {
         heading: "Our promise",
@@ -499,6 +503,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
     title: "Product Warranty",
     description:
       "How manufacturer warranties on products fitted by Migss Interiors are registered and managed on your behalf.",
+    lastUpdated: LAST_UPDATED,
     sections: [
       {
         blocks: [
