@@ -101,6 +101,10 @@
   --color-migss-surface: #eae9e9;
   --color-migss-text: #201f1d;
   --color-migss-accent: #b68235;
+  /* The design has no error colour: the artboards never show a failed state.
+     A desaturated brick, dark enough to pass AA on the #f3f2f2 background
+     and far enough from the gold accent to read as a problem, not a highlight. */
+  --color-migss-error: #9c3226;
 
   --color-migss-neutral-100: #f8f4f4;
   --color-migss-neutral-200: #eae7e7;
