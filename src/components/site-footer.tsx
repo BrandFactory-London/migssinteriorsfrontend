@@ -15,7 +15,8 @@ const EXPLORE = [
   { href: "/our-projects", label: "Our Projects" },
   { href: "/resources", label: "Resources & Insights" },
   { href: "/locations", label: "Locations" },
-  { href: "#enquire", label: "Contact" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const LEGAL = [

@@ -171,7 +171,7 @@ export function SiteChrome() {
                 Book a Free Call Now
               </ButtonLink>
               <ButtonLink
-                href="#enquire"
+                href="/contact"
                 variant="outlineLight"
                 size="lg"
                 onClick={() => setMenuOpen(false)}

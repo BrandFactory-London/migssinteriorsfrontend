@@ -22,12 +22,14 @@ function Tick() {
 
 /** The enquiry band shared by the listing and detail pages. */
 export function EnquireBand({
+  kicker = "Start your project",
   heading,
   body,
   points,
   focus,
   town,
 }: {
+  kicker?: string;
   heading: React.ReactNode;
   body: string;
   points: [string, string];
@@ -43,7 +45,7 @@ export function EnquireBand({
       <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(20px,3.5vw,48px)] px-[clamp(16px,4.5vw,48px)] py-[clamp(30px,6vw,72px)]">
         <Reveal>
           <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
-            Start your project
+            {kicker}
           </p>
           <h2 className="mb-[13.8px] text-[clamp(30px,7.2vw,46px)] leading-[1.05] font-normal tracking-[-0.02em]">
             {heading}

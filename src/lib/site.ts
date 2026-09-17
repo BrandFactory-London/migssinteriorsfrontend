@@ -8,6 +8,23 @@ export const SITE = {
   email: "info@migssinteriors.com",
 } as const;
 
+/**
+ * Registered company details.
+ *
+ * Taken from the legal pages, which were transcribed from the live site. The
+ * Contact artboard carried a different company number and address; these are
+ * the verified ones. No VAT number has been verified, so none is shown.
+ */
+export const COMPANY = {
+  name: "Migss Tiles & Luxury Interiors",
+  number: "16508162",
+  address: [
+    "Gable House, 1 Balfour Road",
+    "Gable House Suite C, Room 3",
+    "Ilford, IG1 4HP",
+  ],
+} as const;
+
 export const telHref = `tel:${SITE.phone.replace(/\s+/g, "")}`;
 export const mailHref = `mailto:${SITE.email}`;
 
@@ -25,5 +42,6 @@ export const NAV = [
   { href: "/renovation-services/interior", label: "Interior Renovation" },
   { href: "/our-projects", label: "Our Projects" },
   { href: "/locations", label: "Locations" },
-  { href: "#enquire", label: "Contact" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ] as const;
