@@ -42,7 +42,14 @@ type Step = 1 | 2 | 3;
  * state without a backend. Wiring it to a Wix Data collection or a form
  * endpoint is a follow-up, and deliberately not bundled into this design pass.
  */
-export function EnquiryForm({ focus }: { focus?: EnquiryFocus }) {
+export function EnquiryForm({
+  focus,
+  town,
+}: {
+  focus?: EnquiryFocus;
+  /** Pre-fills the town field, so a location page does not ask twice. */
+  town?: string;
+}) {
   const [step, setStep] = React.useState<Step>(1);
   const headingRef = React.useRef<HTMLHeadingElement>(null);
   const previousStep = React.useRef(step);
@@ -219,6 +226,7 @@ export function EnquiryForm({ focus }: { focus?: EnquiryFocus }) {
                 type="text"
                 autoComplete="postal-code"
                 placeholder="Chigwell, IG7"
+                defaultValue={town}
                 className={inputClass}
               />
             </div>

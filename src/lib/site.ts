@@ -24,5 +24,6 @@ export const NAV = [
   { href: "/renovation-services/kitchen", label: "Kitchen Renovation" },
   { href: "/renovation-services/interior", label: "Interior Renovation" },
   { href: "/our-projects", label: "Our Projects" },
+  { href: "/locations", label: "Locations" },
   { href: "#enquire", label: "Contact" },
 ] as const;

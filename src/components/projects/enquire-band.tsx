@@ -26,11 +26,14 @@ export function EnquireBand({
   body,
   points,
   focus,
+  town,
 }: {
-  heading: string;
+  heading: React.ReactNode;
   body: string;
   points: [string, string];
   focus?: EnquiryFocus;
+  /** Pre-fills the form's town field on a location page. */
+  town?: string;
 }) {
   return (
     <section
@@ -66,7 +69,7 @@ export function EnquireBand({
         </Reveal>
 
         <Reveal delay={90}>
-          <EnquiryForm focus={focus} />
+          <EnquiryForm focus={focus} town={town} />
         </Reveal>
       </div>
     </section>
