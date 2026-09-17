@@ -80,4 +80,120 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* The design system sets headings in the display face globally; the page
+     only ever overrides the *weight*, never the family. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Migss Interiors — tokens from the Classical design system used by the
+   Claude Design handoff. Namespaced under `migss-` so they generate Tailwind
+   utilities (bg-migss-bg, text-migss-accent-700, …) without colliding with
+   the shadcn token set above.
+   ────────────────────────────────────────────────────────────────────── */
+@theme {
+  --color-migss-bg: #f3f2f2;
+  --color-migss-surface: #eae9e9;
+  --color-migss-text: #201f1d;
+  --color-migss-accent: #b68235;
+
+  --color-migss-neutral-100: #f8f4f4;
+  --color-migss-neutral-200: #eae7e7;
+  --color-migss-neutral-300: #d7d3d3;
+  --color-migss-neutral-400: #bab6b6;
+  --color-migss-neutral-500: #9b9797;
+  --color-migss-neutral-600: #7d7979;
+  --color-migss-neutral-700: #605d5d;
+  --color-migss-neutral-800: #444141;
+  --color-migss-neutral-900: #2d2b2b;
+
+  --color-migss-accent-100: #fff3e4;
+  --color-migss-accent-200: #ffe3bf;
+  --color-migss-accent-300: #facb8d;
+  --color-migss-accent-400: #e1ad66;
+  --color-migss-accent-500: #c28d41;
+  --color-migss-accent-600: #a06f24;
+  --color-migss-accent-700: #7d5411;
+  --color-migss-accent-800: #5a3b0a;
+  --color-migss-accent-900: #3a270d;
+
+  --font-heading: var(--font-cormorant), "Cormorant Garamond", ui-serif, serif;
+  --font-body: var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
+
+  --shadow-migss-sm: 0 1px 2px color-mix(in srgb, #2d2b2b 14%, transparent);
+  --shadow-migss-md: 0 3px 10px color-mix(in srgb, #2d2b2b 16%, transparent);
+}
+
+:root {
+  /* Divider is derived from the text colour, so it stays a single source. */
+  --migss-divider: color-mix(in srgb, #201f1d 16%, transparent);
+}
+
+@layer components {
+  /* Horizontal scrollers hide their bar; the design cues movement with the
+     "Swipe to explore" affordance and peeking cards instead. */
+  .migss-scroll {
+    scrollbar-width: none;
+  }
+  .migss-scroll::-webkit-scrollbar {
+    height: 0;
+  }
+
+  /* The design system's photographic treatment: warmed, slightly flattened,
+     matted inside a surface-coloured bevel. */
+  .migss-plate {
+    filter: sepia(0.22) saturate(0.82) contrast(1.05);
+    box-sizing: border-box;
+    border: 6px solid var(--color-migss-surface);
+    outline: 1px solid var(--migss-divider);
+  }
+}
+
+@keyframes migss-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes migss-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes migss-dock-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 18px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

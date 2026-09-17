@@ -1,14 +1,33 @@
-import type { Metadata } from "next";
+import { Areas } from "@/components/home/areas";
+import { AssuranceBar } from "@/components/home/assurance-bar";
+import { Enquire } from "@/components/home/enquire";
+import { FeaturedWork } from "@/components/home/featured-work";
+import { Hero } from "@/components/home/hero";
+import { Process } from "@/components/home/process";
+import { Resources } from "@/components/home/resources";
+import { Testimonials } from "@/components/home/testimonials";
+import { SiteChrome } from "@/components/site-chrome";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 
-export const metadata: Metadata = {
-  title: "Migss Interiors",
-};
-
-export default function Page() {
+export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-16">
-      <h1 className="text-2xl font-semibold tracking-tight">Migss Interiors</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Home — content to be built in Phase 4.</p>
-    </main>
+    <>
+      <SiteHeader />
+
+      <main id="top" className="scroll-mt-0">
+        <Hero />
+        <AssuranceBar />
+        <FeaturedWork />
+        <Process />
+        <Areas />
+        <Testimonials />
+        <Enquire />
+        <Resources />
+      </main>
+
+      <SiteFooter />
+      <SiteChrome />
+    </>
   );
 }
