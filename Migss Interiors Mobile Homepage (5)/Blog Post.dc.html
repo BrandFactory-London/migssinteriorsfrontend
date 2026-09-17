@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5bab0769-2729-4098-87c3-fef0da1900aa/styles.css">
+<script src="_ds/classical-5bab0769-2729-4098-87c3-fef0da1900aa/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
+<script src="./image-slot.js"></script>
+<style>
+  :root { --font-body: "Instrument Sans", system-ui, sans-serif; }
+  body { margin: 0; -webkit-text-size-adjust: 100%; letter-spacing: -0.005em; }
+  a { color: var(--color-accent-700); }
+  a:hover { color: var(--color-accent); }
+  @keyframes migssFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  article p { margin: 0 0 1.15em; font-size: clamp(17px, 4.6vw, 19px); line-height: 1.78; letter-spacing: -0.003em; color: color-mix(in srgb, var(--color-text) 88%, transparent); text-wrap: pretty; }
+  article h2 { margin: 2.1em 0 .55em; font-family: var(--font-heading); font-weight: 400; font-size: clamp(27px, 6.6vw, 34px); line-height: 1.12; letter-spacing: -0.02em; }
+  article h3 { margin: 1.7em 0 .4em; font-family: var(--font-heading); font-weight: 400; font-size: clamp(21px, 5vw, 25px); line-height: 1.2; }
+  article ul, article ol { margin: 0 0 1.3em; padding-left: 1.15em; }
+  article li { margin-bottom: .55em; font-size: clamp(16.5px, 4.4vw, 18px); line-height: 1.72; color: color-mix(in srgb, var(--color-text) 85%, transparent); }
+  article li::marker { color: var(--color-accent); }
+  article strong { font-weight: 600; }
+  article a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  [data-art] [data-zoom] { transition: transform .8s cubic-bezier(.2,.65,.2,1); }
+  [data-art] [data-title] { transition: color .3s ease; }
+  @media (hover: hover) {
+    [data-art]:hover [data-zoom] { transform: scale(1.05); }
+    [data-art]:hover [data-title] { color: var(--color-accent-700); }
+  }
+  [data-art]:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+</style>
+</helmet>
+
+<div style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden;">
+
+  <header style="position: relative; z-index: 30; border-bottom: 1px solid var(--color-divider);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 14px clamp(16px, 4.5vw, 48px); display: flex; align-items: center; gap: var(--space-4);">
+      <a href="Migss%20Interiors%20Homepage.dc.html" style="margin-right: auto; text-decoration: none; color: var(--color-text); display: flex; align-items: center; gap: 10px;">
+        <span style="width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--color-accent-400); border-radius: 50%; font-family: var(--font-heading); font-size: 15px; color: var(--color-accent-700);">M</span>
+        <span style="display: flex; flex-direction: column; line-height: 1;">
+          <span style="font-family: var(--font-heading); font-size: clamp(18px, 4.8vw, 22px); letter-spacing: 0.05em;">MIGSS</span>
+          <span style="font-size: 8px; letter-spacing: 0.32em; color: var(--color-accent-700); margin-top: 3px;">INTERIORS</span>
+        </span>
+      </a>
+      <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--color-text); text-decoration: none; font-size: 13.5px; letter-spacing: 0.02em;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-700)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 3.5h-3a1.7 1.7 0 0 0-1.7 1.9c.6 5.3 3 9.6 7 12.9 2.1 1.7 4.2 2.7 6.2 3.1a1.7 1.7 0 0 0 1.9-1.7v-2.9a1.7 1.7 0 0 0-1.4-1.7l-2.5-.4a1.7 1.7 0 0 0-1.5.5l-.9.9a14.5 14.5 0 0 1-4.6-4.6l.9-.9a1.7 1.7 0 0 0 .5-1.5l-.4-2.5a1.7 1.7 0 0 0-1.7-1.4z"/></svg>
+        {{ phone }}
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <div style="max-width: 760px; margin: 0 auto; padding: clamp(24px, 5.5vw, 56px) clamp(18px, 6vw, 48px) 0; animation: migssFade .5s ease-out both;">
+      <nav aria-label="Breadcrumb" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; margin-bottom: var(--space-4); color: color-mix(in srgb, var(--color-text) 55%, transparent);">
+        <a href="Resources.dc.html" style="color: inherit; text-decoration: none;">Resources</a>
+        <span aria-hidden="true">/</span>
+        <a href="Bathroom%20Resources.dc.html" style="color: inherit; text-decoration: none;">Bathroom</a>
+        <span aria-hidden="true">/</span>
+        <span style="color: var(--color-accent-700);">Costs</span>
+      </nav>
+      <p style="margin: 0 0 var(--space-3); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700);">Costs &amp; budgets</p>
+      <h1 style="margin: 0 0 var(--space-3); font-weight: 400; font-size: clamp(34px, 8.4vw, 56px); line-height: 1.05; letter-spacing: -0.03em; text-wrap: balance;">What a luxury bathroom really costs in 2026</h1>
+      <p style="margin: 0 0 var(--space-4); font-size: clamp(17px, 4.6vw, 20px); line-height: 1.6; color: color-mix(in srgb, var(--color-text) 70%, transparent); text-wrap: pretty;">We took a finished £28,400 ensuite in Chigwell and published every line of the quote — then worked out where the same room could have been built for sixteen.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; padding: var(--space-3) 0; border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider);">
+        <span style="width: 40px; height: 40px; flex: none; display: grid; place-items: center; border: 1px solid var(--color-accent-400); border-radius: 50%; font-family: var(--font-heading); font-size: 16px; color: var(--color-accent-700);">M</span>
+        <span style="display: flex; flex-direction: column; gap: 2px;">
+          <span style="font-size: 14px; font-weight: 500;">The Migss Interiors team</span>
+          <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent); font-feature-settings: 'tnum';">Published 4 March 2026 · 9 min read</span>
+        </span>
+      </div>
+    </div>
+
+    <figure style="margin: clamp(20px, 4vw, 40px) auto 0; max-width: 1100px; padding: 0 clamp(16px, 4.5vw, 48px);">
+      <div style="aspect-ratio: 3 / 2;">
+        <image-slot id="post-hero" shape="rounded" radius="4" class="plate" placeholder="Hero: the finished £28,400 ensuite" style="width: 100%; height: 100%;"></image-slot>
+      </div>
+      <figcaption style="margin-top: 10px; font-size: 13px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 60%, transparent);">The finished room: 6.2 m², book-matched Calacatta, concealed brassware and a bespoke oak vanity. Manor Road, Chigwell.</figcaption>
+    </figure>
+
+    <article style="max-width: 680px; margin: 0 auto; padding: clamp(26px, 6vw, 52px) clamp(18px, 6vw, 48px) 0;">
+      <p>Nobody asks what a bathroom costs. They ask what <em>their</em> bathroom costs, and the honest answer is that the number depends less on the room than on about six decisions you will make in the first fortnight. So rather than give you a range wide enough to be useless, we asked a client in Chigwell whether we could publish their quote in full. They said yes.</p>
+
+      <p>The room is a 6.2 m² master ensuite in a 1970s detached house. Complete strip-out to brick, doorway moved 400mm, wet area formed with a linear drain, book-matched Calacatta on the shower wall, twin basins in a bespoke oak vanity, wet underfloor heating on its own zone. Four weeks on site. The final figure, including everything, was <strong>£28,400 including VAT</strong>.</p>
+
+      <h2>Where the £28,400 went</h2>
+
+      <p>Roughly half of any bathroom is labour, and that proportion holds almost regardless of specification — which is the first useful thing to know. Spending more on stone does not change how many days a tiler needs; it changes the risk if he gets it wrong.</p>
+
+      <ul>
+        <li><strong>Labour — £13,100.</strong> Strip-out, first fix plumbing and electrics, tanking, boarding, tiling, second fix, plastering and decoration. Four weeks, two trades on site most days.</li>
+        <li><strong>Stone and tiling materials — £5,900.</strong> Book-matched Calacatta slabs for the shower wall and niche, large-format porcelain elsewhere, adhesives and the tanking system.</li>
+        <li><strong>Sanitaryware and brassware — £4,200.</strong> Concealed thermostatic valves, twin basins, wall-hung WC with a concealed frame, a fixed glass screen.</li>
+        <li><strong>Joinery — £2,300.</strong> The oak vanity, made in our workshop to the millimetre, plus the removable service panel in the adjoining cupboard.</li>
+        <li><strong>Underfloor heating and electrics — £1,600.</strong> Wet UFH zone, thermostat, IP-rated lighting circuits, humidity-sensing extraction, Part P certification.</li>
+        <li><strong>Making good, waste and welfare — £1,300.</strong> Skips and waste licensing, plastering beyond the room, the landing repainted, protection and the final clean.</li>
+      </ul>
+
+      <p>Add those and you land slightly over; the difference is the small contingency we hold for what turns up behind a 1970s wall. On this job it paid for a rotten section of floor plate nobody could have seen until the old bath came out.</p>
+
+      <h2>The six decisions that moved the number</h2>
+
+      <h3>1. Whether the layout moves</h3>
+      <p>Moving the doorway 400mm cost about £900 in labour and making good. Moving the <em>soil stack</em> would have cost four times that and gained less. As a rule: moving a basin is cheap, moving a shower is manageable, moving a WC is where the money starts, and moving the stack is a structural conversation rather than a bathroom one.</p>
+
+      <h3>2. Wet room or tray</h3>
+      <p>A tanked wet area with a linear drain added roughly £1,800 over a high-quality low-profile tray — membrane, screed falls, the drain itself and the extra days. It is the right decision in a room this size and often the wrong one in a small family bathroom, where a tray is quicker, cheaper and just as good.</p>
+
+      <h3>3. Which stone, and how it is set out</h3>
+      <p>This is the widest variable on the page. The same room in a good large-format porcelain throughout would have saved around <strong>£3,400</strong> in materials and a day of labour, and ninety per cent of visitors would not know. Book-matching is a genuine luxury: it buys you one wall that looks like a single piece of quarried stone, and it demands a tiler who will spend half a day setting out before cutting anything.</p>
+
+      <h3>4. Brassware</h3>
+      <p>Concealed valves cost more than exposed ones, both in the fitting and the maintenance access you have to design in. Budget brassware in a hard-water area is the single most common false economy we see — it is the part you touch twice a day, and it is the part that gets replaced in year four.</p>
+
+      <h3>5. Bespoke joinery versus a bought vanity</h3>
+      <p>The oak vanity was £2,300. A very good off-the-shelf unit would have been £800. In a room with square walls, buy the unit. In this room — where the re-boxed stack left an awkward 1,840mm run — bespoke was the only way to use the whole wall, and it bought back the storage that let us remove a separate cabinet.</p>
+
+      <h3>6. Underfloor heating</h3>
+      <p>Wet UFH on its own zone was £1,600 fitted. Electric would have been around £700 but costs meaningfully more to run. In a room used for twenty minutes a day, electric on a timer is usually the more rational choice; here the house was already having its heating reworked, so the marginal cost was small.</p>
+
+      <h2>So what could this room have cost?</h2>
+
+      <p>Take the same footprint, the same trades and the same standard of workmanship. Swap book-matched stone for large-format porcelain, the wet area for a low-profile tray, the bespoke vanity for a good bought one, and wet underfloor heating for electric. Keep the brassware — that is not where to save.</p>
+
+      <p>That room comes in at about <strong>£16,800</strong>. It is not a lesser bathroom in any way that shows up in a snagging report. It is a lesser bathroom in the way it feels when you walk in, which is a perfectly legitimate thing to pay for, provided you know that is what you are paying for.</p>
+
+      <h2>What honest quotes have in common</h2>
+
+      <p>Whoever you use, a quote worth trusting will name the tanking system, say who removes the waste, state what happens to the landing and the ceiling below, and put a number against making good rather than leaving it implied. If those four things are missing, the quote is not cheaper than ours — it is just less finished.</p>
+
+      <p>If you would like the same breakdown for your own room, we will do it as part of a free home visit: measured, itemised and fixed in writing, with a straight answer about where we think you should not spend.</p>
+
+      <div style="margin: var(--space-6) 0 0; border-top: 1px solid var(--color-divider); padding-top: var(--space-4); display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+        <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Filed under</span>
+        <span class="tag tag-outline" style="font-size: 11.5px;">Costs</span>
+        <span class="tag tag-outline" style="font-size: 11.5px;">Bathrooms</span>
+        <span class="tag tag-outline" style="font-size: 11.5px;">Planning</span>
+      </div>
+    </article>
+
+    <section id="cta" style="max-width: 1100px; margin: clamp(30px, 6vw, 68px) auto 0; padding: 0 clamp(16px, 4.5vw, 48px);">
+      <div style="border: 1px solid var(--color-divider); border-top: 2px solid var(--color-accent); border-radius: var(--radius-md); padding: clamp(20px, 4vw, 40px); display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); align-items: center;">
+        <div>
+          <p style="margin: 0 0 var(--space-2); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700);">Your room, your number</p>
+          <h2 style="margin: 0 0 10px; font-weight: 400; font-size: clamp(26px, 6vw, 36px); line-height: 1.08; letter-spacing: -0.02em;">Get this breakdown for your own bathroom</h2>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: color-mix(in srgb, var(--color-text) 76%, transparent);">A free home visit and a fixed written quote, itemised exactly like the one above. Average response time under 20 minutes.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a href="Contact.dc.html" class="btn btn-primary" style="min-height: 56px; font-family: var(--font-body); font-weight: 500; font-size: 15px;">Request a fixed quote</a>
+          <a href="Our%20Projects.dc.html" class="btn btn-secondary" style="min-height: 56px; font-family: var(--font-body); font-weight: 500; font-size: 15px;">See the finished projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="related" style="max-width: 1100px; margin: clamp(32px, 6.5vw, 76px) auto 0; padding: 0 clamp(16px, 4.5vw, 48px);">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-5);">
+        <h2 style="margin: 0; font-weight: 400; font-size: clamp(24px, 5.6vw, 34px); line-height: 1.1; letter-spacing: -0.02em;">Related reading</h2>
+        <a href="Bathroom%20Resources.dc.html" style="font-size: 14px; font-weight: 500; text-decoration: none;">All bathroom articles →</a>
+      </div>
+      <div style="display: grid; gap: clamp(16px, 3vw, 28px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));">
+        <a href="Blog%20Post.dc.html" data-art style="text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: var(--space-3);">
+          <div style="position: relative; aspect-ratio: 16 / 11; overflow: hidden; border-radius: var(--radius-md);">
+            <div data-zoom style="position: absolute; inset: 0;"><image-slot id="post-r1" shape="rect" placeholder="Quote document on a worktop" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot></div>
+          </div>
+          <div>
+            <span style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Planning</span>
+            <h3 data-title style="margin: 6px 0 6px; font-weight: 400; font-size: 22px; line-height: 1.18;">Twelve things missing from most bathroom quotes</h3>
+            <p style="margin: 0; font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent); font-feature-settings: 'tnum';">8 min read</p>
+          </div>
+        </a>
+        <a href="Blog%20Post.dc.html" data-art style="text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: var(--space-3);">
+          <div style="position: relative; aspect-ratio: 16 / 11; overflow: hidden; border-radius: var(--radius-md);">
+            <div data-zoom style="position: absolute; inset: 0;"><image-slot id="post-r2" shape="rect" placeholder="Linear drain and tanked floor" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot></div>
+          </div>
+          <div>
+            <span style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Planning</span>
+            <h3 data-title style="margin: 6px 0 6px; font-weight: 400; font-size: 22px; line-height: 1.18;">Wet room or shower tray? How to decide honestly</h3>
+            <p style="margin: 0; font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent); font-feature-settings: 'tnum';">7 min read</p>
+          </div>
+        </a>
+        <a href="Blog%20Post.dc.html" data-art style="text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: var(--space-3);">
+          <div style="position: relative; aspect-ratio: 16 / 11; overflow: hidden; border-radius: var(--radius-md);">
+            <div data-zoom style="position: absolute; inset: 0;"><image-slot id="post-r3" shape="rect" placeholder="Brassware and stone detail" style="width: 100%; height: 100%; border: 0; outline: 0;"></image-slot></div>
+          </div>
+          <div>
+            <span style="font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Costs</span>
+            <h3 data-title style="margin: 6px 0 6px; font-weight: 400; font-size: 22px; line-height: 1.18;">Where to spend and where to save, in order</h3>
+            <p style="margin: 0; font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent); font-feature-settings: 'tnum';">8 min read</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <div style="margin-top: clamp(36px, 7.5vw, 84px);">
+    <dc-import name="Site Footer" phone="{{ phone }}" email="{{ email }}" hint-size="100%,560px"></dc-import>
+  </div>
+  <dc-import name="Site Dock" phone="{{ phone }}" email="{{ email }}" hint-size="100%,0px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;0208 243 2903&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;info@migssinteriors.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const phone = this.props.phone ?? '0208 243 2903';
+    const email = this.props.email ?? 'info@migssinteriors.com';
+    return { phone, email, telHref: 'tel:' + phone.replace(/\s+/g, '') };
+  }
+}
+
+</script>
+</body>
+</html>

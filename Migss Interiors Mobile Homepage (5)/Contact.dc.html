@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-5bab0769-2729-4098-87c3-fef0da1900aa/styles.css">
+<script src="_ds/classical-5bab0769-2729-4098-87c3-fef0da1900aa/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+  :root { --font-body: "Instrument Sans", system-ui, sans-serif; }
+  body { margin: 0; -webkit-text-size-adjust: 100%; letter-spacing: -0.005em; }
+  a { color: var(--color-accent-700); }
+  a:hover { color: var(--color-accent); }
+  @keyframes migssFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  [data-line] { transition: background-color .3s ease; }
+  @media (hover: hover) { [data-line]:hover { background-color: color-mix(in srgb, var(--color-accent) 7%, transparent); } }
+  [data-line]:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+</style>
+</helmet>
+
+<div style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden;">
+
+  <header style="position: relative; z-index: 30; border-bottom: 1px solid var(--color-divider);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 14px clamp(16px, 4.5vw, 48px); display: flex; align-items: center; gap: var(--space-4);">
+      <a href="Migss%20Interiors%20Homepage.dc.html" style="margin-right: auto; text-decoration: none; color: var(--color-text); display: flex; align-items: center; gap: 10px;">
+        <span style="width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--color-accent-400); border-radius: 50%; font-family: var(--font-heading); font-size: 15px; color: var(--color-accent-700);">M</span>
+        <span style="display: flex; flex-direction: column; line-height: 1;">
+          <span style="font-family: var(--font-heading); font-size: clamp(18px, 4.8vw, 22px); letter-spacing: 0.05em;">MIGSS</span>
+          <span style="font-size: 8px; letter-spacing: 0.32em; color: var(--color-accent-700); margin-top: 3px;">INTERIORS</span>
+        </span>
+      </a>
+      <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--color-text); text-decoration: none; font-size: 13.5px; letter-spacing: 0.02em;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-700)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 3.5h-3a1.7 1.7 0 0 0-1.7 1.9c.6 5.3 3 9.6 7 12.9 2.1 1.7 4.2 2.7 6.2 3.1a1.7 1.7 0 0 0 1.9-1.7v-2.9a1.7 1.7 0 0 0-1.4-1.7l-2.5-.4a1.7 1.7 0 0 0-1.5.5l-.9.9a14.5 14.5 0 0 1-4.6-4.6l.9-.9a1.7 1.7 0 0 0 .5-1.5l-.4-2.5a1.7 1.7 0 0 0-1.7-1.4z"/></svg>
+        {{ phone }}
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section style="max-width: 1280px; margin: 0 auto; padding: clamp(26px, 6vw, 64px) clamp(16px, 4.5vw, 48px) clamp(20px, 4vw, 40px); animation: migssFade .5s ease-out both;">
+      <nav aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: var(--space-4); color: color-mix(in srgb, var(--color-text) 55%, transparent);">
+        <a href="Migss%20Interiors%20Homepage.dc.html" style="color: inherit; text-decoration: none;">Home</a>
+        <span aria-hidden="true">/</span>
+        <span style="color: var(--color-accent-700);">Contact</span>
+      </nav>
+      <p style="margin: 0 0 var(--space-3); display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700);">
+        <span style="width: 34px; height: 1px; background: var(--color-accent); display: block;"></span>Mon–Sat, 8am–6pm
+      </p>
+      <h1 style="margin: 0 0 var(--space-3); max-width: 18ch; font-weight: 400; font-size: clamp(38px, 9vw, 72px); line-height: 1; letter-spacing: -0.03em; text-wrap: balance;">Get in touch.</h1>
+      <p style="margin: 0; max-width: 54ch; font-size: clamp(15px, 4vw, 17.5px); line-height: 1.75; color: color-mix(in srgb, var(--color-text) 80%, transparent);">Call, email, or send the form below — whichever is easiest. Average response time is under 20 minutes during working hours.</p>
+    </section>
+
+    <section id="details" style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4.5vw, 48px);">
+      <div style="border: 1px solid var(--color-divider); background: var(--color-divider); display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));">
+        <a href="{{ telHref }}" data-line style="background: var(--color-bg); text-decoration: none; color: inherit; padding: clamp(16px, 2.8vw, 26px); min-height: 120px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="display: flex; align-items: center; gap: 9px; font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 3.5h-3a1.7 1.7 0 0 0-1.7 1.9c.6 5.3 3 9.6 7 12.9 2.1 1.7 4.2 2.7 6.2 3.1a1.7 1.7 0 0 0 1.9-1.7v-2.9a1.7 1.7 0 0 0-1.4-1.7l-2.5-.4a1.7 1.7 0 0 0-1.5.5l-.9.9a14.5 14.5 0 0 1-4.6-4.6l.9-.9a1.7 1.7 0 0 0 .5-1.5l-.4-2.5a1.7 1.7 0 0 0-1.7-1.4z"/></svg>
+            Call us
+          </span>
+          <span style="font-family: var(--font-heading); font-size: clamp(26px, 6vw, 32px); line-height: 1.1; font-feature-settings: 'tnum';">{{ phone }}</span>
+          <span style="font-size: 13.5px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 68%, transparent);">Monday to Saturday, 8am–6pm.</span>
+        </a>
+        <a href="{{ mailHref }}" data-line style="background: var(--color-bg); text-decoration: none; color: inherit; padding: clamp(16px, 2.8vw, 26px); min-height: 120px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="display: flex; align-items: center; gap: 9px; font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
+            Email us
+          </span>
+          <span style="font-family: var(--font-heading); font-size: clamp(21px, 4.6vw, 27px); line-height: 1.15; word-break: break-word;">{{ email }}</span>
+          <span style="font-size: 13.5px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 68%, transparent);">Photographs and plans welcome — they speed up the quote.</span>
+        </a>
+        <div data-line style="background: var(--color-bg); padding: clamp(16px, 2.8vw, 26px); min-height: 120px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="display: flex; align-items: center; gap: 9px; font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 10.2c0 5.3-7 10.8-7 10.8s-7-5.5-7-10.8a7 7 0 0 1 14 0z"/><circle cx="12" cy="10" r="2.4"/></svg>
+            Registered address
+          </span>
+          <address style="margin: 0; font-style: normal; font-family: var(--font-heading); font-size: clamp(19px, 4.2vw, 23px); line-height: 1.3;">Migss Interiors Ltd<br>124 High Road, Chigwell<br>Essex IG7 6PL</address>
+          <span style="font-size: 13.5px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 68%, transparent);">Office and workshop — visits by appointment.</span>
+        </div>
+      </div>
+      <p style="margin: var(--space-3) 0 0; font-size: 13px; line-height: 1.75; color: color-mix(in srgb, var(--color-text) 60%, transparent);">Registered in England &amp; Wales. Company no. 04187326 · VAT no. GB 812 4471 09.</p>
+    </section>
+
+    <section id="enquire" style="margin-top: clamp(32px, 6.5vw, 76px); border-top: 1px solid var(--color-divider); background: color-mix(in srgb, var(--color-surface) 60%, transparent);">
+      <div style="max-width: 1280px; margin: 0 auto; padding: clamp(30px, 6vw, 72px) clamp(16px, 4.5vw, 48px); display: grid; gap: clamp(20px, 3.5vw, 48px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); align-items: start;">
+        <div>
+          <p style="margin: 0 0 var(--space-2); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700);">Send an enquiry</p>
+          <h2 style="margin: 0 0 var(--space-3); font-weight: 400; font-size: clamp(30px, 7.2vw, 46px); line-height: 1.05; letter-spacing: -0.02em;">Two short steps, and we will call you back</h2>
+          <p style="margin: 0 0 var(--space-4); font-size: 15px; line-height: 1.75; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Tell us where you are and roughly what you are planning. We reply the same working day and arrange a free home visit, usually within the week.</p>
+          <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: color-mix(in srgb, var(--color-text) 75%, transparent);">
+            <li style="display: flex; gap: 10px; align-items: center;"><svg width="16" height="16" style="flex:none" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Average response time under 20 minutes</li>
+            <li style="display: flex; gap: 10px; align-items: center;"><svg width="16" height="16" style="flex:none" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Free home visit, fixed written quote</li>
+            <li style="display: flex; gap: 10px; align-items: center;"><svg width="16" height="16" style="flex:none" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.6" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>We never pass your details to anyone else</li>
+          </ul>
+        </div>
+        <dc-import name="Enquiry Form" phone="{{ phone }}" focus="none" hint-size="100%,620px"></dc-import>
+      </div>
+    </section>
+
+    <section id="areas" style="max-width: 1280px; margin: 0 auto; padding: clamp(32px, 6.5vw, 76px) clamp(16px, 4.5vw, 48px) 0;">
+      <div style="border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: clamp(18px, 3.5vw, 32px); display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); align-items: center;">
+        <div>
+          <h2 style="margin: 0 0 8px; font-weight: 400; font-size: clamp(24px, 5.6vw, 32px); line-height: 1.1; letter-spacing: -0.02em;">Where we work</h2>
+          <p style="margin: 0; font-size: 15px; line-height: 1.75; color: color-mix(in srgb, var(--color-text) 76%, transparent);">Ten areas across London and Essex, all within an hour of our Chigwell workshop — from Wanstead and Woodford to Brentwood and Epping.</p>
+        </div>
+        <a href="Locations.dc.html" class="btn btn-primary" style="min-height: 56px; font-family: var(--font-body); font-weight: 500; font-size: 15px;">See all service areas →</a>
+      </div>
+    </section>
+  </main>
+
+  <div style="margin-top: clamp(36px, 7.5vw, 84px);">
+    <dc-import name="Site Footer" phone="{{ phone }}" email="{{ email }}" hint-size="100%,560px"></dc-import>
+  </div>
+  <dc-import name="Site Dock" phone="{{ phone }}" email="{{ email }}" hint-size="100%,0px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;0208 243 2903&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;info@migssinteriors.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const phone = this.props.phone ?? '0208 243 2903';
+    const email = this.props.email ?? 'info@migssinteriors.com';
+    return { phone, email, telHref: 'tel:' + phone.replace(/\s+/g, ''), mailHref: 'mailto:' + email };
+  }
+}
+
+</script>
+</body>
+</html>
