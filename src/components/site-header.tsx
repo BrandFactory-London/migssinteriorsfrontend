@@ -44,7 +44,7 @@ export function SiteHeader({
   return (
     <header
       className={cn(
-        "z-40 transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none",
+        "z-40 transition-[translate,opacity] duration-500 ease-[cubic-bezier(.4,0,.2,1)] will-change-[translate,opacity] motion-reduce:transition-none",
         overlay
           ? "fixed inset-x-0 top-0 text-migss-neutral-100"
           : "sticky top-0 border-b border-[var(--migss-divider)] bg-migss-bg text-migss-text",

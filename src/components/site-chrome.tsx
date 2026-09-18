@@ -2,7 +2,6 @@
 
 import * as React from "react";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -167,7 +166,7 @@ export function SiteChrome() {
       ) : (
         <nav
           aria-label="Primary"
-          className="fixed bottom-[calc(14px+env(safe-area-inset-bottom))] left-1/2 z-50 flex max-w-[calc(100vw-20px)] animate-[migss-dock-in_0.5s_cubic-bezier(.2,.65,.2,1)_both] items-center gap-1 rounded-full border border-migss-text/10 bg-migss-bg/60 p-[7px] shadow-[0_10px_34px_-12px_color-mix(in_srgb,#2d2b2b_38%,transparent),inset_0_1px_0_color-mix(in_srgb,#fff_55%,transparent)] backdrop-blur-[20px] backdrop-saturate-[180%]"
+          className="fixed bottom-[calc(14px+env(safe-area-inset-bottom))] left-1/2 z-50 flex max-w-[calc(100vw-20px)] animate-[migss-dock-in_0.5s_cubic-bezier(.2,.65,.2,1)_both] items-center gap-1 overflow-hidden rounded-full border border-migss-text/10 bg-migss-bg/60 py-[7px] pr-[10px] pl-[10px] shadow-[0_10px_34px_-12px_color-mix(in_srgb,#2d2b2b_38%,transparent),inset_0_1px_0_color-mix(in_srgb,#fff_55%,transparent)] backdrop-blur-[20px] backdrop-saturate-[180%]"
         >
           {DOCK_ITEMS.map((item) => (
             <DockLink
@@ -186,13 +185,13 @@ export function SiteChrome() {
             title="Message us on WhatsApp"
             className={cn(dockItemClass, "group")}
           >
-            <Image
-              src="/Brand/whatsapplogo.svg"
-              alt=""
-              width={19}
-              height={19}
+            {/* Masked rather than drawn: the file is a solid #000 glyph, which
+                reads heavier than the currentColor strokes beside it. As a mask
+                it keeps the real artwork and takes the dock's own colour,
+                including on hover. */}
+            <span
               aria-hidden="true"
-              className="flex-none"
+              className="block h-[19px] w-[19px] flex-none bg-current [mask-image:url(/Brand/whatsapplogo.svg)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
             />
             <DockLabel>WhatsApp</DockLabel>
           </a>
@@ -205,7 +204,7 @@ export function SiteChrome() {
           <a
             href={telHref}
             title="Book a free call"
-            className="group flex h-[50px] flex-none items-center rounded-full bg-migss-accent-700 px-4 text-migss-text no-underline transition-[background-color,transform] duration-300 active:scale-[0.94] [@media(hover:hover)]:hover:bg-migss-accent-600"
+            className="group flex h-[46px] min-w-0 shrink items-center rounded-full bg-migss-accent-700 px-3.5 text-migss-text no-underline transition-[background-color,transform] duration-300 active:scale-[0.94] [@media(hover:hover)]:hover:bg-migss-accent-600"
           >
             <svg
               width="18"
@@ -223,7 +222,7 @@ export function SiteChrome() {
             </svg>
             {/* The CTA's label is always expanded — it is the one item that
                 must read as a call to action without being hovered. */}
-            <span className="ml-2.5 text-[13.5px] font-medium whitespace-nowrap">
+            <span className="ml-2 truncate text-[13.5px] font-medium whitespace-nowrap">
               Book a call
             </span>
           </a>
