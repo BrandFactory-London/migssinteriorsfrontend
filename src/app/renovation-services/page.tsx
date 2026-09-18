@@ -35,6 +35,9 @@ function Tick() {
   );
 }
 
+/** The service door cards read HeroMedia. */
+export const revalidate = 60;
+
 export default function RenovationServicesPage() {
   return (
     <>
