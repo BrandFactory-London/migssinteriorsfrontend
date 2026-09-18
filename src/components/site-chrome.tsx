@@ -191,7 +191,7 @@ export function SiteChrome() {
                 including on hover. */}
             <span
               aria-hidden="true"
-              className="block h-[19px] w-[19px] flex-none bg-current [mask-image:url(/Brand/whatsapplogo.svg)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
+              className="block h-[19px] w-[19px] flex-none bg-current [-webkit-mask-image:url(/Brand/whatsapplogo.svg)] [-webkit-mask-position:center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:contain] [mask-image:url(/Brand/whatsapplogo.svg)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
             />
             <DockLabel>WhatsApp</DockLabel>
           </a>
