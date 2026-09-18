@@ -1,3 +1,4 @@
+import { HeroVideo } from "@/components/hero-video";
 import { ImageSlot } from "@/components/image-slot";
 import {
   getHeroMedia,
@@ -13,9 +14,10 @@ import { cn } from "@/lib/utils";
  * when the slot has no row yet, so an unmatched slotId degrades to the
  * labelled grey box rather than an empty hole.
  *
- * A row marked Video renders a muted, looping background clip. It carries no
- * controls because these are decorative backgrounds behind copy, and it falls
- * back to its own poster frame while loading.
+ * A row marked Video renders a muted, looping background clip through
+ * HeroVideo, which holds it still for anyone who has asked for reduced
+ * motion. It carries no controls because these are decorative backgrounds
+ * behind copy.
  */
 export async function HeroMedia({
   slotId,
@@ -40,23 +42,17 @@ export async function HeroMedia({
 
   if (media?.kind === "video") {
     return (
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
+      <HeroVideo
+        src={media.url}
         poster={heroPosterUrl(media.poster, width, height) ?? undefined}
-        aria-label={media.alt ?? placeholder}
+        label={media.alt ?? placeholder}
         className={cn(
           "h-full w-full object-cover",
           shape === "rounded" && "rounded-[4px]",
           shape === "circle" && "rounded-full",
           className,
         )}
-      >
-        <source src={media.url} />
-      </video>
+      />
     );
   }
 
