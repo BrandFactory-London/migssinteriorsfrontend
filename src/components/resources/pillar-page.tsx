@@ -6,7 +6,13 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { articlesFor, type Pillar } from "@/lib/resources";
+import {
+  getPillarPosts,
+  getTags,
+  getTagLabels,
+  PILLAR_TAG_SLUG,
+  type Pillar,
+} from "@/lib/wix/blog";
 import type { EnquiryFocus } from "@/components/home/enquiry-form";
 import { Reveal } from "@/components/reveal";
 
@@ -108,9 +114,22 @@ export const PILLAR_COPY: Record<Pillar, PillarCopy> = {
 };
 
 /** Shared layout for /resources/bathroom and /resources/kitchen. */
-export function PillarPage({ pillar }: { pillar: Pillar }) {
+export async function PillarPage({ pillar }: { pillar: Pillar }) {
   const copy = PILLAR_COPY[pillar];
-  const articles = articlesFor(pillar);
+  const [posts, allTags, tagLabels] = await Promise.all([
+    getPillarPosts(pillar),
+    getTags(),
+    getTagLabels(),
+  ]);
+
+  // Chips offer the other tags these posts carry: filtering a bathroom
+  // library by "Bathroom Renovation" is every post in it.
+  const roomTagSlug = PILLAR_TAG_SLUG[pillar];
+  const tags = allTags.filter(
+    (tag) =>
+      tag.slug !== roomTagSlug &&
+      posts.some((post) => post.tagIds.includes(tag.id)),
+  );
 
   return (
     <>
@@ -143,11 +162,16 @@ export function PillarPage({ pillar }: { pillar: Pillar }) {
           id="articles"
           className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)]"
         >
-          <ArticleLibrary articles={articles} emptyLine={copy.emptyLine} />
+          <ArticleLibrary
+            posts={posts}
+            tags={tags}
+            tagLabels={tagLabels}
+            emptyLine={copy.emptyLine}
+          />
 
           <div className="mt-7 flex flex-wrap items-center justify-between gap-2.5 border-t border-[var(--migss-divider)] pt-[18.4px]">
             <p className="text-sm text-migss-text/65">
-              {articles.length > 0 ? copy.moreLine : "Writing in progress."}
+              {posts.length > 0 ? copy.moreLine : "Writing in progress."}
             </p>
             <Link
               href={copy.otherHref}

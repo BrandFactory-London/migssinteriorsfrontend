@@ -8,7 +8,10 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { ARTICLES_BY_DATE } from "@/lib/resources";
+import { getPosts, getTagLabels } from "@/lib/wix/blog";
+
+/** The automation pipeline publishes continuously, so this refreshes itself. */
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -21,7 +24,9 @@ export const metadata: Metadata = {
  * the designed browsing entry points; this exists so an article found through
  * search has a sensible parent, and so /blog is a real page rather than a 404.
  */
-export default function BlogIndexPage() {
+export default async function BlogIndexPage() {
+  const [posts, tagLabels] = await Promise.all([getPosts(), getTagLabels()]);
+
   return (
     <>
       <SiteHeader variant="solid" />
@@ -56,16 +61,12 @@ export default function BlogIndexPage() {
 
         <section className="mx-auto max-w-[1280px] px-[clamp(16px,4.5vw,48px)]">
           <p className="border-b border-[var(--migss-divider)] pb-[13.8px] text-[13px] text-migss-text/58 tabular-nums">
-            {ARTICLES_BY_DATE.length} articles
+            {posts.length} articles
           </p>
           <ul className="mt-[18.4px] grid list-none grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-x-[clamp(14px,2.5vw,28px)] gap-y-[clamp(20px,3.5vw,40px)]">
-            {ARTICLES_BY_DATE.map((article, index) => (
-              <Reveal
-                as="li"
-                key={article.slug}
-                delay={Math.min(index, 5) * 60}
-              >
-                <ArticleCard article={article} />
+            {posts.map((post, index) => (
+              <Reveal as="li" key={post.slug} delay={Math.min(index, 5) * 60}>
+                <ArticleCard post={post} tagLabels={tagLabels} />
               </Reveal>
             ))}
           </ul>

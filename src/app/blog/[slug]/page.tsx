@@ -4,53 +4,74 @@ import { notFound } from "next/navigation";
 
 import { ImageSlot } from "@/components/image-slot";
 import { ArticleCard } from "@/components/resources/article-card";
+import { RichContent } from "@/components/resources/rich-content";
 import { Reveal } from "@/components/reveal";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
+import { postMeta } from "@/lib/blog-post";
 import {
-  ARTICLE_AUTHOR,
-  PUBLISHED,
-  bylineMeta,
   getArticle,
-  relatedTo,
-} from "@/lib/resources";
+  getPosts,
+  getRelatedPosts,
+  getTags,
+  getTagLabels,
+  PILLAR_TAG_SLUG,
+} from "@/lib/wix/blog";
 import { telHref } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
-/** Only articles with a body. An unwritten slug is not a route at all. */
-export function generateStaticParams() {
-  return PUBLISHED.map(({ slug }) => ({ slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  return (await getPosts()).map(({ slug }) => ({ slug }));
 }
 
-export const dynamicParams = false;
+/**
+ * The pipeline publishes between deploys, so a post that went live this
+ * morning has to resolve on its first visit rather than 404 until the next
+ * build. A slug that is genuinely not a post still 404s.
+ */
+export const dynamicParams = true;
+
+const AUTHOR = "The Migss Interiors team";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticle(slug);
+  const article = await getArticle(slug);
   if (!article) return { title: "Article not found" };
 
   return {
     title: article.title,
-    description: article.standfirst ?? article.excerpt,
+    description: article.excerpt ?? undefined,
   };
 }
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = getArticle(slug);
+  const article = await getArticle(slug);
 
-  // getArticle only returns published articles, so a missing body here would
-  // mean the data and the route list had drifted apart.
-  if (!article?.body) notFound();
+  if (!article) notFound();
 
-  const pillarHref =
-    article.category === "Bathroom"
-      ? "/resources/bathroom"
-      : "/resources/kitchen";
-  const related = relatedTo(article);
+  const [related, tags, tagLabels] = await Promise.all([
+    getRelatedPosts(article),
+    getTags(),
+    getTagLabels(),
+  ]);
+
+  // The pillar this post belongs to, when it carries a room tag at all.
+  const pillar = (["Bathroom", "Kitchen"] as const).find((room) => {
+    const tagId = tags.find((tag) => tag.slug === PILLAR_TAG_SLUG[room])?.id;
+    return tagId ? article.tagIds.includes(tagId) : false;
+  });
+  const pillarHref = pillar
+    ? `/resources/${pillar.toLowerCase()}`
+    : "/resources";
+  const badge = article.tagIds
+    .map((id) => tagLabels[id])
+    .find((label): label is string => Boolean(label));
 
   return (
     <>
@@ -67,23 +88,35 @@ export default async function ArticlePage({ params }: Props) {
             <Link href="/resources" className="text-inherit no-underline">
               Resources
             </Link>
-            <span aria-hidden="true">/</span>
-            <Link href={pillarHref} className="text-inherit no-underline">
-              {article.category}
-            </Link>
-            <span aria-hidden="true">/</span>
-            <span className="text-migss-accent-700">{article.tags[0]}</span>
+            {pillar ? (
+              <>
+                <span aria-hidden="true">/</span>
+                <Link href={pillarHref} className="text-inherit no-underline">
+                  {pillar}
+                </Link>
+              </>
+            ) : null}
+            {badge ? (
+              <>
+                <span aria-hidden="true">/</span>
+                <span className="text-migss-accent-700">{badge}</span>
+              </>
+            ) : null}
           </nav>
 
-          <p className="mb-[13.8px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
-            {article.tags[0]}
-          </p>
+          {badge ? (
+            <p className="mb-[13.8px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+              {badge}
+            </p>
+          ) : null}
           <h1 className="mb-[13.8px] text-[clamp(34px,8.4vw,56px)] leading-[1.05] font-normal tracking-[-0.03em] text-balance">
             {article.title}
           </h1>
-          <p className="mb-[18.4px] text-[clamp(17px,4.6vw,20px)] leading-[1.6] text-pretty text-migss-text/70">
-            {article.standfirst ?? article.excerpt}
-          </p>
+          {article.excerpt ? (
+            <p className="mb-[18.4px] text-[clamp(17px,4.6vw,20px)] leading-[1.6] text-pretty text-migss-text/70">
+              {article.excerpt}
+            </p>
+          ) : null}
 
           <div className="flex flex-wrap items-center gap-x-5 gap-y-3 border-y border-[var(--migss-divider)] py-[13.8px]">
             <span
@@ -93,98 +126,52 @@ export default async function ArticlePage({ params }: Props) {
               M
             </span>
             <span className="flex flex-col gap-0.5">
-              <span className="text-sm font-medium">{ARTICLE_AUTHOR}</span>
+              <span className="text-sm font-medium">{AUTHOR}</span>
               <span className="text-[12.5px] text-migss-text/58 tabular-nums">
-                {bylineMeta(article)}
+                {postMeta(article)}
               </span>
             </span>
           </div>
         </div>
 
-        <figure className="mx-auto mt-[clamp(20px,4vw,40px)] max-w-[1100px] px-[clamp(16px,4.5vw,48px)]">
-          <div className="aspect-[3/2]">
-            <ImageSlot
-              placeholder={`Hero: ${article.coverPlaceholder}`}
-              shape="rounded"
-              className="migss-plate"
-            />
-          </div>
-          {article.heroCaption ? (
-            <figcaption className="mt-2.5 text-[13px] leading-[1.6] text-migss-text/60">
-              {article.heroCaption}
-            </figcaption>
-          ) : null}
-        </figure>
+        {article.coverUrl ? (
+          <figure className="mx-auto mt-[clamp(20px,4vw,40px)] max-w-[1100px] px-[clamp(16px,4.5vw,48px)]">
+            <div className="aspect-[3/2]">
+              <ImageSlot
+                placeholder={article.coverAlt}
+                src={article.coverUrl}
+                alt={article.coverAlt}
+                shape="rounded"
+                className="migss-plate"
+              />
+            </div>
+          </figure>
+        ) : null}
 
         {/*
           Reading column. 680px is the measure the artboard specifies, and the
-          type scale below is its reading spec verbatim: 17px rising to 19px,
-          1.78 line-height, a slightly tightened tracking and 88% ink. The side
+          type scale in RichContent is its reading spec verbatim. The side
           padding starts at 18px rather than the 16px used elsewhere on the
           site — this is the one page meant for sustained reading at 390px.
         */}
         <article className="mx-auto max-w-[680px] px-[clamp(18px,6vw,48px)] pt-[clamp(26px,6vw,52px)]">
-          {article.body.map((block, index) => {
-            if (block.kind === "h2") {
-              return (
-                <h2
-                  key={index}
-                  className="font-heading mt-[2.1em] mb-[0.55em] text-[clamp(27px,6.6vw,34px)] leading-[1.12] font-normal tracking-[-0.02em] first:mt-0"
-                >
-                  {block.text}
-                </h2>
-              );
-            }
-            if (block.kind === "h3") {
-              return (
-                <h3
-                  key={index}
-                  className="font-heading mt-[1.7em] mb-[0.4em] text-[clamp(21px,5vw,25px)] leading-[1.2] font-normal"
-                >
-                  {block.text}
-                </h3>
-              );
-            }
-            if (block.kind === "ul") {
-              return (
-                <ul
-                  key={index}
-                  className="mb-[1.3em] list-disc pl-[1.15em] marker:text-migss-accent"
-                >
-                  {block.items.map((item, itemIndex) => (
-                    <li
-                      key={itemIndex}
-                      className="mb-[0.55em] text-[clamp(16.5px,4.4vw,18px)] leading-[1.72] text-migss-text/85"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              );
-            }
-            return (
-              <p
-                key={index}
-                className="mb-[1.15em] text-[clamp(17px,4.6vw,19px)] leading-[1.78] tracking-[-0.003em] text-pretty text-migss-text/88"
-              >
-                {block.content}
-              </p>
-            );
-          })}
+          <RichContent nodes={article.richContent} />
 
-          {article.filedUnder ? (
+          {article.tagIds.length > 0 ? (
             <div className="mt-7 flex flex-wrap items-center gap-2 border-t border-[var(--migss-divider)] pt-[18.4px]">
               <span className="text-[12.5px] text-migss-text/55">
                 Filed under
               </span>
-              {article.filedUnder.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center rounded-[3px] border border-migss-accent px-2.5 py-[3px] text-[11.5px] text-migss-accent"
-                >
-                  {tag}
-                </span>
-              ))}
+              {article.tagIds.map((id) =>
+                tagLabels[id] ? (
+                  <span
+                    key={id}
+                    className="inline-flex items-center rounded-[3px] border border-migss-accent px-2.5 py-[3px] text-[11.5px] text-migss-accent"
+                  >
+                    {tagLabels[id]}
+                  </span>
+                ) : null,
+              )}
             </div>
           ) : null}
         </article>
@@ -196,7 +183,9 @@ export default async function ArticlePage({ params }: Props) {
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] items-center gap-[18.4px] rounded-[4px] border border-[var(--migss-divider)] border-t-2 border-t-migss-accent p-[clamp(18px,3.5vw,32px)]">
             <div>
               <h2 className="mb-2.5 text-[clamp(26px,6vw,36px)] leading-[1.08] font-normal tracking-[-0.02em]">
-                Get this breakdown for your own {article.category.toLowerCase()}
+                {pillar
+                  ? `Get this breakdown for your own ${pillar.toLowerCase()}`
+                  : "Get this breakdown for your own project"}
               </h2>
               <p className="text-[15px] leading-[1.75] text-migss-text/78">
                 A free home visit, measured and itemised, with a straight answer
@@ -234,13 +223,15 @@ export default async function ArticlePage({ params }: Props) {
                 href={pillarHref}
                 className="text-sm font-medium text-migss-accent-700 no-underline"
               >
-                All {article.category.toLowerCase()} articles →
+                {pillar
+                  ? `All ${pillar.toLowerCase()} articles →`
+                  : "All articles →"}
               </Link>
             </div>
             <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-[clamp(14px,2.5vw,28px)]">
               {related.map((other, index) => (
                 <Reveal as="li" key={other.slug} delay={index * 80}>
-                  <ArticleCard article={other} />
+                  <ArticleCard post={other} tagLabels={tagLabels} />
                 </Reveal>
               ))}
             </ul>

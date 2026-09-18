@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: PILLAR_COPY.Bathroom.intro,
 };
 
-export default function Page() {
+export const revalidate = 60;
+
+export default async function Page() {
   return <PillarPage pillar="Bathroom" />;
 }
