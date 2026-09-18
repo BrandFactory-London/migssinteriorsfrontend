@@ -30,6 +30,13 @@ export const COMPANY = {
   ],
 } as const;
 
+/**
+ * The WhatsApp Business click-to-chat link, as issued by WhatsApp. It carries
+ * its own short code rather than a phone number, so it is stored verbatim and
+ * deliberately not derived from `SITE.phone`.
+ */
+export const WHATSAPP_URL = "https://wa.me/message/LVSH5BUPL5X7B1";
+
 export const telHref = `tel:${SITE.phone.replace(/\s+/g, "")}`;
 export const mailHref = `mailto:${SITE.email}`;
 

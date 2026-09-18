@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ImageSlot } from "@/components/image-slot";
+import { HeroMedia } from "@/components/hero-media";
 import { LocalProjects } from "@/components/locations/local-projects";
 import { ServiceCards } from "@/components/locations/service-cards";
 import { EnquireBand } from "@/components/projects/enquire-band";
@@ -14,6 +14,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
 import { LOCATIONS, getLocation } from "@/lib/locations";
+import { pageMetadata } from "@/lib/seo";
+import { ogImage } from "@/lib/wix/og-image";
 import { getTownProjects } from "@/lib/wix/projects";
 import { telHref } from "@/lib/site";
 
@@ -34,10 +36,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const location = getLocation(area);
   if (!location) return { title: "Area not found" };
 
-  return {
-    title: `Renovation in ${location.name}`,
+  const image = await ogImage(`location-hero-${location.slug}`);
+
+  return pageMetadata({
+    title: `Bathroom & Kitchen Renovation in ${location.name} | Migss Interiors`,
     description: location.heroLead,
-  };
+    path: `/locations/${location.slug}`,
+    image: image?.url,
+    imageAlt: image?.alt ?? `Recent renovation work in ${location.name}`,
+  });
 }
 
 export default async function LocationDetailPage({ params }: Props) {
@@ -61,8 +68,11 @@ export default async function LocationDetailPage({ params }: Props) {
       <main id="top">
         <section className="relative flex min-h-[clamp(460px,72svh,800px)] items-end overflow-hidden">
           <div className="absolute inset-0">
-            <ImageSlot
+            <HeroMedia
+              slotId={`location-hero-${location.slug}`}
               placeholder={`Hero: recent project in ${location.name}, wide shot`}
+              width={2000}
+              height={1200}
               captionHidden
             />
           </div>
@@ -152,8 +162,11 @@ export default async function LocationDetailPage({ params }: Props) {
 
             <Reveal delay={90} className="flex flex-col gap-[18.4px]">
               <div className="aspect-[4/3]">
-                <ImageSlot
+                <HeroMedia
+                  slotId={`location-detail-${location.slug}`}
                   placeholder={`${location.name} project detail shot`}
+                  width={1200}
+                  height={900}
                   shape="rounded"
                   className="migss-plate"
                 />

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ImageSlot } from "@/components/image-slot";
@@ -9,13 +8,21 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pageMetadata } from "@/lib/seo";
+import { ogImage } from "@/lib/wix/og-image";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Twenty-five years renovating bathrooms, kitchens and whole homes across London and Essex, with our own tradespeople, one fixed price and one project manager.",
-};
+export async function generateMetadata() {
+  const image = await ogImage("home-hero");
 
+  return pageMetadata({
+    title: "About Migss Interiors | Our Own Tradespeople, London & Essex",
+    description:
+      "Twenty-five years renovating bathrooms, kitchens and whole homes across London and Essex, with directly employed tradespeople, one fixed price and one project manager from survey to handover.",
+    path: "/about",
+    image: image?.url,
+    imageAlt: image?.alt,
+  });
+}
 const PRINCIPLES = [
   {
     title: "Our own trades",

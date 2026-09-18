@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-
 import { EnquireBand } from "@/components/projects/enquire-band";
 import { FeaturedCarousel } from "@/components/projects/featured-carousel";
 import { ProjectFilters } from "@/components/projects/project-filters";
@@ -7,6 +5,8 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pageMetadata } from "@/lib/seo";
+import { ogImage } from "@/lib/wix/og-image";
 import {
   categoriesPresent,
   getFeaturedProjects,
@@ -19,12 +19,18 @@ import {
  */
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Our Projects",
-  description:
-    "Bathroom, kitchen and whole-home renovations across London and Essex, designed and built by our own team.",
-};
+export async function generateMetadata() {
+  const image = await ogImage("home-hero");
 
+  return pageMetadata({
+    title: "Our Projects | Bathroom & Kitchen Portfolio, London & Essex",
+    description:
+      "Completed bathroom, kitchen and whole-home renovations across East London and Essex, photographed the week we handed them over. Real homes, our own tradespeople, no borrowed photography.",
+    path: "/our-projects",
+    image: image?.url,
+    imageAlt: image?.alt,
+  });
+}
 const STATS = [
   { label: "Completed", value: "600+" },
   { label: "Years", value: "25" },

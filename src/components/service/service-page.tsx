@@ -1,6 +1,7 @@
 import { EnquiryForm } from "@/components/home/enquiry-form";
 import Link from "next/link";
 
+import { HeroMedia } from "@/components/hero-media";
 import { ImageSlot } from "@/components/image-slot";
 import { Reveal } from "@/components/reveal";
 import { AssuranceStrip } from "@/components/service/assurance-strip";
@@ -51,8 +52,11 @@ export async function ServicePage({ service }: { service: Service }) {
       {/* Hero */}
       <section className="relative flex min-h-[clamp(520px,82svh,900px)] items-end overflow-hidden">
         <div className="absolute inset-0">
-          <ImageSlot
+          <HeroMedia
+            slotId={`${service.slug}-hero`}
             placeholder={service.hero.imagePlaceholder}
+            width={2000}
+            height={1200}
             captionHidden
           />
         </div>
@@ -123,8 +127,11 @@ export async function ServicePage({ service }: { service: Service }) {
               {service.spec.lead}
             </p>
             <div className="mt-1 aspect-[5/4]">
-              <ImageSlot
+              <HeroMedia
+                slotId={`${service.slug}-detail`}
                 placeholder={service.spec.imagePlaceholder}
+                width={1000}
+                height={800}
                 shape="rounded"
                 className="migss-plate"
               />
@@ -438,8 +445,11 @@ export async function ServicePage({ service }: { service: Service }) {
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-105">
-                      <ImageSlot
+                      <HeroMedia
+                        slotId={`${service.slug}-crosslink-${slug}`}
                         placeholder={`${other.title} cross-link image`}
+                        width={900}
+                        height={560}
                         captionHidden
                       />
                     </div>
