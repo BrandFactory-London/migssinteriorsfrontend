@@ -11,29 +11,29 @@ const nextConfig: NextConfig = {
    * already in the search index. None of these paths exists as a route here,
    * so nothing is shadowed.
    *
-   * `permanent: true` is Next's permanent redirect, which it serves as a 308
-   * rather than a 301. Both are permanent and search engines treat them the
-   * same; 308 additionally preserves the request method. If a literal 301 is
-   * ever needed, swap `permanent` for `statusCode: 301`.
+   * `statusCode: 301` rather than `permanent: true`: Next serves the latter
+   * as a 308. Both are permanent and search engines treat them alike, but a
+   * 301 is read without argument by older crawlers and by the SEO tooling
+   * that will be checking these once the domain moves.
    */
   async redirects() {
     return [
       // The Jobs page has no equivalent here.
-      { source: "/jobs", destination: "/", permanent: true },
+      { source: "/jobs", destination: "/", statusCode: 301 },
       {
         source: "/renovations-showcase",
         destination: "/our-projects",
-        permanent: true,
+        statusCode: 301,
       },
       {
         source: "/bathroom-renovations",
         destination: "/renovation-services/bathroom",
-        permanent: true,
+        statusCode: 301,
       },
       {
         source: "/kitchen-renovation",
         destination: "/renovation-services/kitchen",
-        permanent: true,
+        statusCode: 301,
       },
     ];
   },
