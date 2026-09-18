@@ -69,7 +69,12 @@ export function Testimonials() {
         >
           <div className="flex items-center gap-3.5">
             <div className="h-[58px] w-[58px] flex-none">
-              <ImageSlot placeholder="MD portrait" shape="circle" />
+              <ImageSlot
+                placeholder="MD portrait"
+                src="/Brand/headshot-square.jpg"
+                alt="The Managing Director of Migss Interiors"
+                shape="circle"
+              />
             </div>
             <div>
               <p className="font-heading text-[18px]">Managing Director</p>

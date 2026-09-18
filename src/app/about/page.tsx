@@ -99,6 +99,8 @@ export default function AboutPage() {
             <Reveal className="aspect-[4/5] max-h-[560px]">
               <ImageSlot
                 placeholder="Portrait: Managing Director on site"
+                src="/Brand/headshot-portrait.jpg"
+                alt="The Managing Director of Migss Interiors"
                 shape="rounded"
                 className="migss-plate"
               />
