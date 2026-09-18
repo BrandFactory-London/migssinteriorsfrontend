@@ -24,7 +24,7 @@ export function ProjectCard({ project }: { project: Project }) {
           />
         </div>
         {project.category ? (
-          <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-700">
+          <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-ink">
             {project.category}
           </span>
         ) : null}
@@ -32,7 +32,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <div className="flex items-start gap-3">
         <div className="flex-1">
-          <h3 className="mb-[5px] text-[23px] leading-[1.15] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
+          <h3 className="mb-[5px] text-[23px] leading-[1.15] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-ink">
             {project.title}
           </h3>
           {(project.addressLine ?? project.location) ? (
@@ -46,7 +46,7 @@ export function ProjectCard({ project }: { project: Project }) {
             </p>
           ) : null}
         </div>
-        <span className="grid h-[34px] w-[34px] flex-none place-items-center rounded-full border border-migss-accent text-migss-accent-700 opacity-100 transition-[transform,opacity] duration-[350ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:opacity-50 [@media(hover:hover)]:group-hover:translate-x-1 [@media(hover:hover)]:group-hover:opacity-100">
+        <span className="grid h-[34px] w-[34px] flex-none place-items-center rounded-full border border-migss-accent text-migss-accent-ink opacity-100 transition-[transform,opacity] duration-[350ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:opacity-50 [@media(hover:hover)]:group-hover:translate-x-1 [@media(hover:hover)]:group-hover:opacity-100">
           <svg
             width="15"
             height="15"

@@ -19,7 +19,7 @@ const cardClass =
   "flex min-h-[120px] flex-col gap-2 border-r border-b border-[var(--migss-divider)] p-[clamp(16px,2.8vw,26px)] text-inherit no-underline transition-colors duration-300";
 const linkCardClass = `${cardClass} focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/7`;
 const labelClass =
-  "flex items-center gap-2.5 text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700";
+  "flex items-center gap-2.5 text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-ink";
 
 export default function ContactPage() {
   return (
@@ -33,7 +33,7 @@ export default function ContactPage() {
               items={[{ href: "/", label: "Home" }, { label: "Contact" }]}
             />
           </div>
-          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
             Mon–Sat, 8am–6pm
           </p>
@@ -163,7 +163,7 @@ export default function ContactPage() {
               <p className="text-[15px] leading-[1.75] text-migss-text/76">
                 Ten areas across London and Essex, all within an hour of our
                 Essex workshop, from{" "}
-                <Link href="/locations" className="text-migss-accent-700">
+                <Link href="/locations" className="text-migss-accent-ink">
                   Wanstead and Woodford to Brentwood and Epping
                 </Link>
                 .

@@ -73,7 +73,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
                         >
                           <span
                             aria-hidden="true"
-                            className="mt-[0.7em] w-[1.6ch] flex-none text-[11px] leading-none text-migss-accent-700 tabular-nums"
+                            className="mt-[0.7em] w-[1.6ch] flex-none text-[11px] leading-none text-migss-accent-ink tabular-nums"
                           >
                             {block.kind === "ol"
                               ? `${String(itemIndex + 1).padStart(2, "0")}`
@@ -92,7 +92,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
           <footer className="mt-[clamp(28px,5vw,56px)] border-t border-[var(--migss-divider)] pt-[18.4px]">
             <Link
               href="/contact"
-              className="text-sm font-medium text-migss-accent-700 no-underline"
+              className="text-sm font-medium text-migss-accent-ink no-underline"
             >
               Questions about this page? Get in touch →
             </Link>

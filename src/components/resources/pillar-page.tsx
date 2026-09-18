@@ -146,7 +146,7 @@ export async function PillarPage({ pillar }: { pillar: Pillar }) {
               ]}
             />
           </div>
-          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
             {copy.kicker}
           </p>
@@ -175,7 +175,7 @@ export async function PillarPage({ pillar }: { pillar: Pillar }) {
             </p>
             <Link
               href={copy.otherHref}
-              className="text-sm font-medium text-migss-accent-700 no-underline"
+              className="text-sm font-medium text-migss-accent-ink no-underline"
             >
               {copy.otherLabel}
             </Link>
@@ -204,7 +204,7 @@ export async function PillarPage({ pillar }: { pillar: Pillar }) {
                   href={item.href}
                   className="flex min-h-[130px] flex-col gap-2 rounded-[4px] border border-[var(--migss-divider)] p-[18.4px] text-inherit no-underline transition-[background-color,border-color] duration-300 active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-migss-accent [@media(hover:hover)]:hover:border-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/6"
                 >
-                  <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
+                  <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-ink">
                     {item.kicker}
                   </span>
                   <h3 className="text-2xl leading-[1.15] font-normal">

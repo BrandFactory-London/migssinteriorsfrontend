@@ -44,7 +44,7 @@ export function EnquireBand({
     >
       <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(20px,3.5vw,48px)] px-[clamp(16px,4.5vw,48px)] py-[clamp(30px,6vw,72px)]">
         <Reveal>
-          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             {kicker}
           </p>
           <h2 className="mb-[13.8px] text-[clamp(30px,7.2vw,46px)] leading-[1.05] font-normal tracking-[-0.02em]">
@@ -63,7 +63,7 @@ export function EnquireBand({
             <li className="flex items-center gap-2.5">
               <Tick />
               Or call us now on{" "}
-              <a href={telHref} className="text-migss-accent-700">
+              <a href={telHref} className="text-migss-accent-ink">
                 {SITE.phone}
               </a>
             </li>

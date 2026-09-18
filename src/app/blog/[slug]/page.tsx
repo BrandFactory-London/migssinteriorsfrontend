@@ -99,13 +99,13 @@ export default async function ArticlePage({ params }: Props) {
             {badge ? (
               <>
                 <span aria-hidden="true">/</span>
-                <span className="text-migss-accent-700">{badge}</span>
+                <span className="text-migss-accent-ink">{badge}</span>
               </>
             ) : null}
           </nav>
 
           {badge ? (
-            <p className="mb-[13.8px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+            <p className="mb-[13.8px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
               {badge}
             </p>
           ) : null}
@@ -121,7 +121,7 @@ export default async function ArticlePage({ params }: Props) {
           <div className="flex flex-wrap items-center gap-x-5 gap-y-3 border-y border-[var(--migss-divider)] py-[13.8px]">
             <span
               aria-hidden="true"
-              className="font-heading grid h-10 w-10 flex-none place-items-center rounded-full border border-migss-accent-400 text-base text-migss-accent-700"
+              className="font-heading grid h-10 w-10 flex-none place-items-center rounded-full border border-migss-accent-400 text-base text-migss-accent-ink"
             >
               M
             </span>
@@ -166,7 +166,7 @@ export default async function ArticlePage({ params }: Props) {
                 tagLabels[id] ? (
                   <span
                     key={id}
-                    className="inline-flex items-center rounded-[3px] border border-migss-accent px-2.5 py-[3px] text-[11.5px] text-migss-accent"
+                    className="inline-flex items-center rounded-[3px] border border-migss-accent px-2.5 py-[3px] text-[11.5px] text-migss-accent-ink"
                   >
                     {tagLabels[id]}
                   </span>
@@ -221,7 +221,7 @@ export default async function ArticlePage({ params }: Props) {
               </h2>
               <Link
                 href={pillarHref}
-                className="text-sm font-medium text-migss-accent-700 no-underline"
+                className="text-sm font-medium text-migss-accent-ink no-underline"
               >
                 {pillar
                   ? `All ${pillar.toLowerCase()} articles →`

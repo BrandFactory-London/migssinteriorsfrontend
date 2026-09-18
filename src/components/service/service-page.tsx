@@ -103,7 +103,7 @@ export function ServicePage({ service }: { service: Service }) {
       >
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-start gap-[clamp(20px,3.5vw,48px)]">
           <Reveal className="flex flex-col gap-[13.8px]">
-            <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+            <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
               The specification
             </p>
             <h2 className="text-[clamp(30px,7.2vw,46px)] leading-[1.05] font-normal tracking-[-0.02em]">
@@ -135,7 +135,7 @@ export function ServicePage({ service }: { service: Service }) {
                 delay={index * 50}
                 className="flex flex-col gap-1.5 border-r border-b border-[var(--migss-divider)] p-[clamp(14px,2.4vw,20px)] transition-colors duration-300 [@media(hover:hover)]:hover:bg-migss-accent/6"
               >
-                <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700 tabular-nums">
+                <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-ink tabular-nums">
                   {item.n}
                 </span>
                 <h3 className="text-[19px] leading-[1.2] font-normal tracking-[-0.01em]">
@@ -180,7 +180,7 @@ export function ServicePage({ service }: { service: Service }) {
                   <span className="block h-[9px] w-[9px] flex-none rounded-full border border-migss-accent bg-migss-bg" />
                   <span className="block h-px flex-1 bg-[var(--migss-divider)]" />
                 </div>
-                <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700 tabular-nums">
+                <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-ink tabular-nums">
                   {step.when}
                 </span>
                 <h3 className="my-1.5 text-[21px] leading-[1.15] font-normal tracking-[-0.01em]">
@@ -202,7 +202,7 @@ export function ServicePage({ service }: { service: Service }) {
       >
         <div className="flex flex-wrap items-end justify-between gap-[13.8px] px-[clamp(16px,4.5vw,48px)]">
           <Reveal>
-            <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+            <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
               {service.gallery.kicker}
             </p>
             <h2 className="text-[clamp(30px,7.2vw,46px)] leading-[1.05] font-normal tracking-[-0.02em]">
@@ -244,12 +244,12 @@ export function ServicePage({ service }: { service: Service }) {
                     shape="rounded"
                     className="migss-plate h-full w-full transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-[1.02]"
                   />
-                  <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-700">
+                  <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-ink">
                     {item.location}
                   </span>
                 </div>
                 <div className="mt-[13.8px] flex gap-3">
-                  <span className="font-heading pt-1 text-[13px] text-migss-accent-700 tabular-nums">
+                  <span className="font-heading pt-1 text-[13px] text-migss-accent-ink tabular-nums">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
@@ -349,7 +349,7 @@ export function ServicePage({ service }: { service: Service }) {
       >
         <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(20px,3.5vw,48px)] px-[clamp(16px,4.5vw,48px)] py-[clamp(30px,6vw,72px)]">
           <Reveal>
-            <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+            <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
               {service.enquire.kicker}
             </p>
             <h2 className="mb-[13.8px] text-[clamp(30px,7.2vw,46px)] leading-[1.05] font-normal tracking-[-0.02em]">
@@ -368,7 +368,7 @@ export function ServicePage({ service }: { service: Service }) {
               <li className="flex items-center gap-2.5">
                 <Tick />
                 Or call us now on{" "}
-                <a href={telHref} className="text-migss-accent-700">
+                <a href={telHref} className="text-migss-accent-ink">
                   {SITE.phone}
                 </a>
               </li>
@@ -387,7 +387,7 @@ export function ServicePage({ service }: { service: Service }) {
         className="mx-auto max-w-[1280px] px-[clamp(16px,4.5vw,48px)] pt-[clamp(36px,7.5vw,84px)]"
       >
         <Reveal>
-          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             You might also like
           </p>
           <h2 className="mb-7 text-[clamp(28px,6.8vw,42px)] leading-[1.05] font-normal tracking-[-0.02em]">
@@ -419,7 +419,7 @@ export function ServicePage({ service }: { service: Service }) {
                     <p className="text-sm leading-[1.65] text-migss-text/72">
                       {SERVICE_BLURB[slug]}
                     </p>
-                    <span className="mt-1 text-sm font-medium text-migss-accent-700">
+                    <span className="mt-1 text-sm font-medium text-migss-accent-ink">
                       Explore {other.short.toLowerCase()} →
                     </span>
                   </div>

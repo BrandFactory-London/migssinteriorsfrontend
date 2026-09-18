@@ -75,8 +75,8 @@ export function ArticleLibrary({
                 className={cn(
                   "font-body min-h-[46px] flex-none cursor-pointer snap-start rounded-full border px-[18px] text-sm font-medium transition-[background-color,color,border-color] duration-300 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-migss-accent",
                   active
-                    ? "border-migss-accent bg-migss-accent/10 text-migss-accent-700"
-                    : "border-[var(--migss-divider)] text-migss-text [@media(hover:hover)]:hover:border-migss-accent [@media(hover:hover)]:hover:text-migss-accent-700",
+                    ? "border-migss-accent bg-migss-accent/10 text-migss-accent-ink"
+                    : "border-[var(--migss-divider)] text-migss-text [@media(hover:hover)]:hover:border-migss-accent [@media(hover:hover)]:hover:text-migss-accent-ink",
                 )}
               >
                 {option.label}

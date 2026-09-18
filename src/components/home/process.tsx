@@ -28,7 +28,7 @@ export function Process() {
       <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(18px,3vw,40px)]">
         {/* Sticky only once there is a column beside it to stay level with. */}
         <Reveal className="lg:sticky lg:top-[84px]">
-          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             The Migss renovation process
           </p>
           <h2 className="mb-[13.8px] text-[clamp(30px,7.2vw,46px)] leading-[1.05] font-normal tracking-[-0.02em]">

@@ -134,7 +134,7 @@ export default async function LocationDetailPage({ params }: Props) {
         >
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(20px,3.5vw,48px)]">
             <Reveal>
-              <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+              <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
                 Working in {location.name}
               </p>
               <h2 className="mb-[13.8px] text-[clamp(27px,6.4vw,40px)] leading-[1.08] font-normal tracking-[-0.02em]">
@@ -200,7 +200,7 @@ export default async function LocationDetailPage({ params }: Props) {
             </p>
             <footer className="flex flex-col gap-2">
               <span
-                className="flex gap-1 text-migss-accent"
+                className="flex gap-1 text-migss-accent-ink"
                 aria-label="5 out of 5 stars"
               >
                 {Array.from({ length: 5 }, (_, index) => (
@@ -255,7 +255,7 @@ export default async function LocationDetailPage({ params }: Props) {
               strokeWidth="1.5"
               strokeLinecap="round"
               aria-hidden="true"
-              className="flex-none text-migss-accent-700"
+              className="flex-none text-migss-accent-ink"
             >
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>

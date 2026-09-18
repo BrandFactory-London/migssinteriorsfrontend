@@ -248,7 +248,7 @@ export function SiteChrome() {
 }
 
 const dockItemClass =
-  "group flex h-[50px] flex-none cursor-pointer items-center rounded-full px-[15px] text-inherit no-underline transition-[background-color,color,transform] duration-300 active:scale-[0.94] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/15 [@media(hover:hover)]:hover:text-migss-accent-700";
+  "group flex h-[50px] flex-none cursor-pointer items-center rounded-full px-[15px] text-inherit no-underline transition-[background-color,color,transform] duration-300 active:scale-[0.94] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/15 [@media(hover:hover)]:hover:text-migss-accent-ink";
 
 /**
  * Labels expand on hover where hovering exists. On touch there is no hover
@@ -273,7 +273,7 @@ function DockLink({ item, active }: { item: DockItem; active: boolean }) {
       className={cn(
         dockItemClass,
         item.desktopOnly && "hidden min-[1000px]:flex",
-        active && "bg-migss-accent/15 text-migss-accent-700",
+        active && "bg-migss-accent/15 text-migss-accent-ink",
       )}
     >
       {item.icon}

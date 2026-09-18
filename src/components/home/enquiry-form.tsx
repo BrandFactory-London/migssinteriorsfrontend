@@ -103,7 +103,7 @@ export function EnquiryForm({
   return (
     <div className="rounded-[4px] border border-[var(--migss-divider)] border-t-2 border-t-migss-accent bg-migss-bg p-[clamp(16px,4vw,28px)] shadow-migss-sm">
       <div className="mb-[18.4px] flex items-center gap-3">
-        <span className="text-[11.5px] font-medium tracking-[0.12em] uppercase text-migss-accent-700 tabular-nums">
+        <span className="text-[11.5px] font-medium tracking-[0.12em] uppercase text-migss-accent-ink tabular-nums">
           {stepLabel}
         </span>
         <span
@@ -317,7 +317,7 @@ export function EnquiryForm({
               className="rounded-[4px] border border-migss-error px-3.5 py-3 text-[14px] leading-[1.6] text-migss-text"
             >
               {state.message} Or ring{" "}
-              <a href={telHref} className="text-migss-accent-700">
+              <a href={telHref} className="text-migss-accent-ink">
                 {SITE.phone}
               </a>
               .

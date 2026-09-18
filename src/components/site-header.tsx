@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { SITE, telHref } from "@/lib/site";
-import { Wordmark } from "@/components/wordmark";
+import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
 /**
@@ -32,8 +32,7 @@ export function SiteHeader({
         )}
       >
         <Link href="/" className="mr-auto text-inherit no-underline">
-          <Wordmark tone={overlay ? "light" : "dark"} />
-          <span className="sr-only">Migss Interiors home</span>
+          <Logo height={34} priority />
         </Link>
 
         <a

@@ -93,7 +93,7 @@
 /* ──────────────────────────────────────────────────────────────────────────
    Migss Interiors — tokens from the Classical design system used by the
    Claude Design handoff. Namespaced under `migss-` so they generate Tailwind
-   utilities (bg-migss-bg, text-migss-accent-700, …) without colliding with
+   utilities (bg-migss-bg, text-migss-accent-ink, …) without colliding with
    the shadcn token set above.
    ────────────────────────────────────────────────────────────────────── */
 @theme {
@@ -132,6 +132,12 @@
   --color-migss-accent-700: #b38c6d;
   --color-migss-accent-800: #9d714d;
   --color-migss-accent-900: #72543b;
+
+  /* Accent text only. #b38c6d is 2.73:1 on the page background, under the
+     4.5:1 AA wants for body-sized text, so type that happens to be accent
+     coloured uses this darker step (4.8:1) while every fill, border and rule
+     stays the brand colour itself. */
+  --color-migss-accent-ink: #896343;
 
   --font-heading: var(--font-cormorant), "Cormorant Garamond", ui-serif, serif;
   --font-body: var(--font-instrument), "Instrument Sans", system-ui, sans-serif;

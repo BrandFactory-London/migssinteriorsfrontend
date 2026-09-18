@@ -35,13 +35,13 @@ export function ArticleCard({
           />
         </div>
         {badge ? (
-          <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-700">
+          <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-ink">
             {badge}
           </span>
         ) : null}
       </div>
       <div>
-        <h2 className="mb-[7px] text-[23px] leading-[1.18] font-normal tracking-[-0.01em] text-pretty transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
+        <h2 className="mb-[7px] text-[23px] leading-[1.18] font-normal tracking-[-0.01em] text-pretty transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-ink">
           {post.title}
         </h2>
         {post.excerpt ? (

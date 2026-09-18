@@ -48,7 +48,7 @@ export default async function OurProjectsPage() {
               items={[{ href: "/", label: "Home" }, { label: "Our Projects" }]}
             />
           </div>
-          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
             Portfolio · London &amp; Essex
           </p>
@@ -92,7 +92,7 @@ export default async function OurProjectsPage() {
           <p className="mt-7 border-t border-[var(--migss-divider)] pt-[18.4px] text-[14.5px] leading-[1.75] text-migss-text/72">
             Looking for something specific, a wet room in a loft, a kitchen in a
             listed building?{" "}
-            <a href="#enquire" className="text-migss-accent-700">
+            <a href="#enquire" className="text-migss-accent-ink">
               Tell us what you are planning
             </a>{" "}
             and we will send photographs of the closest projects we have done.
