@@ -200,12 +200,17 @@ export function SiteChrome() {
                 ignores the unprefixed property and would paint the span's
                 background unmasked, as a solid square.
 
-                It is a filled mark among 1.25px stroked ones, so it lays down
-                more ink and reads a touch heavier. That is the artwork, and
-                the colour is an exact match. */}
+                Deliberately lighter than the icons beside it, at 70% of the
+                dock's ink. It is a filled mark among outlines, so it covers
+                about half again as much of its box as they do and reads
+                heavier at equal colour. Colour parity is given up here for
+                weight parity, which is the one the eye actually judges.
+                Chosen by rendering the dock at 100, 80, 75, 70, 60 and 50 and
+                looking: 80 and 75 still sit heavier, 60 reads faded, like a
+                disabled control, 70 is where the four settle as one set. */}
             <span
               aria-hidden="true"
-              className="block h-[19px] w-[19px] flex-none bg-current [-webkit-mask-image:url(/Brand/whatsapplogo.svg)] [-webkit-mask-position:center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:contain] [mask-image:url(/Brand/whatsapplogo.svg)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
+              className="block h-[19px] w-[19px] flex-none bg-current/70 [-webkit-mask-image:url(/Brand/whatsapplogo.svg)] [-webkit-mask-position:center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:contain] [mask-image:url(/Brand/whatsapplogo.svg)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
             />
             <DockLabel>WhatsApp</DockLabel>
           </a>
