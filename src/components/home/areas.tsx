@@ -33,12 +33,15 @@ export function Areas() {
             free consultation within the week.
           </p>
           <p className="text-[13px] leading-[1.75] text-migss-text/62">
-            Plus the surrounding IG postcodes — IG1 to IG10 — and neighbouring
-            E4, E11, E18, RM and CM areas. Not listed?{" "}
-            <a href="#enquire" className="text-migss-accent-700 underline-offset-[3px]">
+            Plus the surrounding IG postcodes, IG1 to IG10, and neighbouring E4,
+            E11, E18, RM and CM areas. Not listed?{" "}
+            <a
+              href="#enquire"
+              className="text-migss-accent-700 underline-offset-[3px]"
+            >
               Ask us
             </a>{" "}
-            — we will tell you honestly if you are outside our range.
+            and we will tell you honestly if you are outside our range.
           </p>
         </Reveal>
 

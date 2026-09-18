@@ -10,7 +10,7 @@ const ARTICLES = [
   {
     kicker: "Guarantee",
     title: "What our 10-year labour guarantee covers",
-    body: "In plain English — including what sits under product warranty instead.",
+    body: "In plain English, including what sits under product warranty instead.",
     meta: "3 min read",
   },
   {

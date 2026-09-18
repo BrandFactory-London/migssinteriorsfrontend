@@ -84,7 +84,7 @@ export async function submitEnquiry(
     return {
       status: "error",
       message:
-        "Something went wrong sending your enquiry. Your details are still here — try again, or call us and we will take it over the phone.",
+        "Something went wrong sending your enquiry. Your details are still here, so try again or call us and we will take it over the phone.",
       step: 2,
       values,
     };

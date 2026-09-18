@@ -13,7 +13,7 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Twenty-five years renovating bathrooms, kitchens and whole homes across London and Essex — with our own tradespeople, one fixed price and one project manager.",
+    "Twenty-five years renovating bathrooms, kitchens and whole homes across London and Essex, with our own tradespeople, one fixed price and one project manager.",
 };
 
 const PRINCIPLES = [
@@ -27,11 +27,11 @@ const PRINCIPLES = [
   },
   {
     title: "One project manager",
-    body: "The same person from survey to handover, on site weekly, reachable directly — plus the MD's number behind them.",
+    body: "The same person from survey to handover, on site weekly, reachable directly, plus the MD's number behind them.",
   },
   {
     title: "We leave it clean",
-    body: "Dust screens, protected routes, site cleared every evening — and a proper builder's clean before we hand the keys back.",
+    body: "Dust screens, protected routes, site cleared every evening, and a proper builder's clean before we hand the keys back.",
   },
 ];
 
@@ -85,7 +85,7 @@ export default function AboutPage() {
           <p className="max-w-[62ch] text-[clamp(15px,4vw,17.5px)] leading-[1.75] text-pretty text-migss-text/80">
             Migss Interiors has renovated bathrooms, kitchens and whole homes
             across London and Essex for twenty-five years. We are not a
-            franchise and not a sales operation with a build team bolted on — we
+            franchise and not a sales operation with a build team bolted on. We
             are tradespeople who employ tradespeople, and the same names turn up
             on your job from the first measure to the final snag.
           </p>
@@ -116,11 +116,11 @@ export default function AboutPage() {
                 </p>
               </blockquote>
               <p className="mb-[13.8px] text-[15px] leading-[1.8] text-pretty text-migss-neutral-400">
-                That is not a slogan — it is the reason the business is the size
-                it is. I started out fitting bathrooms myself, and the thing that
-                made people recommend us was never the marble. It was that
-                somebody picked up the phone, told the truth about what was going
-                wrong, and came back to sort it.
+                That is not a slogan: it is the reason the business is the size
+                it is. I started out fitting bathrooms myself, and the thing
+                that made people recommend us was never the marble. It was that
+                somebody picked up the phone, told the truth about what was
+                going wrong, and came back to sort it.
               </p>
               <p className="text-[15px] leading-[1.8] text-pretty text-migss-neutral-400">
                 So we employ our own fitters rather than subcontracting the work
@@ -185,7 +185,7 @@ export default function AboutPage() {
               <p className="text-[15.5px] leading-[1.8] text-pretty text-migss-text/82">
                 It is also why our aftercare is a service and not a formality.
                 Houses move, sealant ages and things need adjusting in the first
-                year — we would rather come back and sort it than have you living
+                year. We would rather come back and sort it than have you living
                 with it.
               </p>
             </Reveal>

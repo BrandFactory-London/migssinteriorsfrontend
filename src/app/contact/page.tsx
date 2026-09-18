@@ -41,7 +41,7 @@ export default function ContactPage() {
             Get in touch.
           </h1>
           <p className="max-w-[54ch] text-[clamp(15px,4vw,17.5px)] leading-[1.75] text-migss-text/80">
-            Call, email, or send the form below — whichever is easiest. Average
+            Call, email, or send the form below, whichever is easiest. Average
             response time is under 20 minutes during working hours.
           </p>
         </section>
@@ -98,7 +98,7 @@ export default function ContactPage() {
                 {SITE.email}
               </span>
               <span className="text-[13.5px] leading-[1.6] text-migss-text/68">
-                Photographs and plans welcome — they speed up the quote.
+                Photographs and plans welcome. They speed up the quote.
               </span>
             </a>
 
@@ -162,17 +162,14 @@ export default function ContactPage() {
                   of the area list, which lives on that page. */}
               <p className="text-[15px] leading-[1.75] text-migss-text/76">
                 Ten areas across London and Essex, all within an hour of our
-                Essex workshop — from{" "}
+                Essex workshop, from{" "}
                 <Link href="/locations" className="text-migss-accent-700">
                   Wanstead and Woodford to Brentwood and Epping
                 </Link>
                 .
               </p>
             </div>
-            <ButtonLink
-              href="/locations"
-              className="font-body font-medium"
-            >
+            <ButtonLink href="/locations" className="font-body font-medium">
               See all service areas →
             </ButtonLink>
           </div>

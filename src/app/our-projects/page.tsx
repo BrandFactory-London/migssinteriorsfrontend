@@ -59,7 +59,7 @@ export default async function OurProjectsPage() {
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-end gap-[clamp(14px,3vw,40px)] border-t border-[var(--migss-divider)] pt-[18.4px]">
             <p className="text-[clamp(15px,4vw,17.5px)] leading-[1.75] text-pretty text-migss-text/80">
               Every project below was designed and built by our own team. No
-              styling props, no borrowed photography — these are real homes in
+              styling props, no borrowed photography. These are real homes in
               Chigwell, Wanstead, Loughton and across Essex, most of which you
               could visit if the owners are willing.
             </p>
@@ -90,8 +90,8 @@ export default async function OurProjectsPage() {
           />
 
           <p className="mt-7 border-t border-[var(--migss-divider)] pt-[18.4px] text-[14.5px] leading-[1.75] text-migss-text/72">
-            Looking for something specific — a wet room in a loft, a kitchen in
-            a listed building?{" "}
+            Looking for something specific, a wet room in a loft, a kitchen in a
+            listed building?{" "}
             <a href="#enquire" className="text-migss-accent-700">
               Tell us what you are planning
             </a>{" "}

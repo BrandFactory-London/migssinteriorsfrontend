@@ -72,13 +72,13 @@ export default function ThankYouPage() {
           Enquiry received
         </p>
         <h1 className="mb-[13.8px] text-[clamp(36px,8.5vw,64px)] leading-[1.02] font-normal tracking-[-0.03em] text-balance">
-          Thank you — we have got it.
+          Thank you, we have got it.
         </h1>
         <p className="mb-7 max-w-[52ch] text-[clamp(15px,4vw,18px)] leading-[1.7] text-pretty text-migss-text/80">
           A member of the team will call you back on the number you gave us. Our
-          average response time is under 20 minutes during working hours —
-          Monday to Saturday, 8am to 6pm. Enquiries sent overnight are answered
-          first thing the next morning.
+          average response time is under 20 minutes during working hours, Monday
+          to Saturday, 8am to 6pm. Enquiries sent overnight are answered first
+          thing the next morning.
         </p>
 
         <ol className="mb-7 grid list-none border-t border-[var(--migss-divider)]">

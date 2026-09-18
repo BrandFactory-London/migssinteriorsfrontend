@@ -77,7 +77,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
                           >
                             {block.kind === "ol"
                               ? `${String(itemIndex + 1).padStart(2, "0")}`
-                              : "—"}
+                              : "·"}
                           </span>
                           <span className="flex-1">{item}</span>
                         </li>

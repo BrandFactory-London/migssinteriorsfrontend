@@ -5,7 +5,13 @@ import { telHref } from "@/lib/site";
 
 function Star() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
       <path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" />
     </svg>
   );
@@ -25,7 +31,10 @@ export function Testimonials() {
           <p className="font-heading text-[56px] leading-[0.95] tabular-nums">
             5.0
           </p>
-          <div className="flex gap-1 text-migss-accent" aria-label="5 out of 5 stars">
+          <div
+            className="flex gap-1 text-migss-accent"
+            aria-label="5 out of 5 stars"
+          >
             <Star />
             <Star />
             <Star />
@@ -38,7 +47,11 @@ export function Testimonials() {
           </p>
         </Reveal>
 
-        <Reveal delay={90} as="blockquote" className="flex flex-col gap-[13.8px] border-l-2 border-migss-accent pt-[9.2px] pl-[18.4px]">
+        <Reveal
+          delay={90}
+          as="blockquote"
+          className="flex flex-col gap-[13.8px] border-l-2 border-migss-accent pt-[9.2px] pl-[18.4px]"
+        >
           <p className="font-heading text-[clamp(21px,5.2vw,28px)] leading-[1.3] italic">
             &ldquo;They treated our home like their own. The site was spotless
             every evening and the finish is better than the visuals we were
@@ -49,7 +62,11 @@ export function Testimonials() {
           </footer>
         </Reveal>
 
-        <Reveal delay={180} as="blockquote" className="flex flex-col gap-[13.8px] rounded-[4px] bg-migss-neutral-900 p-[18.4px] text-migss-neutral-100">
+        <Reveal
+          delay={180}
+          as="blockquote"
+          className="flex flex-col gap-[13.8px] rounded-[4px] bg-migss-neutral-900 p-[18.4px] text-migss-neutral-100"
+        >
           <div className="flex items-center gap-3.5">
             <div className="h-[58px] w-[58px] flex-none">
               <ImageSlot placeholder="MD portrait" shape="circle" />
@@ -60,7 +77,7 @@ export function Testimonials() {
             </div>
           </div>
           <p className="text-[15px] leading-[1.75] italic">
-            &ldquo;You will always be able to reach me personally — during your
+            &ldquo;You will always be able to reach me personally, during your
             project and long after it. That is the whole reason this company has
             lasted 25 years.&rdquo;
           </p>

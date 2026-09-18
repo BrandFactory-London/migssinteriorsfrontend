@@ -23,7 +23,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "Resources",
   description:
-    "Twenty-five years of bathroom and kitchen answers, written down in plain language — costs, construction, layouts and lead times.",
+    "Twenty-five years of bathroom and kitchen answers, written down in plain language: costs, construction, layouts and lead times.",
 };
 
 /** Reads correctly at nought and one, not just at the plural. */
@@ -260,7 +260,7 @@ export default async function ResourcesPage() {
         <EnquireBand
           kicker="Past the reading stage"
           heading="Ask us the question the article did not answer"
-          body="No obligation and no sales sequence — if you are still a year away, say so and we will answer anyway."
+          body="No obligation and no sales sequence. If you are still a year away, say so and we will answer anyway."
           points={[
             "Average response time under 20 minutes",
             "Free home visit, fixed written quote",

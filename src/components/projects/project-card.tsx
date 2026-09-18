@@ -17,7 +17,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="relative aspect-[4/5] overflow-hidden rounded-[4px]">
         <div className="absolute inset-0 transition-transform duration-[800ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-105">
           <ImageSlot
-            placeholder={`${project.location ?? "Recent work"} — ${project.title}`}
+            placeholder={`${project.location ?? "Recent work"}: ${project.title}`}
             src={project.cardUrl ?? undefined}
             alt={`${project.title}${project.addressLine ? `, ${project.addressLine}` : ""}`}
             captionHidden
@@ -35,7 +35,7 @@ export function ProjectCard({ project }: { project: Project }) {
           <h3 className="mb-[5px] text-[23px] leading-[1.15] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
             {project.title}
           </h3>
-          {project.addressLine ?? project.location ? (
+          {(project.addressLine ?? project.location) ? (
             <p className="mb-1.5 text-[13px] tracking-[0.02em] text-migss-text/58">
               {project.addressLine ?? project.location}
             </p>

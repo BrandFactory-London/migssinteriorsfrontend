@@ -225,7 +225,7 @@ export default async function LocationDetailPage({ params }: Props) {
 
         <EnquireBand
           heading={<>Book a free consultation in {location.name}</>}
-          body="Your town is already filled in — add your details and we will call you back the same working day to arrange a visit, usually within the week."
+          body="Your town is already filled in. Add your details and we will call you back the same working day to arrange a visit, usually within the week."
           points={[
             "Free home visit, fixed written quote",
             "Photographs of nearby projects on request",

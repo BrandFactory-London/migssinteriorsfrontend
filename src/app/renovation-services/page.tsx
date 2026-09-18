@@ -14,7 +14,7 @@ import { SITE, telHref } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Renovation Services",
   description:
-    "Bathrooms, kitchens and whole-home interiors across London and Essex — designed, built and guaranteed by one team of directly employed tradespeople.",
+    "Bathrooms, kitchens and whole-home interiors across London and Essex, designed, built and guaranteed by one team of directly employed tradespeople.",
 };
 
 function Tick() {
@@ -61,16 +61,16 @@ export default function RenovationServicesPage() {
           </h1>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-start gap-[clamp(14px,3vw,40px)] border-t border-[var(--migss-divider)] pt-[18.4px]">
             <p className="text-[clamp(15px,4vw,17.5px)] leading-[1.75] text-pretty text-migss-text/80">
-              Bathrooms, kitchens and whole-home interiors — designed, built and
+              Bathrooms, kitchens and whole-home interiors, designed, built and
               guaranteed by one team of directly employed tradespeople. Same
               project manager from first measure to final snag, a fixed written
               quote before anyone lifts a tool, and a ten-year labour guarantee
               on the work itself.
             </p>
             <p className="text-sm leading-[1.8] text-migss-text/62">
-              Not sure which you need? Most of our projects begin as one room and
-              grow. Start with whichever is most urgent and we will tell you
-              honestly what else is worth doing at the same time — and what is
+              Not sure which you need? Most of our projects begin as one room
+              and grow. Start with whichever is most urgent and we will tell you
+              honestly what else is worth doing at the same time, and what is
               not.
             </p>
           </div>
@@ -108,8 +108,8 @@ export default function RenovationServicesPage() {
               </h2>
               <p className="mb-[18.4px] text-[15px] leading-[1.75] text-migss-text/78">
                 A free home visit, a fixed written quote, and an honest view on
-                what is worth spending and what is not. We reply the same working
-                day.
+                what is worth spending and what is not. We reply the same
+                working day.
               </p>
               <ul className="flex list-none flex-col gap-2.5 text-sm text-migss-text/75">
                 <li className="flex items-center gap-2.5">

@@ -7,16 +7,31 @@ import { cn } from "@/lib/utils";
 
 const DOOR_COPY: Record<ServiceSlug, { body: string; tags: string[] }> = {
   bathroom: {
-    body: "Wet rooms, master ensuites and family bathrooms taken back to brick and rebuilt — tanking, underfloor heating, concealed brassware and tiling set out so every cut lands where it should.",
-    tags: ["Wet rooms", "Underfloor heating", "Marble & stone", "3–4 weeks typical"],
+    body: "Wet rooms, master ensuites and family bathrooms taken back to brick and rebuilt: tanking, underfloor heating, concealed brassware and tiling set out so every cut lands where it should.",
+    tags: [
+      "Wet rooms",
+      "Underfloor heating",
+      "Marble & stone",
+      "3–4 weeks typical",
+    ],
   },
   kitchen: {
-    body: "Bespoke in-frame and handleless cabinetry, islands, stone worktops and the structural work behind them — including knock-throughs, steels and the electrics and plumbing a serious kitchen needs.",
-    tags: ["Bespoke cabinetry", "Islands", "Structural openings", "5–8 weeks typical"],
+    body: "Bespoke in-frame and handleless cabinetry, islands, stone worktops and the structural work behind them, including knock-throughs, steels and the electrics and plumbing a serious kitchen needs.",
+    tags: [
+      "Bespoke cabinetry",
+      "Islands",
+      "Structural openings",
+      "5–8 weeks typical",
+    ],
   },
   interior: {
-    body: "Whole-home work on one programme: layouts, joinery, flooring, lighting, plastering and decoration across every room — with the bathrooms and kitchen folded into the same schedule and the same guarantee.",
-    tags: ["Whole home", "Bespoke joinery", "Lighting design", "8–16 weeks typical"],
+    body: "Whole-home work on one programme: layouts, joinery, flooring, lighting, plastering and decoration across every room, with the bathrooms and kitchen folded into the same schedule and the same guarantee.",
+    tags: [
+      "Whole home",
+      "Bespoke joinery",
+      "Lighting design",
+      "8–16 weeks typical",
+    ],
   },
 };
 

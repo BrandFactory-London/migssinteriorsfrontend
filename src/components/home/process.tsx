@@ -7,7 +7,7 @@ const STEPS = [
   },
   {
     title: "Design",
-    body: "Layouts, 3D visuals and a fixed written quote — every material specified before we start.",
+    body: "Layouts, 3D visuals and a fixed written quote, every material specified before we start.",
   },
   {
     title: "Build",
@@ -35,8 +35,8 @@ export function Process() {
             Four steps, one team, no handovers to strangers.
           </h2>
           <p className="max-w-[40ch] text-[15px] leading-[1.7] text-migss-text/72">
-            Every stage is run by people on our own payroll — the same faces
-            from first measure to final snag.
+            Every stage is run by people on our own payroll, the same faces from
+            first measure to final snag.
           </p>
         </Reveal>
 

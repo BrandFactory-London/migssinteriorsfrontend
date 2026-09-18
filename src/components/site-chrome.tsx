@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 type DockItem = {
   href: string;
   label: string;
-  /** Hidden below 1000px, where the Menu button takes over. */
+  /** Hidden below 1000px, where the dock has no room for them. */
   desktopOnly?: boolean;
   icon: React.ReactNode;
 };
@@ -203,12 +203,9 @@ export function SiteChrome() {
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label="Open full menu"
-            className={cn(dockItemClass, "group border-0 bg-transparent min-[1000px]:hidden")}
+            className={cn(dockItemClass, "group border-0 bg-transparent")}
           >
-            <svg
-              {...iconProps}
-              strokeLinejoin={undefined}
-            >
+            <svg {...iconProps} strokeLinejoin={undefined}>
               <path d="M4 8h16M4 16h16" />
             </svg>
             <DockLabel>Menu</DockLabel>

@@ -49,7 +49,7 @@ export const PILLAR_COPY: Record<Pillar, PillarCopy> = {
     otherLabel: "Switch to the kitchen library →",
     moreLine: "More bathroom writing is added most months.",
     emptyLine:
-      "The bathroom library is being written and the first articles are published as they are finished. In the meantime, ask us anything you would have looked up here — we answer the same way we write.",
+      "The bathroom library is being written and the first articles are published as they are finished. In the meantime, ask us anything you would have looked up here, we answer the same way we write.",
     next: [
       {
         href: "/renovation-services/bathroom",
@@ -75,7 +75,7 @@ export const PILLAR_COPY: Record<Pillar, PillarCopy> = {
     kicker: "Kitchen library",
     heading: "The kitchen decisions that are hard to undo.",
     intro:
-      "Layouts, cabinetry construction, worktops, structural openings and lead times — the things that decide whether you like the room in five years, not just on handover day.",
+      "Layouts, cabinetry construction, worktops, structural openings and lead times: the things that decide whether you like the room in five years, not just on handover day.",
     enquire: {
       heading: "Get a real number for your kitchen",
       body: "A free home visit, a check on what the structure allows, and a fixed written quote covering the building work as well as the cabinetry.",
@@ -89,7 +89,7 @@ export const PILLAR_COPY: Record<Pillar, PillarCopy> = {
     otherLabel: "Switch to the bathroom library →",
     moreLine: "More kitchen writing is added most months.",
     emptyLine:
-      "The kitchen library is being written and the first articles are published as they are finished. In the meantime, ask us anything you would have looked up here — we answer the same way we write.",
+      "The kitchen library is being written and the first articles are published as they are finished. In the meantime, ask us anything you would have looked up here, we answer the same way we write.",
     next: [
       {
         href: "/renovation-services/kitchen",

@@ -100,7 +100,7 @@
   --color-migss-bg: #f3f2f2;
   --color-migss-surface: #eae9e9;
   --color-migss-text: #201f1d;
-  --color-migss-accent: #b68235;
+  --color-migss-accent: #b38c6d;
   /* The design has no error colour: the artboards never show a failed state.
      A desaturated brick, dark enough to pass AA on the #f3f2f2 background
      and far enough from the gold accent to read as a problem, not a highlight. */
@@ -116,15 +116,20 @@
   --color-migss-neutral-800: #444141;
   --color-migss-neutral-900: #2d2b2b;
 
-  --color-migss-accent-100: #fff3e4;
-  --color-migss-accent-200: #ffe3bf;
-  --color-migss-accent-300: #facb8d;
-  --color-migss-accent-400: #e1ad66;
-  --color-migss-accent-500: #c28d41;
-  --color-migss-accent-600: #a06f24;
-  --color-migss-accent-700: #7d5411;
-  --color-migss-accent-800: #5a3b0a;
-  --color-migss-accent-900: #3a270d;
+  /* Derived from --color-migss-accent: the same hue (27deg), the lightness
+     ladder the original gold scale used, and saturation eased down so the
+     softer hue does not read as the old gold at the light end. Step 500 is
+     the base colour itself. accent-700 carries the buttons and links: 6.4:1
+     against the page background, and accent-300 is 8.3:1 on the dark footer. */
+  --color-migss-accent-100: #f8f2ec;
+  --color-migss-accent-200: #ecdccf;
+  --color-migss-accent-300: #dbc2ae;
+  --color-migss-accent-400: #c5a58c;
+  --color-migss-accent-500: #b28d6e;
+  --color-migss-accent-600: #946d4c;
+  --color-migss-accent-700: #705138;
+  --color-migss-accent-800: #523b28;
+  --color-migss-accent-900: #35281d;
 
   --font-heading: var(--font-cormorant), "Cormorant Garamond", ui-serif, serif;
   --font-body: var(--font-instrument), "Instrument Sans", system-ui, sans-serif;

@@ -33,7 +33,7 @@ export function SiteHeader({
       >
         <Link href="/" className="mr-auto text-inherit no-underline">
           <Wordmark tone={overlay ? "light" : "dark"} />
-          <span className="sr-only">Migss Interiors — home</span>
+          <span className="sr-only">Migss Interiors home</span>
         </Link>
 
         <a

@@ -75,7 +75,7 @@ export default async function BlogIndexPage() {
         <EnquireBand
           kicker="Past the reading stage"
           heading="Ask us the question the article did not answer"
-          body="No obligation and no sales sequence — if you are still a year away, say so and we will answer anyway."
+          body="No obligation and no sales sequence. If you are still a year away, say so and we will answer anyway."
           points={[
             "Average response time under 20 minutes",
             "Free home visit, fixed written quote",

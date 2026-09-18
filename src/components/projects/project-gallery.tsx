@@ -126,7 +126,7 @@ export function ProjectGallery({
       <div
         ref={trackRef}
         role="group"
-        aria-label={`${title} — ${shots.length} photographs`}
+        aria-label={`${title}: ${shots.length} photographs`}
         tabIndex={0}
         onKeyDown={(event) => {
           if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
@@ -143,7 +143,7 @@ export function ProjectGallery({
           >
             <div className="aspect-[3/2]">
               <ImageSlot
-                placeholder={`${String(index + 1).padStart(2, "0")} — ${caption(index)}`}
+                placeholder={`${String(index + 1).padStart(2, "0")}: ${caption(index)}`}
                 src={shot.url}
                 alt={shot.alt}
                 shape="rounded"

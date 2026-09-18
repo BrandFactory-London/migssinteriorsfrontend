@@ -45,13 +45,13 @@ export const LOCATIONS: Location[] = [
     kicker: "Chigwell, IG7 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Chigwell.",
     heroLead:
-      "Twenty minutes from our Essex workshop, and the postcode we have worked in longest — forty-plus completed projects between Manor Road and the High Road.",
+      "Twenty minutes from our Essex workshop, and the postcode we have worked in longest: forty-plus completed projects between Manor Road and the High Road.",
     postcodes: "IG7, IG8",
     travel: "20 minutes",
     projectCount: "40+",
     localHeading: "We know what is behind the walls here.",
     localCopy: [
-      "Most of the houses we renovate in Chigwell are 1960s–80s detached properties on generous plots, plus the newer gated developments off the High Road. In practice that means two recurring jobs: dated ensuites with boxed-in soil stacks eating floor space, and kitchens laid out for a household that no longer exists. Both are entirely fixable without touching the structure — we have done it forty times within a mile of Chigwell station.",
+      "Most of the houses we renovate in Chigwell are 1960s–80s detached properties on generous plots, plus the newer gated developments off the High Road. In practice that means two recurring jobs: dated ensuites with boxed-in soil stacks eating floor space, and kitchens laid out for a household that no longer exists. Both are entirely fixable without touching the structure, we have done it forty times within a mile of Chigwell station.",
       "Practicalities matter here too. Several of the private roads have parking restrictions and narrow shared driveways, so we schedule skips and stone deliveries for mid-morning and keep one vehicle on site rather than five. On the Epping Forest side we allow extra time for tree-protection and conservation constraints, which we confirm with the council before quoting rather than after.",
     ],
     localFacts: [
@@ -77,7 +77,7 @@ export const LOCATIONS: Location[] = [
     kicker: "Epping, CM16 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Epping.",
     heroLead:
-      "Period cottages, forest-edge houses and the newer closes off Bury Lane — twenty-five minutes from the workshop, with the access planned before we quote.",
+      "Period cottages, forest-edge houses and the newer closes off Bury Lane, twenty-five minutes from the workshop, with the access planned before we quote.",
     postcodes: "CM16",
     travel: "25 minutes",
     projectCount: "20+",
@@ -108,17 +108,17 @@ export const LOCATIONS: Location[] = [
     name: "Loughton",
     postcode: "IG10",
     summary:
-      "1930s semis on the Forest Drive estates — mostly bathrooms and lofts.",
+      "1930s semis on the Forest Drive estates, mostly bathrooms and lofts.",
     kicker: "Loughton, IG10 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Loughton.",
     heroLead:
-      "The 1930s estates off Forest Drive and the roads climbing towards the forest — fifteen minutes away, and the town we are called back to most often.",
+      "The 1930s estates off Forest Drive and the roads climbing towards the forest, fifteen minutes away, and the town we are called back to most often.",
     postcodes: "IG10",
     travel: "15 minutes",
     projectCount: "35+",
     localHeading: "The same house, a hundred times over.",
     localCopy: [
-      "Loughton is estate housing done well: 1930s semis and detached houses built to a handful of repeating plans. That is an advantage. We already know where the soil stack runs, which bathroom walls are non-structural, and how much width you recover by moving a doorway — because we have opened up the same layout on the next street.",
+      "Loughton is estate housing done well: 1930s semis and detached houses built to a handful of repeating plans. That is an advantage. We already know where the soil stack runs, which bathroom walls are non-structural, and how much width you recover by moving a doorway, because we have opened up the same layout on the next street.",
       "The most common brief here is a family bathroom and a small ensuite done together, with the family staying in the house. That is a four-week programme if the two rooms are sequenced properly, and considerably longer if they are not. Loft conversions are the other regular request, usually where a third bedroom needs its own shower room.",
     ],
     localFacts: [
@@ -152,7 +152,7 @@ export const LOCATIONS: Location[] = [
     projectCount: "15+",
     localHeading: "Room counts that no longer suit the family.",
     localCopy: [
-      "Theydon Bois houses tend to be generous but awkwardly divided — four or five bedrooms where three good ones and a dressing room would serve better, and bathrooms sized for 1970s expectations. Most of our work here is reconfiguration rather than extension: moving one or two walls, then rebuilding the services around the new plan.",
+      "Theydon Bois houses tend to be generous but awkwardly divided: four or five bedrooms where three good ones and a dressing room would serve better, and bathrooms sized for 1970s expectations. Most of our work here is reconfiguration rather than extension: moving one or two walls, then rebuilding the services around the new plan.",
       "Because these are whole-floor projects, sequencing decides the timeline. We price a room schedule so the work can be staged if you would rather do the bedroom floor now and the ground floor next year, and we first-fix anything that would otherwise mean reopening finished walls later.",
     ],
     localFacts: [
@@ -173,7 +173,7 @@ export const LOCATIONS: Location[] = [
     slug: "hornchurch",
     name: "Hornchurch",
     postcode: "RM11",
-    summary: "Butts Green and Emerson Park — kitchens opened to the garden.",
+    summary: "Butts Green and Emerson Park, kitchens opened to the garden.",
     kicker: "Hornchurch, RM11 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Hornchurch.",
     heroLead:
@@ -183,7 +183,7 @@ export const LOCATIONS: Location[] = [
     projectCount: "20+",
     localHeading: "Most of the work here is at the back of the house.",
     localCopy: [
-      "Hornchurch houses are typically 1930s and post-war, with the kitchen at the rear and the garden behind a solid wall and a single door. Opening that up — a steel goalpost frame, sliding doors, one continuous floor level — is the most requested job in this postcode, and it brings the structural work, the electrics and the floor build-up with it.",
+      "Hornchurch houses are typically 1930s and post-war, with the kitchen at the rear and the garden behind a solid wall and a single door. Opening that up, with a steel goalpost frame, sliding doors and one continuous floor level, is the most requested job in this postcode, and it brings the structural work, the electrics and the floor build-up with it.",
       "Because that is a building job rather than a kitchen fit, we handle the engineer's calculations, the building control notification and the sign-off certificate inside the same contract. There is no second trade to coordinate and no gap where the kitchen company waits for a builder who waits for the steel.",
     ],
     localFacts: [
@@ -204,17 +204,17 @@ export const LOCATIONS: Location[] = [
     slug: "brentwood",
     name: "Brentwood",
     postcode: "CM14",
-    summary: "Shenfield and Hutton — larger kitchens with structural openings.",
+    summary: "Shenfield and Hutton, larger kitchens with structural openings.",
     kicker: "Brentwood, CM14 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Brentwood.",
     heroLead:
-      "Shenfield, Hutton and the roads around them — larger kitchens, structural openings, and the longest-planned projects we take on.",
+      "Shenfield, Hutton and the roads around them: larger kitchens, structural openings, and the longest-planned projects we take on.",
     postcodes: "CM13, CM14, CM15",
     travel: "35 minutes",
     projectCount: "15+",
     localHeading: "Bigger rooms, and briefs to match.",
     localCopy: [
-      "Brentwood is the far edge of our range and the projects reflect it: larger kitchens, islands that seat five or six, and rear walls coming out on steel. These are rarely single-room jobs — the kitchen usually arrives with flooring, decoration and often a utility or boot room attached.",
+      "Brentwood is the far edge of our range and the projects reflect it: larger kitchens, islands that seat five or six, and rear walls coming out on steel. These are rarely single-room jobs. The kitchen usually arrives with flooring, decoration and often a utility or boot room attached.",
       "The distance is why we schedule rather than improvise here. Cabinetry and stone are templated and delivered on planned days, and the same team stays on the project start to finish rather than rotating, because a thirty-five minute drive punishes any programme that assumes someone can nip back.",
     ],
     localFacts: [
@@ -249,7 +249,7 @@ export const LOCATIONS: Location[] = [
     projectCount: "30+",
     localHeading: "Narrow plans, and how to open them.",
     localCopy: [
-      "Wanstead is terraces: long, narrow and originally divided into small rooms with the kitchen tacked on the back. The two jobs we do most here are the side return — bringing the kitchen out to the full width — and the boxroom ensuite, where four square metres has to work as a proper shower room rather than a compromise.",
+      "Wanstead is terraces: long, narrow and originally divided into small rooms with the kitchen tacked on the back. The two jobs we do most here are the side return, bringing the kitchen out to the full width, and the boxroom ensuite, where four square metres has to work as a proper shower room rather than a compromise.",
       "Party walls come into almost every project on these streets. We serve notices early and talk to the neighbours ourselves rather than leaving you to it, because a party wall award arriving late is the single most common reason a terrace project slips.",
     ],
     localFacts: [
@@ -270,17 +270,17 @@ export const LOCATIONS: Location[] = [
     slug: "woodford",
     name: "Woodford",
     postcode: "E18",
-    summary: "South Woodford and Woodford Green — our most frequent postcode.",
+    summary: "South Woodford and Woodford Green, our most frequent postcode.",
     kicker: "Woodford, E18 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Woodford.",
     heroLead:
-      "South Woodford and Woodford Green — the postcode we work in most, and the shortest drive from the workshop.",
+      "South Woodford and Woodford Green, the postcode we work in most, and the shortest drive from the workshop.",
     postcodes: "E18, IG8",
     travel: "15 minutes",
     projectCount: "50+",
     localHeading: "Our busiest postcode, by some distance.",
     localCopy: [
-      "Woodford covers everything from Edwardian terraces around the station to large inter-war detached houses towards the Green, so the work is varied — but the volume means we have usually renovated something on your street. Whole-home programmes are more common here than anywhere else we work, often because families buy knowing the house needs everything.",
+      "Woodford covers everything from Edwardian terraces around the station to large inter-war detached houses towards the Green, so the work is varied, but the volume means we have usually renovated something on your street. Whole-home programmes are more common here than anywhere else we work, often because families buy knowing the house needs everything.",
       "That is also where the fourteen-week whole-home schedule came from: kitchen, bathrooms, rewire, joinery and decoration on one programme, with the owners moved out for the middle eight weeks. Done as separate trades over three years it costs more and finishes worse.",
     ],
     localFacts: [
@@ -315,7 +315,7 @@ export const LOCATIONS: Location[] = [
     projectCount: "20+",
     localHeading: "Restoration more often than replacement.",
     localCopy: [
-      "Chingford's Victorian stock has usually kept its cornice, its joinery and its floors — buried under decades of paint, carpet and the occasional sheet of plasterboard across an original arch. Where that detail survives, repairing it costs less than replacing it and looks incomparably better, so restoration is the default here rather than the upgrade.",
+      "Chingford's Victorian stock has usually kept its cornice, its joinery and its floors, buried under decades of paint, carpet and the occasional sheet of plasterboard across an original arch. Where that detail survives, repairing it costs less than replacing it and looks incomparably better, so restoration is the default here rather than the upgrade.",
       "That takes a different kind of trade. Cornice is repaired in situ rather than ripped out, parquet is lifted and relaid rather than covered, and new panelling is made to match what is already on the wall. It is slower than stripping a room back, and it is the reason people call us for these houses.",
     ],
     localFacts: [
@@ -341,7 +341,7 @@ export const LOCATIONS: Location[] = [
     kicker: "Ilford, IG1 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Ilford.",
     heroLead:
-      "Cranbrook through to Barkingside — including landlord and HMO-standard bathroom work alongside the owner-occupier projects.",
+      "Cranbrook through to Barkingside, including landlord and HMO-standard bathroom work alongside the owner-occupier projects.",
     postcodes: "IG1, IG2, IG6",
     travel: "25 minutes",
     projectCount: "15+",

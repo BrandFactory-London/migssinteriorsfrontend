@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const place = project.addressLine ?? project.location;
 
   return {
-    title: place ? `${project.title} — ${place}` : project.title,
+    title: place ? `${project.title}: ${place}` : project.title,
     description: project.summary ?? project.description[0],
   };
 }
@@ -180,7 +180,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                       <ImageSlot
                         placeholder={`${shot.label}: ${project.title}`}
                         src={shot.url}
-                        alt={`${shot.label} — ${project.title}`}
+                        alt={`${shot.label}: ${project.title}`}
                         shape="rounded"
                         className="migss-plate"
                       />
@@ -295,7 +295,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                     <div className="relative aspect-[16/11] overflow-hidden">
                       <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-105">
                         <ImageSlot
-                          placeholder={`${other.location ?? "Recent work"} — ${other.title}`}
+                          placeholder={`${other.location ?? "Recent work"}: ${other.title}`}
                           src={other.cardUrl ?? undefined}
                           alt={other.title}
                           captionHidden

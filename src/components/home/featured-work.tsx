@@ -64,7 +64,7 @@ export function FeaturedWork({ projects }: { projects: Project[] }) {
             >
               <div className="relative aspect-[4/5]">
                 <ImageSlot
-                  placeholder={`Project ${index + 1} — ${project.location ?? project.title}`}
+                  placeholder={`Project ${index + 1}: ${project.location ?? project.title}`}
                   src={project.cardUrl ?? undefined}
                   alt={project.title}
                   shape="rounded"

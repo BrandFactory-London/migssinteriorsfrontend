@@ -25,7 +25,7 @@ export function FeaturedCarousel({ projects }: { projects: Project[] }) {
             >
               <div className="absolute inset-0 transition-transform duration-[800ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-105">
                 <ImageSlot
-                  placeholder={`Featured: ${project.location ?? "recent work"} — ${project.title}`}
+                  placeholder={`Featured: ${project.title}, ${project.location ?? "recent work"}`}
                   src={project.heroUrl ?? project.cardUrl ?? undefined}
                   alt={`${project.title}${project.addressLine ? `, ${project.addressLine}` : ""}`}
                   captionHidden
@@ -37,12 +37,14 @@ export function FeaturedCarousel({ projects }: { projects: Project[] }) {
               />
               <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1.5 p-[clamp(16px,3vw,28px)]">
                 <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-300">
-                  {project.category ? `Featured · ${project.category}` : "Featured"}
+                  {project.category
+                    ? `Featured · ${project.category}`
+                    : "Featured"}
                 </span>
                 <h2 className="font-heading text-[clamp(26px,5.5vw,38px)] leading-[1.05] font-normal tracking-[-0.02em] text-inherit">
                   {project.title}
                 </h2>
-                {project.addressLine ?? project.location ? (
+                {(project.addressLine ?? project.location) ? (
                   <span className="text-[13.5px] text-migss-neutral-100/78">
                     {project.addressLine ?? project.location}
                   </span>

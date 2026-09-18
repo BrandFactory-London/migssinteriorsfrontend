@@ -49,7 +49,7 @@ export default function LocationsPage() {
               <a href="#enquire" className="text-migss-accent-700">
                 Ask us
               </a>{" "}
-              — we will tell you honestly whether you are inside our range
+              and we will tell you honestly whether you are inside our range
               rather than quoting and hoping.
             </p>
           </div>

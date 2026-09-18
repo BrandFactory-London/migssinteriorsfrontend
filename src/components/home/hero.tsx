@@ -28,7 +28,7 @@ export function Hero() {
 
         <p className="mb-[18.4px] max-w-[46ch] text-[clamp(15px,4vw,17px)] leading-[1.65] text-migss-neutral-100/85">
           Bathroom, kitchen and whole-home renovations for homeowners across
-          London &amp; Essex — designed, built and guaranteed by one team for
+          London &amp; Essex, designed, built and guaranteed by one team for
           over 25 years.
         </p>
 
