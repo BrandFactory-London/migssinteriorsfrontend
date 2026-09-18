@@ -9,10 +9,25 @@ import { Testimonials } from "@/components/home/testimonials";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pageMetadata } from "@/lib/seo";
 import { getHomeProjects } from "@/lib/wix/projects";
+import { ogImage } from "@/lib/wix/og-image";
 
 /** The rail reads the live portfolio, so the page refreshes in the background. */
 export const revalidate = 60;
+
+export async function generateMetadata() {
+  const image = await ogImage("home-hero");
+
+  return pageMetadata({
+    title: "Migss Interiors | Bathroom & Kitchen Renovation in London & Essex",
+    description:
+      "Migss Interiors design and build luxury bathrooms, kitchens and whole-home interiors across East London and Essex. Directly employed tradespeople, a fixed written quote and a ten-year labour guarantee.",
+    path: "/",
+    image: image?.url,
+    imageAlt: image?.alt,
+  });
+}
 
 export default async function Home() {
   const projects = await getHomeProjects();

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { HeroMedia } from "@/components/hero-media";
@@ -9,6 +8,8 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pageMetadata } from "@/lib/seo";
+import { ogImage } from "@/lib/wix/og-image";
 import { postMeta } from "@/lib/blog-post";
 import {
   getLeadPost,
@@ -21,12 +22,18 @@ import {
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Resources",
-  description:
-    "Twenty-five years of bathroom and kitchen answers, written down in plain language: costs, construction, layouts and lead times.",
-};
+export async function generateMetadata() {
+  const image = await ogImage("resources-bathroom-cover");
 
+  return pageMetadata({
+    title: "Renovation Resources | Bathroom & Kitchen Guides",
+    description:
+      "Twenty-five years of bathroom and kitchen answers, written down in plain language: what things cost, how they are built, which layouts work and what the lead times really are.",
+    path: "/resources",
+    image: image?.url,
+    imageAlt: image?.alt,
+  });
+}
 /** Reads correctly at nought and one, not just at the plural. */
 function countLabel(count: number) {
   if (count === 0) return "In progress";
