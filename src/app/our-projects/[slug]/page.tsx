@@ -140,7 +140,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)] pt-[clamp(32px,6.5vw,76px)]"
           >
             <Reveal className="max-w-[68ch]">
-              <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+              <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
                 The project
               </p>
               {project.summary ? (
@@ -185,7 +185,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                         className="migss-plate"
                       />
                     </div>
-                    <figcaption className="mt-2.5 text-[11px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
+                    <figcaption className="mt-2.5 text-[11px] font-medium tracking-[0.16em] uppercase text-migss-accent-ink">
                       {shot.label}
                     </figcaption>
                   </figure>
@@ -270,7 +270,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           >
             <div className="mb-7 flex flex-wrap items-baseline justify-between gap-x-[18.4px] gap-y-[9.2px]">
               <div>
-                <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+                <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
                   More projects
                 </p>
                 <h2 className="text-[clamp(26px,6vw,38px)] leading-[1.05] font-normal tracking-[-0.02em]">
@@ -279,7 +279,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               </div>
               <Link
                 href="/our-projects"
-                className="text-sm font-medium text-migss-accent-700 no-underline"
+                className="text-sm font-medium text-migss-accent-ink no-underline"
               >
                 All projects →
               </Link>
@@ -304,7 +304,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                     </div>
                     <div className="flex flex-col gap-1.5 p-[18.4px]">
                       {other.category ? (
-                        <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
+                        <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-ink">
                           {other.category}
                         </span>
                       ) : null}

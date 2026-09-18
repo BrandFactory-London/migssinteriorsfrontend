@@ -27,7 +27,7 @@ export function LocalProjects({
     >
       <div className="mx-auto flex max-w-[1280px] flex-wrap items-baseline justify-between gap-x-[18.4px] gap-y-[9.2px] px-[clamp(16px,4.5vw,48px)]">
         <div>
-          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             {isLocal ? "Nearby work" : "Recent work"}
           </p>
           <h2 className="text-[clamp(26px,6vw,38px)] leading-[1.05] font-normal tracking-[-0.02em]">
@@ -47,7 +47,7 @@ export function LocalProjects({
         </div>
         <Link
           href="/our-projects"
-          className="text-sm font-medium text-migss-accent-700 no-underline"
+          className="text-sm font-medium text-migss-accent-ink no-underline"
         >
           All projects →
         </Link>
@@ -78,13 +78,13 @@ export function LocalProjects({
                   />
                 </div>
                 {project.category ? (
-                  <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-700">
+                  <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-ink">
                     {project.category}
                   </span>
                 ) : null}
               </div>
               <div>
-                <h3 className="mb-[5px] text-[23px] leading-[1.15] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
+                <h3 className="mb-[5px] text-[23px] leading-[1.15] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-ink">
                   {project.title}
                 </h3>
                 {(project.addressLine ?? project.location) ? (

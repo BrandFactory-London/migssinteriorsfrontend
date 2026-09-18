@@ -28,7 +28,7 @@ export default function LocationsPage() {
               items={[{ href: "/", label: "Home" }, { label: "Locations" }]}
             />
           </div>
-          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
             Ten areas · One team
           </p>
@@ -46,7 +46,7 @@ export default function LocationsPage() {
             <p className="text-sm leading-[1.8] text-migss-text/62">
               Pick your town for local project examples and the nearest
               completed work. Not on the list?{" "}
-              <a href="#enquire" className="text-migss-accent-700">
+              <a href="#enquire" className="text-migss-accent-ink">
                 Ask us
               </a>{" "}
               and we will tell you honestly whether you are inside our range
@@ -79,11 +79,11 @@ export default function LocationsPage() {
                   href={`/locations/${location.slug}`}
                   className="group flex h-full min-h-[104px] items-start gap-3.5 p-[clamp(16px,2.6vw,22px)] text-inherit no-underline transition-colors duration-300 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/7"
                 >
-                  <span className="font-heading pt-[5px] text-[13px] text-migss-accent-700 tabular-nums">
+                  <span className="font-heading pt-[5px] text-[13px] text-migss-accent-ink tabular-nums">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span className="flex-1">
-                    <span className="font-heading flex items-baseline gap-2 text-[27px] leading-[1.1] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
+                    <span className="font-heading flex items-baseline gap-2 text-[27px] leading-[1.1] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-ink">
                       {location.name}
                       <span className="font-body text-xs tracking-[0.06em] text-migss-text/52">
                         {location.postcode}
@@ -93,7 +93,7 @@ export default function LocationsPage() {
                       {location.summary}
                     </span>
                   </span>
-                  <span className="mt-1 grid h-[30px] w-[30px] flex-none place-items-center rounded-full border border-migss-accent text-migss-accent-700 opacity-100 transition-[transform,opacity] duration-[350ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:opacity-45 [@media(hover:hover)]:group-hover:translate-x-1 [@media(hover:hover)]:group-hover:opacity-100">
+                  <span className="mt-1 grid h-[30px] w-[30px] flex-none place-items-center rounded-full border border-migss-accent text-migss-accent-ink opacity-100 transition-[transform,opacity] duration-[350ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:opacity-45 [@media(hover:hover)]:group-hover:translate-x-1 [@media(hover:hover)]:group-hover:opacity-100">
                     <svg
                       width="14"
                       height="14"

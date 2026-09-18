@@ -31,7 +31,7 @@ export function Breadcrumb({
               className={
                 tone === "light"
                   ? "text-migss-accent-300"
-                  : "text-migss-accent-700"
+                  : "text-migss-accent-ink"
               }
             >
               {item.label}

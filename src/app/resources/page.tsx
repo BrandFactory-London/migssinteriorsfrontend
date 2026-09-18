@@ -87,7 +87,7 @@ export default async function ResourcesPage() {
               items={[{ href: "/", label: "Home" }, { label: "Resources" }]}
             />
           </div>
-          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
             The renovation library
           </p>
@@ -127,7 +127,7 @@ export default async function ResourcesPage() {
                       {pillar.body}
                     </p>
                     <ul className="flex list-none flex-wrap gap-1.5">
-                      <li className="inline-flex items-center rounded-[3px] border border-migss-accent px-2.5 py-[3px] text-[11.5px] text-migss-accent">
+                      <li className="inline-flex items-center rounded-[3px] border border-migss-accent px-2.5 py-[3px] text-[11.5px] text-migss-accent-ink">
                         {countLabel(counts[pillar.href] ?? 0)}
                       </li>
                       {pillar.tags.map((tag) => (
@@ -139,7 +139,7 @@ export default async function ResourcesPage() {
                         </li>
                       ))}
                     </ul>
-                    <span className="mt-auto flex items-center gap-3 text-[14.5px] font-medium text-migss-accent-700">
+                    <span className="mt-auto flex items-center gap-3 text-[14.5px] font-medium text-migss-accent-ink">
                       Open the {pillar.title.toLowerCase()}
                       <span className="grid h-10 w-10 flex-none place-items-center rounded-full border border-migss-accent transition-[transform,background-color,color] duration-[350ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:translate-x-[5px] [@media(hover:hover)]:group-hover:bg-migss-accent-700 [@media(hover:hover)]:group-hover:text-migss-text">
                         <svg
@@ -169,7 +169,7 @@ export default async function ResourcesPage() {
             className="mx-auto mt-[clamp(34px,7vw,80px)] max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)]"
           >
             <Reveal>
-              <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+              <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
                 Browse by subject
               </p>
               <h2 className="mb-7 max-w-[22ch] text-[clamp(28px,6.8vw,44px)] leading-[1.05] font-normal tracking-[-0.02em]">
@@ -181,7 +181,7 @@ export default async function ResourcesPage() {
               {subjects.map((subject, index) => (
                 <Reveal key={subject.tag.id} delay={index * 90}>
                   <div className="flex items-baseline gap-2.5 border-b-2 border-migss-accent pb-2.5">
-                    <span className="font-heading text-[13px] text-migss-accent-700 tabular-nums">
+                    <span className="font-heading text-[13px] text-migss-accent-ink tabular-nums">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <h3 className="text-[25px] leading-[1.1] font-normal">
@@ -201,7 +201,7 @@ export default async function ResourcesPage() {
                               {post.title}
                             </span>
                             {post.minutesToRead ? (
-                              <span className="flex-none text-xs text-migss-text/55 tabular-nums transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
+                              <span className="flex-none text-xs text-migss-text/55 tabular-nums transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-ink">
                                 {post.minutesToRead} min
                               </span>
                             ) : null}
@@ -237,7 +237,7 @@ export default async function ResourcesPage() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-2.5 p-[clamp(18px,3vw,32px)]">
-                  <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
+                  <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-ink">
                     {featured.featured ? "Featured" : "Latest"}
                   </span>
                   <h2 className="text-[clamp(26px,5.8vw,36px)] leading-[1.08] font-normal tracking-[-0.02em]">

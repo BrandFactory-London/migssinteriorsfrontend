@@ -48,7 +48,7 @@ export function ServiceCards({
               href={service.href}
               className="flex min-h-[140px] flex-col gap-2 rounded-[4px] border border-[var(--migss-divider)] p-[18.4px] text-inherit no-underline transition-[background-color,border-color] duration-300 active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-migss-accent [@media(hover:hover)]:hover:border-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/6"
             >
-              <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
+              <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-ink">
                 Service
               </span>
               <h3 className="text-2xl leading-[1.15] font-normal">

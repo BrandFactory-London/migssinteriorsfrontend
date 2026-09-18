@@ -75,7 +75,7 @@ export default function AboutPage() {
               items={[{ href: "/", label: "Home" }, { label: "About" }]}
             />
           </div>
-          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
             Est. 2001 · London &amp; Essex
           </p>
@@ -138,7 +138,7 @@ export default function AboutPage() {
           className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)] pt-[clamp(32px,6.5vw,76px)]"
         >
           <Reveal>
-            <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+            <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
               How we work
             </p>
             <h2 className="mb-7 max-w-[20ch] text-[clamp(28px,6.8vw,44px)] leading-[1.05] font-normal tracking-[-0.02em]">
@@ -149,7 +149,7 @@ export default function AboutPage() {
           <ol className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-[clamp(14px,2.5vw,28px)]">
             {PRINCIPLES.map((principle, index) => (
               <Reveal as="li" key={principle.title} delay={index * 80}>
-                <span className="font-heading text-[13px] text-migss-accent-700 tabular-nums">
+                <span className="font-heading text-[13px] text-migss-accent-ink tabular-nums">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-1.5 mb-1.5 text-[22px] leading-[1.15] font-normal">
@@ -169,7 +169,7 @@ export default function AboutPage() {
         >
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(20px,3.5vw,48px)]">
             <Reveal>
-              <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+              <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
                 Twenty-five years
               </p>
               <h2 className="mb-[13.8px] text-[clamp(27px,6.4vw,40px)] leading-[1.08] font-normal tracking-[-0.02em]">
@@ -241,7 +241,7 @@ export default function AboutPage() {
                   href={item.href}
                   className="flex min-h-[130px] flex-col gap-2 rounded-[4px] border border-[var(--migss-divider)] p-[18.4px] text-inherit no-underline transition-[background-color,border-color] duration-300 active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-migss-accent [@media(hover:hover)]:hover:border-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/6"
                 >
-                  <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
+                  <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-ink">
                     {item.kicker}
                   </span>
                   <h3 className="text-2xl leading-[1.15] font-normal">

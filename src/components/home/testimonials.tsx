@@ -25,14 +25,14 @@ export function Testimonials() {
     >
       <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(18px,3vw,32px)]">
         <Reveal className="flex flex-col gap-[9.2px] rounded-[4px] border border-[var(--migss-divider)] border-t-2 border-t-migss-accent bg-migss-bg p-[18.4px]">
-          <span className="text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <span className="text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             Google reviews
           </span>
           <p className="font-heading text-[56px] leading-[0.95] tabular-nums">
             5.0
           </p>
           <div
-            className="flex gap-1 text-migss-accent"
+            className="flex gap-1 text-migss-accent-ink"
             aria-label="5 out of 5 stars"
           >
             <Star />

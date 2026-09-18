@@ -13,11 +13,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "border-migss-accent text-migss-accent hover:bg-migss-accent/12 active:bg-migss-accent/20",
+          "border-migss-accent text-migss-accent-ink hover:bg-migss-accent/12 active:bg-migss-accent/20",
         secondary:
           "border-[var(--migss-divider)] text-migss-text hover:bg-migss-text/7 active:bg-migss-text/15",
         ghost:
-          "border-transparent text-migss-accent hover:bg-migss-accent/10 active:bg-migss-accent/20",
+          "border-transparent text-migss-accent-ink hover:bg-migss-accent/10 active:bg-migss-accent/20",
         /** Light-on-dark, for the hero and the dark testimonial card. */
         contrast:
           "border-migss-neutral-100 bg-migss-neutral-100 text-migss-neutral-900 hover:bg-white active:bg-migss-neutral-200",

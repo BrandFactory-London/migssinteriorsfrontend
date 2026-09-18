@@ -38,7 +38,7 @@ export default async function BlogIndexPage() {
               items={[{ href: "/", label: "Home" }, { label: "Blog" }]}
             />
           </div>
-          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
             Newest first
           </p>
@@ -47,11 +47,11 @@ export default async function BlogIndexPage() {
           </h1>
           <p className="max-w-[62ch] text-[clamp(15px,4vw,17.5px)] leading-[1.75] text-pretty text-migss-text/80">
             If you would rather browse by room, the{" "}
-            <Link href="/resources/bathroom" className="text-migss-accent-700">
+            <Link href="/resources/bathroom" className="text-migss-accent-ink">
               bathroom
             </Link>{" "}
             and{" "}
-            <Link href="/resources/kitchen" className="text-migss-accent-700">
+            <Link href="/resources/kitchen" className="text-migss-accent-ink">
               kitchen
             </Link>{" "}
             libraries group the same articles by subject and by where you are in

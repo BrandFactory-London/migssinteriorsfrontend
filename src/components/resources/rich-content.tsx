@@ -64,7 +64,7 @@ function Node({ node }: { node: RichNode }) {
       const List = node.type === "ORDERED_LIST" ? "ol" : "ul";
       return (
         <List
-          className={`mb-[1.3em] pl-[1.15em] marker:text-migss-accent ${
+          className={`mb-[1.3em] pl-[1.15em] marker:text-migss-accent-ink ${
             List === "ol" ? "list-decimal" : "list-disc"
           }`}
         >
@@ -277,7 +277,7 @@ function Inline({ nodes }: { nodes: RichNode[] }) {
               href={link.url}
               target={link.target === "BLANK" ? "_blank" : undefined}
               rel={external ? "noreferrer" : undefined}
-              className="text-migss-accent-700 underline underline-offset-2"
+              className="text-migss-accent-ink underline underline-offset-2"
             >
               {content}
             </a>

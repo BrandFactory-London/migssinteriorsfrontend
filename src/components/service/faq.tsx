@@ -18,7 +18,7 @@ export function Faq({
       className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)] pt-[clamp(36px,7.5vw,84px)]"
     >
       <Reveal>
-        <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+        <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
           {kicker}
         </p>
         <h2 className="mb-7 text-[clamp(28px,6.8vw,42px)] leading-[1.05] font-normal tracking-[-0.02em]">

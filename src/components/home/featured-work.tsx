@@ -20,7 +20,7 @@ export function FeaturedWork({ projects }: { projects: Project[] }) {
     >
       <div className="flex flex-wrap items-end justify-between gap-[13.8px] px-[clamp(16px,4.5vw,48px)]">
         <Reveal>
-          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             Featured work
           </p>
           <h2 className="text-[clamp(30px,7.2vw,46px)] leading-[1.05] font-normal tracking-[-0.02em]">
@@ -71,17 +71,17 @@ export function FeaturedWork({ projects }: { projects: Project[] }) {
                   className="migss-plate h-full w-full transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-[1.02]"
                 />
                 {(project.addressLine ?? project.location) ? (
-                  <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-700">
+                  <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-ink">
                     {project.addressLine ?? project.location}
                   </span>
                 ) : null}
               </div>
               <div className="mt-[13.8px] flex gap-3">
-                <span className="font-heading pt-1 text-[13px] text-migss-accent-700 tabular-nums">
+                <span className="font-heading pt-1 text-[13px] text-migss-accent-ink tabular-nums">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="mb-1.5 text-[23px] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
+                  <h3 className="mb-1.5 text-[23px] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-ink">
                     {project.title}
                   </h3>
                   {project.summary ? (

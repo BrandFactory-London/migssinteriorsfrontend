@@ -37,7 +37,7 @@ function Email() {
   return (
     <a
       href={`mailto:${EMAIL}`}
-      className="text-migss-accent-700 underline-offset-[3px]"
+      className="text-migss-accent-ink underline-offset-[3px]"
     >
       {EMAIL}
     </a>
@@ -46,7 +46,7 @@ function Email() {
 
 function Internal({ href, children }: { href: string; children: string }) {
   return (
-    <Link href={href} className="text-migss-accent-700 underline-offset-[3px]">
+    <Link href={href} className="text-migss-accent-ink underline-offset-[3px]">
       {children}
     </Link>
   );
@@ -351,7 +351,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
                   href="https://ico.org.uk"
                   rel="noreferrer noopener"
                   target="_blank"
-                  className="text-migss-accent-700 underline-offset-[3px]"
+                  className="text-migss-accent-ink underline-offset-[3px]"
                 >
                   ico.org.uk
                 </a>

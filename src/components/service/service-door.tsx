@@ -73,7 +73,7 @@ export function ServiceDoor({
           <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-[1.04]">
             <ImageSlot placeholder={DOOR_IMAGE[slug]} captionHidden />
           </div>
-          <span className="absolute top-3 left-3 border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-700 tabular-nums">
+          <span className="absolute top-3 left-3 border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-ink tabular-nums">
             {String(index + 1).padStart(2, "0")} · {service.short}
           </span>
         </div>
@@ -94,13 +94,13 @@ export function ServiceDoor({
             {copy.tags.map((tag) => (
               <li
                 key={tag}
-                className="inline-flex items-center rounded-[3px] border border-migss-accent px-2.5 py-[3px] text-[11.5px] tracking-[0.02em] text-migss-accent"
+                className="inline-flex items-center rounded-[3px] border border-migss-accent px-2.5 py-[3px] text-[11.5px] tracking-[0.02em] text-migss-accent-ink"
               >
                 {tag}
               </li>
             ))}
           </ul>
-          <span className="mt-auto flex items-center gap-3 text-[14.5px] font-medium text-migss-accent-700">
+          <span className="mt-auto flex items-center gap-3 text-[14.5px] font-medium text-migss-accent-ink">
             Explore {service.title.toLowerCase()}
             <span className="grid h-10 w-10 flex-none place-items-center rounded-full border border-migss-accent transition-[transform,background-color,color] duration-[350ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:translate-x-[5px] [@media(hover:hover)]:group-hover:bg-migss-accent-700 [@media(hover:hover)]:group-hover:text-migss-text">
               <svg

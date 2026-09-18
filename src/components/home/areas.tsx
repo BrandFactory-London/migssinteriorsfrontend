@@ -20,7 +20,7 @@ export function Areas() {
     >
       <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-[clamp(20px,3.5vw,52px)] px-[clamp(16px,4.5vw,48px)] py-[clamp(30px,6vw,72px)]">
         <Reveal>
-          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+          <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             Areas we serve
           </p>
           <h2 className="mb-[13.8px] text-[clamp(28px,6.8vw,42px)] leading-[1.06] font-normal tracking-[-0.02em]">
@@ -37,7 +37,7 @@ export function Areas() {
             E11, E18, RM and CM areas. Not listed?{" "}
             <a
               href="#enquire"
-              className="text-migss-accent-700 underline-offset-[3px]"
+              className="text-migss-accent-ink underline-offset-[3px]"
             >
               Ask us
             </a>{" "}
@@ -50,10 +50,10 @@ export function Areas() {
             <Reveal as="li" key={area.name} delay={index * 40}>
               <a
                 href={`/locations/${area.slug}`}
-                className="group flex min-h-[52px] items-center justify-between gap-2 border-b border-[var(--migss-divider)] px-0.5 text-[15px] text-inherit no-underline transition-colors [@media(hover:hover)]:hover:text-migss-accent-700"
+                className="group flex min-h-[52px] items-center justify-between gap-2 border-b border-[var(--migss-divider)] px-0.5 text-[15px] text-inherit no-underline transition-colors [@media(hover:hover)]:hover:text-migss-accent-ink"
               >
                 {area.name}
-                <span className="text-xs text-migss-accent-700">
+                <span className="text-xs text-migss-accent-ink">
                   {area.postcode}
                 </span>
               </a>

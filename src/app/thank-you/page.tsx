@@ -52,7 +52,7 @@ export default function ThankYouPage() {
       <main className="mx-auto w-full max-w-[860px] flex-1 px-[clamp(16px,4.5vw,48px)] pt-[clamp(36px,9vw,96px)] pb-[clamp(40px,8vw,80px)]">
         <span
           aria-hidden="true"
-          className="grid h-[54px] w-[54px] place-items-center rounded-full border border-migss-accent text-migss-accent-700"
+          className="grid h-[54px] w-[54px] place-items-center rounded-full border border-migss-accent text-migss-accent-ink"
         >
           <svg
             width="24"
@@ -68,7 +68,7 @@ export default function ThankYouPage() {
           </svg>
         </span>
 
-        <p className="mt-[18.4px] mb-[13.8px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+        <p className="mt-[18.4px] mb-[13.8px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
           Enquiry received
         </p>
         <h1 className="mb-[13.8px] text-[clamp(36px,8.5vw,64px)] leading-[1.02] font-normal tracking-[-0.03em] text-balance">
@@ -87,7 +87,7 @@ export default function ThankYouPage() {
               key={step.title}
               className="flex gap-3.5 border-b border-[var(--migss-divider)] py-[18.4px]"
             >
-              <span className="font-heading w-[2.2ch] flex-none pt-[3px] text-sm text-migss-accent-700 tabular-nums">
+              <span className="font-heading w-[2.2ch] flex-none pt-[3px] text-sm text-migss-accent-ink tabular-nums">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div>
@@ -125,7 +125,7 @@ export default function ThankYouPage() {
                 href={item.href}
                 className="flex min-h-[88px] flex-col gap-1.5 rounded-[4px] border border-[var(--migss-divider)] p-[18.4px] text-inherit no-underline transition-[background-color,border-color] duration-300 active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-migss-accent [@media(hover:hover)]:hover:border-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/6"
               >
-                <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
+                <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-ink">
                   {item.kicker}
                 </span>
                 <span className="font-heading text-[21px] leading-[1.15]">
