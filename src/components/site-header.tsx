@@ -32,7 +32,7 @@ export function SiteHeader({
         )}
       >
         <Link href="/" className="mr-auto text-inherit no-underline">
-          <Logo height={34} priority />
+          <Logo height={27} priority />
         </Link>
 
         <a
