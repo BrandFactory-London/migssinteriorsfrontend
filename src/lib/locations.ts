@@ -1,5 +1,3 @@
-import { PROJECTS, type Project } from "@/lib/projects";
-
 /**
  * The ten service areas, and the per-town copy the location template is
  * parameterised on.
@@ -8,9 +6,9 @@ import { PROJECTS, type Project } from "@/lib/projects";
  * for. The other nine follow the same structure, written against the
  * characterisation each town is given on the hub page.
  *
- * Project examples are pulled from lib/projects.ts rather than invented, via
- * `projectMatch`. See getLocationProjects for the case where a town has no
- * completed work yet.
+ * Project examples come from the live Projects CMS collection, matched on the
+ * town name — see getTownProjects in lib/wix/projects.ts, which also handles
+ * the towns with no photographed work yet.
  */
 
 export type Location = {
@@ -35,9 +33,6 @@ export type Location = {
   localFacts: { label: string; value: string }[];
 
   quote: { text: string; source: string };
-
-  /** Substrings matched against a project's `location` field. */
-  projectMatch: string[];
 };
 
 export const LOCATIONS: Location[] = [
@@ -62,14 +57,16 @@ export const LOCATIONS: Location[] = [
     localFacts: [
       { label: "Typical property", value: "1960s–80s detached" },
       { label: "Most requested", value: "Master ensuites & wet rooms" },
-      { label: "Local streets worked", value: "Manor Rd, Hainault Rd, Vicarage Ln" },
+      {
+        label: "Local streets worked",
+        value: "Manor Rd, Hainault Rd, Vicarage Ln",
+      },
       { label: "Watch out for", value: "Narrow private-road access" },
     ],
     quote: {
       text: "“We had three quotes. Migss were the only ones who had worked on this road before and knew the drainage ran the wrong way.”",
       source: "Homeowner · Manor Road, Chigwell",
     },
-    projectMatch: ["Chigwell"],
   },
   {
     slug: "epping",
@@ -90,16 +87,21 @@ export const LOCATIONS: Location[] = [
       "Access is the other constraint. The High Street has loading restrictions and several of the forest-side properties have long single-track approaches, so deliveries are scheduled rather than assumed. Where a property is listed or in the conservation area, we confirm what is permitted with the council before quoting.",
     ],
     localFacts: [
-      { label: "Typical property", value: "Period cottages & forest-edge homes" },
+      {
+        label: "Typical property",
+        value: "Period cottages & forest-edge homes",
+      },
       { label: "Most requested", value: "Kitchens & whole-home interiors" },
-      { label: "Local streets worked", value: "Bury Lane, Lindsey St, Theydon Rd" },
+      {
+        label: "Local streets worked",
+        value: "Bury Lane, Lindsey St, Theydon Rd",
+      },
       { label: "Watch out for", value: "Listed status & loading restrictions" },
     ],
     quote: {
       text: "“They found the old chimney breast behind the plasterboard on day one and redrew the layout before it cost us anything.”",
       source: "Homeowner · Bury Lane, Epping",
     },
-    projectMatch: ["Epping"],
   },
   {
     slug: "loughton",
@@ -121,15 +123,20 @@ export const LOCATIONS: Location[] = [
     ],
     localFacts: [
       { label: "Typical property", value: "1930s semi-detached" },
-      { label: "Most requested", value: "Family bathrooms & loft shower rooms" },
-      { label: "Local streets worked", value: "Forest Drive, Alderton Hill, Roding Rd" },
+      {
+        label: "Most requested",
+        value: "Family bathrooms & loft shower rooms",
+      },
+      {
+        label: "Local streets worked",
+        value: "Forest Drive, Alderton Hill, Roding Rd",
+      },
       { label: "Watch out for", value: "Shared drives on the estates" },
     ],
     quote: {
       text: "“Two bathrooms in four weeks with three of us still living here. They cleared the site every single evening.”",
       source: "Homeowner · Forest Drive, Loughton",
     },
-    projectMatch: ["Loughton"],
   },
   {
     slug: "theydon-bois",
@@ -151,14 +158,16 @@ export const LOCATIONS: Location[] = [
     localFacts: [
       { label: "Typical property", value: "Detached, generous plots" },
       { label: "Most requested", value: "Whole-home reconfiguration" },
-      { label: "Local streets worked", value: "Coppice Row, Forest Drive, Piercing Hill" },
+      {
+        label: "Local streets worked",
+        value: "Coppice Row, Forest Drive, Piercing Hill",
+      },
       { label: "Watch out for", value: "Conservation area constraints" },
     ],
     quote: {
       text: "“Four bedrooms became three plus a dressing room. It is the same house and it works twice as well.”",
       source: "Homeowner · Coppice Row, Theydon Bois",
     },
-    projectMatch: ["Theydon Bois"],
   },
   {
     slug: "hornchurch",
@@ -180,14 +189,16 @@ export const LOCATIONS: Location[] = [
     localFacts: [
       { label: "Typical property", value: "1930s & post-war semis" },
       { label: "Most requested", value: "Kitchens opened to the garden" },
-      { label: "Local streets worked", value: "Butts Green Rd, Emerson Park, Wingletye Ln" },
+      {
+        label: "Local streets worked",
+        value: "Butts Green Rd, Emerson Park, Wingletye Ln",
+      },
       { label: "Watch out for", value: "Structural sign-off lead times" },
     ],
     quote: {
       text: "“Two walls out, one floor through, and the garden finally feels like part of the house.”",
       source: "Homeowner · Butts Green, Hornchurch",
     },
-    projectMatch: ["Hornchurch"],
   },
   {
     slug: "brentwood",
@@ -207,16 +218,21 @@ export const LOCATIONS: Location[] = [
       "The distance is why we schedule rather than improvise here. Cabinetry and stone are templated and delivered on planned days, and the same team stays on the project start to finish rather than rotating, because a thirty-five minute drive punishes any programme that assumes someone can nip back.",
     ],
     localFacts: [
-      { label: "Typical property", value: "Large detached & Shenfield estates" },
+      {
+        label: "Typical property",
+        value: "Large detached & Shenfield estates",
+      },
       { label: "Most requested", value: "Kitchens with structural openings" },
-      { label: "Local streets worked", value: "Shenfield, Hutton Mount, Middleton Hall Ln" },
+      {
+        label: "Local streets worked",
+        value: "Shenfield, Hutton Mount, Middleton Hall Ln",
+      },
       { label: "Watch out for", value: "Longer lead times on stone" },
     ],
     quote: {
       text: "“Eight weeks, planned to the day. The steel went in on a Tuesday and the kitchen was templated that Friday.”",
       source: "Homeowner · Shenfield, Brentwood",
     },
-    projectMatch: ["Brentwood", "Shenfield"],
   },
   {
     slug: "wanstead",
@@ -239,14 +255,16 @@ export const LOCATIONS: Location[] = [
     localFacts: [
       { label: "Typical property", value: "Edwardian terrace" },
       { label: "Most requested", value: "Side returns & compact ensuites" },
-      { label: "Local streets worked", value: "Nightingale Ln, Hermon Hill, Grove Park" },
+      {
+        label: "Local streets worked",
+        value: "Nightingale Ln, Hermon Hill, Grove Park",
+      },
       { label: "Watch out for", value: "Party wall notices & shared drains" },
     ],
     quote: {
       text: "“They served the party wall notices before we had even signed. It saved us about six weeks.”",
       source: "Homeowner · Nightingale Lane, Wanstead",
     },
-    projectMatch: ["Wanstead"],
   },
   {
     slug: "woodford",
@@ -266,16 +284,21 @@ export const LOCATIONS: Location[] = [
       "That is also where the fourteen-week whole-home schedule came from: kitchen, bathrooms, rewire, joinery and decoration on one programme, with the owners moved out for the middle eight weeks. Done as separate trades over three years it costs more and finishes worse.",
     ],
     localFacts: [
-      { label: "Typical property", value: "Edwardian terrace to inter-war detached" },
+      {
+        label: "Typical property",
+        value: "Edwardian terrace to inter-war detached",
+      },
       { label: "Most requested", value: "Whole-home renovation" },
-      { label: "Local streets worked", value: "Hermitage Walk, The Drive, Monkhams Ln" },
+      {
+        label: "Local streets worked",
+        value: "Hermitage Walk, The Drive, Monkhams Ln",
+      },
       { label: "Watch out for", value: "Parking bays on the station roads" },
     ],
     quote: {
       text: "“We moved out for eight weeks and came back to a finished house. One phone number for the whole thing.”",
       source: "Homeowner · Hermitage Walk, South Woodford",
     },
-    projectMatch: ["Woodford"],
   },
   {
     slug: "chingford",
@@ -298,14 +321,16 @@ export const LOCATIONS: Location[] = [
     localFacts: [
       { label: "Typical property", value: "Victorian terrace" },
       { label: "Most requested", value: "Full interior restoration" },
-      { label: "Local streets worked", value: "Kings Rd, The Ridgeway, Station Rd" },
+      {
+        label: "Local streets worked",
+        value: "Kings Rd, The Ridgeway, Station Rd",
+      },
       { label: "Watch out for", value: "Original detail worth saving" },
     ],
     quote: {
       text: "“Everyone else quoted to rip the cornice out. Migss quoted to repair it, and it is the best thing in the house.”",
       source: "Homeowner · Kings Road, Chingford",
     },
-    projectMatch: ["Chingford"],
   },
   {
     slug: "ilford",
@@ -328,14 +353,19 @@ export const LOCATIONS: Location[] = [
     localFacts: [
       { label: "Typical property", value: "Inter-war semis & converted flats" },
       { label: "Most requested", value: "Bathrooms, owner-occupier & HMO" },
-      { label: "Local streets worked", value: "Cranbrook Rd, Valentines, Barkingside" },
-      { label: "Watch out for", value: "HMO compliance & extraction standards" },
+      {
+        label: "Local streets worked",
+        value: "Cranbrook Rd, Valentines, Barkingside",
+      },
+      {
+        label: "Watch out for",
+        value: "HMO compliance & extraction standards",
+      },
     ],
     quote: {
       text: "“They talked us out of the more expensive spec for the rental and did the family bathroom properly instead.”",
       source: "Homeowner · Cranbrook, Ilford",
     },
-    projectMatch: ["Ilford"],
   },
 ];
 
@@ -343,25 +373,4 @@ export type LocationSlug = (typeof LOCATIONS)[number]["slug"];
 
 export function getLocation(slug: string) {
   return LOCATIONS.find((location) => location.slug === slug);
-}
-
-/**
- * Project examples for a town, drawn from the existing placeholder projects.
- *
- * Not every area has completed work in the data — Ilford currently has none.
- * Rather than render an empty rail, those pages fall back to recent work from
- * elsewhere, and `isLocal` lets the page say so instead of implying the
- * projects are in that town.
- */
-export function getLocationProjects(location: Location): {
-  projects: Project[];
-  isLocal: boolean;
-} {
-  const local = PROJECTS.filter((project) =>
-    location.projectMatch.some((match) => project.location.includes(match)),
-  );
-
-  if (local.length > 0) return { projects: local, isLocal: true };
-
-  return { projects: PROJECTS.slice(0, 3), isLocal: false };
 }

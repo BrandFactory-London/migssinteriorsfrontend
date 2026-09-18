@@ -13,7 +13,8 @@ import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
-import { LOCATIONS, getLocation, getLocationProjects } from "@/lib/locations";
+import { LOCATIONS, getLocation } from "@/lib/locations";
+import { getTownProjects } from "@/lib/wix/projects";
 import { telHref } from "@/lib/site";
 
 type Props = { params: Promise<{ area: string }> };
@@ -24,6 +25,9 @@ export function generateStaticParams() {
 
 /** Only the ten areas we cover; anything else is a genuine 404. */
 export const dynamicParams = false;
+
+/** The nearby-work rail reads the live portfolio. */
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { area } = await params;
@@ -42,7 +46,7 @@ export default async function LocationDetailPage({ params }: Props) {
 
   if (!location) notFound();
 
-  const { projects, isLocal } = getLocationProjects(location);
+  const { projects, isLocal } = await getTownProjects(location.name);
   const facts = [
     { label: "Postcodes", value: location.postcodes },
     { label: "From our workshop", value: location.travel },

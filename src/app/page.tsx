@@ -9,8 +9,14 @@ import { Testimonials } from "@/components/home/testimonials";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { getHomeProjects } from "@/lib/wix/projects";
 
-export default function Home() {
+/** The rail reads the live portfolio, so the page refreshes in the background. */
+export const revalidate = 60;
+
+export default async function Home() {
+  const projects = await getHomeProjects();
+
   return (
     <>
       <SiteHeader />
@@ -18,7 +24,7 @@ export default function Home() {
       <main id="top" className="scroll-mt-0">
         <Hero />
         <AssuranceBar />
-        <FeaturedWork />
+        <FeaturedWork projects={projects} />
         <Process />
         <Areas />
         <Testimonials />

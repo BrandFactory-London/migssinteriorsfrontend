@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { ImageSlot } from "@/components/image-slot";
 import { cn } from "@/lib/utils";
-import type { Project } from "@/lib/projects";
+import type { GalleryShot } from "@/lib/wix/projects";
 
 /**
  * The finished-room carousel.
@@ -29,13 +29,15 @@ import type { Project } from "@/lib/projects";
  * mandatory snap the browser's own arrow-key scrolling moves a couple of
  * pixels and then snaps straight back to the current shot.
  */
-export function ProjectGallery({ project }: { project: Project }) {
+export function ProjectGallery({
+  title,
+  shots,
+}: {
+  title: string;
+  shots: GalleryShot[];
+}) {
   const trackRef = React.useRef<HTMLDivElement>(null);
   const [current, setCurrent] = React.useState(0);
-  const shots = React.useMemo(
-    () => Array.from({ length: project.imageCount }, (_, i) => i),
-    [project.imageCount],
-  );
 
   // Track which shot is nearest the centre of the viewport.
   React.useEffect(() => {
@@ -102,7 +104,7 @@ export function ProjectGallery({ project }: { project: Project }) {
   };
 
   const caption = (index: number) =>
-    project.shots?.[index] ?? `${project.title}, shot ${index + 1}`;
+    shots[index]?.caption ?? `${title}, shot ${index + 1}`;
 
   return (
     <section id="gallery" className="mt-[clamp(32px,6.5vw,76px)] scroll-mt-20">
@@ -124,7 +126,7 @@ export function ProjectGallery({ project }: { project: Project }) {
       <div
         ref={trackRef}
         role="group"
-        aria-label={`${project.title} — ${shots.length} photographs`}
+        aria-label={`${title} — ${shots.length} photographs`}
         tabIndex={0}
         onKeyDown={(event) => {
           if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
@@ -133,15 +135,17 @@ export function ProjectGallery({ project }: { project: Project }) {
         }}
         className="migss-scroll mt-[18.4px] flex snap-x snap-mandatory gap-[clamp(10px,2vw,18px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,4.5vw,48px)] px-[clamp(16px,4.5vw,48px)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent"
       >
-        {shots.map((index) => (
+        {shots.map((shot, index) => (
           <figure
-            key={index}
+            key={shot.url}
             className="m-0 w-[min(88vw,720px)] flex-none snap-center"
             aria-label={`${index + 1} of ${shots.length}`}
           >
             <div className="aspect-[3/2]">
               <ImageSlot
                 placeholder={`${String(index + 1).padStart(2, "0")} — ${caption(index)}`}
+                src={shot.url}
+                alt={shot.alt}
                 shape="rounded"
                 className="migss-plate"
               />
@@ -155,9 +159,9 @@ export function ProjectGallery({ project }: { project: Project }) {
 
       <div className="mx-auto mt-[13.8px] flex max-w-[1280px] items-center gap-[7px] px-[clamp(16px,4.5vw,48px)]">
         <div aria-hidden="true" className="flex items-center gap-[7px]">
-          {shots.map((index) => (
+          {shots.map((shot, index) => (
             <span
-              key={index}
+              key={shot.url}
               className={cn(
                 "block h-1.5 w-1.5 rounded-full transition-[background-color,transform] duration-300",
                 index === current

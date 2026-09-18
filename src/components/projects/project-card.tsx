@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { ImageSlot } from "@/components/image-slot";
-import type { Project } from "@/lib/projects";
+import type { Project } from "@/lib/wix/projects";
 
 /**
  * Listing-grid card. Hover warms the title, eases the photograph and advances
@@ -17,13 +17,17 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="relative aspect-[4/5] overflow-hidden rounded-[4px]">
         <div className="absolute inset-0 transition-transform duration-[800ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-105">
           <ImageSlot
-            placeholder={`${project.location} — ${project.title}`}
+            placeholder={`${project.location ?? "Recent work"} — ${project.title}`}
+            src={project.cardUrl ?? undefined}
+            alt={`${project.title}${project.addressLine ? `, ${project.addressLine}` : ""}`}
             captionHidden
           />
         </div>
-        <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-700">
-          {project.category}
-        </span>
+        {project.category ? (
+          <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-700">
+            {project.category}
+          </span>
+        ) : null}
       </div>
 
       <div className="flex items-start gap-3">
@@ -31,12 +35,16 @@ export function ProjectCard({ project }: { project: Project }) {
           <h3 className="mb-[5px] text-[23px] leading-[1.15] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
             {project.title}
           </h3>
-          <p className="mb-1.5 text-[13px] tracking-[0.02em] text-migss-text/58">
-            {project.location}
-          </p>
-          <p className="text-sm leading-[1.6] text-migss-text/72">
-            {project.blurb}
-          </p>
+          {project.addressLine ?? project.location ? (
+            <p className="mb-1.5 text-[13px] tracking-[0.02em] text-migss-text/58">
+              {project.addressLine ?? project.location}
+            </p>
+          ) : null}
+          {project.summary ? (
+            <p className="text-sm leading-[1.6] text-migss-text/72">
+              {project.summary}
+            </p>
+          ) : null}
         </div>
         <span className="grid h-[34px] w-[34px] flex-none place-items-center rounded-full border border-migss-accent text-migss-accent-700 opacity-100 transition-[transform,opacity] duration-[350ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:opacity-50 [@media(hover:hover)]:group-hover:translate-x-1 [@media(hover:hover)]:group-hover:opacity-100">
           <svg

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { ImageSlot } from "@/components/image-slot";
 import { Reveal } from "@/components/reveal";
-import type { Project } from "@/lib/projects";
+import type { Project } from "@/lib/wix/projects";
 
 /**
  * Horizontal rail of the projects nearest a town.
@@ -71,24 +71,32 @@ export function LocalProjects({
               <div className="relative aspect-[4/5] overflow-hidden rounded-[4px]">
                 <div className="absolute inset-0 transition-transform duration-[800ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-105">
                   <ImageSlot
-                    placeholder={`${project.location} — ${project.title}`}
+                    placeholder={`${project.location ?? "Recent work"} — ${project.title}`}
+                    src={project.cardUrl ?? undefined}
+                    alt={`${project.title}${project.addressLine ? `, ${project.addressLine}` : ""}`}
                     captionHidden
                   />
                 </div>
-                <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-700">
-                  {project.category}
-                </span>
+                {project.category ? (
+                  <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-700">
+                    {project.category}
+                  </span>
+                ) : null}
               </div>
               <div>
                 <h3 className="mb-[5px] text-[23px] leading-[1.15] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-700">
                   {project.title}
                 </h3>
-                <p className="mb-1.5 text-[13px] text-migss-text/58">
-                  {project.location}
-                </p>
-                <p className="text-sm leading-[1.6] text-migss-text/72">
-                  {project.blurb}
-                </p>
+                {project.addressLine ?? project.location ? (
+                  <p className="mb-1.5 text-[13px] text-migss-text/58">
+                    {project.addressLine ?? project.location}
+                  </p>
+                ) : null}
+                {project.summary ? (
+                  <p className="text-sm leading-[1.6] text-migss-text/72">
+                    {project.summary}
+                  </p>
+                ) : null}
               </div>
             </Link>
           </Reveal>

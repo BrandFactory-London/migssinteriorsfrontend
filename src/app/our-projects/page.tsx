@@ -7,6 +7,17 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import {
+  categoriesPresent,
+  getFeaturedProjects,
+  getProjects,
+} from "@/lib/wix/projects";
+
+/**
+ * The portfolio is edited in the Wix dashboard continuously, so the page is
+ * rebuilt in the background at most once a minute rather than at deploy time.
+ */
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Our Projects",
@@ -20,7 +31,12 @@ const STATS = [
   { label: "Google", value: "5.0" },
 ];
 
-export default function OurProjectsPage() {
+export default async function OurProjectsPage() {
+  const [projects, featured] = await Promise.all([
+    getProjects(),
+    getFeaturedProjects(),
+  ]);
+
   return (
     <>
       <SiteHeader variant="solid" />
@@ -62,13 +78,16 @@ export default function OurProjectsPage() {
           </div>
         </section>
 
-        <FeaturedCarousel />
+        <FeaturedCarousel projects={featured} />
 
         <section
           id="all"
           className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)] pt-[clamp(30px,6vw,68px)]"
         >
-          <ProjectFilters />
+          <ProjectFilters
+            projects={projects}
+            categories={categoriesPresent(projects)}
+          />
 
           <p className="mt-7 border-t border-[var(--migss-divider)] pt-[18.4px] text-[14.5px] leading-[1.75] text-migss-text/72">
             Looking for something specific — a wet room in a loft, a kitchen in

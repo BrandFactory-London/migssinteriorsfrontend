@@ -1,18 +1,20 @@
 import Link from "next/link";
 
 import { ImageSlot } from "@/components/image-slot";
-import { FEATURED } from "@/lib/projects";
+import type { Project } from "@/lib/wix/projects";
 
 /**
  * Full-bleed featured strip. Mandatory snap so a swipe always settles on a
  * card edge rather than halfway; `overscroll-x-contain` keeps the gesture from
  * escaping to the browser's back-navigation at either end.
  */
-export function FeaturedCarousel() {
+export function FeaturedCarousel({ projects }: { projects: Project[] }) {
+  if (projects.length === 0) return null;
+
   return (
     <section aria-label="Featured projects" className="mx-auto max-w-[1280px]">
       <ul className="migss-scroll flex list-none snap-x snap-mandatory gap-[clamp(10px,2vw,18px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,4.5vw,48px)] px-[clamp(16px,4.5vw,48px)]">
-        {FEATURED.map((project) => (
+        {projects.map((project) => (
           <li
             key={project.slug}
             className="w-[min(88vw,620px)] flex-none snap-start"
@@ -23,7 +25,9 @@ export function FeaturedCarousel() {
             >
               <div className="absolute inset-0 transition-transform duration-[800ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-105">
                 <ImageSlot
-                  placeholder={`Featured: ${project.location} — ${project.title}`}
+                  placeholder={`Featured: ${project.location ?? "recent work"} — ${project.title}`}
+                  src={project.heroUrl ?? project.cardUrl ?? undefined}
+                  alt={`${project.title}${project.addressLine ? `, ${project.addressLine}` : ""}`}
                   captionHidden
                 />
               </div>
@@ -33,14 +37,16 @@ export function FeaturedCarousel() {
               />
               <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1.5 p-[clamp(16px,3vw,28px)]">
                 <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-300">
-                  Featured · {project.category}
+                  {project.category ? `Featured · ${project.category}` : "Featured"}
                 </span>
                 <h2 className="font-heading text-[clamp(26px,5.5vw,38px)] leading-[1.05] font-normal tracking-[-0.02em] text-inherit">
                   {project.title}
                 </h2>
-                <span className="text-[13.5px] text-migss-neutral-100/78">
-                  {project.location} · {project.programme}
-                </span>
+                {project.addressLine ?? project.location ? (
+                  <span className="text-[13.5px] text-migss-neutral-100/78">
+                    {project.addressLine ?? project.location}
+                  </span>
+                ) : null}
               </div>
             </Link>
           </li>

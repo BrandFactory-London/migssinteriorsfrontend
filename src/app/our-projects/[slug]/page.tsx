@@ -11,47 +11,61 @@ import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
-import { CATEGORY_SERVICE, PROJECTS, getProject } from "@/lib/projects";
+import { getProject, getProjects, serviceFor } from "@/lib/wix/projects";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return PROJECTS.map(({ slug }) => ({ slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  return (await getProjects()).map(({ slug }) => ({ slug }));
 }
 
-/** Only the projects we know about; anything else is a genuine 404. */
-export const dynamicParams = false;
+/**
+ * Deliberately the opposite of /locations/[area] and /blog/[slug], where the
+ * data is closed and an unknown slug is a genuine 404. The portfolio grows in
+ * the dashboard between deploys, so a project added this morning has to
+ * resolve on its first visit rather than 404 until the next build.
+ */
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) return { title: "Project not found" };
 
+  const place = project.addressLine ?? project.location;
+
   return {
-    title: `${project.title} — ${project.location}`,
-    description: project.narrative[0],
+    title: place ? `${project.title} — ${place}` : project.title,
+    description: project.summary ?? project.description[0],
   };
 }
 
 export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
 
   if (!project) notFound();
 
-  const service = CATEGORY_SERVICE[project.category];
+  const service = serviceFor(project);
+  const place = project.addressLine ?? project.location;
+
+  // Only the facts this project actually carries: the collection has no
+  // programme or scope fields, and a blank cell reads as a missing value.
   const facts = [
-    { label: "Category", value: project.category },
-    { label: "Location", value: project.postcode },
-    { label: "Programme", value: project.programme },
-    { label: "Scope", value: project.scope },
-  ];
-  // Three other projects to keep browsing, nearest first by shared category.
-  const more = PROJECTS.filter((other) => other.slug !== project.slug)
-    .sort((a, b) => {
-      const score = (p: typeof project) => (p.category === project.category ? 0 : 1);
-      return score(a) - score(b);
-    })
+    project.category ? { label: "Category", value: project.category } : null,
+    project.location ? { label: "Location", value: project.location } : null,
+  ].filter((fact) => fact !== null);
+
+  // Three others to keep browsing, same category first.
+  const more = (await getProjects())
+    .filter((other) => other.slug !== project.slug)
+    .sort(
+      (a, b) =>
+        Number(a.category !== project.category) -
+        Number(b.category !== project.category),
+    )
     .slice(0, 3);
 
   return (
@@ -63,6 +77,8 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="absolute inset-0">
             <ImageSlot
               placeholder={`Hero: ${project.title}, wide shot`}
+              src={project.heroUrl ?? undefined}
+              alt={place ? `${project.title}, ${place}` : project.title}
               captionHidden
             />
           </div>
@@ -77,56 +93,62 @@ export default async function ProjectDetailPage({ params }: Props) {
                 items={[
                   { href: "/", label: "Home" },
                   { href: "/our-projects", label: "Projects" },
-                  { label: project.location },
+                  { label: project.location ?? project.title },
                 ]}
               />
             </div>
-            <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-300">
-              <span className="block h-px w-[34px] bg-migss-accent-300" />
-              {project.category} renovation
-            </p>
+            {project.category ? (
+              <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-300">
+                <span className="block h-px w-[34px] bg-migss-accent-300" />
+                {project.category} renovation
+              </p>
+            ) : null}
             <h1 className="mb-[13.8px] max-w-[20ch] text-[clamp(36px,8.4vw,74px)] leading-none font-normal tracking-[-0.03em] text-balance">
               {project.title}
             </h1>
-            <p className="text-[clamp(14px,3.6vw,16px)] text-migss-neutral-100/80">
-              {project.location} · {project.completed}
-            </p>
+            {place ? (
+              <p className="text-[clamp(14px,3.6vw,16px)] text-migss-neutral-100/80">
+                {place}
+              </p>
+            ) : null}
           </div>
         </section>
 
-        <section className="relative z-3 mx-auto max-w-[1280px] px-[clamp(16px,4.5vw,48px)]">
-          <dl className="mt-[clamp(-46px,-3.5vw,-30px)] grid grid-cols-[repeat(auto-fit,minmax(min(50%,180px),1fr))] border-t border-l border-[var(--migss-divider)] bg-migss-bg shadow-migss-md">
-            {facts.map((fact) => (
-              <div
-                key={fact.label}
-                className="border-r border-b border-[var(--migss-divider)] px-[clamp(14px,2vw,24px)] py-[18.4px]"
-              >
-                <dt className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-text/55">
-                  {fact.label}
-                </dt>
-                <dd className="font-heading mt-1.5 text-[21px] tabular-nums">
-                  {fact.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+        {facts.length > 0 ? (
+          <section className="relative z-3 mx-auto max-w-[1280px] px-[clamp(16px,4.5vw,48px)]">
+            <dl className="mt-[clamp(-46px,-3.5vw,-30px)] grid grid-cols-[repeat(auto-fit,minmax(min(50%,180px),1fr))] border-t border-l border-[var(--migss-divider)] bg-migss-bg shadow-migss-md">
+              {facts.map((fact) => (
+                <div
+                  key={fact.label}
+                  className="border-r border-b border-[var(--migss-divider)] px-[clamp(14px,2vw,24px)] py-[18.4px]"
+                >
+                  <dt className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-text/55">
+                    {fact.label}
+                  </dt>
+                  <dd className="font-heading mt-1.5 text-[21px]">
+                    {fact.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ) : null}
 
-        <section
-          id="story"
-          className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)] pt-[clamp(32px,6.5vw,76px)]"
-        >
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(20px,3.5vw,48px)]">
-            <Reveal>
+        {project.description.length > 0 || project.summary ? (
+          <section
+            id="story"
+            className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)] pt-[clamp(32px,6.5vw,76px)]"
+          >
+            <Reveal className="max-w-[68ch]">
               <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
-                The brief
+                The project
               </p>
-              {project.brief ? (
-                <h2 className="mb-[13.8px] text-[clamp(27px,6.4vw,40px)] leading-[1.08] font-normal tracking-[-0.02em]">
-                  {project.brief}
+              {project.summary ? (
+                <h2 className="mb-[18.4px] text-[clamp(24px,5.6vw,34px)] leading-[1.14] font-normal tracking-[-0.02em] text-balance">
+                  {project.summary}
                 </h2>
               ) : null}
-              {project.narrative.map((paragraph) => (
+              {project.description.map((paragraph) => (
                 <p
                   key={paragraph.slice(0, 40)}
                   className="mb-[13.8px] text-[15.5px] leading-[1.8] text-pretty text-migss-text/82 last:mb-0"
@@ -135,66 +157,84 @@ export default async function ProjectDetailPage({ params }: Props) {
                 </p>
               ))}
             </Reveal>
+          </section>
+        ) : null}
 
-            {/* Both blocks are optional: only the fully specified case study
-                carries a before shot and a materials list. */}
-            {project.before || project.spec ? (
-              <Reveal delay={90} className="flex flex-col gap-[18.4px]">
-                {project.before ? (
-                  <div className="border border-[var(--migss-divider)] border-l-2 border-l-migss-accent p-[18.4px]">
-                    <p className="mb-2 text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
-                      Before
-                    </p>
-                    <p className="mb-[13.8px] text-[14.5px] leading-[1.75] text-migss-text/78">
-                      {project.before}
-                    </p>
+        {/* Before and after, only where the dashboard holds both shots. */}
+        {project.beforeUrl && project.heroUrl ? (
+          <section
+            id="before-after"
+            className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)] pt-[clamp(32px,6.5vw,76px)]"
+          >
+            <Reveal>
+              <h2 className="mb-[18.4px] text-[clamp(26px,6vw,38px)] leading-[1.05] font-normal tracking-[-0.02em]">
+                Before and after
+              </h2>
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-[clamp(12px,2.5vw,24px)]">
+                {[
+                  { label: "Before", url: project.beforeUrl },
+                  { label: "After", url: project.heroUrl },
+                ].map((shot) => (
+                  <figure key={shot.label} className="m-0">
                     <div className="aspect-[4/3]">
                       <ImageSlot
-                        placeholder={`Before: ${project.location}`}
+                        placeholder={`${shot.label}: ${project.title}`}
+                        src={shot.url}
+                        alt={`${shot.label} — ${project.title}`}
                         shape="rounded"
+                        className="migss-plate"
                       />
                     </div>
-                  </div>
-                ) : null}
+                    <figcaption className="mt-2.5 text-[11px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
+                      {shot.label}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </Reveal>
+          </section>
+        ) : null}
 
-                {project.spec ? (
-                  <ul className="grid list-none">
-                    {project.spec.map((row, index) => (
-                      <li
-                        key={row.label}
-                        className={`flex justify-between gap-3 border-t border-[var(--migss-divider)] px-0.5 py-[13px] text-[14.5px] ${
-                          index === project.spec!.length - 1
-                            ? "border-b border-b-[var(--migss-divider)]"
-                            : ""
-                        }`}
-                      >
-                        <span className="text-migss-text/62">{row.label}</span>
-                        <span className="text-right">{row.value}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </Reveal>
-            ) : null}
-          </div>
-        </section>
+        {project.gallery.length > 0 ? (
+          <ProjectGallery title={project.title} shots={project.gallery} />
+        ) : null}
 
-        <ProjectGallery project={project} />
+        {project.videoUrl ? (
+          <section
+            id="video"
+            className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)] pt-[clamp(32px,6.5vw,76px)]"
+          >
+            <Reveal>
+              <h2 className="mb-[18.4px] text-[clamp(26px,6vw,38px)] leading-[1.05] font-normal tracking-[-0.02em]">
+                In their own words
+              </h2>
+              <video
+                controls
+                preload="metadata"
+                poster={project.heroUrl ?? undefined}
+                className="migss-plate aspect-video w-full rounded-[4px] bg-migss-neutral-900"
+              >
+                <source src={project.videoUrl} />
+                Your browser cannot play this video.
+              </video>
+            </Reveal>
+          </section>
+        ) : null}
 
         <section className="mt-[clamp(32px,6.5vw,76px)] bg-migss-neutral-900 text-migss-neutral-200">
           <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-center gap-[clamp(18px,3vw,40px)] px-[clamp(16px,4.5vw,48px)] py-[clamp(28px,5.5vw,64px)]">
-            {project.quote ? (
+            {project.testimonial ? (
               <blockquote className="border-l-2 border-migss-accent-400 pl-[18.4px]">
                 <p className="font-heading mb-[13.8px] text-[clamp(21px,5.2vw,30px)] leading-[1.3] italic text-migss-neutral-100">
-                  {project.quote.text}
+                  {project.testimonial}
                 </p>
                 <footer className="text-[11.5px] font-medium tracking-[0.12em] uppercase text-migss-neutral-400">
-                  {project.quote.source}
+                  {[project.clientName, place].filter(Boolean).join(" · ")}
                 </footer>
               </blockquote>
             ) : (
               <p className="font-heading text-[clamp(21px,5.2vw,30px)] leading-[1.3] text-migss-neutral-100">
-                {project.programme} on site, one team, one guarantee.
+                Designed and built by our own team, start to finish.
               </p>
             )}
 
@@ -223,58 +263,66 @@ export default async function ProjectDetailPage({ params }: Props) {
           </div>
         </section>
 
-        <section
-          id="more"
-          className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)] pt-[clamp(32px,6.5vw,76px)]"
-        >
-          <div className="mb-7 flex flex-wrap items-baseline justify-between gap-x-[18.4px] gap-y-[9.2px]">
-            <div>
-              <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
-                More projects
-              </p>
-              <h2 className="text-[clamp(26px,6vw,38px)] leading-[1.05] font-normal tracking-[-0.02em]">
-                Keep looking
-              </h2>
+        {more.length > 0 ? (
+          <section
+            id="more"
+            className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)] pt-[clamp(32px,6.5vw,76px)]"
+          >
+            <div className="mb-7 flex flex-wrap items-baseline justify-between gap-x-[18.4px] gap-y-[9.2px]">
+              <div>
+                <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-700">
+                  More projects
+                </p>
+                <h2 className="text-[clamp(26px,6vw,38px)] leading-[1.05] font-normal tracking-[-0.02em]">
+                  Keep looking
+                </h2>
+              </div>
+              <Link
+                href="/our-projects"
+                className="text-sm font-medium text-migss-accent-700 no-underline"
+              >
+                All projects →
+              </Link>
             </div>
-            <Link
-              href="/our-projects"
-              className="text-sm font-medium text-migss-accent-700 no-underline"
-            >
-              All projects →
-            </Link>
-          </div>
 
-          <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-[clamp(14px,3vw,28px)]">
-            {more.map((other, index) => (
-              <Reveal as="li" key={other.slug} delay={index * 90}>
-                <Link
-                  href={`/our-projects/${other.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-[4px] border border-[var(--migss-divider)] text-inherit no-underline transition-[border-color,box-shadow] duration-[400ms] active:scale-[0.995] [@media(hover:hover)]:hover:border-migss-accent [@media(hover:hover)]:hover:shadow-migss-md"
-                >
-                  <div className="relative aspect-[16/11] overflow-hidden">
-                    <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-105">
-                      <ImageSlot
-                        placeholder={`${other.location} — ${other.title}`}
-                        captionHidden
-                      />
+            <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-[clamp(14px,3vw,28px)]">
+              {more.map((other, index) => (
+                <Reveal as="li" key={other.slug} delay={index * 90}>
+                  <Link
+                    href={`/our-projects/${other.slug}`}
+                    className="group flex flex-col overflow-hidden rounded-[4px] border border-[var(--migss-divider)] text-inherit no-underline transition-[border-color,box-shadow] duration-[400ms] active:scale-[0.995] [@media(hover:hover)]:hover:border-migss-accent [@media(hover:hover)]:hover:shadow-migss-md"
+                  >
+                    <div className="relative aspect-[16/11] overflow-hidden">
+                      <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-105">
+                        <ImageSlot
+                          placeholder={`${other.location ?? "Recent work"} — ${other.title}`}
+                          src={other.cardUrl ?? undefined}
+                          alt={other.title}
+                          captionHidden
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex flex-col gap-1.5 p-[18.4px]">
-                    <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
-                      {other.category}
-                    </span>
-                    <h3 className="text-[23px] leading-[1.15] font-normal">
-                      {other.title}
-                    </h3>
-                    <p className="text-[13px] text-migss-text/58">
-                      {other.location}
-                    </p>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </ul>
-        </section>
+                    <div className="flex flex-col gap-1.5 p-[18.4px]">
+                      {other.category ? (
+                        <span className="text-[10.5px] font-medium tracking-[0.16em] uppercase text-migss-accent-700">
+                          {other.category}
+                        </span>
+                      ) : null}
+                      <h3 className="text-[23px] leading-[1.15] font-normal">
+                        {other.title}
+                      </h3>
+                      {(other.addressLine ?? other.location) ? (
+                        <p className="text-[13px] text-migss-text/58">
+                          {other.addressLine ?? other.location}
+                        </p>
+                      ) : null}
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         <EnquireBand
           heading="Book your free consultation"
