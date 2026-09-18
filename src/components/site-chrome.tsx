@@ -16,13 +16,22 @@ type DockItem = {
   icon: React.ReactNode;
 };
 
+/**
+ * Shared by the two room icons. The stroke is 2 rather than the 1.25 the rest
+ * of the site draws at, because these sit beside the WhatsApp logo, which is a
+ * filled mark: at matched colour it still deposits about twice the ink of a
+ * thin outline, so the outlines are thickened to meet it rather than the logo
+ * lightened to meet them. Arrived at by rendering 1.25 through 2.5 and looking:
+ * 2.5 balances on the numbers but reads clumsy at 19px, 1.75 still reads thin,
+ * 2 is where the four stop looking like two different sets.
+ */
 const iconProps = {
   width: 19,
   height: 19,
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
-  strokeWidth: 1.25,
+  strokeWidth: 2,
   strokeLinecap: "round",
   strokeLinejoin: "round",
   "aria-hidden": true,
