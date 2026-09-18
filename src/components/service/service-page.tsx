@@ -8,12 +8,8 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { Faq } from "@/components/service/faq";
 import { ButtonLink } from "@/components/ui/button";
 import { SITE, telHref } from "@/lib/site";
-import {
-  SERVICES,
-  SERVICE_BLURB,
-  TRUST,
-  type Service,
-} from "@/lib/services";
+import { SERVICES, SERVICE_BLURB, TRUST, type Service } from "@/lib/services";
+import { getCategoryProjects, type ProjectCategory } from "@/lib/wix/projects";
 
 function Tick() {
   return (
@@ -38,13 +34,27 @@ function Tick() {
  * All three artboards are the same page with different copy, so they are one
  * component driven by the data in lib/services.ts.
  */
-export function ServicePage({ service }: { service: Service }) {
+const SERVICE_CATEGORY: Record<Service["slug"], ProjectCategory> = {
+  bathroom: "Bathroom",
+  kitchen: "Kitchen",
+  interior: "Interior",
+};
+
+export async function ServicePage({ service }: { service: Service }) {
+  const { projects, inCategory } = await getCategoryProjects(
+    SERVICE_CATEGORY[service.slug],
+  );
+  const room = service.slug === "interior" ? "interior" : service.slug;
+
   return (
     <main id="top">
       {/* Hero */}
       <section className="relative flex min-h-[clamp(520px,82svh,900px)] items-end overflow-hidden">
         <div className="absolute inset-0">
-          <ImageSlot placeholder={service.hero.imagePlaceholder} captionHidden />
+          <ImageSlot
+            placeholder={service.hero.imagePlaceholder}
+            captionHidden
+          />
         </div>
         <div
           aria-hidden="true"
@@ -209,8 +219,11 @@ export function ServicePage({ service }: { service: Service }) {
               {service.gallery.heading}
             </h2>
           </Reveal>
-          <span className="flex items-center gap-2 text-[12.5px] text-migss-text/55">
-            Swipe to explore
+          <Link
+            href="/our-projects"
+            className="flex items-center gap-2 text-[12.5px] text-migss-accent-ink no-underline"
+          >
+            {projects.length > 1 ? "Swipe to explore" : "All projects"}
             <svg
               width="16"
               height="16"
@@ -223,45 +236,64 @@ export function ServicePage({ service }: { service: Service }) {
             >
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
-          </span>
+          </Link>
         </div>
+
+        {/* Kitchen and Interior hold one project each today, so the rail says
+            what it is showing rather than implying a category set. */}
+        {!inCategory ? (
+          <p className="mt-2.5 max-w-[56ch] px-[clamp(16px,4.5vw,48px)] text-sm leading-[1.7] text-migss-text/62">
+            We have not photographed a {room} project for the website yet. These
+            are recent builds in other rooms, finished by the same team. Ask and
+            we will send {room} photographs that match what you are planning.
+          </p>
+        ) : null}
 
         <ul
           className="migss-scroll mt-7 flex list-none items-start gap-[clamp(14px,2.5vw,28px)] overflow-x-auto scroll-p-[clamp(16px,4.5vw,48px)] snap-x snap-proximity px-[clamp(16px,4.5vw,48px)] pb-[18.4px]"
           aria-label={service.gallery.heading}
         >
-          {service.gallery.items.map((item, index) => (
+          {projects.map((project, index) => (
             <Reveal
               as="li"
-              key={item.placeholder}
+              key={project.slug}
               delay={index * 80}
               className="w-[min(82vw,360px)] flex-none snap-start"
             >
-              <article className="group">
+              <Link
+                href={`/our-projects/${project.slug}`}
+                className="group block text-inherit no-underline transition-transform active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-migss-accent"
+              >
                 <div className="relative aspect-[4/5]">
                   <ImageSlot
-                    placeholder={item.placeholder}
+                    placeholder={`${project.location ?? "Recent work"}: ${project.title}`}
+                    src={project.cardUrl ?? undefined}
+                    alt={`${project.title}${project.addressLine ? `, ${project.addressLine}` : ""}`}
                     shape="rounded"
                     className="migss-plate h-full w-full transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-[1.02]"
                   />
-                  <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-ink">
-                    {item.location}
-                  </span>
+                  {(project.addressLine ?? project.location) ? (
+                    <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-ink">
+                      {project.addressLine ?? project.location}
+                    </span>
+                  ) : null}
                 </div>
                 <div className="mt-[13.8px] flex gap-3">
                   <span className="font-heading pt-1 text-[13px] text-migss-accent-ink tabular-nums">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h3 className="mb-1.5 text-[23px] font-normal tracking-[-0.01em]">
-                      {item.title}
+                    <h3 className="mb-1.5 text-[23px] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-ink">
+                      {project.title}
                     </h3>
-                    <p className="text-sm leading-[1.65] text-migss-text/72">
-                      {item.body}
-                    </p>
+                    {project.summary ? (
+                      <p className="text-sm leading-[1.65] text-migss-text/72">
+                        {project.summary}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           ))}
         </ul>

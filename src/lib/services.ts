@@ -32,15 +32,10 @@ export type Service = {
     heading: string;
     steps: { when: string; title: string; body: string }[];
   };
+  /** Heading only: the rail itself comes from the Projects collection. */
   gallery: {
     kicker: string;
     heading: string;
-    items: {
-      placeholder: string;
-      location: string;
-      title: string;
-      body: string;
-    }[];
   };
   trust: {
     lead: string;
@@ -104,12 +99,6 @@ export const SERVICES: Record<ServiceSlug, Service> = {
     gallery: {
       kicker: "Bathrooms we have built",
       heading: "Recent bathroom projects",
-      items: [
-        { placeholder: "Manor Road, Chigwell: marble wet room", location: "Manor Road, Chigwell", title: "Book-matched marble wet room", body: "Linear drain, concealed thermostatic brassware and a full-height matched slab behind the vanity. Four weeks." },
-        { placeholder: "Forest Drive, Loughton: family bathroom", location: "Forest Drive, Loughton", title: "Family bathroom, two children", body: "Bath with overhead shower, hard-wearing porcelain and storage joinery. Family in residence throughout." },
-        { placeholder: "Nightingale Lane, Wanstead: guest ensuite", location: "Nightingale Ln, Wanstead", title: "Guest ensuite in 4.1 m²", body: "Wall-hung sanitaryware and a walk-in screen that made a boxroom feel twice its size." },
-        { placeholder: "Hermitage Walk, South Woodford: his & hers ensuite", location: "Hermitage Walk, S. Woodford", title: "Twin-vanity master ensuite", body: "Bespoke vanity, backlit mirrors and underfloor heating zoned separately from the bedroom." },
-      ],
     },
     trust: {
       lead: "We employ our own bathroom fitters, tilers and electricians, so the guarantee is ours to honour rather than a subcontractor's to argue about.",
@@ -183,12 +172,6 @@ export const SERVICES: Record<ServiceSlug, Service> = {
     gallery: {
       kicker: "Kitchens we have built",
       heading: "Recent kitchen projects",
-      items: [
-        { placeholder: "Nightingale Lane, Wanstead: open-plan kitchen", location: "Nightingale Ln, Wanstead", title: "Open-plan kitchen & dining", body: "Structural opening, in-frame cabinetry and a quartz island seating five. Seven weeks." },
-        { placeholder: "Epping: handleless kitchen in dark timber", location: "Bury Lane, Epping", title: "Handleless in smoked oak", body: "Full-height pantry run, boiling tap and a porcelain worktop with a mitred waterfall end." },
-        { placeholder: "Chigwell: galley kitchen with pantry", location: "Manor Road, Chigwell", title: "Galley with hidden utility", body: "A narrow Victorian return turned into a working galley with the laundry behind pocket doors." },
-        { placeholder: "Brentwood: kitchen with garden doors", location: "Shenfield, Brentwood", title: "Kitchen opened to the garden", body: "Rear wall removed, steel goalpost frame, sliding doors and a run of bench seating." },
-      ],
     },
     trust: {
       lead: "Carpenters, electricians and plumbers on our own payroll, plus a workshop that makes the cabinetry, so a problem is ours to fix, not a supplier's to deny.",
@@ -262,12 +245,6 @@ export const SERVICES: Record<ServiceSlug, Service> = {
     gallery: {
       kicker: "Whole homes we have renovated",
       heading: "Recent interior projects",
-      items: [
-        { placeholder: "Hermitage Walk, South Woodford: whole home", location: "Hermitage Walk, S. Woodford", title: "Four-bedroom home, top to bottom", body: "Kitchen, two bathrooms, full rewire, joinery and decoration on one programme. Fourteen weeks." },
-        { placeholder: "Chingford: Victorian terrace, hallway and reception", location: "Kings Road, Chingford", title: "Victorian terrace, restored", body: "Cornice and joinery repaired rather than replaced, parquet relaid, panelling made to match." },
-        { placeholder: "Theydon Bois: principal bedroom and dressing room", location: "Coppice Row, Theydon Bois", title: "Bedroom floor reconfigured", body: "Four rooms into three, with a dressing room in fitted oak and a new ensuite behind it." },
-        { placeholder: "Hornchurch: open-plan ground floor", location: "Butts Green, Hornchurch", title: "Ground floor opened up", body: "Two walls out, media wall joinery, zoned lighting and one continuous stone floor." },
-      ],
     },
     trust: {
       lead: "On a whole-home project the biggest risk is coordination. One contract, one project manager and directly employed trades removes it.",

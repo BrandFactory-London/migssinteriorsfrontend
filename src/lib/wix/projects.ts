@@ -217,6 +217,25 @@ export async function getTownProjects(town: string) {
   return { projects: projects.slice(0, 3), isLocal: false };
 }
 
+/**
+ * Projects in one category, falling back to recent work in other rooms.
+ *
+ * `category` is freeform text typed into the dashboard, so it is trimmed and
+ * matched case-insensitively when the item is mapped; this compares against
+ * that normalised value. Kitchen and Interior hold one project each today, so
+ * the caller says plainly when it is showing other rooms rather than padding
+ * the rail out with work that is not what was asked for.
+ */
+export async function getCategoryProjects(category: ProjectCategory) {
+  const projects = await getProjects();
+
+  const matching = projects.filter((project) => project.category === category);
+
+  if (matching.length > 0) return { projects: matching, inCategory: true };
+
+  return { projects: projects.slice(0, 3), inCategory: false };
+}
+
 /** Maps a project category onto the matching service page and form focus. */
 export const CATEGORY_SERVICE = {
   Bathroom: { slug: "bathroom", label: "bathroom renovation" },

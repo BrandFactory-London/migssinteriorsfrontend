@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   description: service.metaDescription,
 };
 
+/** The projects rail reads the live collection. */
+export const revalidate = 60;
+
 export default function Page() {
   return (
     <>
