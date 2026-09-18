@@ -14,6 +14,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
 import { LOCATIONS, getLocation } from "@/lib/locations";
+import { pageMetadata } from "@/lib/seo";
+import { ogImage } from "@/lib/wix/og-image";
 import { getTownProjects } from "@/lib/wix/projects";
 import { telHref } from "@/lib/site";
 
@@ -34,10 +36,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const location = getLocation(area);
   if (!location) return { title: "Area not found" };
 
-  return {
-    title: `Renovation in ${location.name}`,
+  const image = await ogImage(`location-hero-${location.slug}`);
+
+  return pageMetadata({
+    title: `Bathroom & Kitchen Renovation in ${location.name} | Migss Interiors`,
     description: location.heroLead,
-  };
+    path: `/locations/${location.slug}`,
+    image: image?.url,
+    imageAlt: image?.alt ?? `Recent renovation work in ${location.name}`,
+  });
 }
 
 export default async function LocationDetailPage({ params }: Props) {
