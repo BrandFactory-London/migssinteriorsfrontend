@@ -214,3 +214,13 @@
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * The header is now fixed or sticky at the top of the viewport, so an anchor
+ * jump would otherwise land its target underneath it. The value is the tallest
+ * the header gets (the overlay variant, 18px padding either side of a 44px
+ * row), plus a little breathing room.
+ */
+html {
+  scroll-padding-top: 92px;
+}

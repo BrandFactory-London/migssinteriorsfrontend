@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Instrument_Sans } from "next/font/google";
 
+import { NavMenuProvider } from "@/components/nav-menu";
 import { SITE_URL } from "@/lib/seo";
 import { localBusinessJsonLd } from "@/lib/structured-data";
 import "./globals.css";
@@ -35,7 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${cormorant.variable} ${instrument.variable} h-full scroll-smooth antialiased`}
     >
       <body className="bg-migss-bg text-migss-text font-body flex min-h-full flex-col overflow-x-hidden">
-        {children}
+        <NavMenuProvider>{children}</NavMenuProvider>
         {/* Describes the business rather than the page, so it is emitted once
             here rather than repeated on every route. */}
         <script

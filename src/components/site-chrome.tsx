@@ -2,18 +2,18 @@
 
 import * as React from "react";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { SITE, telHref, NAV } from "@/lib/site";
+import { SITE, telHref, NAV, WHATSAPP_URL } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/button";
+import { useNavMenu } from "@/components/nav-menu";
 import { cn } from "@/lib/utils";
 
 type DockItem = {
   href: string;
   label: string;
-  /** Hidden below 1000px, where the dock has no room for them. */
-  desktopOnly?: boolean;
   icon: React.ReactNode;
 };
 
@@ -30,30 +30,15 @@ const iconProps = {
   className: "flex-none",
 } as const;
 
+/**
+ * The two rooms most enquiries are about. Everything else the dock used to
+ * carry — Home, Services, Interiors and the menu — is reachable from the
+ * header's menu, which is where the menu button now lives.
+ */
 const DOCK_ITEMS: DockItem[] = [
   {
-    href: "/",
-    label: "Home",
-    icon: (
-      <svg {...iconProps}>
-        <path d="M4 10.8 12 4.5l8 6.3V20H4z" />
-      </svg>
-    ),
-  },
-  {
-    href: "/renovation-services",
-    label: "Services",
-    icon: (
-      <svg {...iconProps}>
-        <path d="M4 20V8l8-4 8 4v12" />
-        <path d="M4 13h16" />
-      </svg>
-    ),
-  },
-  {
     href: "/renovation-services/bathroom",
-    label: "Bathrooms",
-    desktopOnly: true,
+    label: "Bathroom",
     icon: (
       <svg {...iconProps}>
         <path d="M4 12h16v4a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z" />
@@ -63,23 +48,11 @@ const DOCK_ITEMS: DockItem[] = [
   },
   {
     href: "/renovation-services/kitchen",
-    label: "Kitchens",
-    desktopOnly: true,
+    label: "Kitchen",
     icon: (
       <svg {...iconProps}>
         <rect x="4" y="4" width="16" height="16" />
         <path d="M4 10h16M9 4v6" />
-      </svg>
-    ),
-  },
-  {
-    href: "/renovation-services/interior",
-    label: "Interiors",
-    desktopOnly: true,
-    icon: (
-      <svg {...iconProps}>
-        <path d="M3 20h18M6 20V9l6-4 6 4v11" />
-        <path d="M10 20v-5h4v5" />
       </svg>
     ),
   },
@@ -91,7 +64,12 @@ const DOCK_ITEMS: DockItem[] = [
  * open, so a single piece of state drives both.
  */
 export function SiteChrome() {
-  const [menuOpen, setMenuOpen] = React.useState(false);
+  const menu = useNavMenu();
+  const menuOpen = menu?.open ?? false;
+  const setMenuOpen = React.useCallback(
+    (open: boolean) => menu?.setOpen(open),
+    [menu],
+  );
   const pathname = usePathname();
   const closeButtonRef = React.useRef<HTMLButtonElement>(null);
 
@@ -112,7 +90,7 @@ export function SiteChrome() {
       document.body.style.overflow = previous;
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [menuOpen]);
+  }, [menuOpen, setMenuOpen]);
 
   return (
     <>
@@ -199,17 +177,25 @@ export function SiteChrome() {
             />
           ))}
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open full menu"
-            className={cn(dockItemClass, "group border-0 bg-transparent")}
+          {/* A pre-built WhatsApp Business click-to-chat link, used verbatim:
+              it is not derivable from the phone number in lib/site.ts. */}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Message us on WhatsApp"
+            className={cn(dockItemClass, "group")}
           >
-            <svg {...iconProps} strokeLinejoin={undefined}>
-              <path d="M4 8h16M4 16h16" />
-            </svg>
-            <DockLabel>Menu</DockLabel>
-          </button>
+            <Image
+              src="/Brand/whatsapplogo.svg"
+              alt=""
+              width={19}
+              height={19}
+              aria-hidden="true"
+              className="flex-none"
+            />
+            <DockLabel>WhatsApp</DockLabel>
+          </a>
 
           <span
             aria-hidden="true"
@@ -272,7 +258,6 @@ function DockLink({ item, active }: { item: DockItem; active: boolean }) {
       aria-current={active ? "page" : undefined}
       className={cn(
         dockItemClass,
-        item.desktopOnly && "hidden min-[1000px]:flex",
         active && "bg-migss-accent/15 text-migss-accent-ink",
       )}
     >
