@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { EnquireBand } from "@/components/projects/enquire-band";
@@ -6,15 +5,23 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pageMetadata } from "@/lib/seo";
+import { ogImage } from "@/lib/wix/og-image";
 import { ButtonLink } from "@/components/ui/button";
 import { COMPANY, SITE, mailHref, telHref } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Call, email or send an enquiry. Average response time under 20 minutes, Monday to Saturday, 8am to 6pm.",
-};
+export async function generateMetadata() {
+  const image = await ogImage("home-hero");
 
+  return pageMetadata({
+    title: "Contact Migss Interiors | Free Home Visit & Fixed Quote",
+    description:
+      "Call, email or send an enquiry for a free home visit and a fixed written quote. Average response time under 20 minutes during working hours, across East London and Essex.",
+    path: "/contact",
+    image: image?.url,
+    imageAlt: image?.alt,
+  });
+}
 const cardClass =
   "flex min-h-[120px] flex-col gap-2 border-r border-b border-[var(--migss-divider)] p-[clamp(16px,2.8vw,26px)] text-inherit no-underline transition-colors duration-300";
 const linkCardClass = `${cardClass} focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/7`;

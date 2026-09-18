@@ -45,6 +45,8 @@ export type Project = {
   /** Ready-to-use URLs, sized for where each one is rendered. */
   cardUrl: string | null;
   heroUrl: string | null;
+  /** 1200x630, for the Open Graph card when this project is shared. */
+  ogUrl: string | null;
   beforeUrl: string | null;
   gallery: GalleryShot[];
   videoUrl: string | null;
@@ -56,6 +58,7 @@ const SIZE = {
   hero: [2000, 1333],
   before: [1200, 900],
   gallery: [1440, 960],
+  og: [1200, 630],
 } as const;
 
 function scaled(uri: unknown, [width, height]: readonly [number, number]) {
@@ -139,6 +142,7 @@ function toProject(data: Record<string, unknown>): Project | null {
     featured: data.featured === true,
     cardUrl: scaled(data.heroImage, SIZE.card),
     heroUrl: scaled(data.heroImage, SIZE.hero),
+    ogUrl: scaled(data.heroImage, SIZE.og),
     beforeUrl: scaled(data.beforeImage, SIZE.before),
     gallery: gallery(data.gallery, title),
     videoUrl: videoUrl(data.videoTestimonial),

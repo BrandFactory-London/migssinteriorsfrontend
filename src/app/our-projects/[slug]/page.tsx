@@ -11,6 +11,7 @@ import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
+import { pageMetadata } from "@/lib/seo";
 import { getProject, getProjects, serviceFor } from "@/lib/wix/projects";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -35,11 +36,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project) return { title: "Project not found" };
 
   const place = project.addressLine ?? project.location;
+  const room = project.category
+    ? `${project.category} renovation`
+    : "Renovation";
 
-  return {
-    title: place ? `${project.title}: ${place}` : project.title,
-    description: project.summary ?? project.description[0],
-  };
+  return pageMetadata({
+    title: place
+      ? `${project.title}, ${place} | Migss Interiors`
+      : `${project.title} | Migss Interiors`,
+    description:
+      project.summary ??
+      project.description[0] ??
+      `${room} by Migss Interiors${place ? ` in ${place}` : ""}.`,
+    path: `/our-projects/${project.slug}`,
+    image: project.ogUrl,
+    imageAlt: place ? `${project.title}, ${place}` : project.title,
+  });
 }
 
 export default async function ProjectDetailPage({ params }: Props) {

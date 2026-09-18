@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
+import { HeroMedia } from "@/components/hero-media";
 import { ImageSlot } from "@/components/image-slot";
 import { EnquireBand } from "@/components/projects/enquire-band";
 import { Reveal } from "@/components/reveal";
@@ -8,6 +8,8 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pageMetadata } from "@/lib/seo";
+import { ogImage } from "@/lib/wix/og-image";
 import { postMeta } from "@/lib/blog-post";
 import {
   getLeadPost,
@@ -20,12 +22,18 @@ import {
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Resources",
-  description:
-    "Twenty-five years of bathroom and kitchen answers, written down in plain language: costs, construction, layouts and lead times.",
-};
+export async function generateMetadata() {
+  const image = await ogImage("resources-bathroom-cover");
 
+  return pageMetadata({
+    title: "Renovation Resources | Bathroom & Kitchen Guides",
+    description:
+      "Twenty-five years of bathroom and kitchen answers, written down in plain language: what things cost, how they are built, which layouts work and what the lead times really are.",
+    path: "/resources",
+    image: image?.url,
+    imageAlt: image?.alt,
+  });
+}
 /** Reads correctly at nought and one, not just at the plural. */
 function countLabel(count: number) {
   if (count === 0) return "In progress";
@@ -38,6 +46,7 @@ const PILLARS = [
     title: "Bathroom library",
     body: "Costs, wet-room construction, tile setting-out, ventilation, underfloor heating and the small-room layouts that actually work. Written for people about to spend twenty to forty thousand pounds on one room.",
     cover: "Bathroom library cover image",
+    slotId: "resources-bathroom-cover",
     tags: ["Costs & budgets", "Wet rooms"],
   },
   {
@@ -45,6 +54,7 @@ const PILLARS = [
     title: "Kitchen library",
     body: "Layouts, cabinetry construction, worktop materials, structural openings, appliance planning and the lead times that decide your programme. For anyone weighing up a showroom quote against a builder's.",
     cover: "Kitchen library cover image",
+    slotId: "resources-kitchen-cover",
     tags: ["Layouts", "Cabinetry"],
   },
 ];
@@ -116,7 +126,13 @@ export default async function ResourcesPage() {
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <div className="absolute inset-0 transition-transform duration-[800ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-[1.04]">
-                      <ImageSlot placeholder={pillar.cover} captionHidden />
+                      <HeroMedia
+                        slotId={pillar.slotId}
+                        placeholder={pillar.cover}
+                        width={900}
+                        height={560}
+                        captionHidden
+                      />
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col gap-[13.8px] p-[clamp(18px,3vw,32px)]">

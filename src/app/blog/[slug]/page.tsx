@@ -11,6 +11,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
 import { postMeta } from "@/lib/blog-post";
+import { pageMetadata } from "@/lib/seo";
 import {
   getArticle,
   getPosts,
@@ -43,10 +44,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await getArticle(slug);
   if (!article) return { title: "Article not found" };
 
-  return {
-    title: article.title,
-    description: article.excerpt ?? undefined,
-  };
+  return pageMetadata({
+    title: `${article.title} | Migss Interiors`,
+    description:
+      article.excerpt ??
+      `${article.title}, from the Migss Interiors renovation library.`,
+    path: `/blog/${article.slug}`,
+    // The post's own cover image; Wix serves these as plain https URLs.
+    image: article.coverUrl,
+    imageAlt: article.coverAlt,
+    type: "article",
+    publishedTime: article.publishedDate || undefined,
+  });
 }
 
 export default async function ArticlePage({ params }: Props) {

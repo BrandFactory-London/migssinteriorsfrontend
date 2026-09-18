@@ -1,13 +1,16 @@
-import { ImageSlot } from "@/components/image-slot";
+import { HeroMedia } from "@/components/hero-media";
 import { ButtonLink } from "@/components/ui/button";
 import { telHref } from "@/lib/site";
 
-export function Hero() {
+export async function Hero() {
   return (
     <section className="relative flex min-h-[clamp(540px,86svh,940px)] items-end overflow-hidden">
       <div className="absolute inset-0">
-        <ImageSlot
+        <HeroMedia
+          slotId="home-hero"
           placeholder="Hero: finished luxury bathroom, wide shot"
+          width={2000}
+          height={1200}
           captionHidden
         />
       </div>

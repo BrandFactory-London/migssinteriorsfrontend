@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { EnquireBand } from "@/components/projects/enquire-band";
@@ -8,17 +7,25 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pageMetadata } from "@/lib/seo";
+import { ogImage } from "@/lib/wix/og-image";
 import { getPosts, getTagLabels } from "@/lib/wix/blog";
 
 /** The automation pipeline publishes continuously, so this refreshes itself. */
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Every article we have written about bathroom and kitchen renovation, newest first.",
-};
+export async function generateMetadata() {
+  const image = await ogImage("resources-bathroom-cover");
 
+  return pageMetadata({
+    title: "Blog | Bathroom & Kitchen Renovation Writing",
+    description:
+      "Every article we have written about bathroom, kitchen and whole-home renovation in London and Essex, newest first.",
+    path: "/blog",
+    image: image?.url,
+    imageAlt: image?.alt,
+  });
+}
 /**
  * Chronological index of everything. The pillar libraries at /resources are
  * the designed browsing entry points; this exists so an article found through

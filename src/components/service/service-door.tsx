@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ImageSlot } from "@/components/image-slot";
+import { HeroMedia } from "@/components/hero-media";
 import { Reveal } from "@/components/reveal";
 import { SERVICES, type ServiceSlug } from "@/lib/services";
 import { cn } from "@/lib/utils";
@@ -47,7 +47,7 @@ const DOOR_IMAGE: Record<ServiceSlug, string> = {
  * arrow advances. On touch, none of that fires — so the card carries its own
  * "Explore …" label and responds to the press instead.
  */
-export function ServiceDoor({
+export async function ServiceDoor({
   slug,
   index,
 }: {
@@ -71,7 +71,13 @@ export function ServiceDoor({
           )}
         >
           <div className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-[1.04]">
-            <ImageSlot placeholder={DOOR_IMAGE[slug]} captionHidden />
+            <HeroMedia
+              slotId={`services-door-${slug}`}
+              placeholder={DOOR_IMAGE[slug]}
+              width={900}
+              height={560}
+              captionHidden
+            />
           </div>
           <span className="absolute top-3 left-3 border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-ink tabular-nums">
             {String(index + 1).padStart(2, "0")} · {service.short}

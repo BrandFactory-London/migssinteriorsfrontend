@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
 import { ServiceCards } from "@/components/locations/service-cards";
@@ -8,14 +7,22 @@ import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pageMetadata } from "@/lib/seo";
+import { ogImage } from "@/lib/wix/og-image";
 import { LOCATIONS } from "@/lib/locations";
 
-export const metadata: Metadata = {
-  title: "Locations",
-  description:
-    "The ten areas across East London and Essex where Migss Interiors renovates bathrooms, kitchens and whole homes.",
-};
+export async function generateMetadata() {
+  const image = await ogImage("location-hero-chigwell");
 
+  return pageMetadata({
+    title: "Areas We Cover | Renovation across East London & Essex",
+    description:
+      "The ten towns across East London and Essex where Migss Interiors renovate bathrooms, kitchens and whole homes, from Wanstead and Woodford to Brentwood and Epping.",
+    path: "/locations",
+    image: image?.url,
+    imageAlt: image?.alt,
+  });
+}
 export default function LocationsPage() {
   return (
     <>

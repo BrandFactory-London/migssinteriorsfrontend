@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-
 import { EnquiryForm } from "@/components/home/enquiry-form";
 import { Reveal } from "@/components/reveal";
 import { AssuranceStrip } from "@/components/service/assurance-strip";
@@ -8,14 +6,23 @@ import { ServiceDoor } from "@/components/service/service-door";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { pageMetadata } from "@/lib/seo";
+import { ogImage } from "@/lib/wix/og-image";
 import { SERVICE_ORDER } from "@/lib/services";
 import { SITE, telHref } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Renovation Services",
-  description:
-    "Bathrooms, kitchens and whole-home interiors across London and Essex, designed, built and guaranteed by one team of directly employed tradespeople.",
-};
+export async function generateMetadata() {
+  const image = await ogImage("services-door-bathroom");
+
+  return pageMetadata({
+    title: "Renovation Services in London & Essex | Migss Interiors",
+    description:
+      "Bathroom, kitchen and whole-home interior renovation across East London and Essex, designed and built by one directly employed team with a ten-year labour guarantee.",
+    path: "/renovation-services",
+    image: image?.url,
+    imageAlt: image?.alt,
+  });
+}
 
 function Tick() {
   return (
@@ -34,6 +41,9 @@ function Tick() {
     </svg>
   );
 }
+
+/** The service door cards read HeroMedia. */
+export const revalidate = 60;
 
 export default function RenovationServicesPage() {
   return (
