@@ -185,14 +185,17 @@ export function SiteChrome() {
             title="Message us on WhatsApp"
             className={cn(dockItemClass, "group")}
           >
-            {/* Masked rather than drawn: the file is a solid #000 glyph, which
-                reads heavier than the currentColor strokes beside it. As a mask
-                it keeps the real artwork and takes the dock's own colour,
-                including on hover. */}
-            <span
-              aria-hidden="true"
-              className="block h-[19px] w-[19px] flex-none bg-current [-webkit-mask-image:url(/Brand/whatsapplogo.svg)] [-webkit-mask-position:center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:contain] [mask-image:url(/Brand/whatsapplogo.svg)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
-            />
+            {/* Drawn in the dock's own icon family rather than placed as the
+                logo file. Measured against the others, the supplied artwork is
+                a filled glyph: identical in colour once masked, but laying down
+                about twice the ink of a 1.25px stroke in the same 19px box,
+                which is what made it read darker. Scaling cannot change that
+                ratio and lightening it breaks the colour match, so the mark is
+                stroked here to the same weight as its neighbours. */}
+            <svg {...iconProps}>
+              <path d="M12 3.6a8.4 8.4 0 0 0-7.2 12.7l-1.2 4.1 4.2-1.1A8.4 8.4 0 1 0 12 3.6z" />
+              <path d="M9.1 8.5c.3-.3.8-.2 1 .2l.8 1.5c.1.3.1.6-.2.8l-.6.5c.3.6.7 1.2 1.2 1.7.5.5 1.1.9 1.7 1.2l.5-.6c.2-.2.5-.3.8-.2l1.5.9c.3.2.4.6.2.9l-.5.4c-.5.4-1.1.6-1.7.4-1-.3-2.3-1-3.6-2.3-1.3-1.3-2-2.6-2.3-3.6-.2-.6 0-1.2.4-1.7z" />
+            </svg>
             <DockLabel>WhatsApp</DockLabel>
           </a>
 
