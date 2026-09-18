@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ImageSlot } from "@/components/image-slot";
+import { HeroMedia } from "@/components/hero-media";
 import { LocalProjects } from "@/components/locations/local-projects";
 import { ServiceCards } from "@/components/locations/service-cards";
 import { EnquireBand } from "@/components/projects/enquire-band";
@@ -61,8 +61,11 @@ export default async function LocationDetailPage({ params }: Props) {
       <main id="top">
         <section className="relative flex min-h-[clamp(460px,72svh,800px)] items-end overflow-hidden">
           <div className="absolute inset-0">
-            <ImageSlot
+            <HeroMedia
+              slotId={`location-hero-${location.slug}`}
               placeholder={`Hero: recent project in ${location.name}, wide shot`}
+              width={2000}
+              height={1200}
               captionHidden
             />
           </div>
@@ -152,8 +155,11 @@ export default async function LocationDetailPage({ params }: Props) {
 
             <Reveal delay={90} className="flex flex-col gap-[18.4px]">
               <div className="aspect-[4/3]">
-                <ImageSlot
+                <HeroMedia
+                  slotId={`location-detail-${location.slug}`}
                   placeholder={`${location.name} project detail shot`}
+                  width={1200}
+                  height={900}
                   shape="rounded"
                   className="migss-plate"
                 />

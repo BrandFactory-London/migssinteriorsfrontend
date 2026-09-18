@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { HeroMedia } from "@/components/hero-media";
 import { ImageSlot } from "@/components/image-slot";
 import { EnquireBand } from "@/components/projects/enquire-band";
 import { Reveal } from "@/components/reveal";
@@ -38,6 +39,7 @@ const PILLARS = [
     title: "Bathroom library",
     body: "Costs, wet-room construction, tile setting-out, ventilation, underfloor heating and the small-room layouts that actually work. Written for people about to spend twenty to forty thousand pounds on one room.",
     cover: "Bathroom library cover image",
+    slotId: "resources-bathroom-cover",
     tags: ["Costs & budgets", "Wet rooms"],
   },
   {
@@ -45,6 +47,7 @@ const PILLARS = [
     title: "Kitchen library",
     body: "Layouts, cabinetry construction, worktop materials, structural openings, appliance planning and the lead times that decide your programme. For anyone weighing up a showroom quote against a builder's.",
     cover: "Kitchen library cover image",
+    slotId: "resources-kitchen-cover",
     tags: ["Layouts", "Cabinetry"],
   },
 ];
@@ -116,7 +119,13 @@ export default async function ResourcesPage() {
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <div className="absolute inset-0 transition-transform duration-[800ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:scale-[1.04]">
-                      <ImageSlot placeholder={pillar.cover} captionHidden />
+                      <HeroMedia
+                        slotId={pillar.slotId}
+                        placeholder={pillar.cover}
+                        width={900}
+                        height={560}
+                        captionHidden
+                      />
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col gap-[13.8px] p-[clamp(18px,3vw,32px)]">
