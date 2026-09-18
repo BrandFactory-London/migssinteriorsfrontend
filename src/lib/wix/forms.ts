@@ -22,6 +22,8 @@ export const FIELD = {
   address: "renovation_address_1",
   /** Checkbox group: an array, and the one field the schema marks required. */
   renovationType: "renovation_type_1",
+  budget: "budget_1",
+  notes: "notes_1",
 } as const;
 
 /**
@@ -37,6 +39,8 @@ export type SubmissionValues = {
   [FIELD.phone]?: string;
   [FIELD.email]?: string;
   [FIELD.address]?: string;
+  [FIELD.budget]?: string;
+  [FIELD.notes]?: string;
   [FIELD.renovationType]: string[];
 };
 

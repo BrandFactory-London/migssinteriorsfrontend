@@ -71,6 +71,8 @@ export async function submitEnquiry(
   if (values.phone) submissions[FIELD.phone] = values.phone;
   if (values.email) submissions[FIELD.email] = values.email;
   if (values.town) submissions[FIELD.address] = values.town;
+  if (values.budget) submissions[FIELD.budget] = values.budget;
+  if (values.notes) submissions[FIELD.notes] = values.notes;
 
   const result = await createEnquirySubmission(submissions);
 
