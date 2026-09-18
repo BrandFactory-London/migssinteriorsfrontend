@@ -5,55 +5,48 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { SITE, telHref, NAV } from "@/lib/site";
+import { SITE, telHref, NAV, WHATSAPP_URL } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/button";
+import { useNavMenu } from "@/components/nav-menu";
 import { cn } from "@/lib/utils";
 
 type DockItem = {
   href: string;
   label: string;
-  /** Hidden below 1000px, where the dock has no room for them. */
-  desktopOnly?: boolean;
   icon: React.ReactNode;
 };
 
+/**
+ * Shared by the two room icons. The stroke is 2 rather than the 1.25 the rest
+ * of the site draws at, because these sit beside the WhatsApp logo, which is a
+ * filled mark: at matched colour it still deposits about twice the ink of a
+ * thin outline, so the outlines are thickened to meet it rather than the logo
+ * lightened to meet them. Arrived at by rendering 1.25 through 2.5 and looking:
+ * 2.5 balances on the numbers but reads clumsy at 19px, 1.75 still reads thin,
+ * 2 is where the four stop looking like two different sets.
+ */
 const iconProps = {
   width: 19,
   height: 19,
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
-  strokeWidth: 1.25,
+  strokeWidth: 2,
   strokeLinecap: "round",
   strokeLinejoin: "round",
   "aria-hidden": true,
   className: "flex-none",
 } as const;
 
+/**
+ * The two rooms most enquiries are about. Everything else the dock used to
+ * carry — Home, Services, Interiors and the menu — is reachable from the
+ * header's menu, which is where the menu button now lives.
+ */
 const DOCK_ITEMS: DockItem[] = [
   {
-    href: "/",
-    label: "Home",
-    icon: (
-      <svg {...iconProps}>
-        <path d="M4 10.8 12 4.5l8 6.3V20H4z" />
-      </svg>
-    ),
-  },
-  {
-    href: "/renovation-services",
-    label: "Services",
-    icon: (
-      <svg {...iconProps}>
-        <path d="M4 20V8l8-4 8 4v12" />
-        <path d="M4 13h16" />
-      </svg>
-    ),
-  },
-  {
     href: "/renovation-services/bathroom",
-    label: "Bathrooms",
-    desktopOnly: true,
+    label: "Bathroom",
     icon: (
       <svg {...iconProps}>
         <path d="M4 12h16v4a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z" />
@@ -63,23 +56,11 @@ const DOCK_ITEMS: DockItem[] = [
   },
   {
     href: "/renovation-services/kitchen",
-    label: "Kitchens",
-    desktopOnly: true,
+    label: "Kitchen",
     icon: (
       <svg {...iconProps}>
         <rect x="4" y="4" width="16" height="16" />
         <path d="M4 10h16M9 4v6" />
-      </svg>
-    ),
-  },
-  {
-    href: "/renovation-services/interior",
-    label: "Interiors",
-    desktopOnly: true,
-    icon: (
-      <svg {...iconProps}>
-        <path d="M3 20h18M6 20V9l6-4 6 4v11" />
-        <path d="M10 20v-5h4v5" />
       </svg>
     ),
   },
@@ -91,7 +72,12 @@ const DOCK_ITEMS: DockItem[] = [
  * open, so a single piece of state drives both.
  */
 export function SiteChrome() {
-  const [menuOpen, setMenuOpen] = React.useState(false);
+  const menu = useNavMenu();
+  const menuOpen = menu?.open ?? false;
+  const setMenuOpen = React.useCallback(
+    (open: boolean) => menu?.setOpen(open),
+    [menu],
+  );
   const pathname = usePathname();
   const closeButtonRef = React.useRef<HTMLButtonElement>(null);
 
@@ -112,7 +98,7 @@ export function SiteChrome() {
       document.body.style.overflow = previous;
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [menuOpen]);
+  }, [menuOpen, setMenuOpen]);
 
   return (
     <>
@@ -189,7 +175,7 @@ export function SiteChrome() {
       ) : (
         <nav
           aria-label="Primary"
-          className="fixed bottom-[calc(14px+env(safe-area-inset-bottom))] left-1/2 z-50 flex max-w-[calc(100vw-20px)] animate-[migss-dock-in_0.5s_cubic-bezier(.2,.65,.2,1)_both] items-center gap-1 rounded-full border border-migss-text/10 bg-migss-bg/60 p-[7px] shadow-[0_10px_34px_-12px_color-mix(in_srgb,#2d2b2b_38%,transparent),inset_0_1px_0_color-mix(in_srgb,#fff_55%,transparent)] backdrop-blur-[20px] backdrop-saturate-[180%]"
+          className="fixed bottom-[calc(14px+env(safe-area-inset-bottom))] left-1/2 z-50 flex max-w-[calc(100vw-20px)] animate-[migss-dock-in_0.5s_cubic-bezier(.2,.65,.2,1)_both] items-center gap-1 overflow-hidden rounded-full border border-migss-text/10 bg-migss-bg/60 py-[7px] pr-[10px] pl-[10px] shadow-[0_10px_34px_-12px_color-mix(in_srgb,#2d2b2b_38%,transparent),inset_0_1px_0_color-mix(in_srgb,#fff_55%,transparent)] backdrop-blur-[20px] backdrop-saturate-[180%]"
         >
           {DOCK_ITEMS.map((item) => (
             <DockLink
@@ -199,17 +185,36 @@ export function SiteChrome() {
             />
           ))}
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open full menu"
-            className={cn(dockItemClass, "group border-0 bg-transparent")}
+          {/* A pre-built WhatsApp Business click-to-chat link, used verbatim:
+              it is not derivable from the phone number in lib/site.ts. */}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Message us on WhatsApp"
+            className={cn(dockItemClass, "group")}
           >
-            <svg {...iconProps} strokeLinejoin={undefined}>
-              <path d="M4 8h16M4 16h16" />
-            </svg>
-            <DockLabel>Menu</DockLabel>
-          </button>
+            {/* The supplied logo file, painted through a mask so it takes the
+                dock's own colour rather than its own solid black, hover
+                included. Prefixed as well as unprefixed: Safari before 15.4
+                ignores the unprefixed property and would paint the span's
+                background unmasked, as a solid square.
+
+                Deliberately lighter than the icons beside it, at 75% of the
+                dock's ink. It is a filled mark among outlines, so it covers
+                about half again as much of its box as they do and reads
+                heavier at equal colour. Colour parity is given up here for
+                weight parity, which is the one the eye actually judges.
+                Chosen by rendering the dock at 100, 80, 75, 70, 60 and 50 and
+                comparing: 100 and 80 sit visibly heavier, 60 reads faded, like
+                a disabled control, and 70 tipped a shade light. 75 is the
+                settled value. */}
+            <span
+              aria-hidden="true"
+              className="block h-[19px] w-[19px] flex-none bg-current/75 [-webkit-mask-image:url(/Brand/whatsapplogo.svg)] [-webkit-mask-position:center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:contain] [mask-image:url(/Brand/whatsapplogo.svg)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
+            />
+            <DockLabel>WhatsApp</DockLabel>
+          </a>
 
           <span
             aria-hidden="true"
@@ -219,7 +224,7 @@ export function SiteChrome() {
           <a
             href={telHref}
             title="Book a free call"
-            className="group flex h-[50px] flex-none items-center rounded-full bg-migss-accent-700 px-4 text-migss-text no-underline transition-[background-color,transform] duration-300 active:scale-[0.94] [@media(hover:hover)]:hover:bg-migss-accent-600"
+            className="group flex h-[46px] min-w-0 shrink items-center rounded-full bg-migss-accent-700 px-3.5 text-migss-text no-underline transition-[background-color,transform] duration-300 active:scale-[0.94] [@media(hover:hover)]:hover:bg-migss-accent-600"
           >
             <svg
               width="18"
@@ -237,7 +242,7 @@ export function SiteChrome() {
             </svg>
             {/* The CTA's label is always expanded — it is the one item that
                 must read as a call to action without being hovered. */}
-            <span className="ml-2.5 text-[13.5px] font-medium whitespace-nowrap">
+            <span className="ml-2 truncate text-[13.5px] font-medium whitespace-nowrap">
               Book a call
             </span>
           </a>
@@ -272,7 +277,6 @@ function DockLink({ item, active }: { item: DockItem; active: boolean }) {
       aria-current={active ? "page" : undefined}
       className={cn(
         dockItemClass,
-        item.desktopOnly && "hidden min-[1000px]:flex",
         active && "bg-migss-accent/15 text-migss-accent-ink",
       )}
     >
