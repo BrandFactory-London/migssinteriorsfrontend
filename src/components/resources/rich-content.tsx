@@ -208,7 +208,7 @@ function Node({ node }: { node: RichNode }) {
         <p className="my-[1.7em]">
           <a
             href={url}
-            className="font-body inline-flex min-h-[54px] items-center rounded-[4px] bg-migss-accent-700 px-6 text-[15px] font-medium text-migss-bg no-underline transition-opacity [@media(hover:hover)]:hover:opacity-90"
+            className="font-body inline-flex min-h-[54px] items-center rounded-[4px] bg-migss-accent-700 px-6 text-[15px] font-medium text-migss-text no-underline transition-opacity [@media(hover:hover)]:hover:opacity-90"
           >
             {label}
           </a>

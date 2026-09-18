@@ -141,7 +141,7 @@ export default async function ResourcesPage() {
                     </ul>
                     <span className="mt-auto flex items-center gap-3 text-[14.5px] font-medium text-migss-accent-700">
                       Open the {pillar.title.toLowerCase()}
-                      <span className="grid h-10 w-10 flex-none place-items-center rounded-full border border-migss-accent transition-[transform,background-color,color] duration-[350ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:translate-x-[5px] [@media(hover:hover)]:group-hover:bg-migss-accent-700 [@media(hover:hover)]:group-hover:text-migss-bg">
+                      <span className="grid h-10 w-10 flex-none place-items-center rounded-full border border-migss-accent transition-[transform,background-color,color] duration-[350ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:group-hover:translate-x-[5px] [@media(hover:hover)]:group-hover:bg-migss-accent-700 [@media(hover:hover)]:group-hover:text-migss-text">
                         <svg
                           width="17"
                           height="17"

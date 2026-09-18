@@ -116,20 +116,22 @@
   --color-migss-neutral-800: #444141;
   --color-migss-neutral-900: #2d2b2b;
 
-  /* Derived from --color-migss-accent: the same hue (27deg), the lightness
-     ladder the original gold scale used, and saturation eased down so the
-     softer hue does not read as the old gold at the light end. Step 500 is
-     the base colour itself. accent-700 carries the buttons and links: 6.4:1
-     against the page background, and accent-300 is 8.3:1 on the dark footer. */
+  /* Derived from --color-migss-accent, which is step 700: the shade the site
+     actually paints on links, kickers, the dock CTA and every accent rule, so
+     the brand colour is the one on screen rather than a darkened cousin of it.
+     100-600 are tints of the same hue, 800 and 900 darken it for hover and
+     press. Note the contrast cost: #b38c6d on the page background is 2.73:1,
+     below the 4.5:1 AA needs for body-sized text, so small accent text is
+     decorative rather than load-bearing. */
   --color-migss-accent-100: #f8f2ec;
-  --color-migss-accent-200: #ecdccf;
-  --color-migss-accent-300: #dbc2ae;
-  --color-migss-accent-400: #c5a58c;
-  --color-migss-accent-500: #b28d6e;
-  --color-migss-accent-600: #946d4c;
-  --color-migss-accent-700: #705138;
-  --color-migss-accent-800: #523b28;
-  --color-migss-accent-900: #35281d;
+  --color-migss-accent-200: #eddfd4;
+  --color-migss-accent-300: #dfcab9;
+  --color-migss-accent-400: #d0b59f;
+  --color-migss-accent-500: #c2a389;
+  --color-migss-accent-600: #b99679;
+  --color-migss-accent-700: #b38c6d;
+  --color-migss-accent-800: #9d714d;
+  --color-migss-accent-900: #72543b;
 
   --font-heading: var(--font-cormorant), "Cormorant Garamond", ui-serif, serif;
   --font-body: var(--font-instrument), "Instrument Sans", system-ui, sans-serif;

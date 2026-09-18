@@ -219,7 +219,7 @@ export function SiteChrome() {
           <a
             href={telHref}
             title="Book a free call"
-            className="group flex h-[50px] flex-none items-center rounded-full bg-migss-accent-700 px-4 text-migss-bg no-underline transition-[background-color,transform] duration-300 active:scale-[0.94] [@media(hover:hover)]:hover:bg-migss-accent-800"
+            className="group flex h-[50px] flex-none items-center rounded-full bg-migss-accent-700 px-4 text-migss-text no-underline transition-[background-color,transform] duration-300 active:scale-[0.94] [@media(hover:hover)]:hover:bg-migss-accent-600"
           >
             <svg
               width="18"

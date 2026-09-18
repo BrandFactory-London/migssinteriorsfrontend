@@ -213,7 +213,7 @@ function GalleryButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-migss-accent text-migss-accent-700 transition-[background-color,color,opacity] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent disabled:cursor-not-allowed disabled:opacity-35 active:scale-95 [@media(hover:hover)]:not-disabled:hover:bg-migss-accent-700 [@media(hover:hover)]:not-disabled:hover:text-migss-bg"
+      className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-migss-accent text-migss-accent-700 transition-[background-color,color,opacity] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent disabled:cursor-not-allowed disabled:opacity-35 active:scale-95 [@media(hover:hover)]:not-disabled:hover:bg-migss-accent-700 [@media(hover:hover)]:not-disabled:hover:text-migss-text"
     >
       <svg
         width="16"
