@@ -46,7 +46,7 @@ const HEADER_ROW = 80;
  * transparent strip it occupies does not swallow clicks meant for the hero.
  *
  * Sitting directly on the page means the controls have to carry their own
- * legibility; `adaptiveInk` below is how they do it.
+ * legibility; `ink` below is how they do it.
  *
  * `solid` keeps its own opaque background, and a bar of empty background with
  * a lone hamburger in it is worse than no bar, so there the whole thing hides
@@ -65,35 +65,63 @@ export function SiteHeader({
   const overlay = variant === "overlay";
   const hidden = useHideOnScrollDown();
   const pastHero = usePastHero(overlay);
+  const reducedMotion = useReducedMotion();
   const menu = useNavMenu();
 
   /**
-   * One class string, applied to the logo and the phone number, so the two
-   * move as a single group rather than two coincidentally similar animations.
-   * On `solid` it is the header element that carries it instead.
+   * The fade, as a style object rather than a class string.
+   *
+   * Everything structural in this header now travels in the markup, for the
+   * reason the menu bar's columns do: a utility class that fails to arrive
+   * takes the behaviour with it, and these two — whether the group is shown,
+   * and what colour its neighbours are — are the whole point of the header
+   * reacting to scroll at all. In the markup they cannot be a stylesheet
+   * behind the HTML that references them.
+   *
+   * Reduced motion is handled here too. The global rule in globals.css
+   * shortens transition durations rather than removing them, so this asks the
+   * same question directly and hands back a duration of zero: the group still
+   * appears and disappears, it just stops sliding while it does.
    */
-  const fade = cn(
-    "transition-[opacity,translate] duration-500 ease-[cubic-bezier(.4,0,.2,1)] will-change-[opacity,translate] motion-reduce:transition-none",
-    hidden && "pointer-events-none -translate-y-2 opacity-0",
-  );
-  const brandGroup = overlay ? fade : undefined;
+  const fadeStyle = (alsoTransition?: string): React.CSSProperties => ({
+    transitionProperty: ["opacity", "translate", alsoTransition]
+      .filter(Boolean)
+      .join(", "),
+    transitionDuration: reducedMotion ? "0ms" : "500ms",
+    transitionTimingFunction: "cubic-bezier(.4,0,.2,1)",
+    willChange: "opacity, translate",
+    opacity: hidden ? 0 : 1,
+    translate: hidden ? "0 -0.5rem" : undefined,
+    pointerEvents: hidden ? "none" : undefined,
+  });
 
   /**
    * With no scrim, there are only two things that can be behind the overlay
    * header — the hero, which is dark, and the page below it, which is light —
-   * so one rule serves every control that has to stay legible against both.
+   * so one value serves every control that has to stay legible against both.
    * The phone number and the menu button share it, which is what keeps them
    * in step: they are side by side, and nothing looks more broken than two
    * neighbours disagreeing about what colour the background is.
    *
+   * The token carries a literal fallback, so even a stylesheet that never
+   * arrives cannot leave a control with no colour at all.
+   *
    * The logo is exempt. It is a single tan (#b08a6c, the brand accent), chosen
    * so one file carries both tones, and it needs no help from either side.
    */
-  const adaptiveInk =
+  const ink = overlay
+    ? pastHero
+      ? "var(--color-migss-text, #201f1d)"
+      : "var(--color-migss-neutral-100, #f8f4f4)"
+    : undefined;
+
+  // The hover wash is not structural — nothing breaks if it never arrives —
+  // so it stays a class.
+  const inkHover =
     overlay &&
     (pastHero
-      ? "text-migss-text [@media(hover:hover)]:hover:bg-migss-text/7"
-      : "text-migss-neutral-100 [@media(hover:hover)]:hover:bg-migss-neutral-100/12");
+      ? "[@media(hover:hover)]:hover:bg-migss-text/7"
+      : "[@media(hover:hover)]:hover:bg-migss-neutral-100/12");
 
   return (
     <header
@@ -101,12 +129,15 @@ export function SiteHeader({
         "z-40",
         overlay
           ? "pointer-events-none fixed inset-x-0 top-0 text-migss-neutral-100"
-          : cn(
-              "sticky top-0 border-b border-[var(--migss-divider)] bg-migss-bg text-migss-text",
-              fade,
-              hidden && "-translate-y-full",
-            ),
+          : "sticky top-0 border-b border-[var(--migss-divider)] bg-migss-bg text-migss-text",
       )}
+      // On `solid` the whole bar is what comes and goes, so it wears the fade
+      // itself — and travels its own height rather than the group's nudge.
+      style={
+        overlay
+          ? undefined
+          : { ...fadeStyle(), translate: hidden ? "0 -100%" : undefined }
+      }
     >
       <div
         className={cn(
@@ -117,22 +148,29 @@ export function SiteHeader({
         {/* The link itself no longer fades. Its emblem is now one of the
             fixtures of the bar, alongside the menu button: something is
             always there to get you home. Only the wordmark travels with the
-            phone number, and it is handed the same class string those share,
-            so the two cannot fall out of step. */}
+            phone number, and it is handed the very same style object the
+            phone number gets, so the two cannot fall out of step. */}
         <Link
           href="/"
           className="pointer-events-auto mr-auto text-inherit no-underline"
         >
-          <LogoSplit height={27} priority wordmarkClassName={brandGroup} />
+          <LogoSplit
+            height={27}
+            priority
+            wordmarkStyle={overlay ? fadeStyle() : undefined}
+          />
         </Link>
 
         <a
           href={telHref}
           className={cn(
-            "pointer-events-auto inline-flex min-h-[44px] items-center gap-2 text-[13.5px] tracking-[0.02em] text-inherit no-underline transition-colors duration-300",
-            adaptiveInk,
-            brandGroup,
+            "pointer-events-auto inline-flex min-h-[44px] items-center gap-2 text-[13.5px] tracking-[0.02em] text-inherit no-underline",
+            inkHover,
           )}
+          // The phone number does both jobs at once, so its transition has to
+          // name colour as well, or the fade's own list would quietly drop it
+          // and the colour would jump instead of easing.
+          style={overlay ? { ...fadeStyle("color"), color: ink } : undefined}
         >
           <svg
             width="16"
@@ -160,10 +198,19 @@ export function SiteHeader({
             aria-label="Open full menu"
             aria-expanded={menu.open}
             className={cn(
-              "pointer-events-auto grid h-[44px] w-[44px] flex-none cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit transition-colors duration-300 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
+              "pointer-events-auto grid h-[44px] w-[44px] flex-none cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
               !overlay && "[@media(hover:hover)]:hover:bg-migss-text/7",
-              adaptiveInk,
+              inkHover,
             )}
+            style={
+              overlay
+                ? {
+                    color: ink,
+                    transitionProperty: "color",
+                    transitionDuration: reducedMotion ? "0ms" : "300ms",
+                  }
+                : undefined
+            }
           >
             <svg
               width="20"
@@ -279,4 +326,27 @@ function usePastHero(enabled: boolean) {
   }, [enabled]);
 
   return pastHero;
+}
+
+/**
+ * Whether the visitor has asked for reduced motion.
+ *
+ * Read here rather than left to CSS because the transitions this header runs
+ * are now inline, and the global rule in globals.css only shortens durations
+ * it can see in a stylesheet. Watched rather than read once, so toggling the
+ * preference takes effect without a reload, like `HeroVideo` does.
+ */
+function useReducedMotion() {
+  const [reduced, setReduced] = React.useState(false);
+
+  React.useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => setReduced(query.matches);
+
+    apply();
+    query.addEventListener("change", apply);
+    return () => query.removeEventListener("change", apply);
+  }, []);
+
+  return reduced;
 }

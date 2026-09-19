@@ -1,3 +1,5 @@
+import type * as React from "react";
+
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
@@ -37,30 +39,29 @@ const SPLIT_PERCENT = ((GUTTER.from + GUTTER.to + 1) / 2 / ART.width) * 100;
  * land wrong, and nothing drifts if the header height changes. One `src`, so
  * one fetch and one decode.
  *
- * `wordmarkClassName` is where the caller puts whatever makes the wordmark
- * come and go. The emblem takes nothing, because it never moves.
+ * `wordmarkStyle` is where the caller puts whatever makes the wordmark come
+ * and go. A style rather than a class, so the behaviour rides in the markup
+ * and cannot be left behind by a stylesheet. The emblem takes nothing,
+ * because it never moves.
  */
 export function LogoSplit({
   height = 27,
   priority = false,
   className,
-  wordmarkClassName,
+  wordmarkStyle,
 }: {
   /** Rendered height in CSS pixels; the width follows the aspect ratio. */
   height?: number;
   priority?: boolean;
   className?: string;
-  wordmarkClassName?: string;
+  wordmarkStyle?: React.CSSProperties;
 }) {
   const width = (height * ART.width) / ART.height;
 
   const copy = (part: "emblem" | "wordmark") => (
     <span
       key={part}
-      className={cn(
-        "absolute inset-0",
-        part === "wordmark" && wordmarkClassName,
-      )}
+      className="absolute inset-0"
       style={{
         // Inset from the far side, so each copy keeps its own half and
         // discards the other. Percentages of the same box, so the two edges
@@ -69,6 +70,7 @@ export function LogoSplit({
           part === "emblem"
             ? `inset(0 ${100 - SPLIT_PERCENT}% 0 0)`
             : `inset(0 0 0 ${SPLIT_PERCENT}%)`,
+        ...(part === "wordmark" ? wordmarkStyle : null),
       }}
     >
       <Image
