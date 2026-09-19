@@ -24,7 +24,7 @@ const ALWAYS_SHOWN_ABOVE = 80;
 /**
  * Height of the overlay header row — 18px of padding either side of a 44px
  * control. Used as the line below which the hero still counts as being behind
- * the header.
+ * the header, and so as the point where its controls switch ink.
  */
 const HEADER_ROW = 80;
 
@@ -34,15 +34,18 @@ const HEADER_ROW = 80;
  *
  * The scroll behaviour differs between them, because their backgrounds do.
  *
- * `overlay` is transparent, so the bar itself can stay put and only its
- * contents need to react. The brand group — the gradient scrim, the logo and
- * the phone number — hides on the way down and returns on the way up, and
- * shares a single wrapper precisely so the three cannot drift apart: one
+ * `overlay` is transparent — nothing is painted behind it at all — so the bar
+ * itself can stay put and only its contents need to react. The brand group —
+ * the logo and the phone number — hides on the way down and returns on the way
+ * up, and shares a single wrapper precisely so the two cannot drift apart: one
  * opacity, one translate, one transition. The menu button is deliberately
  * outside that group: it rides along at the top of the viewport the whole way
  * down the page, so there is never a stretch with no way into the menu. The
  * bar is `pointer-events-none` with its three controls opting back in, so the
  * transparent strip it occupies does not swallow clicks meant for the hero.
+ *
+ * Sitting directly on the page means the controls have to carry their own
+ * legibility; `adaptiveInk` below is how they do it.
  *
  * `solid` keeps its own opaque background, and a bar of empty background with
  * a lone hamburger in it is worse than no bar, so there the whole thing hides
@@ -64,15 +67,32 @@ export function SiteHeader({
   const menu = useNavMenu();
 
   /**
-   * One class string, applied to the scrim, the logo and the phone number, so
-   * the three move as a single group rather than three coincidentally similar
-   * animations. On `solid` it is the header element that carries it instead.
+   * One class string, applied to the logo and the phone number, so the two
+   * move as a single group rather than two coincidentally similar animations.
+   * On `solid` it is the header element that carries it instead.
    */
   const fade = cn(
     "transition-[opacity,translate] duration-500 ease-[cubic-bezier(.4,0,.2,1)] will-change-[opacity,translate] motion-reduce:transition-none",
     hidden && "pointer-events-none -translate-y-2 opacity-0",
   );
   const brandGroup = overlay ? fade : undefined;
+
+  /**
+   * With no scrim, there are only two things that can be behind the overlay
+   * header — the hero, which is dark, and the page below it, which is light —
+   * so one rule serves every control that has to stay legible against both.
+   * The phone number and the menu button share it, which is what keeps them
+   * in step: they are side by side, and nothing looks more broken than two
+   * neighbours disagreeing about what colour the background is.
+   *
+   * The logo is exempt. It is a single tan (#b08a6c, the brand accent), chosen
+   * so one file carries both tones, and it needs no help from either side.
+   */
+  const adaptiveInk =
+    overlay &&
+    (pastHero
+      ? "text-migss-text [@media(hover:hover)]:hover:bg-migss-text/7"
+      : "text-migss-neutral-100 [@media(hover:hover)]:hover:bg-migss-neutral-100/12");
 
   return (
     <header
@@ -87,23 +107,6 @@ export function SiteHeader({
             ),
       )}
     >
-      {/* The scrim earns its keep on the phone number and the logo, and
-          nowhere else, so it is scoped to the strip they actually sit in.
-          The header row is 80px tall (18px of padding either side of a 44px
-          control); at 108px the gradient is already clear by the time it
-          leaves that row, which is the point — it lifts the type off the
-          photograph without shading the hero behind it. Overlay only, since
-          the solid bar has its own background. */}
-      {overlay ? (
-        <div
-          aria-hidden="true"
-          className={cn(
-            "pointer-events-none absolute inset-x-0 top-0 h-[108px] bg-[linear-gradient(to_bottom,color-mix(in_srgb,#2d2b2b_70%,transparent)_0%,color-mix(in_srgb,#2d2b2b_44%,transparent)_46%,transparent_100%)]",
-            brandGroup,
-          )}
-        />
-      ) : null}
-
       <div
         className={cn(
           "relative flex items-center gap-4 px-[clamp(16px,7.2vw,100px)]",
@@ -123,7 +126,8 @@ export function SiteHeader({
         <a
           href={telHref}
           className={cn(
-            "pointer-events-auto inline-flex min-h-[44px] items-center gap-2 text-[13.5px] tracking-[0.02em] text-inherit no-underline",
+            "pointer-events-auto inline-flex min-h-[44px] items-center gap-2 text-[13.5px] tracking-[0.02em] text-inherit no-underline transition-colors duration-300",
+            adaptiveInk,
             brandGroup,
           )}
         >
@@ -153,25 +157,9 @@ export function SiteHeader({
             aria-label="Open full menu"
             aria-expanded={menu.open}
             className={cn(
-              "pointer-events-auto grid h-[44px] w-[44px] flex-none cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit transition-[color,background-color] duration-300 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
+              "pointer-events-auto grid h-[44px] w-[44px] flex-none cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit transition-colors duration-300 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
               !overlay && "[@media(hover:hover)]:hover:bg-migss-text/7",
-              // The button is the one control that outlives the hero, so it
-              // is the one that has to cope with two backgrounds. It carries
-              // no container of its own; the icon simply swaps ink to whatever
-              // is actually behind it.
-              //
-              // Two things can be behind it, and both have to be dark for the
-              // light ink to be wrong. The hero is dark, so anywhere over it
-              // the icon stays light however far the page has scrolled. The
-              // scrim is dark too, and it comes back with the brand group on
-              // the way up, so while that is showing the icon stays light as
-              // well. Only once the hero is gone AND the scrim is out is the
-              // icon genuinely over the light page, and only then does it take
-              // the page's own text colour. The hover wash follows the ink.
-              overlay &&
-                (pastHero && hidden
-                  ? "text-migss-text [@media(hover:hover)]:hover:bg-migss-text/7"
-                  : "text-migss-neutral-100 [@media(hover:hover)]:hover:bg-migss-neutral-100/12"),
+              adaptiveInk,
             )}
           >
             <svg
@@ -251,7 +239,9 @@ function useHideOnScrollDown() {
 }
 
 /**
- * Whether the photographic hero has scrolled clear of the header row.
+ * Whether the photographic hero has scrolled clear of the header row — which,
+ * for a transparent bar, is the same question as whether what is behind the
+ * header is still dark.
  *
  * The overlay header is only ever used on a page that opens on a full-height
  * hero, and that hero is the first thing in `main`, so that is what this
@@ -264,7 +254,7 @@ function useHideOnScrollDown() {
  * stops counting as "behind the header" at the moment its bottom edge passes
  * under it rather than when it leaves the viewport entirely.
  *
- * Defaults to false, which keeps the icon light — the safe reading, since an
+ * Defaults to false, which keeps the ink light — the safe reading, since an
  * overlay header starts over a photograph.
  */
 function usePastHero(enabled: boolean) {
