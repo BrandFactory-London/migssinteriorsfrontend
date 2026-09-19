@@ -126,7 +126,15 @@ export function SiteChrome() {
               flanking it are different widths — spacing them apart would put
               it wherever the leftover room happened to fall. The outer columns
               take an equal share and their contents sit at the outer edges, so
-              the middle one is centred on the bar itself. */}
+              the middle one is centred on the bar itself.
+
+              The column template and the two outer alignments are style
+              attributes, not classes, for the same reason the sub-indent is:
+              they are structural, and a grid item that loses its alignment
+              does not fail quietly. It falls back to the start of its column,
+              which for the close button is hard against the label in the
+              middle of the bar rather than out at the edge. The padding the
+              two ends mirror is the bar's own, so one value sets both. */}
           <div
             className="grid items-center gap-3 border-b border-migss-neutral-100/20 px-[clamp(16px,4.5vw,48px)] py-3"
             style={{ gridTemplateColumns: "1fr auto 1fr" }}
@@ -139,7 +147,8 @@ export function SiteChrome() {
               href={STAFF_LOGIN_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="justify-self-start text-[11px] tracking-[0.24em] text-migss-neutral-100/75 uppercase no-underline transition-colors [@media(hover:hover)]:hover:text-migss-accent-300"
+              className="text-[11px] tracking-[0.24em] text-migss-neutral-100/75 uppercase no-underline transition-colors [@media(hover:hover)]:hover:text-migss-accent-300"
+              style={{ justifySelf: "start" }}
             >
               Staff Login
             </a>
@@ -159,7 +168,8 @@ export function SiteChrome() {
               // opens up directly under the cursor that just hit the
               // hamburger, and on touch that would leave a highlight sitting
               // there with no pointer to explain it.
-              className="grid h-[46px] w-[46px] cursor-pointer place-items-center justify-self-end rounded-[4px] border-0 bg-transparent text-inherit transition-colors active:scale-95 [@media(hover:hover)]:hover:bg-migss-neutral-100/10"
+              className="grid h-[46px] w-[46px] cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit transition-colors active:scale-95 [@media(hover:hover)]:hover:bg-migss-neutral-100/10"
+              style={{ justifySelf: "end" }}
             >
               <svg
                 width="20"
