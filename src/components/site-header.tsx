@@ -5,7 +5,7 @@ import * as React from "react";
 import Link from "next/link";
 
 import { SITE, telHref } from "@/lib/site";
-import { Logo } from "@/components/logo";
+import { LogoSplit } from "@/components/logo-split";
 import { useNavMenu } from "@/components/nav-menu";
 import { cn } from "@/lib/utils";
 
@@ -36,11 +36,12 @@ const HEADER_ROW = 80;
  *
  * `overlay` is transparent — nothing is painted behind it at all — so the bar
  * itself can stay put and only its contents need to react. The brand group —
- * the logo and the phone number — hides on the way down and returns on the way
- * up, and shares a single wrapper precisely so the two cannot drift apart: one
- * opacity, one translate, one transition. The menu button is deliberately
- * outside that group: it rides along at the top of the viewport the whole way
- * down the page, so there is never a stretch with no way into the menu. The
+ * the logo's wordmark and the phone number — hides on the way down and returns
+ * on the way up, and shares a single class string precisely so the two cannot
+ * drift apart: one opacity, one translate, one transition. The menu button and
+ * the logo's emblem are deliberately outside that group: they ride along at the
+ * top of the viewport the whole way down the page, so there is never a stretch
+ * with no way into the menu and never one with nothing identifying the site. The
  * bar is `pointer-events-none` with its three controls opting back in, so the
  * transparent strip it occupies does not swallow clicks meant for the hero.
  *
@@ -113,14 +114,16 @@ export function SiteHeader({
           overlay ? "py-[18px]" : "py-3.5",
         )}
       >
+        {/* The link itself no longer fades. Its emblem is now one of the
+            fixtures of the bar, alongside the menu button: something is
+            always there to get you home. Only the wordmark travels with the
+            phone number, and it is handed the same class string those share,
+            so the two cannot fall out of step. */}
         <Link
           href="/"
-          className={cn(
-            "pointer-events-auto mr-auto text-inherit no-underline",
-            brandGroup,
-          )}
+          className="pointer-events-auto mr-auto text-inherit no-underline"
         >
-          <Logo height={27} priority />
+          <LogoSplit height={27} priority wordmarkClassName={brandGroup} />
         </Link>
 
         <a
