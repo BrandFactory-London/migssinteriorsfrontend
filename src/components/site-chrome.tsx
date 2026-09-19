@@ -5,7 +5,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { SITE, telHref, NAV, WHATSAPP_URL } from "@/lib/site";
+import { SITE, telHref, NAV, STAFF_LOGIN_URL, WHATSAPP_URL } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/button";
 import { useNavMenu } from "@/components/nav-menu";
 import { cn } from "@/lib/utils";
@@ -113,6 +113,20 @@ export function SiteChrome() {
             <span className="text-[11px] tracking-[0.24em] uppercase text-migss-accent-300">
               Menu
             </span>
+
+            {/* Not a destination on this site, so it stays out of the
+                navigation list and sits on the bar instead. Plain text at the
+                bar's own type treatment — it is a link, not a call to action,
+                and a filled button here would outrank every page below it. */}
+            <a
+              href={STAFF_LOGIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] tracking-[0.24em] text-migss-neutral-100/75 uppercase no-underline transition-colors [@media(hover:hover)]:hover:text-migss-accent-300"
+            >
+              Staff Login
+            </a>
+
             <button
               ref={closeButtonRef}
               type="button"
@@ -141,7 +155,13 @@ export function SiteChrome() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="group flex min-h-[64px] items-baseline gap-3.5 border-b border-migss-neutral-100/15 pt-3.5 text-inherit no-underline transition-colors active:text-migss-accent-300 [@media(hover:hover)]:hover:text-migss-accent-300"
+                className={cn(
+                  "group flex min-h-[64px] items-baseline gap-3.5 border-b border-migss-neutral-100/15 pt-3.5 text-inherit no-underline transition-colors active:text-migss-accent-300 [@media(hover:hover)]:hover:text-migss-accent-300",
+                  // A fixed step rather than a proportional one: the rows are
+                  // already fluid, and an indent that moved with the viewport
+                  // would stop reading as a level and start reading as drift.
+                  item.sub && "pl-[28px]",
+                )}
               >
                 <span className="w-[22px] text-[11px] text-migss-accent-300 tabular-nums">
                   {String(index + 1).padStart(2, "0")}

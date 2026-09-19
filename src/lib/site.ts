@@ -56,15 +56,45 @@ export const mailHref = `mailto:${SITE.email}`;
  * rather than between sections of a single page — entries that are still
  * homepage anchors keep their hash.
  */
-export const NAV = [
+type NavItem = {
+  href: string;
+  label: string;
+  /**
+   * Belongs under the entry above it. The menu keeps these inline and in
+   * order — they are indented rather than collapsed, so every room is one tap
+   * away instead of hidden behind a disclosure.
+   */
+  sub?: boolean;
+};
+
+export const NAV: readonly NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/renovation-services", label: "Renovation Services" },
-  { href: "/renovation-services/bathroom", label: "Bathroom Renovation" },
-  { href: "/renovation-services/kitchen", label: "Kitchen Renovation" },
-  { href: "/renovation-services/interior", label: "Interior Renovation" },
+  {
+    href: "/renovation-services/bathroom",
+    label: "Bathroom Renovation",
+    sub: true,
+  },
+  {
+    href: "/renovation-services/kitchen",
+    label: "Kitchen Renovation",
+    sub: true,
+  },
+  {
+    href: "/renovation-services/interior",
+    label: "Interior Renovation",
+    sub: true,
+  },
   { href: "/our-projects", label: "Our Projects" },
   { href: "/locations", label: "Locations" },
   { href: "/resources", label: "Resources" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
-] as const;
+];
+
+/**
+ * The team's own login, linked from the menu bar rather than the navigation
+ * list: it is not part of the site, and does not belong among the pages a
+ * visitor is being offered.
+ */
+export const STAFF_LOGIN_URL = "https://staff.migssinteriors.com/";
