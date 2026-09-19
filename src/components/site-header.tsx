@@ -22,6 +22,13 @@ const HIDE_AFTER = 6;
 const ALWAYS_SHOWN_ABOVE = 80;
 
 /**
+ * Height of the overlay header row — 18px of padding either side of a 44px
+ * control. Used as the line below which the hero still counts as being behind
+ * the header.
+ */
+const HEADER_ROW = 80;
+
+/**
  * `overlay` sits on top of a photographic hero in light-on-dark, `solid` is the
  * in-page bar used where a page opens on the background colour instead.
  *
@@ -52,7 +59,8 @@ export function SiteHeader({
   variant?: "overlay" | "solid";
 }) {
   const overlay = variant === "overlay";
-  const { hidden, scrolled } = useHideOnScrollDown();
+  const hidden = useHideOnScrollDown();
+  const pastHero = usePastHero(overlay);
   const menu = useNavMenu();
 
   /**
@@ -79,15 +87,18 @@ export function SiteHeader({
             ),
       )}
     >
-      {/* The scrim: dark at the top, clear by the bottom of the header, so the
-          light-on-dark logo and number hold their contrast over whatever the
-          hero photograph happens to be doing up there. Overlay only — the
-          solid bar has its own background. */}
+      {/* The scrim earns its keep on the phone number and the logo, and
+          nowhere else, so it is scoped to the strip they actually sit in.
+          The header row is 80px tall (18px of padding either side of a 44px
+          control); at 108px the gradient is already clear by the time it
+          leaves that row, which is the point — it lifts the type off the
+          photograph without shading the hero behind it. Overlay only, since
+          the solid bar has its own background. */}
       {overlay ? (
         <div
           aria-hidden="true"
           className={cn(
-            "pointer-events-none absolute inset-x-0 top-0 h-[190px] bg-[linear-gradient(to_bottom,color-mix(in_srgb,#2d2b2b_72%,transparent)_0%,color-mix(in_srgb,#2d2b2b_34%,transparent)_52%,transparent_100%)]",
+            "pointer-events-none absolute inset-x-0 top-0 h-[108px] bg-[linear-gradient(to_bottom,color-mix(in_srgb,#2d2b2b_70%,transparent)_0%,color-mix(in_srgb,#2d2b2b_44%,transparent)_46%,transparent_100%)]",
             brandGroup,
           )}
         />
@@ -142,18 +153,25 @@ export function SiteHeader({
             aria-label="Open full menu"
             aria-expanded={menu.open}
             className={cn(
-              "pointer-events-auto grid h-[44px] w-[44px] flex-none cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit transition-[background-color,box-shadow] duration-300 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
-              overlay
-                ? "[@media(hover:hover)]:hover:bg-migss-neutral-100/12"
-                : "[@media(hover:hover)]:hover:bg-migss-text/7",
-              // Over the hero the button reads fine bare, in light-on-dark.
-              // Below it the page turns light and a white icon would vanish,
-              // so once the page has left the top it carries its own dark
-              // chip. Keyed to position rather than scroll direction, so it
-              // does not flicker on and off as the visitor changes their mind.
+              "pointer-events-auto grid h-[44px] w-[44px] flex-none cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit transition-[color,background-color] duration-300 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
+              !overlay && "[@media(hover:hover)]:hover:bg-migss-text/7",
+              // The button is the one control that outlives the hero, so it
+              // is the one that has to cope with two backgrounds. It carries
+              // no container of its own; the icon simply swaps ink to whatever
+              // is actually behind it.
+              //
+              // Two things can be behind it, and both have to be dark for the
+              // light ink to be wrong. The hero is dark, so anywhere over it
+              // the icon stays light however far the page has scrolled. The
+              // scrim is dark too, and it comes back with the brand group on
+              // the way up, so while that is showing the icon stays light as
+              // well. Only once the hero is gone AND the scrim is out is the
+              // icon genuinely over the light page, and only then does it take
+              // the page's own text colour. The hover wash follows the ink.
               overlay &&
-                scrolled &&
-                "rounded-full bg-migss-neutral-900/85 shadow-migss-sm backdrop-blur-[6px] [@media(hover:hover)]:hover:bg-migss-neutral-900",
+                (pastHero && hidden
+                  ? "text-migss-text [@media(hover:hover)]:hover:bg-migss-text/7"
+                  : "text-migss-neutral-100 [@media(hover:hover)]:hover:bg-migss-neutral-100/12"),
             )}
           >
             <svg
@@ -179,12 +197,6 @@ export function SiteHeader({
  * Drives the appear/disappear: hide on scroll down, show on scroll up or near
  * the top. On `overlay` it moves the brand group, on `solid` the whole bar.
  *
- * `scrolled` is reported separately and is about position, not direction: it
- * says the page has left the top at all. The overlay menu button needs that
- * rather than `hidden`, because it is the one control that outlives the hero —
- * once it is over ordinary page content it has to carry its own backdrop, and
- * that must not blink off every time the visitor scrolls back up a little.
- *
  * It reads `scrollY` inside a `requestAnimationFrame` from a passive listener,
  * so it neither blocks the scroll nor lays out on every event. That matters
  * here because the site's other scroll motion — `components/reveal.tsx` — is
@@ -196,7 +208,6 @@ export function SiteHeader({
  */
 function useHideOnScrollDown() {
   const [hidden, setHidden] = React.useState(false);
-  const [scrolled, setScrolled] = React.useState(false);
   const lastY = React.useRef(0);
   const frame = React.useRef(0);
 
@@ -206,8 +217,6 @@ function useHideOnScrollDown() {
     const update = () => {
       const y = Math.max(0, window.scrollY);
       const delta = y - lastY.current;
-
-      setScrolled(y > ALWAYS_SHOWN_ABOVE);
 
       if (y <= ALWAYS_SHOWN_ABOVE) {
         setHidden(false);
@@ -238,5 +247,43 @@ function useHideOnScrollDown() {
     };
   }, []);
 
-  return { hidden, scrolled };
+  return hidden;
+}
+
+/**
+ * Whether the photographic hero has scrolled clear of the header row.
+ *
+ * The overlay header is only ever used on a page that opens on a full-height
+ * hero, and that hero is the first thing in `main`, so that is what this
+ * watches. An IntersectionObserver rather than a scroll position, for the same
+ * reason `components/reveal.tsx` uses one: it reports the geometry directly,
+ * costs nothing per frame, and does not need to know the hero's height, which
+ * is a viewport-relative clamp and changes with the window.
+ *
+ * The top inset shrinks the observed region by the header row, so the hero
+ * stops counting as "behind the header" at the moment its bottom edge passes
+ * under it rather than when it leaves the viewport entirely.
+ *
+ * Defaults to false, which keeps the icon light — the safe reading, since an
+ * overlay header starts over a photograph.
+ */
+function usePastHero(enabled: boolean) {
+  const [pastHero, setPastHero] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!enabled) return;
+
+    const hero = document.querySelector("main > *");
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setPastHero(!entry.isIntersecting),
+      { rootMargin: `-${HEADER_ROW}px 0px 0px 0px`, threshold: 0 },
+    );
+    observer.observe(hero);
+
+    return () => observer.disconnect();
+  }, [enabled]);
+
+  return pastHero;
 }
