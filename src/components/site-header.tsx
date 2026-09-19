@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { SITE, telHref } from "@/lib/site";
 import { LogoSplit } from "@/components/logo-split";
+import { DARK_BEHIND_HEADER_SELECTOR } from "@/lib/header-ink";
 import { useNavMenu } from "@/components/nav-menu";
 import { cn } from "@/lib/utils";
 
@@ -22,11 +23,26 @@ const HIDE_AFTER = 6;
 const ALWAYS_SHOWN_ABOVE = 80;
 
 /**
- * Height of the overlay header row — 18px of padding either side of a 44px
- * control. Used as the line below which the hero still counts as being behind
- * the header, and so as the point where its controls switch ink.
+ * The slice of the viewport the header's controls actually occupy, measured
+ * from the top of the viewport. The overlay row is 80px tall — 18px of padding
+ * either side of a 44px control — so the control sits at 18..62 and its glyphs
+ * are centred at 40.
+ *
+ * The ink is decided against this band rather than the whole header row.
+ * Keyed to the row, the colour flips the moment a dark section's edge slides
+ * under the header — which is while the type is still over the light page
+ * above it, so white type lands on white for the whole 80px of the crossing.
+ * Keyed to a few pixels either side of the glyphs' centre line, the colour
+ * changes as the edge passes the type, which is the question actually being
+ * asked: what is behind *this*.
+ *
+ * It cannot be made exact. While an edge is passing through the glyphs, half
+ * of each one is over the section above and half over the one below, and no
+ * single colour is right for both. Centring the probe puts the change at the
+ * most balanced moment and narrows the mismatch to a few pixels of scroll,
+ * which is a frame or two of a flick.
  */
-const HEADER_ROW = 80;
+const INK_PROBE = { top: 38, bottom: 42 };
 
 /**
  * `overlay` sits on top of a photographic hero in light-on-dark, `solid` is the
@@ -64,7 +80,7 @@ export function SiteHeader({
 }) {
   const overlay = variant === "overlay";
   const hidden = useHideOnScrollDown();
-  const pastHero = usePastHero(overlay);
+  const overDark = useOverDark(overlay);
   const reducedMotion = useReducedMotion();
   const menu = useNavMenu();
 
@@ -110,18 +126,18 @@ export function SiteHeader({
    * so one file carries both tones, and it needs no help from either side.
    */
   const ink = overlay
-    ? pastHero
-      ? "var(--color-migss-text, #201f1d)"
-      : "var(--color-migss-neutral-100, #f8f4f4)"
+    ? overDark
+      ? "var(--color-migss-neutral-100, #f8f4f4)"
+      : "var(--color-migss-text, #201f1d)"
     : undefined;
 
   // The hover wash is not structural — nothing breaks if it never arrives —
   // so it stays a class.
   const inkHover =
     overlay &&
-    (pastHero
-      ? "[@media(hover:hover)]:hover:bg-migss-text/7"
-      : "[@media(hover:hover)]:hover:bg-migss-neutral-100/12");
+    (overDark
+      ? "[@media(hover:hover)]:hover:bg-migss-neutral-100/12"
+      : "[@media(hover:hover)]:hover:bg-migss-text/7");
 
   return (
     <header
@@ -289,74 +305,103 @@ function useHideOnScrollDown() {
 }
 
 /**
- * Whether the photographic hero has scrolled clear of the header row — which,
- * for a transparent bar, is the same question as whether what is behind the
- * header is still dark.
+ * Whether the strip the header occupies currently has a dark band behind it.
  *
- * The overlay header is only ever used on a page that opens on a full-height
- * hero, and that hero is the first thing in `main`, so that is what this
- * watches. An IntersectionObserver rather than a scroll position, for the same
- * reason `components/reveal.tsx` uses one: it reports the geometry directly,
- * costs nothing per frame, and does not need to know the hero's height, which
- * is a viewport-relative clamp and changes with the window.
+ * Not "have I left the hero yet". A page is not dark once and light ever
+ * after: a hero, then the page, then a dark call to action, then the footer.
+ * Anything that answers the question positionally gets the first boundary
+ * right and every later one wrong, which is how the controls ended up dark
+ * and unreadable over the band above the footer.
  *
- * The top inset shrinks the observed region by the header row, so the hero
- * stops counting as "behind the header" at the moment its bottom edge passes
- * under it rather than when it leaves the viewport entirely.
+ * So the bands declare themselves — see `lib/header-ink.ts` — and this watches
+ * all of them at once, holding the set currently overlapping the header and
+ * reporting whether that set is empty. An IntersectionObserver rather than
+ * measuring on every frame: the answer only changes at a boundary, and a hook
+ * that reads geometry during a touch scroll is a hook that costs frames on
+ * the device this matters most on.
  *
- * Defaults to false, which keeps the ink light — the safe reading, since an
- * overlay header starts over a photograph.
+ * The root is shrunk to the band the controls' glyphs occupy, so the answer
+ * changes as a section's edge passes the type rather than as it passes the
+ * top of the header. Those insets are in pixels, so the observer is rebuilt
+ * when the viewport height changes — which on a phone includes the address
+ * bar collapsing.
  *
- * If there is no first element in `main` to watch, it falls back to scroll
- * position instead of silently reporting "over the hero" for the rest of the
- * page. That was the shape of the original bug: an early return left the ink
- * light over light content, where it cannot be seen at all.
+ * Defaults to true, keeping the ink light: an overlay header opens on a
+ * photograph, and light ink on a dark hero is the state the markup ships with.
  */
-function usePastHero(enabled: boolean) {
-  const [pastHero, setPastHero] = React.useState(false);
+function useOverDark(enabled: boolean) {
+  const [overDark, setOverDark] = React.useState(true);
 
   React.useEffect(() => {
     if (!enabled) return;
 
-    const hero = document.querySelector("main > *");
+    const bands = Array.from(
+      document.querySelectorAll(DARK_BEHIND_HEADER_SELECTOR),
+    );
 
-    if (hero) {
-      const observer = new IntersectionObserver(
-        ([entry]) => setPastHero(!entry.isIntersecting),
-        { rootMargin: `-${HEADER_ROW}px 0px 0px 0px`, threshold: 0 },
-      );
-      observer.observe(hero);
+    if (bands.length === 0) {
+      // Nothing declared. Rather than report "dark" for the life of the page —
+      // light ink on a light page is not a wrong colour, it is an invisible
+      // control — fall back to the crude reading: dark near the top, where a
+      // hero would be, light below it.
+      let frame = 0;
+      const update = () => {
+        frame = 0;
+        setOverDark(window.scrollY <= window.innerHeight * 0.6);
+      };
+      const onScroll = () => {
+        if (frame) return;
+        frame = window.requestAnimationFrame(update);
+      };
 
-      return () => observer.disconnect();
+      update();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll, { passive: true });
+      return () => {
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onScroll);
+        if (frame) window.cancelAnimationFrame(frame);
+      };
     }
 
-    // No hero element to watch. Rather than report "still over the hero"
-    // forever — which would leave light ink on a light page, the one failure
-    // that makes a control vanish — fall back to scroll position. It is
-    // cruder, since it assumes a hero about a screen tall, but it is wrong
-    // for a moment rather than wrong permanently.
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      setPastHero(window.scrollY > window.innerHeight * 0.6);
-    };
-    const onScroll = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(update);
+    const overlapping = new Set<Element>();
+    let observer: IntersectionObserver | null = null;
+
+    const build = () => {
+      observer?.disconnect();
+      overlapping.clear();
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) overlapping.add(entry.target);
+            else overlapping.delete(entry.target);
+          }
+          setOverDark(overlapping.size > 0);
+        },
+        {
+          // Shrink the root to the band the controls' glyphs occupy.
+          rootMargin: `-${INK_PROBE.top}px 0px -${Math.max(
+            0,
+            window.innerHeight - INK_PROBE.bottom,
+          )}px 0px`,
+          threshold: 0,
+        },
+      );
+
+      for (const band of bands) observer.observe(band);
     };
 
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+    build();
+    window.addEventListener("resize", build);
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", build);
+      observer?.disconnect();
     };
   }, [enabled]);
 
-  return pastHero;
+  return overDark;
 }
 
 /**
