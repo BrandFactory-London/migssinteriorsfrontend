@@ -306,6 +306,11 @@ function useHideOnScrollDown() {
  *
  * Defaults to false, which keeps the ink light — the safe reading, since an
  * overlay header starts over a photograph.
+ *
+ * If there is no first element in `main` to watch, it falls back to scroll
+ * position instead of silently reporting "over the hero" for the rest of the
+ * page. That was the shape of the original bug: an early return left the ink
+ * light over light content, where it cannot be seen at all.
  */
 function usePastHero(enabled: boolean) {
   const [pastHero, setPastHero] = React.useState(false);
@@ -314,15 +319,41 @@ function usePastHero(enabled: boolean) {
     if (!enabled) return;
 
     const hero = document.querySelector("main > *");
-    if (!hero) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setPastHero(!entry.isIntersecting),
-      { rootMargin: `-${HEADER_ROW}px 0px 0px 0px`, threshold: 0 },
-    );
-    observer.observe(hero);
+    if (hero) {
+      const observer = new IntersectionObserver(
+        ([entry]) => setPastHero(!entry.isIntersecting),
+        { rootMargin: `-${HEADER_ROW}px 0px 0px 0px`, threshold: 0 },
+      );
+      observer.observe(hero);
 
-    return () => observer.disconnect();
+      return () => observer.disconnect();
+    }
+
+    // No hero element to watch. Rather than report "still over the hero"
+    // forever — which would leave light ink on a light page, the one failure
+    // that makes a control vanish — fall back to scroll position. It is
+    // cruder, since it assumes a hero about a screen tall, but it is wrong
+    // for a moment rather than wrong permanently.
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      setPastHero(window.scrollY > window.innerHeight * 0.6);
+    };
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, [enabled]);
 
   return pastHero;
