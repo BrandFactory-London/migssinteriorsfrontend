@@ -1,10 +1,25 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Lets the dev server accept requests whose Origin is the machine's LAN
-  // address, so the site can be opened on a phone on the same network.
-  // Hostname only — the scheme and port are ignored.
-  allowedDevOrigins: ["192.168.1.217"],
+  /**
+   * Lets the dev server accept requests whose Origin is the machine's LAN
+   * address, so the site can be opened on a phone. Hostname only — the scheme
+   * and port are ignored.
+   *
+   * Ranges rather than single addresses, because a hostname that is not listed
+   * does not fail loudly: Next blocks cross-origin requests to dev-only assets
+   * and endpoints, the HMR socket among them, and the page then arrives as
+   * server-rendered HTML that never hydrates. Nothing 404s and no script is
+   * missing, so it reads as a React bug rather than a network one.
+   *
+   * `*` stands for exactly one label, and an IPv4 address is four labels, so
+   * `172.20.10.*` covers a host reached over an iPhone's Personal Hotspot —
+   * iOS always numbers that subnet 172.20.10.x — and `192.168.1.*` survives
+   * the router handing out a different lease than it did last time.
+   *
+   * Development only. `next start` applies none of this.
+   */
+  allowedDevOrigins: ["192.168.1.*", "172.20.10.*"],
 
   /**
    * The Wix site's URL structure, kept alive for bookmarks and for links
