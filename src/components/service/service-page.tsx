@@ -51,15 +51,14 @@ export async function ServicePage({ service }: { service: Service }) {
     <main id="top">
       {/* Hero */}
       <section className="relative flex min-h-[clamp(520px,82svh,900px)] items-end overflow-hidden">
-        <div className="absolute inset-0">
-          <HeroMedia
-            slotId={`${service.slug}-hero`}
-            placeholder={service.hero.imagePlaceholder}
-            width={2000}
-            height={1200}
-            captionHidden
-          />
-        </div>
+        <HeroMedia
+          slotId={`${service.slug}-hero`}
+          placeholder={service.hero.imagePlaceholder}
+          width={2000}
+          height={1200}
+          captionHidden
+          parallax
+        />
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_srgb,#2d2b2b_88%,transparent)_0%,color-mix(in_srgb,#2d2b2b_55%,transparent)_42%,color-mix(in_srgb,#2d2b2b_24%,transparent)_100%)]"

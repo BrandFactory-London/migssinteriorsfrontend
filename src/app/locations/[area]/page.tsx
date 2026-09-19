@@ -67,15 +67,14 @@ export default async function LocationDetailPage({ params }: Props) {
 
       <main id="top">
         <section className="relative flex min-h-[clamp(460px,72svh,800px)] items-end overflow-hidden">
-          <div className="absolute inset-0">
-            <HeroMedia
-              slotId={`location-hero-${location.slug}`}
-              placeholder={`Hero: recent project in ${location.name}, wide shot`}
-              width={2000}
-              height={1200}
-              captionHidden
-            />
-          </div>
+          <HeroMedia
+            slotId={`location-hero-${location.slug}`}
+            placeholder={`Hero: recent project in ${location.name}, wide shot`}
+            width={2000}
+            height={1200}
+            captionHidden
+            parallax
+          />
           <div
             aria-hidden="true"
             className="absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_srgb,#2d2b2b_88%,transparent)_0%,color-mix(in_srgb,#2d2b2b_52%,transparent)_44%,color-mix(in_srgb,#2d2b2b_22%,transparent)_100%)]"

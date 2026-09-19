@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { HeroParallax } from "@/components/hero-parallax";
 import { ImageSlot } from "@/components/image-slot";
 import { EnquireBand } from "@/components/projects/enquire-band";
 import { ProjectGallery } from "@/components/projects/project-gallery";
@@ -86,14 +87,18 @@ export default async function ProjectDetailPage({ params }: Props) {
 
       <main id="top">
         <section className="relative flex min-h-[clamp(480px,76svh,860px)] items-end overflow-hidden">
-          <div className="absolute inset-0">
+          {/* This hero is fed by the Projects collection rather than
+              HeroMedia, so it reaches for the shared backdrop directly
+              instead of through the `parallax` flag. Same treatment either
+              way — the effect only ever wrapped whatever fills the box. */}
+          <HeroParallax>
             <ImageSlot
               placeholder={`Hero: ${project.title}, wide shot`}
               src={project.heroUrl ?? undefined}
               alt={place ? `${project.title}, ${place}` : project.title}
               captionHidden
             />
-          </div>
+          </HeroParallax>
           <div
             aria-hidden="true"
             className="absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_srgb,#2d2b2b_88%,transparent)_0%,color-mix(in_srgb,#2d2b2b_52%,transparent)_44%,color-mix(in_srgb,#2d2b2b_22%,transparent)_100%)]"
