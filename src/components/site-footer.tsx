@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { SITE, telHref, mailHref } from "@/lib/site";
 import { Logo } from "@/components/logo";
+import { DARK_BEHIND_HEADER } from "@/lib/header-ink";
 
 const SERVICES_LINKS = [
   { href: "/renovation-services", label: "Renovation Services" },
@@ -28,7 +29,10 @@ const LEGAL = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-[clamp(36px,7.5vw,84px)] bg-migss-neutral-900 text-migss-neutral-200">
+    <footer
+      {...DARK_BEHIND_HEADER}
+      className="mt-[clamp(36px,7.5vw,84px)] bg-migss-neutral-900 text-migss-neutral-200"
+    >
       <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-[clamp(22px,3.5vw,44px)] px-[clamp(16px,4.5vw,48px)] py-[clamp(30px,6vw,60px)]">
         <div>
           <Logo height={44} />

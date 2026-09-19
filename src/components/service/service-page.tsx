@@ -11,6 +11,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { SITE, telHref } from "@/lib/site";
 import { SERVICES, SERVICE_BLURB, TRUST, type Service } from "@/lib/services";
 import { getCategoryProjects, type ProjectCategory } from "@/lib/wix/projects";
+import { DARK_BEHIND_HEADER } from "@/lib/header-ink";
 
 function Tick() {
   return (
@@ -50,7 +51,10 @@ export async function ServicePage({ service }: { service: Service }) {
   return (
     <main id="top">
       {/* Hero */}
-      <section className="relative flex min-h-[clamp(520px,82svh,900px)] items-end overflow-hidden">
+      <section
+        {...DARK_BEHIND_HEADER}
+        className="relative flex min-h-[clamp(520px,82svh,900px)] items-end overflow-hidden"
+      >
         <HeroMedia
           slotId={`${service.slug}-hero`}
           placeholder={service.hero.imagePlaceholder}
@@ -308,6 +312,7 @@ export async function ServicePage({ service }: { service: Service }) {
       {/* Trust */}
       <section
         id="trust"
+        {...DARK_BEHIND_HEADER}
         className="mt-[clamp(30px,6vw,60px)] scroll-mt-20 bg-migss-neutral-900 text-migss-neutral-200"
       >
         <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] items-start gap-[clamp(18px,3vw,40px)] px-[clamp(16px,4.5vw,48px)] py-[clamp(30px,6vw,72px)]">

@@ -10,6 +10,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { pageMetadata } from "@/lib/seo";
 import { ogImage } from "@/lib/wix/og-image";
+import { DARK_BEHIND_HEADER } from "@/lib/header-ink";
 
 export async function generateMetadata() {
   const image = await ogImage("home-hero");
@@ -100,6 +101,7 @@ export default function AboutPage() {
 
         <section
           id="md"
+          {...DARK_BEHIND_HEADER}
           className="scroll-mt-20 bg-migss-neutral-900 text-migss-neutral-200"
         >
           <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-center gap-[clamp(20px,3.5vw,48px)] px-[clamp(16px,4.5vw,48px)] py-[clamp(30px,6vw,72px)]">

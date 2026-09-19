@@ -14,6 +14,7 @@ import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
 import { pageMetadata } from "@/lib/seo";
 import { getProject, getProjects, serviceFor } from "@/lib/wix/projects";
+import { DARK_BEHIND_HEADER } from "@/lib/header-ink";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -86,7 +87,10 @@ export default async function ProjectDetailPage({ params }: Props) {
       <SiteHeader />
 
       <main id="top">
-        <section className="relative flex min-h-[clamp(480px,76svh,860px)] items-end overflow-hidden">
+        <section
+          {...DARK_BEHIND_HEADER}
+          className="relative flex min-h-[clamp(480px,76svh,860px)] items-end overflow-hidden"
+        >
           {/* This hero is fed by the Projects collection rather than
               HeroMedia, so it reaches for the shared backdrop directly
               instead of through the `parallax` flag. Same treatment either
@@ -238,7 +242,10 @@ export default async function ProjectDetailPage({ params }: Props) {
           </section>
         ) : null}
 
-        <section className="mt-[clamp(32px,6.5vw,76px)] bg-migss-neutral-900 text-migss-neutral-200">
+        <section
+          {...DARK_BEHIND_HEADER}
+          className="mt-[clamp(32px,6.5vw,76px)] bg-migss-neutral-900 text-migss-neutral-200"
+        >
           <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-center gap-[clamp(18px,3vw,40px)] px-[clamp(16px,4.5vw,48px)] py-[clamp(28px,5.5vw,64px)]">
             {project.testimonial ? (
               <blockquote className="border-l-2 border-migss-accent-400 pl-[18.4px]">

@@ -18,6 +18,7 @@ import { pageMetadata } from "@/lib/seo";
 import { ogImage } from "@/lib/wix/og-image";
 import { getTownProjects } from "@/lib/wix/projects";
 import { telHref } from "@/lib/site";
+import { DARK_BEHIND_HEADER } from "@/lib/header-ink";
 
 type Props = { params: Promise<{ area: string }> };
 
@@ -66,7 +67,10 @@ export default async function LocationDetailPage({ params }: Props) {
       <SiteHeader />
 
       <main id="top">
-        <section className="relative flex min-h-[clamp(460px,72svh,800px)] items-end overflow-hidden">
+        <section
+          {...DARK_BEHIND_HEADER}
+          className="relative flex min-h-[clamp(460px,72svh,800px)] items-end overflow-hidden"
+        >
           <HeroMedia
             slotId={`location-hero-${location.slug}`}
             placeholder={`Hero: recent project in ${location.name}, wide shot`}

@@ -1,10 +1,14 @@
 import { HeroMedia } from "@/components/hero-media";
 import { ButtonLink } from "@/components/ui/button";
 import { telHref } from "@/lib/site";
+import { DARK_BEHIND_HEADER } from "@/lib/header-ink";
 
 export async function Hero() {
   return (
-    <section className="relative flex min-h-[clamp(540px,86svh,940px)] items-end overflow-hidden">
+    <section
+      {...DARK_BEHIND_HEADER}
+      className="relative flex min-h-[clamp(540px,86svh,940px)] items-end overflow-hidden"
+    >
       <HeroMedia
         slotId="home-hero"
         placeholder="Hero: finished luxury bathroom, wide shot"
