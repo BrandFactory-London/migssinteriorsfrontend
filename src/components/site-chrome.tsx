@@ -141,7 +141,7 @@ export function SiteChrome() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="flex min-h-[64px] items-baseline gap-3.5 border-b border-migss-neutral-100/15 pt-3.5 text-inherit no-underline transition-colors active:text-migss-accent-300"
+                className="group flex min-h-[64px] items-baseline gap-3.5 border-b border-migss-neutral-100/15 pt-3.5 text-inherit no-underline transition-colors active:text-migss-accent-300 [@media(hover:hover)]:hover:text-migss-accent-300"
               >
                 <span className="w-[22px] text-[11px] text-migss-accent-300 tabular-nums">
                   {String(index + 1).padStart(2, "0")}

@@ -65,7 +65,7 @@ export async function ServicePage({ service }: { service: Service }) {
           className="absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_srgb,#2d2b2b_88%,transparent)_0%,color-mix(in_srgb,#2d2b2b_55%,transparent)_42%,color-mix(in_srgb,#2d2b2b_24%,transparent)_100%)]"
         />
         <div className="relative z-2 mx-auto w-full max-w-[1280px] animate-[migss-fade_0.6s_ease-out_both] px-[clamp(16px,4.5vw,48px)] pt-[clamp(96px,16vh,160px)] pb-[clamp(56px,8vw,96px)] text-migss-neutral-100">
-          <div className="mb-[13.8px]">
+          <div className="mb-[clamp(20px,3vw,32px)]">
             <Breadcrumb
               tone="light"
               items={[

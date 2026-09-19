@@ -1,7 +1,7 @@
 import { ImageSlot } from "@/components/image-slot";
 import { Reveal } from "@/components/reveal";
 import { ButtonLink } from "@/components/ui/button";
-import { telHref } from "@/lib/site";
+import { mdTelHref } from "@/lib/site";
 
 function Star() {
   return (
@@ -87,7 +87,7 @@ export function Testimonials() {
             lasted 25 years.&rdquo;
           </p>
           <ButtonLink
-            href={telHref}
+            href={mdTelHref}
             variant="outlineAccent"
             size="md"
             className="font-body self-start font-medium"

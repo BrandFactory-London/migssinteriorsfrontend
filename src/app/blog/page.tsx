@@ -40,7 +40,7 @@ export default async function BlogIndexPage() {
 
       <main id="top">
         <section className="mx-auto max-w-[1280px] animate-[migss-fade_0.5s_ease-out_both] px-[clamp(16px,4.5vw,48px)] pt-[clamp(26px,6vw,68px)] pb-[clamp(22px,4.5vw,44px)]">
-          <div className="mb-[18.4px]">
+          <div className="mb-[clamp(24px,3.4vw,38px)]">
             <Breadcrumb
               items={[{ href: "/", label: "Home" }, { label: "Blog" }]}
             />

@@ -46,17 +46,22 @@ export function Process() {
               as="li"
               key={step.title}
               delay={index * 90}
-              className={`flex gap-[clamp(14px,3vw,26px)] border-t border-[var(--migss-divider)] py-[18.4px] ${
+              className={`group flex gap-[clamp(14px,3vw,26px)] border-t border-[var(--migss-divider)] py-[18.4px] transition-colors ${
                 index === STEPS.length - 1
                   ? "border-b border-b-[var(--migss-divider)]"
                   : ""
               }`}
             >
-              <span className="font-heading w-[2.2ch] flex-none text-[clamp(30px,8vw,40px)] leading-[0.9] text-migss-accent-300 tabular-nums">
+              {/* The number already carries the accent; on hover the whole row
+                  picks it up, the step title in the readable ink step so it
+                  stays above 4.5:1 on the page background. */}
+              <span className="font-heading w-[2.2ch] flex-none text-[clamp(30px,8vw,40px)] leading-[0.9] text-migss-accent-300 tabular-nums transition-colors [@media(hover:hover)]:group-hover:text-migss-accent-700">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div>
-                <h3 className="mb-1.5 text-[22px] font-normal">{step.title}</h3>
+                <h3 className="mb-1.5 text-[22px] font-normal transition-colors [@media(hover:hover)]:group-hover:text-migss-accent-ink">
+                  {step.title}
+                </h3>
                 <p className="text-[14.5px] leading-[1.65] text-migss-text/72">
                   {step.body}
                 </p>

@@ -38,6 +38,16 @@ export const COMPANY = {
 export const WHATSAPP_URL = "https://wa.me/message/LVSH5BUPL5X7B1";
 
 export const telHref = `tel:${SITE.phone.replace(/\s+/g, "")}`;
+
+/**
+ * The Managing Director's direct mobile, in E.164 so it dials from any
+ * network. Deliberately separate from `SITE.phone`: the landline stays the
+ * number the site shows everywhere else, and this one is only offered where
+ * the copy promises the MD personally.
+ */
+export const MD_PHONE = "+447920091309";
+
+export const mdTelHref = `tel:${MD_PHONE}`;
 export const mailHref = `mailto:${SITE.email}`;
 
 /**

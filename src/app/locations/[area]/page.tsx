@@ -81,7 +81,7 @@ export default async function LocationDetailPage({ params }: Props) {
             className="absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_srgb,#2d2b2b_88%,transparent)_0%,color-mix(in_srgb,#2d2b2b_52%,transparent)_44%,color-mix(in_srgb,#2d2b2b_22%,transparent)_100%)]"
           />
           <div className="relative z-2 mx-auto w-full max-w-[1280px] animate-[migss-fade_0.6s_ease-out_both] px-[clamp(16px,4.5vw,48px)] pt-[clamp(96px,16vh,150px)] pb-[clamp(44px,7vw,80px)] text-migss-neutral-100">
-            <div className="mb-[13.8px]">
+            <div className="mb-[clamp(20px,3vw,32px)]">
               <Breadcrumb
                 tone="light"
                 items={[

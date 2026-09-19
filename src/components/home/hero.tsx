@@ -1,11 +1,12 @@
 import { HeroMedia } from "@/components/hero-media";
+import { HeroParallax } from "@/components/home/hero-parallax";
 import { ButtonLink } from "@/components/ui/button";
 import { telHref } from "@/lib/site";
 
 export async function Hero() {
   return (
     <section className="relative flex min-h-[clamp(540px,86svh,940px)] items-end overflow-hidden">
-      <div className="absolute inset-0">
+      <HeroParallax>
         <HeroMedia
           slotId="home-hero"
           placeholder="Hero: finished luxury bathroom, wide shot"
@@ -13,7 +14,7 @@ export async function Hero() {
           height={1200}
           captionHidden
         />
-      </div>
+      </HeroParallax>
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_srgb,#2d2b2b_88%,transparent)_0%,color-mix(in_srgb,#2d2b2b_55%,transparent)_42%,color-mix(in_srgb,#2d2b2b_22%,transparent)_100%)]"
@@ -37,7 +38,7 @@ export async function Hero() {
 
         <div className="flex max-w-[520px] flex-wrap gap-2.5">
           <ButtonLink
-            href="#work"
+            href="/our-projects"
             variant="contrast"
             className="font-body flex-[1_1_200px] font-medium"
           >

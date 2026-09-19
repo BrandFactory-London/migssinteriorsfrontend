@@ -10,27 +10,33 @@ import { useNavMenu } from "@/components/nav-menu";
 import { cn } from "@/lib/utils";
 
 /**
- * Pixels of downward scroll tolerated before the header hides, so that the
- * small jitter a touch scroll ends on does not flicker it away.
+ * Pixels of downward scroll tolerated before the brand group hides, so that
+ * the small jitter a touch scroll ends on does not flicker it away.
  */
 const HIDE_AFTER = 6;
 
 /**
- * Distance from the top within which the header is always shown. Below this
- * the page has barely moved and a hidden header reads as a bug.
+ * Distance from the top within which the brand group is always shown. Below
+ * this the page has barely moved and a hidden logo reads as a bug.
  */
 const ALWAYS_SHOWN_ABOVE = 80;
 
 /**
- * Two treatments, both in the handoff: `overlay` sits on top of a photographic
- * hero in light-on-dark, `solid` is the in-page bar used where a page opens on
- * the background colour instead.
+ * Both treatments now sit in the flow and scroll away with the page: `overlay`
+ * is `absolute` over a photographic hero so it lies on the picture rather than
+ * pushing it down, `solid` is the ordinary in-page bar. Neither follows the
+ * visitor down any more.
  *
- * Both now stay with the visitor rather than scrolling away, and hide on the
- * way down to give the page its full height back. `solid` is `sticky` so it
- * keeps its space in the flow and the content below does not jump up under it;
- * `overlay` is `fixed`, because it is meant to sit on the hero rather than
- * push it down, which is what it did as `absolute`.
+ * What does react to scroll is the brand group — the gradient scrim, the logo
+ * and the phone number — which fades as one. They share a single wrapper
+ * precisely so they cannot drift apart: one opacity, one transform, one
+ * transition. The menu button is outside that group and stays legible for as
+ * long as the header itself is on screen.
+ *
+ * Logo and the menu/phone cluster are pinned to the viewport edges rather than
+ * to the 1280px content column, at 100px in from each side. The clamp holds
+ * that 100px from roughly 1390px up and eases it in on narrower screens, where
+ * a literal 100px gutter would leave the row nowhere to go.
  */
 export function SiteHeader({
   variant = "overlay",
@@ -38,32 +44,56 @@ export function SiteHeader({
   variant?: "overlay" | "solid";
 }) {
   const overlay = variant === "overlay";
-  const hidden = useHideOnScrollDown();
+  const brandHidden = useHideOnScrollDown();
   const menu = useNavMenu();
+
+  const brandGroup = cn(
+    "transition-[opacity,translate] duration-500 ease-[cubic-bezier(.4,0,.2,1)] will-change-[opacity,translate] motion-reduce:transition-none",
+    brandHidden && "pointer-events-none -translate-y-2 opacity-0",
+  );
 
   return (
     <header
       className={cn(
-        "z-40 transition-[translate,opacity] duration-500 ease-[cubic-bezier(.4,0,.2,1)] will-change-[translate,opacity] motion-reduce:transition-none",
+        "z-40",
         overlay
-          ? "fixed inset-x-0 top-0 text-migss-neutral-100"
-          : "sticky top-0 border-b border-[var(--migss-divider)] bg-migss-bg text-migss-text",
-        hidden && "pointer-events-none -translate-y-full opacity-0",
+          ? "absolute inset-x-0 top-0 text-migss-neutral-100"
+          : "border-b border-[var(--migss-divider)] bg-migss-bg text-migss-text",
       )}
     >
+      {/* The scrim: dark at the top, clear by the bottom of the header, so the
+          light-on-dark logo and number hold their contrast over whatever the
+          hero photograph happens to be doing up there. Overlay only — the
+          solid bar has its own background. */}
+      {overlay ? (
+        <div
+          aria-hidden="true"
+          className={cn(
+            "pointer-events-none absolute inset-x-0 top-0 h-[190px] bg-[linear-gradient(to_bottom,color-mix(in_srgb,#2d2b2b_72%,transparent)_0%,color-mix(in_srgb,#2d2b2b_34%,transparent)_52%,transparent_100%)]",
+            brandGroup,
+          )}
+        />
+      ) : null}
+
       <div
         className={cn(
-          "mx-auto flex max-w-[1280px] items-center gap-4 px-[clamp(16px,4.5vw,48px)]",
+          "relative flex items-center gap-4 px-[clamp(16px,7.2vw,100px)]",
           overlay ? "py-[18px]" : "py-3.5",
         )}
       >
-        <Link href="/" className="mr-auto text-inherit no-underline">
+        <Link
+          href="/"
+          className={cn("mr-auto text-inherit no-underline", brandGroup)}
+        >
           <Logo height={27} priority />
         </Link>
 
         <a
           href={telHref}
-          className="inline-flex min-h-[44px] items-center gap-2 text-[13.5px] tracking-[0.02em] text-inherit no-underline"
+          className={cn(
+            "inline-flex min-h-[44px] items-center gap-2 text-[13.5px] tracking-[0.02em] text-inherit no-underline",
+            brandGroup,
+          )}
         >
           <svg
             width="16"
@@ -91,7 +121,7 @@ export function SiteHeader({
             aria-label="Open full menu"
             aria-expanded={menu.open}
             className={cn(
-              "-mr-2 grid h-[44px] w-[44px] flex-none cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit transition-colors active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
+              "grid h-[44px] w-[44px] flex-none cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit transition-colors active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
               overlay
                 ? "[@media(hover:hover)]:hover:bg-migss-neutral-100/12"
                 : "[@media(hover:hover)]:hover:bg-migss-text/7",
@@ -117,7 +147,8 @@ export function SiteHeader({
 }
 
 /**
- * The conventional hide-on-scroll-down, show-on-scroll-up header.
+ * Drives the brand group's appear/disappear: hide on scroll down, show on
+ * scroll up or near the top.
  *
  * It reads `scrollY` inside a `requestAnimationFrame` from a passive listener,
  * so it neither blocks the scroll nor lays out on every event. That matters
@@ -125,8 +156,8 @@ export function SiteHeader({
  * driven by IntersectionObserver rather than by scroll position, and the two
  * must not end up fighting over the same frame. They are independent: nothing
  * here moves the elements the observer is watching, and the observer's
- * thresholds are measured against the viewport, which a fixed header does not
- * change.
+ * thresholds are measured against the viewport, which the header does not
+ * change now that it sits in the flow.
  */
 function useHideOnScrollDown() {
   const [hidden, setHidden] = React.useState(false);
