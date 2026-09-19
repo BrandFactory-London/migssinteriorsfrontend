@@ -10,6 +10,18 @@ import { ButtonLink } from "@/components/ui/button";
 import { useNavMenu } from "@/components/nav-menu";
 import { cn } from "@/lib/utils";
 
+/**
+ * How far a child entry sits in from its parent in the menu, in pixels.
+ *
+ * Applied inline rather than through a utility class, together with the menu
+ * bar's own column template. Both are structural — without them the bar
+ * collapses into a single column and the service pages read as siblings of
+ * the section above them — and a style attribute travels with the markup, so
+ * neither can be left behind by a stylesheet that is a deploy or a cache
+ * behind the HTML referencing it.
+ */
+const SUB_INDENT = 28;
+
 type DockItem = {
   href: string;
   label: string;
@@ -115,7 +127,10 @@ export function SiteChrome() {
               it wherever the leftover room happened to fall. The outer columns
               take an equal share and their contents sit at the outer edges, so
               the middle one is centred on the bar itself. */}
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 border-b border-migss-neutral-100/20 px-[clamp(16px,4.5vw,48px)] py-3">
+          <div
+            className="grid items-center gap-3 border-b border-migss-neutral-100/20 px-[clamp(16px,4.5vw,48px)] py-3"
+            style={{ gridTemplateColumns: "1fr auto 1fr" }}
+          >
             {/* Not a destination on this site, so it stays out of the
                 navigation list and sits on the bar instead. Plain text at the
                 bar's own type treatment — it is a link, not a call to action,
@@ -167,13 +182,12 @@ export function SiteChrome() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className={cn(
-                  "group flex min-h-[64px] items-baseline gap-3.5 border-b border-migss-neutral-100/15 pt-3.5 text-inherit no-underline transition-colors active:text-migss-accent-300 [@media(hover:hover)]:hover:text-migss-accent-300",
-                  // A fixed step rather than a proportional one: the rows are
-                  // already fluid, and an indent that moved with the viewport
-                  // would stop reading as a level and start reading as drift.
-                  item.sub && "pl-[28px]",
-                )}
+                className="group flex min-h-[64px] items-baseline gap-3.5 border-b border-migss-neutral-100/15 pt-3.5 text-inherit no-underline transition-colors active:text-migss-accent-300 [@media(hover:hover)]:hover:text-migss-accent-300"
+                // The indent rides in the markup rather than in a utility
+                // class. A fixed step, not a proportional one: the rows are
+                // already fluid, and an indent that moved with the viewport
+                // would stop reading as a level and start reading as drift.
+                style={item.sub ? { paddingLeft: SUB_INDENT } : undefined}
               >
                 <span className="w-[22px] text-[11px] text-migss-accent-300 tabular-nums">
                   {String(index + 1).padStart(2, "0")}
