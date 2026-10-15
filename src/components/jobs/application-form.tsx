@@ -348,7 +348,7 @@ export function ApplicationForm({
           size="xl"
           disabled={pending}
           aria-busy={pending}
-          className="font-body mt-1 min-h-[62px] text-[15px] font-semibold tracking-[0.12em] uppercase"
+          className="font-body mt-1 font-medium"
         >
           {pending ? "Sending…" : "Send my application"}
         </Button>

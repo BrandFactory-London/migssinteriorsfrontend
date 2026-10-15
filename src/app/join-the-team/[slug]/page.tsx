@@ -157,7 +157,7 @@ export default async function JobPage({ params }: Props) {
                 href="#apply"
                 variant="solid"
                 size="xl"
-                className="font-body min-h-[62px] flex-[1_1_260px] text-[15px] font-semibold tracking-[0.12em] uppercase sm:flex-[0_1_280px]"
+                className="font-body min-h-[58px] flex-[1_1_260px] text-[14.5px] font-medium sm:flex-[0_1_240px]"
               >
                 Apply now
               </ButtonLink>
@@ -168,7 +168,7 @@ export default async function JobPage({ params }: Props) {
                   rel="noopener noreferrer"
                   variant="secondary"
                   size="xl"
-                  className="font-body min-h-[62px] flex-[1_1_260px] font-medium sm:flex-[0_1_240px]"
+                  className="font-body min-h-[58px] flex-[1_1_260px] text-[14.5px] font-medium sm:flex-[0_1_240px]"
                 >
                   Apply on Indeed ↗
                   <span className="sr-only"> (opens in a new tab)</span>
