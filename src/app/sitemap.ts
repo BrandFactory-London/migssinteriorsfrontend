@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { LOCATIONS } from "@/lib/locations";
 import { absolute } from "@/lib/seo";
 import { getPosts } from "@/lib/wix/blog";
+import { getOpenJobs } from "@/lib/wix/jobs";
 import { getProjects } from "@/lib/wix/projects";
 
 /**
@@ -32,6 +33,7 @@ const STATIC_ROUTES: [path: string, priority: number][] = [
   ["/resources/kitchen", 0.7],
   ["/blog", 0.7],
   ["/about", 0.6],
+  ["/join-the-team", 0.5],
   ["/contact", 0.6],
   ["/terms-of-use", 0.3],
   ["/privacy-policy", 0.3],
@@ -40,7 +42,11 @@ const STATIC_ROUTES: [path: string, priority: number][] = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [projects, posts] = await Promise.all([getProjects(), getPosts()]);
+  const [projects, posts, jobs] = await Promise.all([
+    getProjects(),
+    getPosts(),
+    getOpenJobs(),
+  ]);
   const now = new Date();
 
   return [
@@ -71,6 +77,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: post.publishedDate ? new Date(post.publishedDate) : now,
       changeFrequency: "yearly" as const,
       priority: 0.6,
+    })),
+
+    // Open roles only: a filled role stays reachable but is noindexed.
+    ...jobs.map((job) => ({
+      url: absolute(`/join-the-team/${job.slug}`),
+      lastModified: job.datePosted ? new Date(job.datePosted) : now,
+      changeFrequency: "weekly" as const,
+      priority: 0.5,
     })),
   ];
 }

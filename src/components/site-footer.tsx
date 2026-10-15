@@ -17,6 +17,7 @@ const EXPLORE = [
   { href: "/resources", label: "Resources & Insights" },
   { href: "/locations", label: "Locations" },
   { href: "/about", label: "About" },
+  { href: "/join-the-team", label: "Join the Team" },
   { href: "/contact", label: "Contact" },
 ];
 
