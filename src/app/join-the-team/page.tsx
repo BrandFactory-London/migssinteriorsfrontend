@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { FinishGallery, finishShots } from "@/components/jobs/finish-gallery";
+import { CraftDetail } from "@/components/jobs/craft-detail";
 import { Reveal } from "@/components/reveal";
 import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
@@ -11,7 +11,6 @@ import { formatJobDate } from "@/lib/jobs";
 import { pageMetadata } from "@/lib/seo";
 import { mailHref, SITE, telHref } from "@/lib/site";
 import { getOpenJobs } from "@/lib/wix/jobs";
-import { getProjects } from "@/lib/wix/projects";
 import { ogImage } from "@/lib/wix/og-image";
 
 /**
@@ -50,7 +49,7 @@ const POINTS = [
 ];
 
 export default async function JoinTheTeamPage() {
-  const [jobs, projects] = await Promise.all([getOpenJobs(), getProjects()]);
+  const jobs = await getOpenJobs();
   const onIndeed = jobs.filter((job) => job.indeedUrl);
 
   return (
@@ -98,7 +97,7 @@ export default async function JoinTheTeamPage() {
           </ul>
         </section>
 
-        <FinishGallery shots={finishShots(projects)} />
+        <CraftDetail />
 
         <section
           id="roles"
