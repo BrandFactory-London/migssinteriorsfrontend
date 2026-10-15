@@ -122,7 +122,13 @@ export default async function JobPage({ params }: Props) {
         ) : null}
 
         <section className="mx-auto max-w-[1280px] animate-[migss-fade_0.5s_ease-out_both] px-[clamp(16px,4.5vw,48px)] pt-[clamp(26px,6vw,68px)] pb-[clamp(20px,4vw,40px)]">
-          <div className="mb-[clamp(24px,3.4vw,38px)]">
+          <div className="mb-[clamp(24px,3.4vw,38px)] flex flex-wrap items-center gap-2.5">
+            <Link
+              href="/join-the-team#roles"
+              className="inline-flex min-h-[32px] items-center gap-1.5 rounded-full border border-[var(--migss-divider)] px-3.5 py-[7px] text-xs text-migss-text/75 no-underline transition-colors [@media(hover:hover)]:hover:border-migss-accent [@media(hover:hover)]:hover:text-migss-accent-ink"
+            >
+              <span aria-hidden="true">←</span> All jobs
+            </Link>
             <Breadcrumb
               items={[
                 { href: "/", label: "Home" },
@@ -149,8 +155,9 @@ export default async function JobPage({ params }: Props) {
             <div className="mt-[clamp(18px,3vw,28px)] flex flex-wrap gap-2.5">
               <ButtonLink
                 href="#apply"
+                variant="solid"
                 size="xl"
-                className="font-body flex-[0_1_220px] font-medium"
+                className="font-body min-h-[62px] flex-[1_1_260px] text-[15px] font-semibold tracking-[0.12em] uppercase sm:flex-[0_1_280px]"
               >
                 Apply now
               </ButtonLink>
@@ -161,7 +168,7 @@ export default async function JobPage({ params }: Props) {
                   rel="noopener noreferrer"
                   variant="secondary"
                   size="xl"
-                  className="font-body flex-[0_1_220px] font-medium"
+                  className="font-body min-h-[62px] flex-[1_1_260px] font-medium sm:flex-[0_1_240px]"
                 >
                   Apply on Indeed ↗
                   <span className="sr-only"> (opens in a new tab)</span>
@@ -254,34 +261,37 @@ export default async function JobPage({ params }: Props) {
             id="apply"
             className="mt-[clamp(36px,7.5vw,84px)] scroll-mt-20 border-t border-[var(--migss-divider)] bg-migss-surface/60"
           >
-            <div className="mx-auto grid max-w-[1280px] grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-[clamp(20px,3.5vw,48px)] px-[clamp(16px,4.5vw,48px)] py-[clamp(30px,6vw,72px)]">
-              <Reveal>
+            {/* Full width on purpose: nothing beside the form to pull the
+                eye away from finishing it. */}
+            <div className="mx-auto max-w-[1280px] px-[clamp(16px,4.5vw,48px)] py-[clamp(30px,6vw,72px)]">
+              <Reveal className="mb-[clamp(20px,3.5vw,32px)] max-w-[68ch]">
                 <p className="mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
                   Apply
                 </p>
                 <h2 className="mb-[13.8px] text-[clamp(30px,7.2vw,46px)] leading-[1.05] font-normal tracking-[-0.02em]">
                   Interested? Tell us about yourself.
                 </h2>
-                <p className="mb-[18.4px] text-[15px] leading-[1.75] text-migss-text/78">
+                <p className="text-[15px] leading-[1.75] text-migss-text/78">
                   It takes a couple of minutes, no CV needed. We will call you
                   to talk it through and, if it is a fit, arrange your paid
                   trial.
+                  {job.indeedUrl ? (
+                    <>
+                      {" "}
+                      Prefer Indeed?{" "}
+                      <a
+                        href={job.indeedUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-migss-accent-ink"
+                      >
+                        Apply through our Indeed advert
+                        <span className="sr-only"> (opens in a new tab)</span>
+                      </a>
+                      .
+                    </>
+                  ) : null}
                 </p>
-                {job.indeedUrl ? (
-                  <p className="text-[14.5px] leading-[1.75] text-migss-text/72">
-                    Prefer Indeed?{" "}
-                    <a
-                      href={job.indeedUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-migss-accent-ink"
-                    >
-                      Apply through our Indeed advert
-                      <span className="sr-only"> (opens in a new tab)</span>
-                    </a>
-                    .
-                  </p>
-                ) : null}
               </Reveal>
               <ApplicationForm roleTitle={job.title} />
             </div>

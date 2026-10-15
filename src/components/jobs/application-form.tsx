@@ -14,14 +14,41 @@ import { cn } from "@/lib/utils";
 
 /* Same field styling as the enquiry form, so the two read as one system. */
 const inputClass =
-  "min-h-[56px] w-full rounded-[4px] border border-[var(--migss-divider)] bg-transparent px-3.5 text-base text-migss-text caret-migss-accent transition-colors focus-visible:border-migss-accent focus-visible:outline-none [@media(hover:hover)]:hover:border-migss-text/45";
+  "font-body min-h-[56px] w-full rounded-[4px] border border-[var(--migss-divider)] bg-transparent px-3.5 text-base text-migss-text caret-migss-accent transition-colors focus-visible:border-migss-accent focus-visible:outline-none [@media(hover:hover)]:hover:border-migss-text/45";
 
 const errorInputClass = "border-migss-error";
 
 const labelClass = "mb-1.5 block text-[12.5px] text-migss-text/70";
 
+/**
+ * Native selects draw their own arrow hard against the border, and on macOS
+ * the closed control is a system widget. `appearance-none` hands both back to
+ * us: the chevron below sits 16px in from the edge, and the text keeps clear
+ * of it.
+ */
+const selectClass = "cursor-pointer appearance-none pr-12 pl-3.5";
+
+function SelectChevron() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-migss-text/60"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 const choiceClass =
-  "flex min-h-[52px] cursor-pointer items-center gap-2.5 rounded-[4px] border border-[var(--migss-divider)] px-3.5 text-[15px] transition-colors has-[:checked]:border-migss-accent has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-migss-accent active:bg-migss-text/5 [@media(hover:hover)]:hover:border-migss-text/45";
+  "font-body flex min-h-[52px] cursor-pointer items-center gap-2.5 rounded-[4px] border border-[var(--migss-divider)] px-3.5 text-[15px] transition-colors has-[:checked]:border-migss-accent has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-migss-accent active:bg-migss-text/5 [@media(hover:hover)]:hover:border-migss-text/45";
 
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
@@ -173,6 +200,7 @@ export function ApplicationForm({
           <label htmlFor="apply-experience" className={labelClass}>
             Years of experience as a bathroom fitter
           </label>
+          <div className="relative">
           <select
             id="apply-experience"
             name="experience"
@@ -183,7 +211,7 @@ export function ApplicationForm({
             }
             className={cn(
               inputClass,
-              "px-2.5",
+              selectClass,
               errors?.experience && errorInputClass,
             )}
           >
@@ -194,6 +222,8 @@ export function ApplicationForm({
               <option key={option}>{option}</option>
             ))}
           </select>
+          <SelectChevron />
+          </div>
           <FieldError
             id="apply-experience-error"
             message={errors?.experience}
@@ -204,7 +234,7 @@ export function ApplicationForm({
           <legend className="mb-2 text-[12.5px] text-migss-text/70">
             What work can you do? Tick all that apply.
           </legend>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,190px),1fr))] gap-2">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-2">
             {JOB_WORK_TYPES.map((type) => (
               <label key={type} className={choiceClass}>
                 <input
@@ -212,8 +242,25 @@ export function ApplicationForm({
                   name="workTypes"
                   value={type}
                   defaultChecked={ticked.includes(type)}
-                  className="h-4 w-4 flex-none accent-[var(--color-migss-accent)]"
+                  className="peer sr-only"
                 />
+                <span
+                  aria-hidden="true"
+                  className="grid h-[18px] w-[18px] flex-none place-items-center rounded-[3px] border-[1.5px] border-[var(--migss-divider)] text-transparent transition-colors peer-checked:border-migss-accent peer-checked:bg-migss-accent peer-checked:text-migss-bg"
+                >
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                </span>
                 {type}
               </label>
             ))}
@@ -227,6 +274,7 @@ export function ApplicationForm({
             <label htmlFor="apply-start" className={labelClass}>
               When can you start?
             </label>
+            <div className="relative">
             <select
               id="apply-start"
               name="start"
@@ -235,7 +283,7 @@ export function ApplicationForm({
               aria-describedby={errors?.start ? "apply-start-error" : undefined}
               className={cn(
                 inputClass,
-                "px-2.5",
+                selectClass,
                 errors?.start && errorInputClass,
               )}
             >
@@ -243,6 +291,8 @@ export function ApplicationForm({
                 <option key={option}>{option}</option>
               ))}
             </select>
+            <SelectChevron />
+            </div>
             <FieldError id="apply-start-error" message={errors?.start} />
           </div>
 
@@ -256,7 +306,11 @@ export function ApplicationForm({
                     name="rightToWork"
                     value={answer}
                     defaultChecked={values?.rightToWork === answer}
-                    className="h-4 w-4 flex-none accent-[var(--color-migss-accent)]"
+                    className="peer sr-only"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="h-4 w-4 flex-none rounded-full border-[1.5px] border-[var(--migss-divider)] transition-colors peer-checked:border-migss-accent peer-checked:bg-migss-accent peer-checked:shadow-[inset_0_0_0_4px_var(--color-migss-bg)]"
                   />
                   {answer}
                 </label>
@@ -290,10 +344,11 @@ export function ApplicationForm({
 
         <Button
           type="submit"
+          variant="solid"
           size="xl"
           disabled={pending}
           aria-busy={pending}
-          className="font-body mt-1 font-medium"
+          className="font-body mt-1 min-h-[62px] text-[15px] font-semibold tracking-[0.12em] uppercase"
         >
           {pending ? "Sending…" : "Send my application"}
         </Button>

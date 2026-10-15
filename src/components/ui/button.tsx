@@ -23,6 +23,12 @@ const buttonVariants = cva(
           "border-migss-neutral-100 bg-migss-neutral-100 text-migss-neutral-900 hover:bg-white active:bg-migss-neutral-200",
         outlineLight:
           "border-migss-neutral-100/55 text-migss-neutral-100 hover:bg-migss-neutral-100/12 active:bg-migss-neutral-100/20",
+        /**
+         * Filled accent, the same treatment as the dock's "Book a call": the
+         * one control on a page that has to read as the action to take.
+         */
+        solid:
+          "border-migss-accent-700 bg-migss-accent-700 text-migss-text hover:border-migss-accent-600 hover:bg-migss-accent-600 active:bg-migss-accent-800 active:text-migss-neutral-100",
         outlineAccent:
           "border-migss-accent-400 text-migss-accent-300 hover:bg-migss-accent-300/12 active:bg-migss-accent-300/20",
       },
