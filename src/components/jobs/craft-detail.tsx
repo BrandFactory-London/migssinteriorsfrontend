@@ -13,7 +13,7 @@ import { Reveal } from "@/components/reveal";
  * photo's own ratio at every width (no cropping), so they never drift.
  */
 const DETAILS = [
-  { x: 72, y: 21, label: "Lit recessed niche" },
+  { x: 72, y: 21, label: "LED backlit feature niche" },
   { x: 46, y: 56, label: "Mitred ledge edge" },
   { x: 18, y: 68, label: "Brushed brass, concealed valve" },
   { x: 40, y: 85, label: "Large-format tiles, tight joints" },
@@ -58,7 +58,7 @@ export function CraftDetail() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/careers/shower-niche-detail-1200.jpg"
-              alt="A finished Migss shower wall: large-format stone-effect tiles, a lit recessed niche with a mitred ledge, and brushed brass fittings."
+              alt="A finished Migss shower wall: large-format stone-effect tiles, an LED backlit feature niche with a mitred ledge, and brushed brass fittings."
               width={2000}
               height={1125}
               loading="lazy"
