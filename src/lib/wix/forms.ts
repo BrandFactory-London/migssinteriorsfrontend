@@ -49,13 +49,57 @@ export type SubmissionResult =
   | { ok: false; status: number | null; detail: string };
 
 /**
+ * The old Wix Studio "Job Form" (Forms & Submissions → "Job Form"), reused
+ * for applications from /join-the-team so they land in the same place, and
+ * with the same Contacts sync, as they always have. Same rules as above: the
+ * keys are targets, and the map is closed.
+ */
+export const JOB_FORM_ID = "8a236dc4-dd75-44de-8c08-a62e36fda2ba";
+
+export const JOB_FIELD = {
+  firstName: "first_name_b745",
+  lastName: "last_name_0c29",
+  phone: "phone_618f",
+  email: "email_f301",
+  /** Single choice: "5-10 years", "10-14 years", "14 years +". */
+  experience: "years_of_experience",
+  /** Checkbox group, an array of the options in JOB_WORK_TYPES. */
+  workTypes: "what_work_can_you_do",
+  /** Single choice: "Immediately", "Within 1-2 Weeks", "Within 1 Month". */
+  start: "when_can_you_start",
+  /** "Yes" or "No". */
+  rightToWork: "do_you_have_right_to_work_in_the_uk",
+} as const;
+
+export { JOB_EXPERIENCE, JOB_START, JOB_WORK_TYPES } from "@/lib/job-form";
+
+export type JobSubmissionValues = Partial<
+  Record<(typeof JOB_FIELD)[keyof typeof JOB_FIELD], string | string[]>
+>;
+
+/** Creates a submission on the enquiry form. */
+export function createEnquirySubmission(
+  submissions: SubmissionValues,
+): Promise<SubmissionResult> {
+  return createSubmission(ENQUIRY_FORM_ID, submissions);
+}
+
+/** Creates a submission on the Job Form. */
+export function createJobSubmission(
+  submissions: JobSubmissionValues,
+): Promise<SubmissionResult> {
+  return createSubmission(JOB_FORM_ID, submissions);
+}
+
+/**
  * Creates a form submission as an anonymous visitor.
  *
  * Auth is the same anonymous-visitor OAuth the rest of the site uses, so no
  * client secret is involved and nothing here can run in the browser.
  */
-export async function createEnquirySubmission(
-  submissions: SubmissionValues,
+async function createSubmission(
+  formId: string,
+  submissions: Record<string, unknown>,
 ): Promise<SubmissionResult> {
   const client = getWixClient();
 
@@ -77,7 +121,7 @@ export async function createEnquirySubmission(
       headers: { ...headers, "Content-Type": "application/json" },
       body: JSON.stringify({
         submission: {
-          formId: ENQUIRY_FORM_ID,
+          formId,
           namespace: ENQUIRY_FORM_NAMESPACE,
           submissions,
         },
