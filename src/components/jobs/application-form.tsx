@@ -120,6 +120,7 @@ export function ApplicationForm({
   return (
     <div className="rounded-[4px] border border-[var(--migss-divider)] border-t-2 border-t-migss-accent bg-migss-bg p-[clamp(16px,4vw,28px)] shadow-migss-sm">
       <form action={formAction} className="flex flex-col gap-[13.8px]">
+        <input type="hidden" name="role" value={roleTitle} />
         <h3 className="text-[21px] font-normal">Your details</h3>
 
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,170px),1fr))] gap-[13.8px]">

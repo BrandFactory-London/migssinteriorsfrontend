@@ -69,6 +69,12 @@ export const JOB_FIELD = {
   start: "when_can_you_start",
   /** "Yes" or "No". */
   rightToWork: "do_you_have_right_to_work_in_the_uk",
+  /**
+   * Free text, filled from the role page the application came from rather
+   * than typed by the applicant. Added to the form on 15 October 2026 so
+   * applications to different roles can be told apart in the dashboard.
+   */
+  role: "role_applied_for",
 } as const;
 
 export { JOB_EXPERIENCE, JOB_START, JOB_WORK_TYPES } from "@/lib/job-form";

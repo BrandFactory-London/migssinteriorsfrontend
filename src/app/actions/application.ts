@@ -32,6 +32,9 @@ export async function submitApplication(
     start: read("start"),
     rightToWork: read("rightToWork"),
   };
+  // Set by the role page, not the applicant; capped so a tampered value
+  // cannot push an oversized string into the dashboard.
+  const role = read("role").slice(0, 120);
 
   // Only the options the Wix form defines: anything else fails the whole
   // submission rather than being dropped.
@@ -68,6 +71,7 @@ export async function submitApplication(
     [JOB_FIELD.start]: values.start,
     [JOB_FIELD.rightToWork]: values.rightToWork,
   };
+  if (role) submissions[JOB_FIELD.role] = role;
   if (values.lastName) submissions[JOB_FIELD.lastName] = values.lastName;
   if (values.email) submissions[JOB_FIELD.email] = values.email;
   if (workTypes.length > 0) submissions[JOB_FIELD.workTypes] = workTypes;
