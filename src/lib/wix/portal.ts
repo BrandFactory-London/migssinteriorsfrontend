@@ -11,7 +11,7 @@ import "server-only";
  * bundle.
  *
  * Collections (created alongside this code, both admin-only):
- *   ClientProjects   title (client name), referenceId (MIG-XXXX-XX),
+ *   ClientProjects   title (client name), referenceId (any format),
  *                    postcode, active
  *   ClientDocuments  title, file (Document), project (-> ClientProjects),
  *                    sortOrder
@@ -98,18 +98,18 @@ function toProject(item: DataItem): PortalProject {
   };
 }
 
-/** Projects stored under this reference, whatever case they were typed in. */
-export async function findProjectsByReference(
-  reference: string,
+/**
+ * Projects stored under any of these postcode spellings.
+ *
+ * The lookup goes by postcode rather than reference because a postcode has
+ * only a couple of ways to be written, which Wix's exact-match filter can
+ * cover, whereas a reference could be stored with hyphens or spaces anywhere.
+ * The caller then matches the reference itself, format-free, in code.
+ */
+export async function findProjectsByPostcode(
+  variants: string[],
 ): Promise<PortalProject[]> {
-  const variants = Array.from(
-    new Set([reference, reference.toLowerCase(), reference.replace(/-/g, "")]),
-  );
-  const items = await query(
-    PROJECTS,
-    { referenceId: { $in: variants } },
-    5,
-  );
+  const items = await query(PROJECTS, { postcode: { $in: variants } }, 50);
   return items.map(toProject);
 }
 

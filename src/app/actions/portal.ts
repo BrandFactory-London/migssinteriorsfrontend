@@ -4,21 +4,18 @@ import { timingSafeEqual } from "node:crypto";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import {
-  looksLikeReference,
-  normalisePostcode,
-  normaliseReference,
-} from "@/lib/portal/credentials";
+import { compact, plausible, postcodeVariants } from "@/lib/portal/credentials";
 import {
   clearFailures,
   isLockedOut,
   recordFailure,
 } from "@/lib/portal/rate-limit";
 import { endSession, startSession } from "@/lib/portal/session";
-import { findProjectsByReference } from "@/lib/wix/portal";
+import { findProjectsByPostcode } from "@/lib/wix/portal";
 
 export type PortalSignInState = {
   error?: string;
+  /** Echoed back exactly as typed, so a failed attempt keeps its hyphens. */
   reference?: string;
 };
 
@@ -42,41 +39,47 @@ export async function signInToPortal(
   _previous: PortalSignInState,
   formData: FormData,
 ): Promise<PortalSignInState> {
-  const reference = normaliseReference(String(formData.get("reference") ?? ""));
-  const postcode = normalisePostcode(String(formData.get("postcode") ?? ""));
+  const typedReference = String(formData.get("reference") ?? "").trim();
+  const typedPostcode = String(formData.get("postcode") ?? "").trim();
+  const reference = compact(typedReference);
+  const postcode = compact(typedPostcode);
 
   if (!reference || !postcode) {
-    return { error: "Enter your project reference ID and postcode.", reference };
+    return {
+      error: "Enter your project reference ID and postcode.",
+      reference: typedReference,
+    };
   }
 
   const ip =
     (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   const keys = [`ip:${ip}`, `ref:${reference}`];
 
-  if (isLockedOut(keys)) return { error: LOCKED, reference };
+  if (isLockedOut(keys)) return { error: LOCKED, reference: typedReference };
 
-  // A reference that cannot exist is still a failed attempt, but it does not
-  // need a round trip to Wix to find that out.
   let projectId: string | null = null;
-  if (looksLikeReference(reference)) {
+  // Nonsense input is still a failed attempt, but needs no round trip to Wix.
+  if (plausible(reference) && plausible(postcode)) {
     try {
-      const candidates = await findProjectsByReference(reference);
+      const candidates = await findProjectsByPostcode(
+        postcodeVariants(typedPostcode),
+      );
       const match = candidates.find(
         (project) =>
           project.active &&
-          normaliseReference(project.referenceId) === reference &&
-          same(normalisePostcode(project.postcode), postcode),
+          same(compact(project.postcode), postcode) &&
+          same(compact(project.referenceId), reference),
       );
       projectId = match?.id ?? null;
     } catch (error) {
       console.error("[client-portal] sign-in lookup failed", error);
-      return { error: BROKEN, reference };
+      return { error: BROKEN, reference: typedReference };
     }
   }
 
   if (!projectId) {
     recordFailure(keys);
-    return { error: WRONG, reference };
+    return { error: WRONG, reference: typedReference };
   }
 
   clearFailures(keys);
@@ -84,7 +87,7 @@ export async function signInToPortal(
     await startSession(projectId);
   } catch (error) {
     console.error("[client-portal] could not start session", error);
-    return { error: BROKEN, reference };
+    return { error: BROKEN, reference: typedReference };
   }
   redirect("/client-portal/documents");
 }

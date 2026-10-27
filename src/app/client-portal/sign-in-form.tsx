@@ -26,7 +26,6 @@ export function SignInForm() {
         autoCapitalize="characters"
         autoCorrect="off"
         spellCheck={false}
-        placeholder="MIG-XXXX-XX"
         className={s.field}
         required
       />
