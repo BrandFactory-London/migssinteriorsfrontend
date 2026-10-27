@@ -163,7 +163,7 @@ export const SERVICES: Record<ServiceSlug, Service> = {
       heading: "Five to eight weeks, with a temporary kitchen from day one",
       steps: [
         { when: "Week 0", title: "Survey & feasibility", body: "What is load-bearing, where the services run, and whether your layout is possible." },
-        { when: "Week 0", title: "Design & cabinetry order", body: "Fixed price, then a six-week workshop lead we run in parallel with the build." },
+        { when: "Week 0", title: "Design & cabinetry order", body: "Fixed price, then a six-week cabinetry lead time we run in parallel with the build." },
         { when: "Weeks 1–2", title: "Strip-out & structure", body: "Openings formed, steels in, services re-routed, floors levelled, dust screens up." },
         { when: "Weeks 3–6", title: "Install & templating", body: "Cabinetry fitted and levelled, worktops templated, then appliances and splashbacks." },
         { when: "Weeks 7–8", title: "Decoration & handover", body: "Finishing decoration, an appliance walk-through, certificates and your guarantee." },
@@ -174,7 +174,7 @@ export const SERVICES: Record<ServiceSlug, Service> = {
       heading: "Recent kitchen projects",
     },
     trust: {
-      lead: "Carpenters, electricians and plumbers on our own payroll, plus a workshop that makes the cabinetry, so a problem is ours to fix, not a supplier's to deny.",
+      lead: "Carpenters, electricians and plumbers on our own payroll, so a problem is ours to fix, not a supplier's to deny.",
       cards: [
         { title: "10-year labour guarantee", body: "Covers the install, the cabinetry fit and the building work. Appliances and worktops carry their manufacturer warranties on top." },
         { title: "0% interest over 5 years", body: "Kitchens are the project people most often spread. No interest, no arrangement fee, and a soft check before you commit." },
@@ -225,7 +225,7 @@ export const SERVICES: Record<ServiceSlug, Service> = {
         { n: "01", title: "Space planning", body: "Room-by-room drawings with circulation and storage resolved before pricing." },
         { n: "02", title: "Structural alterations", body: "Walls, steels, loft conversions and staircase changes, signed off." },
         { n: "03", title: "Kitchen & bathrooms", body: "Our own room teams, inside the same programme and the same quote." },
-        { n: "04", title: "Bespoke joinery", body: "Wardrobes, media walls, panelling and window seats from our workshop." },
+        { n: "04", title: "Bespoke joinery", body: "Wardrobes, media walls, panelling and window seats, fitted by our own carpenters." },
         { n: "05", title: "Rewire & lighting", body: "Full or partial rewires, circuits per room, dimming and smart controls." },
         { n: "06", title: "Heating & plumbing", body: "Boiler and cylinder upgrades, radiator moves, underfloor heating zones." },
         { n: "07", title: "Flooring throughout", body: "Timber, parquet, stone or carpet on levelled, acoustically treated sub-floors." },
