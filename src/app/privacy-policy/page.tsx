@@ -14,7 +14,7 @@ export async function generateMetadata() {
     title: `${doc?.title ?? "Privacy Policy"} | Migss Interiors`,
     description:
       doc?.description ??
-      "Privacy Policy for Migss Interiors, bathroom and kitchen renovation across London and Essex.",
+      "Privacy Policy for Migss Interiors, bathroom and kitchen renovation across north London and Chigwell.",
     path: "/privacy-policy",
     image: image?.url,
     imageAlt: image?.alt,

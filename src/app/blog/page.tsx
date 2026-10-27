@@ -20,7 +20,7 @@ export async function generateMetadata() {
   return pageMetadata({
     title: "Blog | Bathroom & Kitchen Renovation Writing",
     description:
-      "Every article we have written about bathroom, kitchen and whole-home renovation in London and Essex, newest first.",
+      "Every article we have written about bathroom, kitchen and whole-home renovation across north London and Chigwell, newest first.",
     path: "/blog",
     image: image?.url,
     imageAlt: image?.alt,

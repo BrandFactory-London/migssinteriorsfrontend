@@ -14,7 +14,7 @@ export async function generateMetadata() {
     title: `${doc?.title ?? "Website Terms of Use"} | Migss Interiors`,
     description:
       doc?.description ??
-      "Website Terms of Use for Migss Interiors, bathroom and kitchen renovation across London and Essex.",
+      "Website Terms of Use for Migss Interiors, bathroom and kitchen renovation across north London and Chigwell.",
     path: "/terms-of-use",
     image: image?.url,
     imageAlt: image?.alt,

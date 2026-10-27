@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { LOCATIONS } from "@/lib/locations";
+import { CLUSTERS, LOCATIONS } from "@/lib/locations";
 import { absolute } from "@/lib/seo";
 import { getPosts } from "@/lib/wix/blog";
 import { getOpenJobs } from "@/lib/wix/jobs";
@@ -55,6 +55,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority,
+    })),
+
+    ...CLUSTERS.map((cluster) => ({
+      url: absolute(`/locations/${cluster.slug}`),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
     })),
 
     ...LOCATIONS.map((location) => ({

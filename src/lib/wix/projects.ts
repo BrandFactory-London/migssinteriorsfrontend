@@ -201,24 +201,59 @@ export function categoriesPresent(projects: Project[]) {
 }
 
 /**
- * Projects in a town, falling back to recent work elsewhere.
+ * Projects in a town, falling back to nearby work in the same cluster, then
+ * to the featured portfolio.
  *
- * The town name is matched against the freeform `location` field, trimmed and
- * case-insensitively. Most of the ten towns have no photographed work yet, so
- * the fallback is the normal case rather than the exception — the caller says
- * so in the heading rather than implying we have worked on the next street.
+ * Town names are matched against the freeform `location` field, trimmed and
+ * case-insensitively. Many towns have no photographed work yet, so the
+ * fallback is the normal case rather than the exception. `isLocal` is false
+ * for both fallbacks, and the caller says so in the heading rather than
+ * implying we have worked on the next street.
+ *
+ * The cluster step matters for positioning: a north London page should not
+ * fall back to whichever three projects happen to be newest anywhere.
  */
-export async function getTownProjects(town: string) {
+export async function getTownProjects(town: string, clusterTowns: string[] = []) {
   const projects = await getProjects();
-  const wanted = town.trim().toLowerCase();
+  const normalise = (value: string | null | undefined) =>
+    value?.trim().toLowerCase() ?? "";
+  const wanted = normalise(town);
 
   const local = projects.filter(
-    (project) => project.location?.trim().toLowerCase() === wanted,
+    (project) => normalise(project.location) === wanted,
   );
-
   if (local.length > 0) return { projects: local, isLocal: true };
 
-  return { projects: projects.slice(0, 3), isLocal: false };
+  const nearbyNames = new Set(clusterTowns.map(normalise));
+  const nearby = projects.filter((project) =>
+    nearbyNames.has(normalise(project.location)),
+  );
+  if (nearby.length > 0) return { projects: nearby.slice(0, 6), isLocal: false };
+
+  const featured = projects.filter((project) => project.featured);
+  return {
+    projects: (featured.length > 0 ? featured : projects).slice(0, 3),
+    isLocal: false,
+  };
+}
+
+/**
+ * Projects anywhere in a cluster, for the cluster pages. Falls back to the
+ * featured portfolio, flagged the same way as getTownProjects.
+ */
+export async function getClusterProjects(clusterTowns: string[]) {
+  const projects = await getProjects();
+  const names = new Set(clusterTowns.map((name) => name.trim().toLowerCase()));
+  const inCluster = projects.filter((project) =>
+    names.has(project.location?.trim().toLowerCase() ?? ""),
+  );
+  if (inCluster.length > 0) return { projects: inCluster, isLocal: true };
+
+  const featured = projects.filter((project) => project.featured);
+  return {
+    projects: (featured.length > 0 ? featured : projects).slice(0, 3),
+    isLocal: false,
+  };
 }
 
 /**

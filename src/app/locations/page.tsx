@@ -1,23 +1,23 @@
 import Link from "next/link";
 
 import { ServiceCards } from "@/components/locations/service-cards";
+import { TownList } from "@/components/locations/town-list";
 import { EnquireBand } from "@/components/projects/enquire-band";
-import { Reveal } from "@/components/reveal";
 import { Breadcrumb } from "@/components/service/breadcrumb";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { pageMetadata } from "@/lib/seo";
 import { ogImage } from "@/lib/wix/og-image";
-import { LOCATIONS } from "@/lib/locations";
+import { CLUSTERS, clusterTowns } from "@/lib/locations";
 
 export async function generateMetadata() {
   const image = await ogImage("location-hero-chigwell");
 
   return pageMetadata({
-    title: "Areas We Cover | Renovation across East London & Essex",
+    title: "Areas We Cover | High-End Renovation in North London & Chigwell",
     description:
-      "The ten towns across East London and Essex where Migss Interiors renovate bathrooms, kitchens and whole homes, from Wanstead and Woodford to Brentwood and Epping.",
+      "Migss Interiors specialises in two areas: north London and its suburbs, from Hampstead to Cockfosters, and Chigwell with the east London and Essex forest towns.",
     path: "/locations",
     image: image?.url,
     imageAlt: image?.alt,
@@ -37,18 +37,18 @@ export default function LocationsPage() {
           </div>
           <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
-            Ten areas · One team
+            Two specialist areas · One team
           </p>
           <h1 className="mb-[18.4px] max-w-[23ch] text-[clamp(38px,9vw,76px)] leading-none font-normal tracking-[-0.03em] text-balance">
-            Where we work, and why we keep it close.
+            Two areas we know inside out.
           </h1>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-[clamp(14px,3vw,40px)] border-t border-[var(--migss-divider)] pt-[18.4px]">
             <p className="text-[clamp(15px,4vw,17.5px)] leading-[1.75] text-pretty text-migss-text/80">
-              Every area below is within an hour of our Essex workshop. That is
-              deliberate: it is how the same fitters, the same tiler and the
-              same project manager stay on your job from first measure to final
-              snag, and how we can be back the week after handover if anything
-              needs adjusting.
+              We specialise in two clusters: north London and its suburbs, and
+              Chigwell with the east London and Essex forest towns. We work
+              alongside the interior designers and luxury showrooms in both,
+              and the same fitters, tiler and project manager stay on your job
+              from first measure to final snag.
             </p>
             <p className="text-sm leading-[1.8] text-migss-text/62">
               Pick your town for local project examples and the nearest
@@ -66,58 +66,36 @@ export default function LocationsPage() {
           id="areas"
           className="mx-auto max-w-[1280px] scroll-mt-20 px-[clamp(16px,4.5vw,48px)]"
         >
-          <h2 className="mb-[13.8px] text-[clamp(24px,5.6vw,32px)] leading-[1.1] font-normal tracking-[-0.02em]">
-            Service areas
-          </h2>
-          {/* auto-rows-fr sizes every row to the tallest card, so Theydon Bois
-              wrapping to two lines does not make row 1 taller than the rest.
-              Gated at 620px because that is where the auto-fit track first
-              yields two columns — below it each card is its own row, and
-              equalising would only add dead space on a phone. */}
-          <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] border-t border-l border-[var(--migss-divider)] min-[620px]:auto-rows-fr">
-            {LOCATIONS.map((location, index) => (
-              <Reveal
-                as="li"
-                key={location.slug}
-                delay={Math.min(index, 6) * 50}
-                className="border-r border-b border-[var(--migss-divider)]"
+          {CLUSTERS.map((cluster, clusterIndex) => {
+            const { core, surrounding } = clusterTowns(cluster);
+            return (
+              <div
+                key={cluster.slug}
+                className={clusterIndex > 0 ? "mt-[clamp(32px,6vw,64px)]" : ""}
               >
-                <Link
-                  href={`/locations/${location.slug}`}
-                  className="group flex h-full min-h-[104px] items-start gap-3.5 p-[clamp(16px,2.6vw,22px)] text-inherit no-underline transition-colors duration-300 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/7"
-                >
-                  <span className="font-heading pt-[5px] text-[13px] text-migss-accent-ink tabular-nums">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="flex-1">
-                    <span className="font-heading flex items-baseline gap-2 text-[27px] leading-[1.1] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-ink">
-                      {location.name}
-                      <span className="font-body text-xs tracking-[0.06em] text-migss-text/52">
-                        {location.postcode}
-                      </span>
-                    </span>
-                    <span className="mt-1.5 block text-[13.5px] leading-[1.6] text-migss-text/68">
-                      {location.summary}
-                    </span>
-                  </span>
-                  <span className="mt-1 grid h-[30px] w-[30px] flex-none place-items-center rounded-full border border-migss-accent text-migss-accent-ink opacity-100 transition-[transform,opacity] duration-[350ms] ease-[cubic-bezier(.2,.65,.2,1)] [@media(hover:hover)]:opacity-45 [@media(hover:hover)]:group-hover:translate-x-1 [@media(hover:hover)]:group-hover:opacity-100">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </ul>
+                <div className="mb-[13.8px] flex flex-wrap items-baseline justify-between gap-x-[18.4px] gap-y-1.5">
+                  <h2 className="text-[clamp(24px,5.6vw,32px)] leading-[1.1] font-normal tracking-[-0.02em]">
+                    {cluster.name}
+                  </h2>
+                  <Link
+                    href={`/locations/${cluster.slug}`}
+                    className="text-sm font-medium text-migss-accent-ink no-underline"
+                  >
+                    About this area →
+                  </Link>
+                </div>
+                <TownList towns={core} />
+                {surrounding.length > 0 ? (
+                  <>
+                    <p className="mt-[18.4px] mb-[9.2px] text-[11px] font-medium tracking-[0.18em] uppercase text-migss-text/60">
+                      Surrounding areas
+                    </p>
+                    <TownList towns={surrounding} startAt={core.length + 1} />
+                  </>
+                ) : null}
+              </div>
+            );
+          })}
         </section>
 
         <section className="mx-auto mt-[clamp(32px,6.5vw,76px)] max-w-[1280px] px-[clamp(16px,4.5vw,48px)]">

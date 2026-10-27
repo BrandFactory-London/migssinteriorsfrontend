@@ -11,7 +11,7 @@ import { LOCATIONS } from "@/lib/locations";
  *
  * Everything here is already established elsewhere in the codebase — the
  * registered name, number and address from COMPANY, the phone and email from
- * SITE, the ten towns from LOCATIONS — so there is one place to correct if
+ * SITE, the towns from LOCATIONS, so there is one place to correct if
  * any of it changes.
  */
 export function localBusinessJsonLd() {
@@ -47,8 +47,10 @@ export function localBusinessJsonLd() {
       name: "Company number",
       value: COMPANY.number,
     },
+    // "Place" rather than "City": several entries, such as Hampstead Garden
+    // Suburb, are districts rather than cities.
     areaServed: LOCATIONS.map((location) => ({
-      "@type": "City" as const,
+      "@type": "Place" as const,
       name: location.name,
     })),
     hasOfferCatalog: {

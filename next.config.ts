@@ -33,8 +33,8 @@ const nextConfig: NextConfig = {
    */
   async redirects() {
     return [
-      // The Jobs page has no equivalent here.
-      { source: "/jobs", destination: "/", statusCode: 301 },
+      // The old Wix Jobs page now has a real equivalent.
+      { source: "/jobs", destination: "/join-the-team", statusCode: 301 },
       {
         source: "/renovations-showcase",
         destination: "/our-projects",

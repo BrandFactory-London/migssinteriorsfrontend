@@ -16,7 +16,7 @@ export async function generateMetadata() {
   return pageMetadata({
     title: "Contact Migss Interiors | Free Home Visit & Fixed Quote",
     description:
-      "Call, email or send an enquiry for a free home visit and a fixed written quote. Average response time under 20 minutes during working hours, across East London and Essex.",
+      "Call, email or send an enquiry for a free home visit and a fixed written quote. Average response time under 20 minutes during working hours, across north London and Chigwell.",
     path: "/contact",
     image: image?.url,
     imageAlt: image?.alt,
@@ -168,10 +168,19 @@ export default function ContactPage() {
               {/* Deliberately a pointer to /locations rather than a second copy
                   of the area list, which lives on that page. */}
               <p className="text-[15px] leading-[1.75] text-migss-text/76">
-                Ten areas across London and Essex, all within an hour of our
-                Essex workshop, from{" "}
-                <Link href="/locations" className="text-migss-accent-ink">
-                  Wanstead and Woodford to Brentwood and Epping
+                Two areas we specialise in:{" "}
+                <Link
+                  href="/locations/north-london"
+                  className="text-migss-accent-ink"
+                >
+                  north London and its suburbs
+                </Link>
+                , and{" "}
+                <Link
+                  href="/locations/essex-forest"
+                  className="text-migss-accent-ink"
+                >
+                  Chigwell and the Essex forest towns
                 </Link>
                 .
               </p>

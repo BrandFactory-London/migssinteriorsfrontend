@@ -14,7 +14,7 @@ export async function generateMetadata() {
     title: `${doc?.title ?? "Labour Guarantee"} | Migss Interiors`,
     description:
       doc?.description ??
-      "Labour Guarantee for Migss Interiors, bathroom and kitchen renovation across London and Essex.",
+      "Labour Guarantee for Migss Interiors, bathroom and kitchen renovation across north London and Chigwell.",
     path: "/labour-guarantee",
     image: image?.url,
     imageAlt: image?.alt,

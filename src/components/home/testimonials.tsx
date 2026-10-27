@@ -42,7 +42,7 @@ export function Testimonials() {
             <Star />
           </div>
           <p className="text-[13.5px] leading-[1.65] text-migss-text/70">
-            Rated by homeowners across London &amp; Essex. Read every review on
+            Rated by homeowners across north London and Chigwell. Read every review on
             our Google Business profile.
           </p>
         </Reveal>

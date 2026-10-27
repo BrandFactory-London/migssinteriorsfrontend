@@ -14,7 +14,7 @@ export async function generateMetadata() {
     title: `${doc?.title ?? "Product Warranty"} | Migss Interiors`,
     description:
       doc?.description ??
-      "Product Warranty for Migss Interiors, bathroom and kitchen renovation across London and Essex.",
+      "Product Warranty for Migss Interiors, bathroom and kitchen renovation across north London and Chigwell.",
     path: "/product-warantee",
     image: image?.url,
     imageAlt: image?.alt,

@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description:
       job.summary ??
       job.description[0] ??
-      `${job.title} at Migss Interiors, East London and Essex.`,
+      `${job.title} at Migss Interiors, north London and Chigwell.`,
     path: `/join-the-team/${job.slug}`,
     image: image?.url,
     imageAlt: image?.alt,

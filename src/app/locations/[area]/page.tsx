@@ -13,7 +13,7 @@ import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
-import { LOCATIONS, getLocation } from "@/lib/locations";
+import { LOCATIONS, clusterFor, getLocation } from "@/lib/locations";
 import { pageMetadata } from "@/lib/seo";
 import { ogImage } from "@/lib/wix/og-image";
 import { getTownProjects } from "@/lib/wix/projects";
@@ -26,7 +26,7 @@ export function generateStaticParams() {
   return LOCATIONS.map(({ slug }) => ({ area: slug }));
 }
 
-/** Only the ten areas we cover; anything else is a genuine 404. */
+/** Only the towns we cover; anything else is a genuine 404. */
 export const dynamicParams = false;
 
 /** The nearby-work rail reads the live portfolio. */
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const image = await ogImage(`location-hero-${location.slug}`);
 
   return pageMetadata({
-    title: `Bathroom & Kitchen Renovation in ${location.name} | Migss Interiors`,
+    title: `High-End Bathroom & Kitchen Renovation in ${location.name} | Migss Interiors`,
     description: location.heroLead,
     path: `/locations/${location.slug}`,
     image: image?.url,
@@ -54,11 +54,23 @@ export default async function LocationDetailPage({ params }: Props) {
 
   if (!location) notFound();
 
-  const { projects, isLocal } = await getTownProjects(location.name);
+  const cluster = clusterFor(location.slug);
+  const { projects, isLocal } = await getTownProjects(
+    location.name,
+    cluster
+      ? [...cluster.core, ...cluster.surrounding].map(
+          (slug) => getLocation(slug)?.name ?? slug,
+        )
+      : [],
+  );
   const facts = [
     { label: "Postcodes", value: location.postcodes },
-    { label: "From our workshop", value: location.travel },
-    { label: "Projects completed", value: location.projectCount },
+    ...(cluster
+      ? [{ label: "Specialist area", value: cluster.shortName }]
+      : []),
+    ...(location.projectCount
+      ? [{ label: "Projects completed", value: location.projectCount }]
+      : []),
     { label: "Consultation", value: "Within the week" },
   ];
 
@@ -90,6 +102,14 @@ export default async function LocationDetailPage({ params }: Props) {
                 items={[
                   { href: "/", label: "Home" },
                   { href: "/locations", label: "Locations" },
+                  ...(cluster
+                    ? [
+                        {
+                          href: `/locations/${cluster.slug}`,
+                          label: cluster.shortName,
+                        },
+                      ]
+                    : []),
                   { label: location.name },
                 ]}
               />
@@ -201,43 +221,45 @@ export default async function LocationDetailPage({ params }: Props) {
 
         <div className="mt-[clamp(10px,2vw,24px)]">
           <AssuranceStrip
-            fourth={`${location.travel} from our workshop`}
+            fourth="Designer & showroom partners"
             overlap={false}
           />
         </div>
 
-        <section className="mx-auto mt-[clamp(32px,6.5vw,76px)] max-w-[1280px] px-[clamp(16px,4.5vw,48px)]">
-          <Reveal
-            as="blockquote"
-            className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] items-center gap-[clamp(16px,3vw,40px)] border-t border-[var(--migss-divider)] pt-7"
-          >
-            <p className="font-heading text-[clamp(22px,5.4vw,32px)] leading-[1.28] italic">
-              {location.quote.text}
-            </p>
-            <footer className="flex flex-col gap-2">
-              <span
-                className="flex gap-1 text-migss-accent-ink"
-                aria-label="5 out of 5 stars"
-              >
-                {Array.from({ length: 5 }, (_, index) => (
-                  <svg
-                    key={index}
-                    width="17"
-                    height="17"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" />
-                  </svg>
-                ))}
-              </span>
-              <span className="text-[11.5px] font-medium tracking-[0.12em] uppercase text-migss-text/60">
-                {location.quote.source}
-              </span>
-            </footer>
-          </Reveal>
-        </section>
+        {location.quote ? (
+          <section className="mx-auto mt-[clamp(32px,6.5vw,76px)] max-w-[1280px] px-[clamp(16px,4.5vw,48px)]">
+            <Reveal
+              as="blockquote"
+              className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] items-center gap-[clamp(16px,3vw,40px)] border-t border-[var(--migss-divider)] pt-7"
+            >
+              <p className="font-heading text-[clamp(22px,5.4vw,32px)] leading-[1.28] italic">
+                {location.quote.text}
+              </p>
+              <footer className="flex flex-col gap-2">
+                <span
+                  className="flex gap-1 text-migss-accent-ink"
+                  aria-label="5 out of 5 stars"
+                >
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <svg
+                      key={index}
+                      width="17"
+                      height="17"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" />
+                    </svg>
+                  ))}
+                </span>
+                <span className="text-[11.5px] font-medium tracking-[0.12em] uppercase text-migss-text/60">
+                  {location.quote.source}
+                </span>
+              </footer>
+            </Reveal>
+          </section>
+        ) : null}
 
         <EnquireBand
           heading={<>Book a free consultation in {location.name}</>}
@@ -258,10 +280,14 @@ export default async function LocationDetailPage({ params }: Props) {
             variant="detail"
           />
           <Link
-            href="/locations"
+            href={cluster ? `/locations/${cluster.slug}` : "/locations"}
             className="mt-[18.4px] flex min-h-[56px] items-center justify-between gap-3 rounded-[4px] border border-[var(--migss-divider)] px-[18.4px] text-[15px] text-inherit no-underline transition-colors duration-300 [@media(hover:hover)]:hover:border-migss-accent"
           >
-            <span>See all ten areas we cover</span>
+            <span>
+              {cluster
+                ? `See every town in ${cluster.name}`
+                : "See every area we cover"}
+            </span>
             <svg
               width="17"
               height="17"

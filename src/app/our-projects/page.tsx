@@ -23,9 +23,9 @@ export async function generateMetadata() {
   const image = await ogImage("home-hero");
 
   return pageMetadata({
-    title: "Our Projects | Bathroom & Kitchen Portfolio, London & Essex",
+    title: "Our Projects | High-End Renovation Portfolio, North London & Chigwell",
     description:
-      "Completed bathroom, kitchen and whole-home renovations across East London and Essex, photographed the week we handed them over. Real homes, our own tradespeople, no borrowed photography.",
+      "Completed high-end bathroom, kitchen and whole-home renovations across north London and Chigwell, photographed the week we handed them over. Real homes, our own tradespeople, no borrowed photography.",
     path: "/our-projects",
     image: image?.url,
     imageAlt: image?.alt,
@@ -56,7 +56,7 @@ export default async function OurProjectsPage() {
           </div>
           <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
-            Portfolio · London &amp; Essex
+            Portfolio · North London &amp; Chigwell
           </p>
           <h1 className="mb-[18.4px] max-w-[22ch] text-[clamp(38px,9vw,76px)] leading-none font-normal tracking-[-0.03em] text-balance">
             Finished work, photographed the week we handed it over.
@@ -66,7 +66,7 @@ export default async function OurProjectsPage() {
             <p className="text-[clamp(15px,4vw,17.5px)] leading-[1.75] text-pretty text-migss-text/80">
               Every project below was designed and built by our own team. No
               styling props, no borrowed photography. These are real homes in
-              Chigwell, Wanstead, Loughton and across Essex, most of which you
+              Chigwell, Theydon Bois and the surrounding areas, most of which you
               could visit if the owners are willing.
             </p>
             <dl className="grid grid-cols-3 gap-[13.8px]">

@@ -15,9 +15,9 @@ export async function generateMetadata() {
   const image = await ogImage("services-door-bathroom");
 
   return pageMetadata({
-    title: "Renovation Services in London & Essex | Migss Interiors",
+    title: "High-End Renovation Services in North London & Chigwell | Migss Interiors",
     description:
-      "Bathroom, kitchen and whole-home interior renovation across East London and Essex, designed and built by one directly employed team with a ten-year labour guarantee.",
+      "High-end bathroom, kitchen and whole-home interior renovation across north London and Chigwell, designed and built by one directly employed team with a ten-year labour guarantee.",
     path: "/renovation-services",
     image: image?.url,
     imageAlt: image?.alt,

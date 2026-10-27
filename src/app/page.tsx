@@ -20,9 +20,9 @@ export async function generateMetadata() {
   const image = await ogImage("home-hero");
 
   return pageMetadata({
-    title: "Migss Interiors | Bathroom & Kitchen Renovation in London & Essex",
+    title: "Migss Interiors | High-End Bathroom & Kitchen Renovation, North London & Chigwell",
     description:
-      "Migss Interiors design and build luxury bathrooms, kitchens and whole-home interiors across East London and Essex. Directly employed tradespeople, a fixed written quote and a ten-year labour guarantee.",
+      "High-end bathrooms, kitchens and interiors across north London and Chigwell, from Hampstead and Highgate to Chigwell and Epping. Our own tradespeople, a fixed written quote and a ten-year labour guarantee.",
     path: "/",
     image: image?.url,
     imageAlt: image?.alt,

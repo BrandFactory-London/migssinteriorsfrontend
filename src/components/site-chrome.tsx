@@ -223,7 +223,7 @@ export function SiteChrome() {
               <p className="mt-2 text-[12.5px] leading-[1.7] text-migss-neutral-400">
                 {SITE.phone} · {SITE.email}
                 <br />
-                Mon–Sat, 8am–6pm · London &amp; Essex
+                Mon–Sat, 8am–6pm · North London &amp; Chigwell
               </p>
             </div>
           </nav>
