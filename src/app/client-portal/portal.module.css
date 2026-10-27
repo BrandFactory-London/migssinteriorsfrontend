@@ -1,0 +1,290 @@
+/*
+ * The client portal is a copy of the staff sign-in at staff.migssinteriors.com.
+ *
+ * Every value below is lifted from `packages/ui-tokens/src/login.ts` in the
+ * migss-operations-platform repo, which is where the staff screen reads them
+ * from. That file in turn took them from this website's own mobile menu, so
+ * most of them are this site's `--color-migss-*` steps and are referenced as
+ * such. If the staff screen changes, change it there first and copy the value
+ * across: the two are meant to look identical, and nothing enforces it but this
+ * note.
+ *
+ * One knowing difference: the staff screen sets its small capitals in DM Sans
+ * because that app already loads it. This site already loads Instrument Sans,
+ * which is the face login.ts says it was standing in for, so the portal uses
+ * that and pulls in no font of its own.
+ */
+
+.screen {
+  /* loginColor */
+  --p-ground: var(--color-migss-neutral-900); /* #2d2b2b */
+  --p-ink: var(--color-migss-neutral-100); /* #f8f4f4 */
+  --p-ink-muted: var(--color-migss-neutral-400); /* #bab6b6 */
+  --p-rule: rgba(248, 244, 244, 0.2);
+  --p-rule-soft: rgba(248, 244, 244, 0.15);
+  --p-field-edge: var(--color-migss-neutral-600); /* #7d7979 */
+  --p-accent: var(--color-migss-accent-300); /* #dfcab9 */
+  --p-accent-edge: var(--color-migss-accent-400); /* #d0b59f */
+  --p-error: #e98b7d;
+  --p-accent-wash: rgba(223, 202, 185, 0.12);
+
+  /* loginLayout */
+  --p-gutter: clamp(16px, 4.5vw, 48px);
+  --p-radius: 4px;
+  --p-banner-h: 260px;
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  background: var(--p-ground);
+  color: var(--p-ink);
+  font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* The header photograph, its eased fade into charcoal, and the dither tile
+   that stops the fade banding. Decorative throughout. */
+.banner {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: var(--p-banner-h);
+  overflow: hidden;
+  pointer-events: none;
+}
+.bannerImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+}
+.bannerFade {
+  position: absolute;
+  inset: 0;
+  /* fadeStops(): nine stops, alpha rising as the square of the distance. */
+  background: linear-gradient(
+    to bottom,
+    rgba(45, 43, 43, 0) 0%,
+    rgba(45, 43, 43, 0.0156) 12.5%,
+    rgba(45, 43, 43, 0.0625) 25%,
+    rgba(45, 43, 43, 0.1406) 37.5%,
+    rgba(45, 43, 43, 0.25) 50%,
+    rgba(45, 43, 43, 0.3906) 62.5%,
+    rgba(45, 43, 43, 0.5625) 75%,
+    rgba(45, 43, 43, 0.7656) 87.5%,
+    rgba(45, 43, 43, 1) 100%
+  );
+}
+.bannerNoise {
+  position: absolute;
+  inset: 0;
+  background: url(/portal/login-noise.png) repeat;
+  opacity: 0.35;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px var(--p-gutter);
+  border-bottom: 1px solid var(--p-rule);
+}
+
+/* The tracked capitals used for the bar label and the field labels. */
+.caps {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--p-accent);
+}
+
+.barLink {
+  composes: caps;
+  color: var(--p-ink-muted);
+  text-decoration: none;
+  transition: color 150ms;
+}
+@media (hover: hover) {
+  .barLink:hover {
+    color: var(--p-accent);
+  }
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px var(--p-gutter) 40px;
+}
+
+.column {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: block;
+  width: 180px;
+  height: auto;
+  aspect-ratio: 412 / 86;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  margin: 0 0 30px;
+  font-size: 14px;
+  color: var(--p-ink-muted);
+}
+
+.label {
+  composes: caps;
+  display: block;
+  margin: 16px 0 7px;
+}
+
+.field {
+  display: block;
+  width: 100%;
+  height: 52px;
+  padding: 0 14px;
+  border: 1px solid var(--p-field-edge);
+  border-radius: var(--p-radius);
+  background: transparent;
+  color: var(--p-ink);
+  font: inherit;
+  /* 16px is the floor: below it iOS zooms the page on focus. */
+  font-size: 16px;
+  outline: none;
+  transition: border-color 150ms;
+}
+.field:focus {
+  border-color: var(--p-accent-edge);
+}
+.field::placeholder {
+  color: var(--p-ink-muted);
+}
+
+.error {
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--p-error);
+}
+
+.button {
+  display: flex;
+  width: 100%;
+  min-height: 56px;
+  margin-top: 20px;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--p-accent-edge);
+  border-radius: var(--p-radius);
+  background: transparent;
+  color: var(--p-accent);
+  font-family: var(--font-cormorant), ui-serif, Georgia, serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+.button:active,
+.button[aria-busy="true"] {
+  background: var(--p-accent-wash);
+}
+@media (hover: hover) {
+  .button:hover {
+    background: var(--p-accent-wash);
+  }
+}
+.button[aria-busy="true"],
+.button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.button:focus-visible,
+.field:focus-visible,
+.barLink:focus-visible {
+  outline: 2px solid var(--p-accent-edge);
+  outline-offset: 2px;
+}
+
+.footer {
+  margin: 28px 0 0;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--p-ink-muted);
+}
+.footer a {
+  color: var(--p-accent);
+  text-decoration: none;
+}
+
+/* --- Documents page: the same language, one list. --- */
+
+.docs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--p-rule-soft);
+}
+.doc {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--p-rule-soft);
+}
+.docName {
+  min-width: 0;
+  flex: 1 1 180px;
+  font-family: var(--font-cormorant), ui-serif, Georgia, serif;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--p-ink);
+  overflow-wrap: anywhere;
+}
+.docMeta {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  font-size: 12.5px;
+  color: var(--p-ink-muted);
+}
+.docActions {
+  display: flex;
+  gap: 8px;
+}
+.docButton {
+  composes: button;
+  width: auto;
+  min-width: 96px;
+  min-height: 44px;
+  margin-top: 0;
+  padding: 0 16px;
+}
+.empty {
+  margin: 0;
+  padding: 16px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--p-ink-muted);
+  border-top: 1px solid var(--p-rule-soft);
+  border-bottom: 1px solid var(--p-rule-soft);
+}
+.signOut {
+  composes: button;
+  margin-top: 28px;
+}

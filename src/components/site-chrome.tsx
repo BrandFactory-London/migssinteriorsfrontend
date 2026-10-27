@@ -5,7 +5,14 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { SITE, telHref, NAV, STAFF_LOGIN_URL, WHATSAPP_URL } from "@/lib/site";
+import {
+  SITE,
+  telHref,
+  NAV,
+  STAFF_LOGIN_URL,
+  CLIENT_LOGIN_PATH,
+  WHATSAPP_URL,
+} from "@/lib/site";
 import { ButtonLink } from "@/components/ui/button";
 import { useNavMenu } from "@/components/nav-menu";
 import { cn } from "@/lib/utils";
@@ -187,6 +194,34 @@ export function SiteChrome() {
           </div>
 
           <nav className="flex flex-1 flex-col overflow-y-auto px-[clamp(16px,4.5vw,48px)] pt-[18px] pb-7">
+            {/* The client portal, set apart on purpose. It is not one of the
+                pages being offered, so it is not a numbered serif row, and it
+                is not a call to action, so it is not one of the large buttons
+                at the foot. A compact tan-washed chip with a lock, in the same
+                tracked capitals as the bar, so it reads as "your account"
+                and can be found at a glance by someone who came for it. */}
+            <Link
+              href={CLIENT_LOGIN_PATH}
+              onClick={() => setMenuOpen(false)}
+              className="mb-2 inline-flex min-h-[40px] items-center gap-2 self-start rounded-full border border-migss-accent-400 bg-migss-accent-300/12 px-4 text-[11px] font-medium tracking-[0.24em] text-migss-accent-300 uppercase no-underline transition-colors active:bg-migss-accent-300/20 [@media(hover:hover)]:hover:bg-migss-accent-300/20"
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="4.5" y="10.5" width="15" height="10" rx="1.5" />
+                <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" />
+              </svg>
+              Client Login
+            </Link>
+
             {NAV.map((item, index) => (
               <Link
                 key={item.href}

@@ -10,7 +10,14 @@ import { absolute } from "@/lib/seo";
  */
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: "*", allow: "/", disallow: "/thank-you" }],
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        // The client portal is private and carries noindex as well.
+        disallow: ["/thank-you", "/client-portal"],
+      },
+    ],
     sitemap: absolute("/sitemap.xml"),
   };
 }
