@@ -16,7 +16,7 @@ const ARTICLES = [
   {
     kicker: "Planning",
     title: "A realistic bathroom renovation budget for 2026",
-    body: "Where the money actually goes on an Essex bathroom project.",
+    body: "Where the money actually goes on a high-end bathroom project.",
     meta: "6 min read",
   },
 ];

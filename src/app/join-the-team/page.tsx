@@ -23,9 +23,9 @@ export async function generateMetadata() {
   const image = await ogImage("home-hero");
 
   return pageMetadata({
-    title: "Join the Team | Bathroom Fitter Jobs, London & Essex",
+    title: "Join the Team | Bathroom Fitter Jobs, North London & Chigwell",
     description:
-      "Open roles at Migss Interiors. Experienced bathroom fitters and tradespeople for luxury renovations across East London and Essex, with a steady pipeline of work and a paid trial.",
+      "Open roles at Migss Interiors. Experienced bathroom fitters and tradespeople for high-end renovations across north London and Chigwell, with a steady pipeline of work and a paid trial.",
     path: "/join-the-team",
     image: image?.url,
     imageAlt: image?.alt,
@@ -65,7 +65,7 @@ export default async function JoinTheTeamPage() {
           </div>
           <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
-            Careers · London &amp; Essex
+            Careers · North London &amp; Chigwell
           </p>
           <h1 className="mb-[18.4px] max-w-[22ch] text-[clamp(38px,9vw,76px)] leading-none font-normal tracking-[-0.03em] text-balance">
             Build the bathrooms our clients photograph.
@@ -171,7 +171,7 @@ export default async function JoinTheTeamPage() {
               <p className="max-w-[64ch] text-[15px] leading-[1.75] text-migss-text/78">
                 We are not advertising a role at the moment, but we are always
                 glad to hear from experienced fitters and tilers working across
-                East London and Essex. Call{" "}
+                north London and Chigwell. Call{" "}
                 <a href={telHref} className="text-migss-accent-ink">
                   {SITE.phone}
                 </a>{" "}

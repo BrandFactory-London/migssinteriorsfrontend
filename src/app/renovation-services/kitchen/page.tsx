@@ -12,7 +12,7 @@ export async function generateMetadata() {
   const image = await ogImage("kitchen-hero");
 
   return pageMetadata({
-    title: `${service.title} in London & Essex | Migss Interiors`,
+    title: `${service.title} in North London & Chigwell | Migss Interiors`,
     description: service.metaDescription,
     path: "/renovation-services/kitchen",
     image: image?.url,

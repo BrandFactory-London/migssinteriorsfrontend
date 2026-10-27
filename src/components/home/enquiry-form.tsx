@@ -23,7 +23,7 @@ const FOCUS_TO_TYPE = {
 export type EnquiryFocus = keyof typeof FOCUS_TO_TYPE;
 const BUDGETS = [
   "Not sure yet",
-  "£15k – £30k",
+  "£20k – £30k",
   "£30k – £60k",
   "£60k – £100k",
   "£100k +",

@@ -39,9 +39,9 @@ export function LocalProjects({
           </h2>
           {!isLocal ? (
             <p className="mt-2 max-w-[52ch] text-sm leading-[1.6] text-migss-text/62">
-              We have not photographed a {town} project yet. These are recent
-              builds elsewhere in the same range. Ask and we will send the
-              closest match to your street.
+              We have not published a {town} project yet. These are recent
+              builds nearby or from our featured work. Ask and we will send the
+              closest match to your home.
             </p>
           ) : null}
         </div>

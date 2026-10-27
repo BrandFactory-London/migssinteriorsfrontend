@@ -16,9 +16,9 @@ export async function generateMetadata() {
   const image = await ogImage("home-hero");
 
   return pageMetadata({
-    title: "About Migss Interiors | Our Own Tradespeople, London & Essex",
+    title: "About Migss Interiors | High-End Renovation, North London & Chigwell",
     description:
-      "Twenty-five years renovating bathrooms, kitchens and whole homes across London and Essex, with directly employed tradespeople, one fixed price and one project manager from survey to handover.",
+      "Twenty-five years renovating bathrooms, kitchens and whole homes, now specialising in north London and Chigwell, with directly employed tradespeople, one fixed price and one project manager from survey to handover.",
     path: "/about",
     image: image?.url,
     imageAlt: image?.alt,
@@ -67,7 +67,7 @@ const NEXT = [
     href: "/locations",
     kicker: "Areas",
     title: "Locations",
-    body: "The ten areas we cover across London and Essex.",
+    body: "North London and its suburbs, and Chigwell with the Essex forest towns.",
   },
 ];
 
@@ -85,17 +85,25 @@ export default function AboutPage() {
           </div>
           <p className="mb-[13.8px] flex items-center gap-2.5 text-[11px] font-medium tracking-[0.18em] uppercase text-migss-accent-ink">
             <span className="block h-px w-[34px] bg-migss-accent" />
-            Est. 2001 · London &amp; Essex
+            Est. 2001 · North London &amp; Chigwell
           </p>
           <h1 className="mb-[18.4px] max-w-[21ch] text-[clamp(38px,9vw,76px)] leading-none font-normal tracking-[-0.03em] text-balance">
             A builder you can ring, not a company you have to chase.
           </h1>
           <p className="max-w-[62ch] text-[clamp(15px,4vw,17.5px)] leading-[1.75] text-pretty text-migss-text/80">
             Migss Interiors has renovated bathrooms, kitchens and whole homes
-            across London and Essex for twenty-five years. We are not a
-            franchise and not a sales operation with a build team bolted on. We
-            are tradespeople who employ tradespeople, and the same names turn up
-            on your job from the first measure to the final snag.
+            for twenty-five years. We are not a franchise and not a sales
+            operation with a build team bolted on. We are tradespeople who
+            employ tradespeople, and the same names turn up on your job from the
+            first measure to the final snag.
+          </p>
+          <p className="mt-[13.8px] max-w-[62ch] text-[15px] leading-[1.8] text-pretty text-migss-text/70">
+            Today we specialise in two areas: north London and its suburbs,
+            from Hampstead and Highgate to Cockfosters, and Chigwell with the
+            east London and Essex forest towns. We work alongside interior
+            designers and luxury showrooms in both, and every project is
+            documented and published, so you can see exactly how we work before
+            you call.
           </p>
         </section>
 

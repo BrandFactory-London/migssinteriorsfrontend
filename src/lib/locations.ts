@@ -1,10 +1,20 @@
 /**
- * The ten service areas, and the per-town copy the location template is
- * parameterised on.
+ * The service areas, grouped into two clusters, and the per-town copy the
+ * location template is parameterised on.
+ *
+ * Positioning (confirmed 27 Oct 2026): Migss specialises in two clusters,
+ * North London & Suburbs and East London & Essex Forest Towns. CLUSTERS, at
+ * the end of this file, is the one place that says which town sits where and
+ * in what order; the hub, the cluster pages, the homepage and the schema all
+ * read it.
+ *
+ * Claims policy: towns added for the north London cluster carry no project
+ * counts, named streets or homeowner quotes until real ones are confirmed.
+ * Their copy sticks to verifiable local character.
  *
  * Chigwell's copy is the design's own — it is the town the artboard was drawn
- * for. The other nine follow the same structure, written against the
- * characterisation each town is given on the hub page.
+ * for. The other original towns follow the same structure, written against
+ * the characterisation each town is given on the hub page.
  *
  * Project examples come from the live Projects CMS collection, matched on the
  * town name — see getTownProjects in lib/wix/projects.ts, which also handles
@@ -25,14 +35,18 @@ export type Location = {
 
   /** Fact strip. */
   postcodes: string;
-  travel: string;
-  projectCount: string;
+  /**
+   * Completed projects in the town. Optional: only shown where Migss has
+   * confirmed a count. New towns carry none until real work is published.
+   */
+  projectCount?: string;
 
   localHeading: string;
   localCopy: [string, string];
   localFacts: { label: string; value: string }[];
 
-  quote: { text: string; source: string };
+  /** A real homeowner quote from this town. Omitted until one is confirmed. */
+  quote?: { text: string; source: string };
 };
 
 export const LOCATIONS: Location[] = [
@@ -45,9 +59,8 @@ export const LOCATIONS: Location[] = [
     kicker: "Chigwell, IG7 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Chigwell.",
     heroLead:
-      "Twenty minutes from our Essex workshop, and the postcode we have worked in longest: forty-plus completed projects between Manor Road and the High Road.",
+      "The heart of our east London and Essex work, and the postcode we have worked in longest: forty-plus completed projects between Manor Road and the High Road.",
     postcodes: "IG7, IG8",
-    travel: "20 minutes",
     projectCount: "40+",
     localHeading: "We know what is behind the walls here.",
     localCopy: [
@@ -77,9 +90,8 @@ export const LOCATIONS: Location[] = [
     kicker: "Epping, CM16 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Epping.",
     heroLead:
-      "Period cottages, forest-edge houses and the newer closes off Bury Lane, twenty-five minutes from the workshop, with the access planned before we quote.",
+      "Period cottages, forest-edge houses and the newer closes off Bury Lane, with the access planned before we quote.",
     postcodes: "CM16",
-    travel: "25 minutes",
     projectCount: "20+",
     localHeading: "Old buildings, and the surprises that come with them.",
     localCopy: [
@@ -112,9 +124,8 @@ export const LOCATIONS: Location[] = [
     kicker: "Loughton, IG10 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Loughton.",
     heroLead:
-      "The 1930s estates off Forest Drive and the roads climbing towards the forest, fifteen minutes away, and the town we are called back to most often.",
+      "The 1930s estates off Forest Drive and the roads climbing towards the forest, and the town we are called back to most often.",
     postcodes: "IG10",
-    travel: "15 minutes",
     projectCount: "35+",
     localHeading: "The same house, a hundred times over.",
     localCopy: [
@@ -148,7 +159,6 @@ export const LOCATIONS: Location[] = [
     heroLead:
       "Larger plots off Coppice Row and the village roads, where the brief is usually the whole house rather than a single room.",
     postcodes: "CM16",
-    travel: "25 minutes",
     projectCount: "15+",
     localHeading: "Room counts that no longer suit the family.",
     localCopy: [
@@ -179,7 +189,6 @@ export const LOCATIONS: Location[] = [
     heroLead:
       "Butts Green and Emerson Park, where the recurring brief is opening the back of the house up to a garden it currently ignores.",
     postcodes: "RM11, RM12",
-    travel: "30 minutes",
     projectCount: "20+",
     localHeading: "Most of the work here is at the back of the house.",
     localCopy: [
@@ -210,12 +219,11 @@ export const LOCATIONS: Location[] = [
     heroLead:
       "Shenfield, Hutton and the roads around them: larger kitchens, structural openings, and the longest-planned projects we take on.",
     postcodes: "CM13, CM14, CM15",
-    travel: "35 minutes",
     projectCount: "15+",
     localHeading: "Bigger rooms, and briefs to match.",
     localCopy: [
-      "Brentwood is the far edge of our range and the projects reflect it: larger kitchens, islands that seat five or six, and rear walls coming out on steel. These are rarely single-room jobs. The kitchen usually arrives with flooring, decoration and often a utility or boot room attached.",
-      "The distance is why we schedule rather than improvise here. Cabinetry and stone are templated and delivered on planned days, and the same team stays on the project start to finish rather than rotating, because a thirty-five minute drive punishes any programme that assumes someone can nip back.",
+      "Brentwood projects tend to be the largest we take on in Essex: larger kitchens, islands that seat five or six, and rear walls coming out on steel. These are rarely single-room jobs. The kitchen usually arrives with flooring, decoration and often a utility or boot room attached.",
+      "Projects of this size are scheduled rather than improvised. Cabinetry and stone are templated and delivered on planned days, and the same team stays on the project from start to finish rather than rotating, so nothing depends on someone nipping back.",
     ],
     localFacts: [
       {
@@ -245,7 +253,6 @@ export const LOCATIONS: Location[] = [
     heroLead:
       "Edwardian terraces off Nightingale Lane, where a side return turns a dark galley into the room the house was missing.",
     postcodes: "E11, E12",
-    travel: "25 minutes",
     projectCount: "30+",
     localHeading: "Narrow plans, and how to open them.",
     localCopy: [
@@ -269,14 +276,13 @@ export const LOCATIONS: Location[] = [
   {
     slug: "woodford",
     name: "Woodford",
-    postcode: "E18",
-    summary: "South Woodford and Woodford Green, our most frequent postcode.",
-    kicker: "Woodford, E18 · Est. 25 years",
+    postcode: "IG8",
+    summary: "Woodford Green and South Woodford, our most frequent postcode.",
+    kicker: "Woodford, IG8 & E18 · Est. 25 years",
     heading: "Bathroom, kitchen & interior renovation in Woodford.",
     heroLead:
-      "South Woodford and Woodford Green, the postcode we work in most, and the shortest drive from the workshop.",
+      "Woodford Green and South Woodford, from the large inter-war houses around the Green to the Edwardian roads by the station.",
     postcodes: "E18, IG8",
-    travel: "15 minutes",
     projectCount: "50+",
     localHeading: "Our busiest postcode, by some distance.",
     localCopy: [
@@ -311,7 +317,6 @@ export const LOCATIONS: Location[] = [
     heroLead:
       "Victorian terraces around Kings Road and the roads up towards the forest, where most of the original detail is still there under the paint.",
     postcodes: "E4",
-    travel: "25 minutes",
     projectCount: "20+",
     localHeading: "Restoration more often than replacement.",
     localCopy: [
@@ -343,7 +348,6 @@ export const LOCATIONS: Location[] = [
     heroLead:
       "Cranbrook through to Barkingside, including landlord and HMO-standard bathroom work alongside the owner-occupier projects.",
     postcodes: "IG1, IG2, IG6",
-    travel: "25 minutes",
     projectCount: "15+",
     localHeading: "Two different briefs in one postcode.",
     localCopy: [
@@ -367,10 +371,338 @@ export const LOCATIONS: Location[] = [
       source: "Homeowner · Cranbrook, Ilford",
     },
   },
+  // North London & Suburbs. Added 27 Oct 2026 with no project counts, streets
+  // or quotes, per the claims policy above.
+  {
+    slug: "hampstead",
+    name: "Hampstead",
+    postcode: "NW3",
+    summary:
+      "Georgian and Victorian townhouses, villas and mansion flats, much of it in conservation areas.",
+    kicker: "Hampstead, NW3 · North London",
+    heading: "High-end bathroom, kitchen & interior renovation in Hampstead.",
+    heroLead:
+      "Townhouses, villas and mansion flats where the brief is a high-end finish and the constraint is the building: conservation areas, listed fabric and neighbours a party wall away.",
+    postcodes: "NW3",
+    localHeading: "Period buildings, and a finish to match them.",
+    localCopy: [
+      "Much of Hampstead sits within conservation areas, and a good share of its houses are listed. That shapes the work before a tile is chosen: what can move, what has to be repaired rather than replaced, and what needs consent first. We establish those constraints at survey and price to them, so the design you approve is one the building will allow.",
+      "Mansion flats bring their own process. Most leases need the freeholder's licence before a bathroom or kitchen is altered, and many buildings set working hours, lift bookings and waterproofing standards. We prepare the drawings and method statements a managing agent asks for, and we work alongside the interior designers and luxury showrooms our clients already use.",
+    ],
+    localFacts: [
+      { label: "Typical property", value: "Period townhouses & mansion flats" },
+      { label: "Typical brief", value: "Principal suites & kitchens" },
+      { label: "Planning context", value: "Conservation areas & listed buildings" },
+      { label: "Watch out for", value: "Freeholder licences on flats" },
+    ],
+  },
+  {
+    slug: "highgate",
+    name: "Highgate",
+    postcode: "N6",
+    summary:
+      "Georgian village houses and large Victorian homes either side of the borough line.",
+    kicker: "Highgate, N6 · North London",
+    heading: "High-end bathroom, kitchen & interior renovation in Highgate.",
+    heroLead:
+      "Georgian village houses and large Victorian homes, renovated to a high-end specification with the period detail kept where it matters.",
+    postcodes: "N6",
+    localHeading: "Two boroughs, one conservation-minded village.",
+    localCopy: [
+      "Highgate straddles Camden and Haringey, and much of it is conservation area under either council. The practical effect is that windows, external flues and extraction routes need thought early, and original joinery, cornice and floors are usually worth keeping. We plan services around the fabric rather than through it.",
+      "The houses are tall and narrow more often than not, which makes sequencing the real skill: one staircase, deliveries on residential streets and several floors of finished rooms to protect. We programme the work floor by floor and coordinate with the designers and showrooms specifying the finishes.",
+    ],
+    localFacts: [
+      { label: "Typical property", value: "Georgian & Victorian houses" },
+      { label: "Typical brief", value: "Whole-floor bathroom suites" },
+      { label: "Planning context", value: "Camden & Haringey conservation areas" },
+      { label: "Watch out for", value: "Narrow plans and single staircases" },
+    ],
+  },
+  {
+    slug: "hampstead-garden-suburb",
+    name: "Hampstead Garden Suburb",
+    postcode: "NW11",
+    summary:
+      "Arts and Crafts houses where the Suburb Trust's consent comes before the build.",
+    kicker: "Hampstead Garden Suburb, NW11 · North London",
+    heading:
+      "High-end bathroom, kitchen & interior renovation in Hampstead Garden Suburb.",
+    heroLead:
+      "Arts and Crafts houses with a character worth protecting, renovated inside to a modern, high-end standard.",
+    postcodes: "NW11, N2",
+    localHeading: "Consent first, then the build.",
+    localCopy: [
+      "The whole Suburb is a conservation area, and alterations are also controlled by the Hampstead Garden Suburb Trust under its scheme of management. Anything visible from outside, from a new window to an extractor outlet, can need the Trust's consent as well as the council's. We build that into the programme rather than discovering it halfway through.",
+      "Inside, the houses reward careful work: generous rooms, original joinery and layouts that often predate modern bathrooms. Most briefs are about adding a proper principal suite or opening a kitchen to the garden without losing what makes the house what it is.",
+    ],
+    localFacts: [
+      { label: "Typical property", value: "Arts and Crafts houses" },
+      { label: "Typical brief", value: "Principal suites & garden kitchens" },
+      { label: "Planning context", value: "Suburb Trust consent & conservation area" },
+      { label: "Watch out for", value: "External changes need Trust approval" },
+    ],
+  },
+  {
+    slug: "finchley",
+    name: "Finchley",
+    postcode: "N2",
+    summary:
+      "East Finchley's Edwardian roads through to the large detached houses of N2.",
+    kicker: "Finchley, N2 · North London",
+    heading: "High-end bathroom, kitchen & interior renovation in Finchley.",
+    heroLead:
+      "From Edwardian family houses in East Finchley to the large detached homes of N2, renovated by one team from design to handover.",
+    postcodes: "N2, N3",
+    localHeading: "Family houses, and the briefs that come with them.",
+    localCopy: [
+      "N2 covers a wide range of housing, from Edwardian semis and terraces near the High Road to substantial detached houses towards The Bishops Avenue. The briefs follow the house: a family bathroom and ensuite done together in the Edwardian roads, whole-floor suites and large kitchens in the bigger homes.",
+      "Whatever the size, the programme is the same discipline: a fixed written quote, one project manager and our own tradespeople on site, working to the specification you and your designer or showroom have chosen.",
+    ],
+    localFacts: [
+      { label: "Typical property", value: "Edwardian semis to large detached" },
+      { label: "Typical brief", value: "Bathroom suites & kitchens" },
+      { label: "Borough", value: "Barnet" },
+      { label: "Watch out for", value: "Party walls on the Edwardian roads" },
+    ],
+  },
+  {
+    slug: "muswell-hill",
+    name: "Muswell Hill",
+    postcode: "N10",
+    summary:
+      "Edwardian houses and mansion flats with original detail worth keeping.",
+    kicker: "Muswell Hill, N10 · North London",
+    heading: "High-end bathroom, kitchen & interior renovation in Muswell Hill.",
+    heroLead:
+      "Edwardian houses and mansion flats, where a high-end bathroom or kitchen has to sit comfortably with original detail.",
+    postcodes: "N10",
+    localHeading: "Edwardian houses, renovated without losing them.",
+    localCopy: [
+      "Muswell Hill is one of London's most complete Edwardian suburbs, and much of it is a conservation area. The houses typically keep their cornice, joinery and tiled floors, and the best renovations work with that detail rather than stripping it out.",
+      "The common briefs are a loft or rear extension that needs a proper bathroom, and kitchens opened to the garden through the back of the house. Both bring structural and building control work with them, which we handle inside the same contract.",
+    ],
+    localFacts: [
+      { label: "Typical property", value: "Edwardian houses & mansion flats" },
+      { label: "Typical brief", value: "Bathrooms, lofts & garden kitchens" },
+      { label: "Planning context", value: "Muswell Hill conservation area" },
+      { label: "Watch out for", value: "Original detail worth saving" },
+    ],
+  },
+  {
+    slug: "totteridge",
+    name: "Totteridge",
+    postcode: "N20",
+    summary:
+      "Large detached houses on generous plots in a green-belt conservation area.",
+    kicker: "Totteridge, N20 · North London",
+    heading: "High-end bathroom, kitchen & interior renovation in Totteridge.",
+    heroLead:
+      "Large detached houses on generous plots, where the brief is usually several rooms at once and the finish has to match the house.",
+    postcodes: "N20",
+    localHeading: "Big houses, planned as one project.",
+    localCopy: [
+      "Totteridge is low-density and largely green belt, with a conservation area covering much of the village. The houses are big, the plots bigger, and renovation briefs tend to cover a whole floor or the whole house rather than a single room.",
+      "That makes planning the difference between a smooth project and a long one: a single programme for bathrooms, kitchen, joinery and finishes, deliveries scheduled for long private drives, and one team accountable from start to finish.",
+    ],
+    localFacts: [
+      { label: "Typical property", value: "Large detached houses" },
+      { label: "Typical brief", value: "Whole-floor & whole-home renovation" },
+      { label: "Planning context", value: "Green belt & conservation area" },
+      { label: "Watch out for", value: "Long lead times on stone and joinery" },
+    ],
+  },
+  {
+    slug: "hadley-wood",
+    name: "Hadley Wood",
+    postcode: "EN4",
+    summary:
+      "Substantial detached houses on wooded roads, often whole-home projects.",
+    kicker: "Hadley Wood, EN4 · North London",
+    heading: "High-end bathroom, kitchen & interior renovation in Hadley Wood.",
+    heroLead:
+      "Substantial detached houses on quiet, wooded roads, renovated room by room or all at once to a high-end specification.",
+    postcodes: "EN4",
+    localHeading: "Large homes, and a specification to match.",
+    localCopy: [
+      "Hadley Wood's houses are large and individually designed, and the briefs reflect it: principal suites with dressing rooms, wet rooms and steam rooms, and kitchens built around islands and entertaining. Specification is the heart of these projects, and we work with the designers and showrooms our clients choose.",
+      "Because these are multi-room projects, we price a room-by-room schedule so the work can be staged if needed, and we first-fix everything that would otherwise mean reopening finished walls later.",
+    ],
+    localFacts: [
+      { label: "Typical property", value: "Large detached houses" },
+      { label: "Typical brief", value: "Principal suites, wet rooms & kitchens" },
+      { label: "Borough", value: "Enfield" },
+      { label: "Watch out for", value: "Tree protection on wooded plots" },
+    ],
+  },
+  {
+    slug: "cockfosters",
+    name: "Cockfosters",
+    postcode: "EN4",
+    summary:
+      "Inter-war and post-war family houses on the edge of Trent Park.",
+    kicker: "Cockfosters, EN4 · North London",
+    heading: "High-end bathroom, kitchen & interior renovation in Cockfosters.",
+    heroLead:
+      "Inter-war and post-war family houses by Trent Park, where bathrooms and kitchens are rebuilt to a far higher standard than they were built to.",
+    postcodes: "EN4",
+    localHeading: "Solid houses, ready for a better finish.",
+    localCopy: [
+      "Cockfosters is mostly well-built inter-war and post-war housing, detached and semi-detached, with layouts that have not kept pace with how families live now. The usual briefs are a family bathroom and ensuite rebuilt together, and a kitchen opened up to the garden.",
+      "These are projects where planning the sequence saves weeks: two bathrooms done with the family still at home, or a kitchen built while a temporary one keeps the house running. Our own tradespeople and one project manager carry it through.",
+    ],
+    localFacts: [
+      { label: "Typical property", value: "Inter-war & post-war houses" },
+      { label: "Typical brief", value: "Family bathrooms & open kitchens" },
+      { label: "Borough", value: "Enfield & Barnet" },
+      { label: "Watch out for", value: "Structural openings at the rear" },
+    ],
+  },
+
+  // East London & Essex Forest Towns: towns added 27 Oct 2026.
+  {
+    slug: "buckhurst-hill",
+    name: "Buckhurst Hill",
+    postcode: "IG9",
+    summary:
+      "Victorian and Edwardian houses and larger detached homes on the forest edge.",
+    kicker: "Buckhurst Hill, IG9 · Chigwell & Essex",
+    heading: "High-end bathroom, kitchen & interior renovation in Buckhurst Hill.",
+    heroLead:
+      "Victorian and Edwardian houses and larger detached homes on the edge of Epping Forest, between Chigwell and Loughton.",
+    postcodes: "IG9",
+    localHeading: "Between the forest and the Central line.",
+    localCopy: [
+      "Buckhurst Hill mixes Victorian and Edwardian houses near the station with larger detached homes on the roads towards the forest. The period houses reward careful work on their original detail; the larger homes usually bring principal suites and kitchens opened to the garden.",
+      "It sits between Chigwell and Loughton, at the centre of our east London and Essex work, so the same team, designers and showrooms we use across the area are on hand here too.",
+    ],
+    localFacts: [
+      { label: "Typical property", value: "Period houses & forest-edge detached" },
+      { label: "Typical brief", value: "Principal suites & garden kitchens" },
+      { label: "District", value: "Epping Forest" },
+      { label: "Watch out for", value: "Hilly roads and tight access" },
+    ],
+  },
+  {
+    slug: "abridge",
+    name: "Abridge",
+    postcode: "RM4",
+    summary:
+      "A green-belt village of larger detached houses and converted properties.",
+    kicker: "Abridge, RM4 · Chigwell & Essex",
+    heading: "High-end bathroom, kitchen & interior renovation in Abridge.",
+    heroLead:
+      "Larger detached houses and converted properties in the village and the green belt around it, a short way from Chigwell.",
+    postcodes: "RM4",
+    localHeading: "Village homes, renovated to a high standard.",
+    localCopy: [
+      "Abridge and the lanes around it are green belt, with a mix of large detached houses, older village properties and conversions. Renovations here are often whole-home or multi-room projects, and older properties need surveying properly before pricing.",
+      "Rural access shapes the programme: longer drives, narrow lanes and deliveries that need planning. We schedule stone, cabinetry and skips on fixed days so the site stays tidy and the work stays on time.",
+    ],
+    localFacts: [
+      { label: "Typical property", value: "Detached houses & conversions" },
+      { label: "Typical brief", value: "Whole-home & multi-room projects" },
+      { label: "District", value: "Epping Forest" },
+      { label: "Watch out for", value: "Green-belt constraints & lane access" },
+    ],
+  },
 ];
 
 export type LocationSlug = (typeof LOCATIONS)[number]["slug"];
 
 export function getLocation(slug: string) {
   return LOCATIONS.find((location) => location.slug === slug);
+}
+
+/** A cluster of towns Migss specialises in. */
+export type Cluster = {
+  slug: "north-london" | "essex-forest";
+  name: string;
+  /** Short label for kickers and tight spaces. */
+  shortName: string;
+  kicker: string;
+  heading: string;
+  intro: [string, string];
+  metaTitle: string;
+  metaDescription: string;
+  /** Town slugs, in display order. */
+  core: string[];
+  /** Towns presented as the cluster's surrounding areas. */
+  surrounding: string[];
+};
+
+export const CLUSTERS: Cluster[] = [
+  {
+    slug: "north-london",
+    name: "North London & Suburbs",
+    shortName: "North London",
+    kicker: "Cluster one · North London & Suburbs",
+    heading: "High-end renovation across north London and its suburbs.",
+    intro: [
+      "From Hampstead and Highgate out to Totteridge, Hadley Wood and Cockfosters, we design and build high-end bathrooms, kitchens and interiors for period townhouses, mansion flats and large family homes.",
+      "We work alongside the interior designers and luxury showrooms our clients use across north London, and we have built up specific expertise in what these homes need: conservation-area consent, freeholder licences, original detail worth keeping and specifications that leave no room for error.",
+    ],
+    metaTitle:
+      "High-End Renovation in North London | Hampstead to Cockfosters | Migss Interiors",
+    metaDescription:
+      "High-end bathroom, kitchen and interior renovation across north London and its suburbs, from Hampstead, Highgate and Muswell Hill to Finchley, Totteridge and Cockfosters.",
+    core: [
+      "hampstead",
+      "highgate",
+      "hampstead-garden-suburb",
+      "finchley",
+      "muswell-hill",
+      "totteridge",
+      "hadley-wood",
+      "cockfosters",
+    ],
+    surrounding: [],
+  },
+  {
+    slug: "essex-forest",
+    name: "East London & Essex Forest Towns",
+    shortName: "Chigwell & Essex",
+    kicker: "Cluster two · East London & Essex Forest Towns",
+    heading: "High-end renovation in Chigwell and the Essex forest towns.",
+    intro: [
+      "Chigwell is where Migss has worked longest, and the forest towns around it, from Buckhurst Hill and Loughton to Theydon Bois, Woodford Green, Epping and Abridge, are the heart of our east London and Essex work.",
+      "We work alongside the interior designers and luxury showrooms our clients use across the area, and we also cover the surrounding areas of Wanstead, Chingford, Ilford, Hornchurch and Brentwood.",
+    ],
+    metaTitle:
+      "High-End Renovation in Chigwell & the Essex Forest Towns | Migss Interiors",
+    metaDescription:
+      "High-end bathroom, kitchen and interior renovation in Chigwell, Buckhurst Hill, Loughton, Theydon Bois, Woodford Green, Epping and Abridge, plus the surrounding areas.",
+    core: [
+      "chigwell",
+      "buckhurst-hill",
+      "loughton",
+      "theydon-bois",
+      "woodford",
+      "epping",
+      "abridge",
+    ],
+    surrounding: ["wanstead", "chingford", "ilford", "hornchurch", "brentwood"],
+  },
+];
+
+export function getCluster(slug: string) {
+  return CLUSTERS.find((cluster) => cluster.slug === slug);
+}
+
+/** The cluster a town belongs to. Every town in LOCATIONS has exactly one. */
+export function clusterFor(townSlug: string) {
+  return CLUSTERS.find(
+    (cluster) =>
+      cluster.core.includes(townSlug) ||
+      cluster.surrounding.includes(townSlug),
+  );
+}
+
+/** A cluster's towns, resolved to their full records, in display order. */
+export function clusterTowns(cluster: Cluster) {
+  const resolve = (slugs: string[]) =>
+    slugs
+      .map((slug) => getLocation(slug))
+      .filter((town): town is Location => town !== undefined);
+  return { core: resolve(cluster.core), surrounding: resolve(cluster.surrounding) };
 }

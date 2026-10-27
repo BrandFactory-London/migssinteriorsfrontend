@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | Migss Interiors",
   },
   description:
-    "Bathroom, kitchen and interior renovations across London and Essex.",
+    "High-end bathroom, kitchen and interior renovation across north London and Chigwell.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

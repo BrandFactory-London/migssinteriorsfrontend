@@ -62,9 +62,9 @@ export const SERVICES: Record<ServiceSlug, Service> = {
     short: "Bathrooms",
     title: "Bathroom Renovation",
     metaDescription:
-      "Wet rooms, master ensuites and family bathrooms across London and Essex, designed, tanked, tiled and finished by our own tradespeople with a ten-year labour guarantee.",
+      "Wet rooms, master ensuites and family bathrooms across north London and Chigwell, designed, tanked, tiled and finished by our own tradespeople with a ten-year labour guarantee.",
     hero: {
-      kicker: "Bathroom renovation · London & Essex",
+      kicker: "Bathroom renovation · North London & Chigwell",
       heading: "Luxury bathrooms, taken back to brick and rebuilt properly.",
       body: "Wet rooms, master ensuites and family bathrooms, designed, tanked, tiled and finished by our own tradespeople in three to four weeks, with a ten-year labour guarantee.",
       cta: "Get a fixed quote",
@@ -114,7 +114,7 @@ export const SERVICES: Record<ServiceSlug, Service> = {
     faq: {
       kicker: "Bathroom questions",
       items: [
-        { q: "What does a luxury bathroom actually cost?", a: "Most complete bathrooms we build in London and Essex land between £18,000 and £45,000 including all labour, materials and making good. The variables are stone, brassware and whether the layout moves. Your quote is fixed in writing before we start." },
+        { q: "What does a luxury bathroom actually cost?", a: "Most complete bathrooms we build across north London and Chigwell land between £20,000 and £45,000 including all labour, materials and making good. The variables are stone, brassware and whether the layout moves. Your quote is fixed in writing before we start." },
         { q: "Can we stay in the house during the work?", a: "Almost always yes. We dust-sheet the route in, keep one working WC available wherever the house allows it, and clear the site every evening. If you only have one bathroom we will tell you honestly which days will be difficult." },
         { q: "Do you supply the tiles and sanitaryware?", a: "We can supply everything at trade, or fit items you have chosen yourself. Both are common. Where we supply, the product warranty and any replacement is handled by us rather than by you and a showroom." },
         { q: "How soon could you start?", a: "Typically four to eight weeks from signing, which is the time it takes to get stone and joinery in. Consultations are usually available within the week." },
@@ -134,9 +134,9 @@ export const SERVICES: Record<ServiceSlug, Service> = {
     short: "Kitchens",
     title: "Kitchen Renovation",
     metaDescription:
-      "Bespoke cabinetry, stone worktops, islands and the structural work behind them, delivered on one programme across London and Essex with a ten-year labour guarantee.",
+      "Bespoke cabinetry, stone worktops, islands and the structural work behind them, delivered on one programme across north London and Chigwell with a ten-year labour guarantee.",
     hero: {
-      kicker: "Kitchen renovation · London & Essex",
+      kicker: "Kitchen renovation · North London & Chigwell",
       heading: "Kitchens built around how your family actually lives.",
       body: "Bespoke cabinetry, stone worktops, islands and the structural work behind them: knock-throughs, steels, electrics and plumbing, delivered on one programme with a ten-year labour guarantee.",
       cta: "Get a fixed quote",
@@ -207,9 +207,9 @@ export const SERVICES: Record<ServiceSlug, Service> = {
     short: "Interiors",
     title: "Interior Renovation",
     metaDescription:
-      "Whole-home renovation across London and Essex, layouts, joinery, flooring, lighting, plastering and decoration on one programme, one team and one guarantee.",
+      "Whole-home renovation across north London and Chigwell, layouts, joinery, flooring, lighting, plastering and decoration on one programme, one team and one guarantee.",
     hero: {
-      kicker: "Interior renovation · London & Essex",
+      kicker: "Interior renovation · North London & Chigwell",
       heading: "A whole house, on one programme and one guarantee.",
       body: "Layouts, joinery, flooring, lighting, plastering and decoration across every room, with the kitchen and bathrooms folded into the same schedule instead of three separate builders.",
       cta: "Discuss your whole home",

@@ -47,8 +47,8 @@ export function SiteFooter() {
             </a>
           </p>
           <p className="mt-[13.8px] text-[13px] leading-[1.75] text-migss-neutral-400">
-            Luxury bathroom, kitchen and interior renovation across London &amp;
-            Essex.
+            High-end bathroom, kitchen and interior renovation across north
+            London and Chigwell.
           </p>
         </div>
 
