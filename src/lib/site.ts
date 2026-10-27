@@ -98,3 +98,9 @@ export const NAV: readonly NavItem[] = [
  * visitor is being offered.
  */
 export const STAFF_LOGIN_URL = "https://staff.migssinteriors.com/";
+
+/**
+ * The client portal: a client's warranty, handover book and other project
+ * documents, behind their reference ID and postcode.
+ */
+export const CLIENT_LOGIN_PATH = "/client-portal";

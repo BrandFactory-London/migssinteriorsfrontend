@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "wix:check": "tsx --env-file=.env.local scripts/wix-smoke-test.ts"
+    "wix:check": "tsx --env-file=.env.local scripts/wix-smoke-test.ts",
+    "portal:ref": "tsx scripts/portal-reference.ts"
   },
   "dependencies": {
     "@wix/data": "^1.0.521",

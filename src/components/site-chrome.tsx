@@ -5,7 +5,14 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { SITE, telHref, NAV, STAFF_LOGIN_URL, WHATSAPP_URL } from "@/lib/site";
+import {
+  SITE,
+  telHref,
+  NAV,
+  STAFF_LOGIN_URL,
+  CLIENT_LOGIN_PATH,
+  WHATSAPP_URL,
+} from "@/lib/site";
 import { ButtonLink } from "@/components/ui/button";
 import { useNavMenu } from "@/components/nav-menu";
 import { cn } from "@/lib/utils";
@@ -135,27 +142,51 @@ export function SiteChrome() {
               which for the close button is hard against the label in the
               middle of the bar rather than out at the edge. The padding the
               two ends mirror is the bar's own, so one value sets both. */}
-          <div
-            className="grid items-center gap-3 border-b border-migss-neutral-100/20 px-[clamp(16px,4.5vw,48px)] py-3"
-            style={{ gridTemplateColumns: "1fr auto 1fr" }}
-          >
-            {/* Not a destination on this site, so it stays out of the
-                navigation list and sits on the bar instead. Plain text at the
-                bar's own type treatment — it is a link, not a call to action,
-                and a filled button here would outrank every page below it. */}
-            <a
-              href={STAFF_LOGIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] tracking-[0.24em] text-migss-neutral-100/75 uppercase no-underline transition-colors [@media(hover:hover)]:hover:text-migss-accent-300"
-              style={{ justifySelf: "start" }}
-            >
-              Staff Login
-            </a>
+          {/* Phones: the logins sit at the left and the close button at the
+              right, in a two-column grid whose first column can shrink
+              (minmax(0, 1fr)) so the logins can never push the X off-screen.
+              From md up: three columns with equal fixed outer tracks, the
+              close button's own width, so the logins are centred on the bar
+              itself rather than wherever the leftover space falls. */}
+          <div className="grid grid-cols-[minmax(0,1fr)_46px] items-center gap-3 border-b border-migss-neutral-100/20 px-[clamp(16px,4.5vw,48px)] py-3 md:grid-cols-[46px_minmax(0,1fr)_46px]">
+            <span aria-hidden="true" className="hidden md:block" />
 
-            <span className="text-[11px] tracking-[0.24em] uppercase text-migss-accent-300">
-              Menu
-            </span>
+            {/* The two logins, side by side where the "Menu" label used to
+                be. Neither is a page of this site, so they stay out of the
+                navigation list. Staff is plain text at the bar's type; Client
+                is the tan chip with a lock, so the one a customer is looking
+                for is the one that stands out. */}
+            <div className="flex min-w-0 items-center gap-[clamp(12px,3vw,24px)] justify-self-start md:justify-self-center">
+              <a
+                href={STAFF_LOGIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] tracking-[0.24em] whitespace-nowrap text-migss-neutral-100/75 uppercase no-underline transition-colors [@media(hover:hover)]:hover:text-migss-accent-300"
+              >
+                Staff Login
+              </a>
+              <Link
+                href={CLIENT_LOGIN_PATH}
+                onClick={() => setMenuOpen(false)}
+                className="inline-flex min-h-[36px] items-center gap-2 rounded-full border border-migss-accent-400 bg-migss-accent-300/12 px-3.5 text-[11px] font-medium tracking-[0.24em] whitespace-nowrap text-migss-accent-300 uppercase no-underline transition-colors active:bg-migss-accent-300/20 [@media(hover:hover)]:hover:bg-migss-accent-300/20"
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="4.5" y="10.5" width="15" height="10" rx="1.5" />
+                  <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" />
+                </svg>
+                Client Login
+              </Link>
+            </div>
 
             <button
               ref={closeButtonRef}
@@ -168,8 +199,7 @@ export function SiteChrome() {
               // opens up directly under the cursor that just hit the
               // hamburger, and on touch that would leave a highlight sitting
               // there with no pointer to explain it.
-              className="grid h-[46px] w-[46px] cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit transition-colors active:scale-95 [@media(hover:hover)]:hover:bg-migss-neutral-100/10"
-              style={{ justifySelf: "end" }}
+              className="grid h-[46px] w-[46px] cursor-pointer place-items-center justify-self-end rounded-[4px] border-0 bg-transparent text-inherit transition-colors active:scale-95 [@media(hover:hover)]:hover:bg-migss-neutral-100/10"
             >
               <svg
                 width="20"
