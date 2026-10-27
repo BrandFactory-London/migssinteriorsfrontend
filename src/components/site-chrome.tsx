@@ -142,24 +142,21 @@ export function SiteChrome() {
               which for the close button is hard against the label in the
               middle of the bar rather than out at the edge. The padding the
               two ends mirror is the bar's own, so one value sets both. */}
-          <div
-            className="grid items-center gap-3 border-b border-migss-neutral-100/20 px-[clamp(16px,4.5vw,48px)] py-3"
-            // Equal fixed outer columns, the close button's own width, so the
-            // two logins are centred on the bar itself at every width rather
-            // than wherever the leftover space falls.
-            style={{ gridTemplateColumns: "46px 1fr 46px" }}
-          >
-            <span aria-hidden="true" />
+          {/* Phones: the logins sit at the left and the close button at the
+              right, in a two-column grid whose first column can shrink
+              (minmax(0, 1fr)) so the logins can never push the X off-screen.
+              From md up: three columns with equal fixed outer tracks, the
+              close button's own width, so the logins are centred on the bar
+              itself rather than wherever the leftover space falls. */}
+          <div className="grid grid-cols-[minmax(0,1fr)_46px] items-center gap-3 border-b border-migss-neutral-100/20 px-[clamp(16px,4.5vw,48px)] py-3 md:grid-cols-[46px_minmax(0,1fr)_46px]">
+            <span aria-hidden="true" className="hidden md:block" />
 
             {/* The two logins, side by side where the "Menu" label used to
                 be. Neither is a page of this site, so they stay out of the
                 navigation list. Staff is plain text at the bar's type; Client
                 is the tan chip with a lock, so the one a customer is looking
                 for is the one that stands out. */}
-            <div
-              className="flex items-center gap-[clamp(12px,3vw,24px)]"
-              style={{ justifySelf: "center" }}
-            >
+            <div className="flex min-w-0 items-center gap-[clamp(12px,3vw,24px)] justify-self-start md:justify-self-center">
               <a
                 href={STAFF_LOGIN_URL}
                 target="_blank"
@@ -202,8 +199,7 @@ export function SiteChrome() {
               // opens up directly under the cursor that just hit the
               // hamburger, and on touch that would leave a highlight sitting
               // there with no pointer to explain it.
-              className="grid h-[46px] w-[46px] cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit transition-colors active:scale-95 [@media(hover:hover)]:hover:bg-migss-neutral-100/10"
-              style={{ justifySelf: "end" }}
+              className="grid h-[46px] w-[46px] cursor-pointer place-items-center justify-self-end rounded-[4px] border-0 bg-transparent text-inherit transition-colors active:scale-95 [@media(hover:hover)]:hover:bg-migss-neutral-100/10"
             >
               <svg
                 width="20"
