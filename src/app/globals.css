@@ -161,6 +161,19 @@
     height: 0;
   }
 
+  /* The cookie banner, hidden for a visitor who has already chosen.
+
+     This is the one piece of the consent UI that is CSS rather than React.
+     The decision is in a cookie, which the server cannot read without opting
+     every page out of static rendering, so the banner is server-rendered for
+     everyone and the consent bootstrap — which runs before first paint — sets
+     data-consent="set" on <html> when a decision is already stored. A
+     returning visitor therefore never sees it, not even for a frame, and
+     nothing has to wait for hydration. See src/lib/consent.ts. */
+  :root[data-consent="set"] [data-consent-banner] {
+    display: none;
+  }
+
   /* The design system's photographic treatment: warmed, slightly flattened,
      matted inside a surface-coloured bevel. */
   .migss-plate {
