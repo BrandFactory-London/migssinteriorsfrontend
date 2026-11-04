@@ -250,9 +250,9 @@ export const LEGAL_DOCS: LegalDoc[] = [
                 <strong className="font-medium">
                   Analytics and advertising:
                 </strong>{" "}
-                technical data collected through Google Analytics and Meta
-                Pixel, including pages visited, device and browser type, and how
-                you arrived at our site
+                technical data collected through Google Analytics,
+                including pages visited, device and browser type, and how you
+                arrived at our site
               </>,
             ],
           },
@@ -264,7 +264,22 @@ export const LEGAL_DOCS: LegalDoc[] = [
           {
             kind: "p",
             content:
-              "This website uses cookies. Strictly necessary cookies, needed for the site to function, are used without requiring consent. Analytics cookies (Google Analytics) and advertising cookies (Meta Pixel) are not essential and are only set once you have given consent through our cookie banner. You can withdraw consent at any time by adjusting your cookie preferences.",
+              "This website uses cookies. Some are strictly necessary for the site to work — delivering pages and keeping the client portal secure — and are always set.",
+          },
+          {
+            kind: "p",
+            content:
+              "We also use Google Analytics, which sets cookies to measure how the site is used: which pages are read, the type of device and browser you are on, and how you arrived here. This is aggregated reporting and is never used to identify or contact you. These analytics cookies are set when you arrive. We do not currently show a cookie banner, so you are not asked beforehand.",
+          },
+          {
+            kind: "p",
+            content:
+              "You can refuse or delete cookies through your browser settings, which your browser's help pages explain how to do, and the site will continue to work normally. To opt out of Google Analytics specifically, across every site that uses it, you can install Google's opt-out browser add-on at tools.google.com/dlpage/gaoptout.",
+          },
+          {
+            kind: "p",
+            content:
+              "We do not currently use advertising cookies. If that changes, we will update this policy and ask for your consent before setting them.",
           },
         ],
       },
@@ -281,7 +296,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
             items: [
               "Website hosting and platform providers",
               "Email and newsletter service providers",
-              "Google (Analytics) and Meta (Pixel), for site analytics and advertising purposes",
+              "Google (Analytics), for site analytics",
             ],
           },
           {
