@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Instrument_Sans } from "next/font/google";
 
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { NavMenuProvider } from "@/components/nav-menu";
 import { ScrollReset } from "@/components/scroll-reset";
 import { SITE_URL } from "@/lib/seo";
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: JSON.stringify(localBusinessJsonLd()),
           }}
         />
+        <GoogleAnalytics />
       </body>
     </html>
   );
