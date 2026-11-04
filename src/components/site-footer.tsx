@@ -1,10 +1,7 @@
-import type * as React from "react";
-
 import Link from "next/link";
 
 import { SITE, telHref, mailHref, CLIENT_LOGIN_PATH } from "@/lib/site";
 import { Logo } from "@/components/logo";
-import { CookiePreferencesButton } from "@/components/cookie-consent";
 import { DARK_BEHIND_HEADER } from "@/lib/header-ink";
 
 const SERVICES_LINKS = [
@@ -82,13 +79,7 @@ export function SiteFooter() {
         {/* The new shared footer drops the Legal column. Kept here because
             removing the only route to the policy pages is a compliance
             regression rather than a design change. */}
-        <FooterNav heading="Legal" links={LEGAL}>
-          {/* Not a route, so it cannot be a link in the list above: it reopens
-              the consent panel. Required rather than decorative — consent has
-              to be as easy to withdraw as it was to give, and the privacy
-              policy tells visitors they can do it here. */}
-          <CookiePreferencesButton className={`${footerLinkClass} cursor-pointer border-0 bg-transparent p-0 text-left`} />
-        </FooterNav>
+        <FooterNav heading="Legal" links={LEGAL} />
       </div>
 
       <div className="border-t border-migss-neutral-200/20">
@@ -108,11 +99,9 @@ const footerLinkClass =
 function FooterNav({
   heading,
   links,
-  children,
 }: {
   heading: string;
   links: { href: string; label: string }[];
-  children?: React.ReactNode;
 }) {
   return (
     <nav aria-label={heading} className="flex flex-col">
@@ -131,7 +120,6 @@ function FooterNav({
           </Link>
         ),
       )}
-      {children}
     </nav>
   );
 }
