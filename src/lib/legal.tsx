@@ -1,6 +1,8 @@
 import type * as React from "react";
 import Link from "next/link";
 
+import { FINANCE_DISCLAIMER } from "@/lib/site";
+
 /**
  * The four policy documents, transcribed from the live migssinteriors.com.
  *
@@ -30,8 +32,11 @@ export type LegalDoc = {
 
 const EMAIL = "info@migssinteriors.com";
 
-/** All four documents are revised together, so the date lives in one place. */
+/** The documents' shared revision date. A document revised on its own gets its own date below. */
 const LAST_UPDATED = "17th September 2026";
+
+/** Terms of Use revised for the finance disclaimer (TKT-42). */
+const TERMS_LAST_UPDATED = "5th November 2026";
 
 function Email() {
   return (
@@ -67,7 +72,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
     title: "Website Terms of Use",
     description:
       "The terms governing your use of the Migss Interiors website.",
-    lastUpdated: LAST_UPDATED,
+    lastUpdated: TERMS_LAST_UPDATED,
     sections: [
       {
         heading: "About us",
@@ -162,6 +167,15 @@ export const LEGAL_DOCS: LegalDoc[] = [
             kind: "p",
             content:
               "We are not liable for any loss or damage arising from your use of, or inability to use, this website, except where such liability cannot be excluded under English law (for example, liability for death or personal injury caused by our negligence).",
+          },
+        ],
+      },
+      {
+        heading: "Finance",
+        blocks: [
+          {
+            kind: "p",
+            content: FINANCE_DISCLAIMER,
           },
         ],
       },
