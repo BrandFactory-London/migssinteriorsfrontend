@@ -1,6 +1,12 @@
 import Link from "next/link";
 
-import { SITE, telHref, mailHref, CLIENT_LOGIN_PATH } from "@/lib/site";
+import {
+  SITE,
+  telHref,
+  mailHref,
+  CLIENT_LOGIN_PATH,
+  FINANCE_DISCLAIMER,
+} from "@/lib/site";
 import { Logo } from "@/components/logo";
 import { DARK_BEHIND_HEADER } from "@/lib/header-ink";
 
@@ -85,6 +91,11 @@ export function SiteFooter() {
       <div className="border-t border-migss-neutral-200/20">
         {/* Bottom padding keeps the copyright line clear of the dock. */}
         <div className="mx-auto flex max-w-[1280px] flex-wrap justify-between gap-[9.2px] px-[clamp(16px,4.5vw,48px)] pt-[18.4px] pb-[calc(18.4px+72px)] text-[12.5px] text-migss-neutral-400">
+          {/* Required by Ideal4Finance on every public page (TKT-42). The
+              wording is fixed: see FINANCE_DISCLAIMER. */}
+          <p className="m-0 mb-[4.6px] w-full max-w-[880px] text-[11px] leading-[1.6]">
+            {FINANCE_DISCLAIMER}
+          </p>
           <span>© 2026 Migss Interiors. All rights reserved.</span>
           <span>Powered by BrandFactory London.</span>
         </div>

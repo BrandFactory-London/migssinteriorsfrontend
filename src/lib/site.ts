@@ -31,6 +31,15 @@ export const COMPANY = {
 } as const;
 
 /**
+ * The finance provider disclaimer Ideal4Finance requires on the website
+ * (TKT-42). It must match the wording Ideal4Finance supplied character for
+ * character, so never edit, reflow or restyle the text itself. Shown in the
+ * site footer and in the Terms of Use.
+ */
+export const FINANCE_DISCLAIMER =
+  "MIGSS TILES & LUXURY INTERIORS LTD is an introducer appointed representative of Ideal Sales Solutions Ltd T/A Ideal4Finance. Ideal Sales Solutions is a credit broker and not a lender (FRN 703401). Finance available subject to status. The rate offered is always provisional and will depend upon your personal circumstances, the loan amount and term.";
+
+/**
  * The WhatsApp Business click-to-chat link, as issued by WhatsApp. It carries
  * its own short code rather than a phone number, so it is stored verbatim and
  * deliberately not derived from `SITE.phone`.
