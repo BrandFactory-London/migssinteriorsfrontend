@@ -34,7 +34,7 @@ function overlayOpen() {
 /**
  * The floating dock, for enquiries only: WhatsApp and the enquiry form.
  *
- * Resting, it shows the WhatsApp mark and a "Form" button. The first tap
+ * Resting, it shows the WhatsApp mark and a "Free consultation" button. The first tap
  * (or, on a desktop, hovering or tabbing to it) expands it: a "Contact us
  * now" line with the response time appears above, and WhatsApp gains its
  * label. Buttons act on the next tap, so nobody lands in WhatsApp or the form
@@ -45,7 +45,7 @@ function overlayOpen() {
  * once per visit, inviting a free consultation. It can be dismissed, and
  * tapping it expands the dock.
  *
- * "Form" carries `data-enquire`, so the site-wide EnquiryDialog opens it with
+ * "Free consultation" carries `data-enquire`, so the site-wide EnquiryDialog opens it with
  * the page's context, exactly as before. Without JavaScript both buttons are
  * plain links (WhatsApp, and /contact).
  */
@@ -236,13 +236,13 @@ export function EnquiryDock() {
             href="/contact"
             data-enquire=""
             tabIndex={expanded ? 0 : -1}
-            aria-label="Open the enquiry form"
+            aria-label="Free consultation: open the enquiry form"
             className={cn(
-              "flex h-[46px] items-center justify-center rounded-full bg-migss-accent-ink px-6 text-[14.5px] font-semibold tracking-[0.01em] text-white no-underline transition-[background-color,transform] duration-300 active:scale-[0.95] active:bg-migss-accent-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent-800",
+              "flex h-[46px] items-center justify-center whitespace-nowrap rounded-full bg-migss-accent-ink px-5 text-[14.5px] font-semibold tracking-[0.01em] text-white no-underline transition-[background-color,transform] duration-300 active:scale-[0.95] active:bg-migss-accent-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent-800",
               expanded && "flex-1",
             )}
           >
-            Form
+            Free consultation
           </a>
         </div>
 
