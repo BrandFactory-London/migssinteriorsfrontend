@@ -204,6 +204,80 @@
   }
 }
 
+/* Enquiry card (modelled on the BrandFactory Labs pop-up). */
+@keyframes enquiry-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes enquiry-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes enquiry-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes enquiry-blink {
+  50% {
+    opacity: 0;
+  }
+}
+.enquiry-scrim {
+  animation: enquiry-fade 0.28s ease-out both;
+}
+.enquiry-pop {
+  animation: enquiry-pop 0.52s cubic-bezier(0.2, 1.2, 0.32, 1) both;
+}
+.enquiry-caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.85em;
+  margin-left: 3px;
+  vertical-align: -0.06em;
+  background: var(--color-migss-accent);
+  animation: enquiry-blink 0.8s steps(1) infinite;
+}
+/* Fields sit in their final places while the heading types, then fade in one
+   by one, so nothing moves or resizes. */
+.enquiry-hold > * {
+  opacity: 0;
+}
+.enquiry-rise > * {
+  opacity: 0;
+  animation: enquiry-rise 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.enquiry-rise > *:nth-child(2) {
+  animation-delay: 90ms;
+}
+.enquiry-rise > *:nth-child(3) {
+  animation-delay: 180ms;
+}
+.enquiry-rise > *:nth-child(4) {
+  animation-delay: 270ms;
+}
+.enquiry-rise > *:nth-child(n + 5) {
+  animation-delay: 360ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

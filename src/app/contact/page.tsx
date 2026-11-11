@@ -148,7 +148,8 @@ export default function ContactPage() {
 
         <EnquireBand
           kicker="Send an enquiry"
-          heading="Two short steps, and we will call you back"
+          heading="Three quick steps, and we will call you back"
+          inline
           body="Tell us where you are and roughly what you are planning. We reply the same working day and arrange a free home visit, usually within the week."
           points={[
             "Average response time under 20 minutes",

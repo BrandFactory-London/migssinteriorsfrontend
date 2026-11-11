@@ -123,7 +123,7 @@ export const SERVICES: Record<ServiceSlug, Service> = {
     enquire: {
       kicker: "Start your bathroom",
       heading: "Book your free bathroom consultation",
-      body: "Two short steps. We measure up, talk budget openly, and send a fixed written quote, usually within three working days of the visit.",
+      body: "Three quick steps. We measure up, talk budget openly, and send a fixed written quote, usually within three working days of the visit.",
       points: ["Fixed written quote, no sales pressure", "10-year labour guarantee on every bathroom"],
     },
     also: ["kitchen", "interior"],
@@ -196,7 +196,7 @@ export const SERVICES: Record<ServiceSlug, Service> = {
     enquire: {
       kicker: "Start your kitchen",
       heading: "Book your free kitchen consultation",
-      body: "Two short steps. We measure up, check what the structure allows, and send a fixed written quote, usually within five working days of the visit.",
+      body: "Three quick steps. We measure up, check what the structure allows, and send a fixed written quote, usually within five working days of the visit.",
       points: ["Fixed written quote, no sales pressure", "Temporary kitchen included as standard"],
     },
     also: ["bathroom", "interior"],
@@ -269,7 +269,7 @@ export const SERVICES: Record<ServiceSlug, Service> = {
     enquire: {
       kicker: "Start your interior",
       heading: "Book your free whole-home consultation",
-      body: "Two short steps. We walk the house, agree the scope room by room, and send a priced schedule you can stage or build in one go.",
+      body: "Three quick steps. We walk the house, agree the scope room by room, and send a priced schedule you can stage or build in one go.",
       points: ["A priced schedule, room by room", "One project manager for the whole house"],
     },
     also: ["bathroom", "kitchen"],

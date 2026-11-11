@@ -86,7 +86,7 @@ export async function ClusterPage({ cluster }: { cluster: Cluster }) {
 
         <EnquireBand
           heading="Tell us where you are."
-          body="Two short steps. We reply the same working day to arrange a free home visit."
+          body="Three quick steps. We reply the same working day to arrange a free home visit."
           points={[
             "Free home visit, fixed written quote",
             "Photographs of nearby projects on request",

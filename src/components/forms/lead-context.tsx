@@ -50,7 +50,32 @@ export function useLeadContext() {
     </>
   );
 
-  return { fields, onSubmit };
+  /**
+   * The same context as plain values, for forms that build their own
+   * FormData (the enquiry card). Keeps the submission ID across retries.
+   */
+  const snapshot = React.useCallback((): Record<string, string> => {
+    if (!submissionId.current) submissionId.current = makeId();
+    let attribution = "";
+    try {
+      attribution = window.sessionStorage.getItem(ATTRIBUTION_STORAGE_KEY) ?? "";
+    } catch {
+      // No storage: send without attribution.
+    }
+    return {
+      pagePath: window.location.pathname,
+      pageUrl: window.location.href,
+      attribution,
+      submissionId: submissionId.current,
+    };
+  }, []);
+
+  /** Starts a new submission, e.g. "Send another" after a successful one. */
+  const reset = React.useCallback(() => {
+    submissionId.current = null;
+  }, []);
+
+  return { fields, onSubmit, snapshot, reset };
 }
 
 function makeId(): string {

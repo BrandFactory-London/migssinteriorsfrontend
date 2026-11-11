@@ -107,7 +107,7 @@ export default async function OurProjectsPage() {
 
         <EnquireBand
           heading="Like what you have seen? Let's talk about yours."
-          body="Two short steps. We reply the same working day, and we are happy to put you in touch with the owners of any project above."
+          body="Three quick steps. We reply the same working day, and we are happy to put you in touch with the owners of any project above."
           points={[
             "References from past clients on request",
             "Fixed written quote, no sales pressure",

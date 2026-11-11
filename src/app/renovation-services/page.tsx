@@ -1,4 +1,4 @@
-import { EnquiryForm } from "@/components/home/enquiry-form";
+import { EnquireCta } from "@/components/enquiry/enquire-cta";
 import { Reveal } from "@/components/reveal";
 import { AssuranceStrip } from "@/components/service/assurance-strip";
 import { Breadcrumb } from "@/components/service/breadcrumb";
@@ -142,7 +142,7 @@ export default function RenovationServicesPage() {
 
             <Reveal delay={90}>
               {/* No pre-selected room: the visitor is still choosing. */}
-              <EnquiryForm />
+              <EnquireCta />
             </Reveal>
           </div>
         </section>

@@ -1,5 +1,7 @@
-import { EnquiryForm, type EnquiryFocus } from "@/components/home/enquiry-form";
+import { EnquireCta } from "@/components/enquiry/enquire-cta";
+import { EnquiryCardForm } from "@/components/enquiry/enquiry-card-form";
 import { Reveal } from "@/components/reveal";
+import type { EnquiryFocus } from "@/lib/enquiry";
 import { SITE, telHref } from "@/lib/site";
 
 function Tick() {
@@ -20,7 +22,7 @@ function Tick() {
   );
 }
 
-/** The enquiry band shared by the listing and detail pages. */
+/** The enquiry band shared by the listing, detail, location and contact pages. */
 export function EnquireBand({
   kicker = "Start your project",
   heading,
@@ -28,14 +30,20 @@ export function EnquireBand({
   points,
   focus,
   town,
+  inline = false,
 }: {
   kicker?: string;
   heading: React.ReactNode;
   body: string;
   points: [string, string];
   focus?: EnquiryFocus;
-  /** Pre-fills the form's town field on a location page. */
+  /** Pre-fills the card's town field on a location page. */
   town?: string;
+  /**
+   * Shows the enquiry form itself rather than a button that opens the card.
+   * Only /contact does this, so the form works there without the pop-up.
+   */
+  inline?: boolean;
 }) {
   return (
     <section
@@ -71,7 +79,13 @@ export function EnquireBand({
         </Reveal>
 
         <Reveal delay={90}>
-          <EnquiryForm focus={focus} town={town} />
+          {inline ? (
+            <div className="h-[600px] overflow-hidden rounded-[4px] border border-[var(--migss-divider)] border-t-2 border-t-migss-accent bg-migss-bg shadow-migss-sm">
+              <EnquiryCardForm variant="contact page" context={{ focus, town }} />
+            </div>
+          ) : (
+            <EnquireCta focus={focus} town={town} />
+          )}
         </Reveal>
       </div>
     </section>
