@@ -1,4 +1,4 @@
-import { EnquiryForm } from "@/components/home/enquiry-form";
+import { EnquireCta } from "@/components/enquiry/enquire-cta";
 import { Reveal } from "@/components/reveal";
 import { SITE, telHref } from "@/lib/site";
 
@@ -41,7 +41,7 @@ export function Enquire() {
             Book your free consultation
           </h2>
           <p className="mb-[18.4px] text-[15px] leading-[1.75] text-migss-text/78">
-            Two short steps. We reply the same working day, and your details
+            Three quick steps. We reply the same working day, and your details
             never leave our office.
           </p>
           <ul className="flex list-none flex-col gap-2.5 text-sm text-migss-text/75">
@@ -62,7 +62,7 @@ export function Enquire() {
         </Reveal>
 
         <Reveal delay={90}>
-          <EnquiryForm />
+          <EnquireCta />
         </Reveal>
       </div>
     </section>

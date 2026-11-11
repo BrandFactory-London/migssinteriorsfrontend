@@ -1,8 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
-
-import { createConversionToken } from "@/lib/conversion-token";
 import { formatNotes, parseAttribution } from "@/lib/crm/attribution";
 import { enquiryFormName } from "@/lib/crm/form-name";
 import {
@@ -12,55 +9,49 @@ import {
 } from "@/lib/crm/lead";
 import { saveLead } from "@/lib/crm/notion";
 import { normaliseUkPhone } from "@/lib/crm/phone";
-import type { EnquiryState } from "@/lib/enquiry";
-
-const PROJECT_TYPES = ["Bathroom", "Kitchen", "Whole home", "Something else"];
+import {
+  BUDGETS,
+  checkAll,
+  type EnquiryState,
+  type EnquiryValues,
+  firstStepWithError,
+} from "@/lib/enquiry";
 
 /**
- * Saves an enquiry as a Lead in the Contacts CRM, then sends the visitor to
- * /thank-you with a one-time token so the conversion fires once, for a real
- * enquiry only.
+ * Saves an enquiry as a Lead in the Contacts CRM.
+ *
+ * The card shows its own thank-you and fires the conversion when this
+ * returns "sent", so there is no redirect. Validation is the same code the
+ * card runs before each step; it is repeated here because the browser can be
+ * bypassed.
  */
 export async function submitEnquiry(
   _previous: EnquiryState,
   formData: FormData,
 ): Promise<EnquiryState> {
-  const read = (name: string) => String(formData.get(name) ?? "").trim();
+  const read = (name: string, max = 2000) =>
+    String(formData.get(name) ?? "").trim().slice(0, max);
 
-  const values = {
-    firstName: read("firstName"),
-    lastName: read("lastName"),
-    phone: read("phone"),
-    email: read("email"),
-    town: read("town"),
-    projectType: read("projectType"),
-    budget: read("budget"),
+  const values: EnquiryValues = {
+    firstName: read("firstName", 120),
+    lastName: read("lastName", 120),
+    phone: read("phone", 40),
+    email: read("email", 200),
+    projectType: read("projectType", 40),
+    town: read("town", 120),
+    budget: read("budget", 40),
     notes: read("notes"),
   };
 
-  const fieldErrors: NonNullable<EnquiryState["fieldErrors"]> = {};
-  if (!values.firstName) fieldErrors.firstName = "Please tell us your name.";
-  if (!values.email) {
-    fieldErrors.email = "We need an email address to reply to.";
-  } else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(values.email)) {
-    fieldErrors.email = "That email address does not look right.";
-  }
-  if (!PROJECT_TYPES.includes(values.projectType)) {
-    fieldErrors.projectType = "Please choose what we are renovating.";
-  }
+  const fieldErrors = checkAll(values);
+  const step = firstStepWithError(fieldErrors);
+  if (step) return { status: "error", fieldErrors, step };
 
-  if (Object.keys(fieldErrors).length > 0) {
-    return {
-      status: "error",
-      fieldErrors,
-      // Contact-details errors live on step 1, the project radio on step 2.
-      step: fieldErrors.firstName || fieldErrors.email ? 1 : 2,
-      values,
-    };
-  }
-
-  const submissionId = submissionIdOrNew(read("submissionId"));
-  const pagePath = read("pagePath") || "/";
+  const submissionId = submissionIdOrNew(read("submissionId", 60));
+  const pagePath = read("pagePath", 300) || "/";
+  const budget = (BUDGETS as readonly string[]).includes(values.budget)
+    ? values.budget
+    : "";
 
   const result = await saveLead(
     {
@@ -72,12 +63,12 @@ export async function submitEnquiry(
       message: labelledLines([
         ["Renovating", values.projectType],
         ["Town", values.town],
-        ["Budget", values.budget],
+        ["Budget", budget],
         ["Notes", values.notes],
       ]),
       notes: formatNotes({
         submissionId,
-        pageUrl: read("pageUrl").slice(0, 500) || pagePath,
+        pageUrl: read("pageUrl", 500) || pagePath,
         attribution: parseAttribution(read("attribution")),
       }),
       acquired: londonDate(),
@@ -93,13 +84,10 @@ export async function submitEnquiry(
     return {
       status: "error",
       message:
-        "Something went wrong sending your enquiry. Your details are still here, so try again or call us and we will take it over the phone.",
-      step: 2,
-      values,
+        "Something went wrong sending your enquiry. Your answers are still here, so try again, or call us and we will take it over the phone.",
+      step: 3,
     };
   }
 
-  // NOTION_TOKEN is set, or saveLead would have failed above.
-  const token = createConversionToken(process.env.NOTION_TOKEN!);
-  redirect(`/thank-you?lead=${token}`);
+  return { status: "sent" };
 }

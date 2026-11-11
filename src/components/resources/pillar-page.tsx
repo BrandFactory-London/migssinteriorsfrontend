@@ -13,7 +13,7 @@ import {
   PILLAR_TAG_SLUG,
   type Pillar,
 } from "@/lib/wix/blog";
-import type { EnquiryFocus } from "@/components/home/enquiry-form";
+import type { EnquiryFocus } from "@/lib/enquiry";
 import { Reveal } from "@/components/reveal";
 
 type PillarCopy = {

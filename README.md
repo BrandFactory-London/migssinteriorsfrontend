@@ -45,9 +45,13 @@ CRM** in Notion, not to Wix. Code: `src/lib/crm/` and the two server actions in
 - **Notes** carry the page URL, any UTM tags or ad click IDs captured on
   arrival (`AttributionCapture`), and a submission ID. A retry with the same
   ID returns the existing row, so errors and double clicks never duplicate.
-- A successful enquiry redirects to `/thank-you?lead=<token>`. Only a valid,
-  unexpired token fires the GA4 `generate_lead` event, once; reloads and
-  direct visits fire nothing.
+- Enquiries are made in the **enquiry card** (`src/components/enquiry/`), a
+  site-wide pop-up modelled on the BrandFactory Labs one. It opens from the
+  dock's "Free quote" button and from any link marked `data-enquire` or
+  pointing to `#enquire`, pre-filled from the page (`EnquiryPageContext`).
+  `/contact` shows the same form inline. On success the card shows its own
+  thank-you and pushes the GA4 `generate_lead` event once; `/thank-you` is
+  kept only for old links and fires nothing.
 - Needs `NOTION_TOKEN` (server-side) for an integration connected to the
   Contacts CRM. Without it every submission fails with the inline error.
 

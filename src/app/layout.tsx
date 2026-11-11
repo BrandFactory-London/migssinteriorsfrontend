@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Instrument_Sans } from "next/font/google";
 
 import { AttributionCapture } from "@/components/attribution-capture";
+import { EnquiryDialog } from "@/components/enquiry/enquiry-dialog";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { NavMenuProvider } from "@/components/nav-menu";
 import { ScrollReset } from "@/components/scroll-reset";
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
         <GoogleAnalytics />
         <AttributionCapture />
+        <EnquiryDialog />
       </body>
     </html>
   );

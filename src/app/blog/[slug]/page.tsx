@@ -204,6 +204,7 @@ export default async function ArticlePage({ params }: Props) {
             <div className="flex flex-wrap gap-2.5">
               <ButtonLink
                 href="/contact"
+                data-enquire=""
                 className="font-body flex-[1_1_180px] font-medium"
               >
                 Book a free visit

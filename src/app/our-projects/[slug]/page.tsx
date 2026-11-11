@@ -350,7 +350,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         <EnquireBand
           heading="Book your free consultation"
-          body="Two short steps. We reply the same working day, and we can send the full photo set from this project if it helps you picture yours."
+          body="Three quick steps. We reply the same working day, and we can send the full photo set from this project if it helps you picture yours."
           points={[
             "Fixed written quote, no sales pressure",
             "10-year labour guarantee, 0% finance available",

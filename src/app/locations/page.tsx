@@ -107,7 +107,7 @@ export default function LocationsPage() {
 
         <EnquireBand
           heading="Tell us where you are."
-          body="Two short steps. We reply the same working day, and we will say honestly whether you are inside our range."
+          body="Three quick steps. We reply the same working day, and we will say honestly whether you are inside our range."
           points={[
             "Free home visit, fixed written quote",
             "Photographs of nearby projects on request",

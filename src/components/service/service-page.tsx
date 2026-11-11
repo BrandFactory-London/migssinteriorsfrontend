@@ -1,4 +1,4 @@
-import { EnquiryForm } from "@/components/home/enquiry-form";
+import { EnquireCta } from "@/components/enquiry/enquire-cta";
 import Link from "next/link";
 
 import { HeroMedia } from "@/components/hero-media";
@@ -419,7 +419,7 @@ export async function ServicePage({ service }: { service: Service }) {
           </Reveal>
 
           <Reveal delay={90}>
-            <EnquiryForm focus={service.slug} />
+            <EnquireCta focus={service.slug} />
           </Reveal>
         </div>
       </section>
