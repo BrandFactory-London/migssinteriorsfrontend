@@ -177,7 +177,10 @@ export function EnquiryDock() {
             expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
           )}
         >
-          <div className="overflow-hidden">
+          {/* w-0 min-w-full: the line takes the dock's width but never sets
+              it. Collapsed to zero height it would otherwise still widen the
+              resting dock to the length of its text. */}
+          <div className="w-0 min-w-full overflow-hidden">
             <div className="flex items-center gap-2.5 px-1 pt-0.5 pb-3">
               <span aria-hidden="true" className="dock-dot relative size-2 flex-none rounded-full bg-[#3b8a4f]" />
               <p className="min-w-0 flex-1 text-[15px] leading-[1.25] text-migss-text">
