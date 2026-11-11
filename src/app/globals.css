@@ -204,6 +204,40 @@
   }
 }
 
+/* Enquiry dock: the "Contact us now" dot breathes; the idle nudge slides up. */
+.dock-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: inherit;
+  animation: dock-pulse 2.2s ease-out infinite;
+}
+@keyframes dock-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.dock-nudge {
+  animation: dock-nudge-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes dock-nudge-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Enquiry card (modelled on the BrandFactory Labs pop-up). */
 @keyframes enquiry-pop {
   0% {
