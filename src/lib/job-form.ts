@@ -1,9 +1,6 @@
 /**
- * The Job Form's option values, exactly as Wix defines them.
- *
- * Kept outside `lib/wix/forms.ts` (which is server-only) because the
- * application form renders these options in the browser. Any value sent to
- * Wix that is not in these lists fails the whole submission.
+ * The job application's option values. Shared by the form, which renders them
+ * in the browser, and the server action, which only accepts these values.
  */
 export const JOB_EXPERIENCE = ["5-10 years", "10-14 years", "14 years +"];
 

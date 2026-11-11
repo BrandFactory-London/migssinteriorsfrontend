@@ -2,26 +2,25 @@
 
 import { redirect } from "next/navigation";
 
-import type { EnquiryState } from "@/lib/enquiry";
+import { createConversionToken } from "@/lib/conversion-token";
+import { formatNotes, parseAttribution } from "@/lib/crm/attribution";
+import { enquiryFormName } from "@/lib/crm/form-name";
 import {
-  createEnquirySubmission,
-  FIELD,
-  type SubmissionValues,
-} from "@/lib/wix/forms";
+  labelledLines,
+  londonDate,
+  submissionIdOrNew,
+} from "@/lib/crm/lead";
+import { saveLead } from "@/lib/crm/notion";
+import { normaliseUkPhone } from "@/lib/crm/phone";
+import type { EnquiryState } from "@/lib/enquiry";
+
+const PROJECT_TYPES = ["Bathroom", "Kitchen", "Whole home", "Something else"];
 
 /**
- * How the form's own radio labels map onto the Wix checkbox group's options.
- * "Whole home" is worded for the visitor; the Wix option is "Full Interior".
- * "Something else" has no option, so it goes through as a custom value —
- * the field has `addOther` enabled, which is what permits that.
+ * Saves an enquiry as a Lead in the Contacts CRM, then sends the visitor to
+ * /thank-you with a one-time token so the conversion fires once, for a real
+ * enquiry only.
  */
-const TYPE_TO_OPTION: Record<string, string> = {
-  Bathroom: "Bathroom",
-  Kitchen: "Kitchen",
-  "Whole home": "Full Interior",
-  "Something else": "Other",
-};
-
 export async function submitEnquiry(
   _previous: EnquiryState,
   formData: FormData,
@@ -46,8 +45,7 @@ export async function submitEnquiry(
   } else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(values.email)) {
     fieldErrors.email = "That email address does not look right.";
   }
-  // The one field Wix itself marks required.
-  if (!values.projectType) {
+  if (!PROJECT_TYPES.includes(values.projectType)) {
     fieldErrors.projectType = "Please choose what we are renovating.";
   }
 
@@ -61,25 +59,36 @@ export async function submitEnquiry(
     };
   }
 
-  const submissions: SubmissionValues = {
-    [FIELD.firstName]: values.firstName,
-    [FIELD.renovationType]: [
-      TYPE_TO_OPTION[values.projectType] ?? values.projectType,
-    ],
-  };
-  if (values.lastName) submissions[FIELD.lastName] = values.lastName;
-  if (values.phone) submissions[FIELD.phone] = values.phone;
-  if (values.email) submissions[FIELD.email] = values.email;
-  if (values.town) submissions[FIELD.address] = values.town;
-  if (values.budget) submissions[FIELD.budget] = values.budget;
-  if (values.notes) submissions[FIELD.notes] = values.notes;
+  const submissionId = submissionIdOrNew(read("submissionId"));
+  const pagePath = read("pagePath") || "/";
 
-  const result = await createEnquirySubmission(submissions);
+  const result = await saveLead(
+    {
+      name: [values.firstName, values.lastName].filter(Boolean).join(" "),
+      email: values.email,
+      phone: normaliseUkPhone(values.phone),
+      formName: enquiryFormName(pagePath),
+      type: "Lead",
+      message: labelledLines([
+        ["Renovating", values.projectType],
+        ["Town", values.town],
+        ["Budget", values.budget],
+        ["Notes", values.notes],
+      ]),
+      notes: formatNotes({
+        submissionId,
+        pageUrl: read("pageUrl").slice(0, 500) || pagePath,
+        attribution: parseAttribution(read("attribution")),
+      }),
+      acquired: londonDate(),
+    },
+    submissionId,
+  );
 
   if (!result.ok) {
     // The detail is for our logs, not the visitor: it can carry raw API text.
     console.error(
-      `[enquiry] submission failed (status ${result.status ?? "none"}): ${result.detail}`,
+      `[enquiry] CRM save failed (status ${result.status ?? "none"}): ${result.detail}`,
     );
     return {
       status: "error",
@@ -90,5 +99,7 @@ export async function submitEnquiry(
     };
   }
 
-  redirect("/thank-you");
+  // NOTION_TOKEN is set, or saveLead would have failed above.
+  const token = createConversionToken(process.env.NOTION_TOKEN!);
+  redirect(`/thank-you?lead=${token}`);
 }

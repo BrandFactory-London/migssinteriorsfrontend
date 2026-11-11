@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import { submitApplication } from "@/app/actions/application";
+import { useLeadContext } from "@/components/forms/lead-context";
 import { Button } from "@/components/ui/button";
 import {
   EMPTY_APPLICATION_STATE,
@@ -60,8 +61,8 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 }
 
 /**
- * Application form for a role, submitted to the Wix "Job Form" through the
- * `submitApplication` server action. Single step: it is short, and a fitter
+ * Application form for a role, saved to the Contacts CRM in Notion as an
+ * Applicant through the `submitApplication` server action. Single step: it is short, and a fitter
  * applying from a van on a phone should not have to page through it.
  *
  * On success the form is replaced by a confirmation in place rather than
@@ -79,6 +80,7 @@ export function ApplicationForm({
     ApplicationState,
     FormData
   >(submitApplication, EMPTY_APPLICATION_STATE);
+  const lead = useLeadContext();
 
   const confirmationRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
@@ -119,7 +121,12 @@ export function ApplicationForm({
 
   return (
     <div className="rounded-[4px] border border-[var(--migss-divider)] border-t-2 border-t-migss-accent bg-migss-bg p-[clamp(16px,4vw,28px)] shadow-migss-sm">
-      <form action={formAction} className="flex flex-col gap-[13.8px]">
+      <form
+        action={formAction}
+        onSubmit={lead.onSubmit}
+        className="flex flex-col gap-[13.8px]"
+      >
+        {lead.fields}
         <input type="hidden" name="role" value={roleTitle} />
         <h3 className="text-[21px] font-normal">Your details</h3>
 

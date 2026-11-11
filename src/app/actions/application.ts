@@ -1,21 +1,24 @@
 "use server";
 
 import type { ApplicationState } from "@/lib/application";
+import { formatNotes, parseAttribution } from "@/lib/crm/attribution";
+import { applicationFormName } from "@/lib/crm/form-name";
 import {
-  createJobSubmission,
-  JOB_EXPERIENCE,
-  JOB_FIELD,
-  JOB_START,
-  JOB_WORK_TYPES,
-  type JobSubmissionValues,
-} from "@/lib/wix/forms";
+  labelledLines,
+  londonDate,
+  submissionIdOrNew,
+} from "@/lib/crm/lead";
+import { saveLead } from "@/lib/crm/notion";
+import { normaliseUkPhone } from "@/lib/crm/phone";
+import { JOB_EXPERIENCE, JOB_START, JOB_WORK_TYPES } from "@/lib/job-form";
 
 /**
- * Sends an application to the Wix "Job Form".
+ * Saves a job application as an Applicant in the Contacts CRM.
  *
  * Unlike the enquiry, a successful application does not redirect: /thank-you
  * is written for renovation customers (call back, home visit, quote), and
- * none of that applies to a fitter. The form shows its own confirmation.
+ * none of that applies to a fitter. The form shows its own confirmation, and
+ * no conversion fires: an applicant is not a lead.
  */
 export async function submitApplication(
   _previous: ApplicationState,
@@ -33,11 +36,9 @@ export async function submitApplication(
     rightToWork: read("rightToWork"),
   };
   // Set by the role page, not the applicant; capped so a tampered value
-  // cannot push an oversized string into the dashboard.
+  // cannot push an oversized string into the CRM.
   const role = read("role").slice(0, 120);
 
-  // Only the options the Wix form defines: anything else fails the whole
-  // submission rather than being dropped.
   const workTypes = formData
     .getAll("workTypes")
     .map(String)
@@ -64,24 +65,37 @@ export async function submitApplication(
     return { status: "error", fieldErrors, values, workTypes };
   }
 
-  const submissions: JobSubmissionValues = {
-    [JOB_FIELD.firstName]: values.firstName,
-    [JOB_FIELD.phone]: values.phone,
-    [JOB_FIELD.experience]: values.experience,
-    [JOB_FIELD.start]: values.start,
-    [JOB_FIELD.rightToWork]: values.rightToWork,
-  };
-  if (role) submissions[JOB_FIELD.role] = role;
-  if (values.lastName) submissions[JOB_FIELD.lastName] = values.lastName;
-  if (values.email) submissions[JOB_FIELD.email] = values.email;
-  if (workTypes.length > 0) submissions[JOB_FIELD.workTypes] = workTypes;
+  const submissionId = submissionIdOrNew(read("submissionId"));
+  const pagePath = read("pagePath") || "/join-the-team";
 
-  const result = await createJobSubmission(submissions);
+  const result = await saveLead(
+    {
+      name: [values.firstName, values.lastName].filter(Boolean).join(" "),
+      email: values.email,
+      phone: normaliseUkPhone(values.phone),
+      formName: applicationFormName(role),
+      type: "Applicant",
+      message: labelledLines([
+        ["Role", role],
+        ["Experience", values.experience],
+        ["Can start", values.start],
+        ["Right to work in the UK", values.rightToWork],
+        ["Work they can do", workTypes.join(", ")],
+      ]),
+      notes: formatNotes({
+        submissionId,
+        pageUrl: read("pageUrl").slice(0, 500) || pagePath,
+        attribution: parseAttribution(read("attribution")),
+      }),
+      acquired: londonDate(),
+    },
+    submissionId,
+  );
 
   if (!result.ok) {
     // The detail is for our logs, not the applicant: it can carry raw API text.
     console.error(
-      `[application] submission failed (status ${result.status ?? "none"}): ${result.detail}`,
+      `[application] CRM save failed (status ${result.status ?? "none"}): ${result.detail}`,
     );
     return {
       status: "error",

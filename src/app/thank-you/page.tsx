@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { LeadConversion } from "@/components/lead-conversion";
 import { SiteChrome } from "@/components/site-chrome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ButtonLink } from "@/components/ui/button";
+import { verifyConversionToken } from "@/lib/conversion-token";
 import { SITE, telHref } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -37,16 +39,24 @@ const NEXT = [
 ];
 
 /**
- * Post-submission destination. Not linked from any navigation — it is reached
- * by redirect once the submission handler exists (Phase 4).
+ * Post-submission destination, reached by redirect from the enquiry action
+ * with a one-time `lead` token. Only a valid token renders LeadConversion,
+ * which fires the conversion once; a reload, bookmark or direct visit shows
+ * the same page and fires nothing.
  *
- * Deliberately plain: no scroll reveals, no carousels, no client components of
- * its own. Its job is to load fast and fire cleanly as a conversion target, so
- * everything here is server-rendered and static.
+ * Deliberately plain: no scroll reveals, no carousels. Its job is to load fast
+ * and fire cleanly as a conversion target.
  */
-export default function ThankYouPage() {
+export default async function ThankYouPage({
+  searchParams,
+}: PageProps<"/thank-you">) {
+  const { lead } = await searchParams;
+  const token = typeof lead === "string" ? lead : undefined;
+  const genuine = verifyConversionToken(token, process.env.NOTION_TOKEN);
+
   return (
     <>
+      {genuine && token ? <LeadConversion token={token} /> : null}
       <SiteHeader variant="solid" />
 
       <main className="mx-auto w-full max-w-[860px] flex-1 px-[clamp(16px,4.5vw,48px)] pt-[clamp(36px,9vw,96px)] pb-[clamp(40px,8vw,80px)]">
