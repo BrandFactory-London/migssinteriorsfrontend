@@ -170,7 +170,7 @@ export function EnquiryDock() {
         className={cn(
           "relative overflow-hidden border border-migss-text/10 bg-migss-bg/70 shadow-[0_10px_34px_-12px_color-mix(in_srgb,#2d2b2b_38%,transparent),inset_0_1px_0_color-mix(in_srgb,#fff_55%,transparent)] backdrop-blur-[20px] backdrop-saturate-[180%] transition-[border-radius,padding,width] duration-[380ms] ease-[cubic-bezier(.2,.8,.2,1)]",
           expanded
-            ? "w-[min(290px,calc(100vw-20px))] rounded-[22px] p-3"
+            ? "w-[min(356px,calc(100vw-20px))] rounded-[22px] p-3"
             : "rounded-[30px] p-1.5",
         )}
       >
@@ -221,7 +221,7 @@ export function EnquiryDock() {
             aria-label="Message us on WhatsApp"
             className={cn(
               "flex h-[46px] items-center justify-center rounded-full text-migss-accent-ink no-underline transition-[background-color,transform] duration-300 active:scale-[0.95] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/12",
-              expanded ? "flex-1 gap-2 px-3" : "w-[50px] flex-none",
+              expanded ? "flex-none gap-2 px-3" : "w-[50px] flex-none",
             )}
           >
             {/* The supplied logo, painted through a mask so it takes the
@@ -244,7 +244,7 @@ export function EnquiryDock() {
             tabIndex={expanded ? 0 : -1}
             aria-label="Free consultation: open the enquiry form"
             className={cn(
-              "flex h-[46px] items-center justify-center whitespace-nowrap rounded-full bg-migss-accent-ink px-5 text-[14.5px] font-semibold tracking-[0.01em] text-white no-underline transition-[background-color,transform] duration-300 active:scale-[0.95] active:bg-migss-accent-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent-800",
+              "flex h-[46px] min-w-0 items-center justify-center whitespace-nowrap rounded-full bg-migss-accent-ink px-5 text-[14.5px] font-semibold tracking-[0.01em] text-white no-underline transition-[background-color,transform] duration-300 active:scale-[0.95] active:bg-migss-accent-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent-800",
               expanded && "flex-1",
             )}
           >
