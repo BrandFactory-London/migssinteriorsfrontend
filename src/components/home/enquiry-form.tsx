@@ -4,6 +4,7 @@ import * as React from "react";
 
 import { submitEnquiry } from "@/app/actions/enquiry";
 import { EMPTY_ENQUIRY_STATE, type EnquiryState } from "@/lib/enquiry";
+import { useLeadContext } from "@/components/forms/lead-context";
 import { Button } from "@/components/ui/button";
 import { SITE, telHref } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -48,10 +49,11 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 }
 
 /**
- * Two-step enquiry, submitted to Wix Forms through the `submitEnquiry` server
- * action — the Wix client ID stays on the server and never reaches the
- * browser. A successful submission redirects to /thank-you; a failure comes
- * back as state and is shown inline, with every answer still in place.
+ * Two-step enquiry, saved to the Contacts CRM in Notion through the
+ * `submitEnquiry` server action, so the integration key stays on the server.
+ * A successful submission redirects to /thank-you; a failure comes back as
+ * state and is shown inline, with every answer still in place. The page it is
+ * sent from names the form in the CRM (see `useLeadContext`).
  *
  * Both steps stay mounted and the inactive one is hidden with CSS rather than
  * unmounted: the step-1 inputs have to still be in the form element when the
@@ -70,6 +72,7 @@ export function EnquiryForm({
     EnquiryState,
     FormData
   >(submitEnquiry, EMPTY_ENQUIRY_STATE);
+  const lead = useLeadContext();
 
   const [step, setStep] = React.useState<Step>(1);
   const headingRef = React.useRef<HTMLHeadingElement>(null);
@@ -121,7 +124,12 @@ export function EnquiryForm({
         </span>
       </div>
 
-      <form action={formAction} className="flex flex-col gap-[13.8px]">
+      <form
+        action={formAction}
+        onSubmit={lead.onSubmit}
+        className="flex flex-col gap-[13.8px]"
+      >
+        {lead.fields}
         <div
           className={cn(
             step === 1

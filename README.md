@@ -30,6 +30,29 @@ the same kind of call the live pages make. Note that it deliberately does not
 call `listDataCollections`: that is an admin operation and always 403s for a
 visitor token, so it says nothing about whether the connection works.
 
+## Forms and leads
+
+Enquiries and job applications are saved to the shared BrandFactory **Contacts
+CRM** in Notion, not to Wix. Code: `src/lib/crm/` and the two server actions in
+`src/app/actions/`.
+
+- Each submission is a new CRM row: Owner Migss Interiors
+  (`src/lib/crm/config.ts`), Type `Lead` or `Applicant`, Status `New`, Source
+  `Website form`, Acquired today, phone normalised to `+44`.
+- **Form** is worked out from the page the form was sent from
+  (`src/lib/crm/form-name.ts`), e.g. `/renovation-services/bathroom` gives
+  "Bathroom page enquiry". A site-wide enquiry card needs no extra wiring.
+- **Notes** carry the page URL, any UTM tags or ad click IDs captured on
+  arrival (`AttributionCapture`), and a submission ID. A retry with the same
+  ID returns the existing row, so errors and double clicks never duplicate.
+- A successful enquiry redirects to `/thank-you?lead=<token>`. Only a valid,
+  unexpired token fires the GA4 `generate_lead` event, once; reloads and
+  direct visits fire nothing.
+- Needs `NOTION_TOKEN` (server-side) for an integration connected to the
+  Contacts CRM. Without it every submission fails with the inline error.
+
+Tests: `pnpm test` (Vitest, unit tests with Notion mocked).
+
 ## Routes
 
 The route tree is scaffolded but intentionally empty — every page renders a
