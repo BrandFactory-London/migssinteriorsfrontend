@@ -137,21 +137,27 @@ export function EnquiryDock() {
       {nudge && (
         <div
           role="status"
-          className="dock-nudge relative mb-2.5 w-[min(250px,calc(100vw-40px))] rounded-[16px] bg-migss-neutral-900 text-migss-neutral-100 shadow-[0_10px_28px_-10px_color-mix(in_srgb,#2d2b2b_60%,transparent)]"
+          // Full width on phones (16px gutters), capped on wider screens so
+          // it still reads as part of the dock rather than a page banner.
+          className="dock-nudge mb-2.5 flex w-[min(560px,calc(100vw-32px))] items-center rounded-[16px] bg-migss-neutral-900 text-migss-neutral-100 shadow-[0_10px_28px_-10px_color-mix(in_srgb,#2d2b2b_60%,transparent)]"
         >
           <button
             type="button"
             onClick={(event) => expand(event.detail === 0)}
-            className="block w-full rounded-[16px] py-2.5 pr-9 pl-3.5 text-left text-[13px] leading-[1.4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent"
+            className="flex min-w-0 flex-1 items-center gap-3 rounded-[16px] py-3 pr-2 pl-4 text-left text-[13.5px] leading-[1.4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent"
           >
-            <span className="block font-medium text-migss-accent-300">Get in touch now</span>
-            Free renovation consultations and advice
+            <span className="min-w-0 flex-1">
+              <span className="block font-medium text-migss-accent-300">Get in touch now</span>
+              Free renovation consultations and advice
+            </span>
+            {/* The same breathing "we are here" dot as the expanded dock. */}
+            <span aria-hidden="true" className="dock-dot relative size-2.5 flex-none rounded-full bg-[#4caf68]" />
           </button>
           <button
             type="button"
             aria-label="Dismiss"
             onClick={() => setNudge(false)}
-            className="absolute top-1 right-1 flex size-8 items-center justify-center rounded-full text-migss-neutral-400 transition-colors focus-visible:outline-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:text-migss-neutral-100"
+            className="mr-1.5 flex size-9 flex-none items-center justify-center rounded-full text-migss-neutral-400 transition-colors focus-visible:outline-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:text-migss-neutral-100"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
               <path d="M6 6l12 12M18 6L6 18" />
