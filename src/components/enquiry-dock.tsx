@@ -146,12 +146,13 @@ export function EnquiryDock() {
             onClick={(event) => expand(event.detail === 0)}
             className="flex min-w-0 flex-1 items-center gap-3 rounded-[16px] py-3 pr-2 pl-4 text-left text-[13.5px] leading-[1.4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent"
           >
+            {/* The same breathing "we are here" dot as the expanded dock, in
+                the same place: before the text. */}
+            <span aria-hidden="true" className="dock-dot relative size-2.5 flex-none rounded-full bg-[#4caf68]" />
             <span className="min-w-0 flex-1">
               <span className="block font-medium text-migss-accent-300">Get in touch now</span>
               Free renovation consultations and advice
             </span>
-            {/* The same breathing "we are here" dot as the expanded dock. */}
-            <span aria-hidden="true" className="dock-dot relative size-2.5 flex-none rounded-full bg-[#4caf68]" />
           </button>
           <button
             type="button"
