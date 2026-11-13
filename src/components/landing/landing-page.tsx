@@ -36,8 +36,10 @@ const h2 =
 const wrap = "mx-auto w-full max-w-[720px] px-4";
 
 /**
- * Projects for the rail: this room in this cluster first, then any room in
- * the cluster, then featured work. Area names only, never street lines.
+ * Projects for the rail: this room in this cluster first, then other rooms
+ * in the cluster. Nothing from outside the cluster; with no cluster projects
+ * the rail shows labelled placeholders until some are added in Wix. Area
+ * names only, never street lines.
  */
 async function projectsFor(page: LandingPageData): Promise<Project[]> {
   const cluster = getCluster(page.cluster);
@@ -50,10 +52,9 @@ async function projectsFor(page: LandingPageData): Promise<Project[]> {
     names.has(project.location?.trim().toLowerCase() ?? ""),
   );
   const sameRoom = inCluster.filter((project) => project.category === page.room);
-  if (sameRoom.length > 0) return sameRoom.slice(0, 6);
-  if (inCluster.length > 0) return inCluster.slice(0, 6);
-  const featured = all.filter((project) => project.featured);
-  return (featured.length > 0 ? featured : all).slice(0, 3);
+  const others = inCluster.filter((project) => project.category !== page.room);
+  // Never pad with work from outside the cluster: the heading names the area.
+  return [...sameRoom, ...others].slice(0, 6);
 }
 
 function Testimonial({
@@ -173,6 +174,17 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           className="migss-scroll mx-auto mt-5 flex max-w-[720px] list-none snap-x snap-proximity gap-3 overflow-x-auto overscroll-x-contain px-4 pb-2"
           aria-label={page.projectsHeading}
         >
+          {projects.length === 0
+            ? [1, 2, 3].map((n) => (
+                <li key={n} className="w-[min(72vw,260px)] flex-none snap-start">
+                  <div className="migss-plate relative aspect-[4/5] overflow-hidden">
+                    <ImageSlot
+                      placeholder={`[${page.clusterLabel} project ${n}: add in Wix Projects]`}
+                    />
+                  </div>
+                </li>
+              ))
+            : null}
           {projects.map((project) => (
             <li key={project.slug} className="w-[min(72vw,260px)] flex-none snap-start">
               <div className="migss-plate relative aspect-[4/5] overflow-hidden">
