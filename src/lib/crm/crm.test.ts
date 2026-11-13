@@ -65,6 +65,9 @@ describe("enquiryFormName", () => {
     ["/resources/bathroom", "Resources page enquiry: Bathroom"],
     ["/blog", "Blog enquiry"],
     ["/blog/wet-room-costs", "Blog post enquiry: Wet Room Costs"],
+    ["/lp/bathrooms-north-london", "Meta LP: Bathrooms, North London"],
+    ["/lp/kitchens-chigwell-essex/", "Meta LP: Kitchens, Chigwell & Essex"],
+    ["/lp/not-a-page", "Website enquiry: /lp/not-a-page"],
     ["/something-new", "Website enquiry: /something-new"],
   ])("%s -> %s", (path, expected) => {
     expect(enquiryFormName(path)).toBe(expected);

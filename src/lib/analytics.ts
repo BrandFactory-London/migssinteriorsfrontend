@@ -12,7 +12,9 @@ declare global {
  * even if gtag.js has not finished loading. Without a GA measurement ID
  * (local and previews) dataLayer is never read, so nothing is sent anywhere.
  */
-export function pushLeadEvent(formType: "pop-up" | "contact page") {
+export function pushLeadEvent(
+  formType: "pop-up" | "contact page" | "landing page",
+) {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer || [];
   // gtag() pushes its `arguments` object, not an array; mirror that exactly
