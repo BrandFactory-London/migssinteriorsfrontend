@@ -132,7 +132,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     headline: "Luxury bathroom renovation in north London",
     subline: SUB_NORTH,
     projectsHeading: "Recently completed in north London",
-    projects: [],
+    projects: ["family-bathroom-barking"],
     metaTitle: "Luxury Bathroom Renovation in North London | Migss Interiors",
     metaDescription:
       "Luxury bathroom renovation from Hampstead to Cockfosters, designed, built and guaranteed by our own in-house team. Book a design consultation.",
@@ -163,7 +163,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     headline: "Luxury kitchen renovation in north London",
     subline: SUB_NORTH,
     projectsHeading: "Recently completed in north London",
-    projects: [],
+    projects: ["family-bathroom-barking"],
     metaTitle: "Luxury Kitchen Renovation in North London | Migss Interiors",
     metaDescription:
       "Luxury kitchen renovation from Hampstead to Cockfosters, designed, built and guaranteed by our own in-house team. Book a design consultation.",
