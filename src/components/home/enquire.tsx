@@ -1,4 +1,7 @@
+import { Check } from "lucide-react";
+
 import { EnquireCta } from "@/components/enquiry/enquire-cta";
+import { MotionIcon } from "@/components/icons/motion-icon";
 import { Reveal } from "@/components/reveal";
 import { SITE, telHref } from "@/lib/site";
 
@@ -7,21 +10,11 @@ const POINTS = [
   "0% interest over 5 years available",
 ];
 
-function Tick() {
+function Tick({ delay }: { delay?: number }) {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="var(--color-migss-accent)"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      aria-hidden="true"
-      className="flex-none"
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
+    <MotionIcon motion="draw" delay={delay} className="text-migss-accent">
+      <Check size={16} strokeWidth={2} />
+    </MotionIcon>
   );
 }
 
@@ -45,14 +38,14 @@ export function Enquire() {
             never leave our office.
           </p>
           <ul className="flex list-none flex-col gap-2.5 text-sm text-migss-text/75">
-            {POINTS.map((point) => (
-              <li key={point} className="flex items-center gap-2.5">
-                <Tick />
+            {POINTS.map((point, index) => (
+              <li key={point} className="group flex items-center gap-2.5">
+                <Tick delay={index * 90} />
                 {point}
               </li>
             ))}
-            <li className="flex items-center gap-2.5">
-              <Tick />
+            <li className="group flex items-center gap-2.5">
+              <Tick delay={POINTS.length * 90} />
               Or call us now on{" "}
               <a href={telHref} className="text-migss-accent-ink">
                 {SITE.phone}

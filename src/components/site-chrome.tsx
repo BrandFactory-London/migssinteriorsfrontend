@@ -4,6 +4,8 @@ import * as React from "react";
 
 import Link from "next/link";
 
+import { Lock, X } from "lucide-react";
+
 import {
   SITE,
   telHref,
@@ -11,6 +13,7 @@ import {
   STAFF_LOGIN_URL,
   CLIENT_LOGIN_PATH,
 } from "@/lib/site";
+import { MotionIcon } from "@/components/icons/motion-icon";
 import { ButtonLink } from "@/components/ui/button";
 import { EnquiryDock } from "@/components/enquiry-dock";
 import { useNavMenu } from "@/components/nav-menu";
@@ -109,22 +112,11 @@ export function SiteChrome() {
               <Link
                 href={CLIENT_LOGIN_PATH}
                 onClick={() => setMenuOpen(false)}
-                className="inline-flex min-h-[36px] items-center gap-2 rounded-full border border-migss-accent-400 bg-migss-accent-300/12 px-3.5 text-[11px] font-medium tracking-[0.24em] whitespace-nowrap text-migss-accent-300 uppercase no-underline transition-colors active:bg-migss-accent-300/20 [@media(hover:hover)]:hover:bg-migss-accent-300/20"
+                className="group inline-flex min-h-[36px] items-center gap-2 rounded-full border border-migss-accent-400 bg-migss-accent-300/12 px-3.5 text-[11px] font-medium tracking-[0.24em] whitespace-nowrap text-migss-accent-300 uppercase no-underline transition-colors active:bg-migss-accent-300/20 [@media(hover:hover)]:hover:bg-migss-accent-300/20"
               >
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <rect x="4.5" y="10.5" width="15" height="10" rx="1.5" />
-                  <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" />
-                </svg>
+                <MotionIcon motion="shake">
+                  <Lock size={12} strokeWidth={2} />
+                </MotionIcon>
                 Client Login
               </Link>
             </div>
@@ -140,20 +132,11 @@ export function SiteChrome() {
               // opens up directly under the cursor that just hit the
               // hamburger, and on touch that would leave a highlight sitting
               // there with no pointer to explain it.
-              className="grid h-[46px] w-[46px] cursor-pointer place-items-center justify-self-end rounded-[4px] border-0 bg-transparent text-inherit transition-colors active:scale-95 [@media(hover:hover)]:hover:bg-migss-neutral-100/10"
+              className="group grid h-[46px] w-[46px] cursor-pointer place-items-center justify-self-end rounded-[4px] border-0 bg-transparent text-inherit transition-colors active:scale-95 [@media(hover:hover)]:hover:bg-migss-neutral-100/10"
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                aria-hidden="true"
-              >
-                <path d="M18 6 6 18M6 6l12 12" />
-              </svg>
+              <MotionIcon motion="twirl" className="mi-enter">
+                <X size={20} strokeWidth={2} />
+              </MotionIcon>
             </button>
           </div>
 

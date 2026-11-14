@@ -2,7 +2,10 @@
 
 import * as React from "react";
 
+import { Check, CirclePlay, Plus } from "lucide-react";
+
 import { submitLandingEnquiry } from "@/app/actions/landing-enquiry";
+import { MotionIcon } from "@/components/icons/motion-icon";
 import { useLeadContext } from "@/components/forms/lead-context";
 import { pushLeadEvent } from "@/lib/analytics";
 import {
@@ -151,9 +154,9 @@ export function ToggleList({
                 ) : null}
                 <span className={numbered ? "font-medium" : undefined}>{item.title}</span>
               </span>
-              <span aria-hidden="true" className="text-xl text-migss-accent-700">
-                {isOpen ? "−" : "+"}
-              </span>
+              <MotionIcon motion="plus" className="text-migss-accent-700">
+                <Plus size={20} strokeWidth={2} />
+              </MotionIcon>
             </button>
             <div id={panelId} hidden={!isOpen}>
               <p
@@ -223,14 +226,12 @@ export function VideoStrip({
     <button
       type="button"
       onClick={() => setOpen(true)}
-      className="flex w-full cursor-pointer items-center gap-3 border-0 border-t border-[var(--migss-divider)] bg-migss-surface px-5 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-migss-accent"
+      className="group flex w-full cursor-pointer items-center gap-3 border-0 border-t border-[var(--migss-divider)] bg-migss-surface px-5 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-migss-accent"
     >
       <span className="grid h-12 w-[76px] flex-none place-items-center rounded-[3px] bg-migss-neutral-700">
-        <span className="grid size-[26px] place-items-center rounded-full bg-migss-neutral-100/90">
-          <svg width="10" height="12" viewBox="0 0 10 12" aria-hidden="true">
-            <path d="M1 1l8 5-8 5z" fill="currentColor" className="text-migss-text" />
-          </svg>
-        </span>
+        <MotionIcon motion="pop" className="text-migss-neutral-100">
+          <CirclePlay size={28} strokeWidth={2} />
+        </MotionIcon>
       </span>
       <span className="flex min-w-0 flex-col gap-0.5">
         <span className="text-sm font-medium text-migss-text">
@@ -379,7 +380,7 @@ export function LandingForm({ roomPlural }: { roomPlural: string }) {
                   <label
                     key={timing}
                     className={cn(
-                      "flex min-h-[48px] cursor-pointer items-center rounded-[4px] border px-3.5 text-sm",
+                      "flex min-h-[48px] cursor-pointer items-center justify-between gap-3 rounded-[4px] border px-3.5 text-sm transition-[background-color,border-color,transform] duration-200 active:scale-[0.99]",
                       checked
                         ? "border-migss-accent-700 bg-migss-accent-100"
                         : "border-[var(--migss-divider)] bg-migss-bg",
@@ -395,6 +396,11 @@ export function LandingForm({ roomPlural }: { roomPlural: string }) {
                       aria-describedby={errors.timing ? errorId("timing") : undefined}
                     />
                     {timing}
+                    {checked ? (
+                      <MotionIcon motion="draw" autoplay className="text-migss-accent-700">
+                        <Check size={18} strokeWidth={2} />
+                      </MotionIcon>
+                    ) : null}
                   </label>
                 );
               })}

@@ -1,6 +1,8 @@
+import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 
 import { HeroMedia } from "@/components/hero-media";
+import { MotionIcon } from "@/components/icons/motion-icon";
 import { ImageSlot } from "@/components/image-slot";
 import { EnquiryPageContext } from "@/components/enquiry/page-context";
 import {
@@ -37,7 +39,7 @@ const kicker =
 const h2 =
   "mt-2 mb-0 text-[clamp(30px,7.2vw,46px)] leading-[1.05] font-normal tracking-[-0.02em] text-balance";
 const cta =
-  "font-heading flex min-h-[56px] items-center justify-center rounded-[4px] border border-migss-accent-700 bg-migss-accent-700 px-6 text-[17px] font-semibold text-migss-text no-underline transition-colors [@media(hover:hover)]:hover:bg-migss-accent-800 [@media(hover:hover)]:hover:border-migss-accent-800";
+  "font-heading flex min-h-[56px] items-center justify-center rounded-[4px] border border-migss-accent-700 bg-migss-accent-700 px-6 text-[17px] font-semibold text-migss-text no-underline transition-[color,background-color,border-color,transform] duration-200 active:scale-[0.98] [@media(hover:hover)]:hover:bg-migss-accent-800 [@media(hover:hover)]:hover:border-migss-accent-800";
 
 /**
  * Projects for the rail: this room in this cluster first, then other rooms
@@ -100,8 +102,12 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
   const firstCard = (
     <div className="overflow-hidden rounded-[4px] border border-[var(--migss-divider)] bg-migss-neutral-100 text-migss-text">
       <div className="px-5 pt-5.5 pb-4.5 lg:px-7 lg:pt-7 lg:pb-6">
-        <p className="m-0 mb-3 text-sm tracking-[3px] text-migss-accent-700" aria-label="Five stars">
-          ★★★★★
+        <p className="group m-0 mb-3 flex gap-1 text-migss-accent-700" aria-label="Five stars">
+          {[0, 1, 2, 3, 4].map((index) => (
+            <MotionIcon key={index} motion="star" delay={index * 70}>
+              <Star size={15} strokeWidth={2} fill="currentColor" />
+            </MotionIcon>
+          ))}
         </p>
         <Testimonial {...first} />
       </div>
@@ -212,8 +218,11 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
             </li>
           ))}
         </ul>
-        <p className={`${wrap} mt-3 mb-0 text-xs tracking-[0.06em] text-migss-accent-ink lg:hidden`}>
-          Swipe to explore →
+        <p className={`${wrap} mt-3 mb-0 flex items-center gap-1.5 text-xs tracking-[0.06em] text-migss-accent-ink lg:hidden`}>
+          Swipe to explore
+          <MotionIcon motion="nudge">
+            <ArrowRight size={14} strokeWidth={2} />
+          </MotionIcon>
         </p>
       </section>
 
@@ -304,12 +313,9 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                       {row.text}
                     </span>
                   </span>
-                  <span
-                    aria-hidden="true"
-                    className="text-migss-accent-700 transition-transform [@media(hover:hover)]:group-hover:translate-x-1"
-                  >
-                    →
-                  </span>
+                  <MotionIcon motion="nudge" className="text-migss-accent-700">
+                    <ArrowRight size={20} strokeWidth={2} />
+                  </MotionIcon>
                 </Link>
               </li>
             ))}
@@ -331,9 +337,12 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
             </p>
             <Link
               href="/finance"
-              className="inline-flex min-h-[44px] items-center gap-2 text-sm font-medium text-migss-accent-ink no-underline"
+              className="group inline-flex min-h-[44px] items-center gap-2 text-sm font-medium text-migss-accent-ink no-underline"
             >
-              Find out more →
+              Find out more
+              <MotionIcon motion="nudge">
+                <ArrowRight size={16} strokeWidth={2} />
+              </MotionIcon>
             </Link>
           </div>
           <a href="#book" className={`${cta} w-full lg:w-auto lg:min-w-[320px]`}>

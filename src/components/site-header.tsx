@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Menu, Phone } from "lucide-react";
 
 import { ChatIcon } from "@/components/icons/chat-icon";
+import { MotionIcon } from "@/components/icons/motion-icon";
 import { SITE, telHref, WHATSAPP_URL } from "@/lib/site";
 import { LogoSplit } from "@/components/logo-split";
 import { DARK_BEHIND_HEADER_SELECTOR } from "@/lib/header-ink";
@@ -194,7 +195,7 @@ export function SiteHeader({
               href={telHref}
               aria-label={`Call us on ${SITE.phone}`}
               className={cn(
-                "pointer-events-auto grid h-[44px] w-[44px] flex-none place-items-center rounded-[4px] text-inherit no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
+                "group pointer-events-auto grid h-[44px] w-[44px] flex-none place-items-center rounded-[4px] text-inherit no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
                 !overlay && "[@media(hover:hover)]:hover:bg-migss-text/7",
                 inkHover,
               )}
@@ -208,7 +209,9 @@ export function SiteHeader({
                   : undefined
               }
             >
-              <Phone size={20} strokeWidth={2} aria-hidden="true" />
+              <MotionIcon motion="ring">
+                <Phone size={20} strokeWidth={2} aria-hidden="true" />
+              </MotionIcon>
             </a>
             <a
               href={WHATSAPP_URL}
@@ -264,7 +267,7 @@ export function SiteHeader({
             aria-label="Open full menu"
             aria-expanded={menu.open}
             className={cn(
-              "pointer-events-auto grid h-[44px] w-[44px] flex-none cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
+              "group pointer-events-auto grid h-[44px] w-[44px] flex-none cursor-pointer place-items-center rounded-[4px] border-0 bg-transparent text-inherit active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
               !overlay && "[@media(hover:hover)]:hover:bg-migss-text/7",
               inkHover,
             )}
@@ -278,7 +281,9 @@ export function SiteHeader({
                 : undefined
             }
           >
-            <Menu size={20} strokeWidth={2} aria-hidden="true" />
+            <MotionIcon motion="menu">
+              <Menu size={20} strokeWidth={2} aria-hidden="true" />
+            </MotionIcon>
           </button>
         ) : null}
       </div>

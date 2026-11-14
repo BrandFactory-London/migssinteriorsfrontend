@@ -1,5 +1,7 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
+import { MotionIcon } from "@/components/icons/motion-icon";
 import { Reveal } from "@/components/reveal";
 import { CLUSTERS, clusterTowns } from "@/lib/locations";
 
@@ -53,7 +55,12 @@ export function Areas() {
                   <span className="font-heading text-[22px] leading-[1.15] transition-colors [@media(hover:hover)]:group-hover:text-migss-accent-ink">
                     {cluster.name}
                   </span>
-                  <span className="text-xs text-migss-accent-ink">View →</span>
+                  <span className="flex items-center gap-1 text-xs text-migss-accent-ink">
+                    View
+                    <MotionIcon motion="nudge">
+                      <ArrowRight size={13} strokeWidth={2} />
+                    </MotionIcon>
+                  </span>
                 </Link>
                 <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] gap-x-[clamp(16px,3vw,32px)]">
                   {core.map((town) => (

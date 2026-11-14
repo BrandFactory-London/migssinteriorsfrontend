@@ -1,6 +1,9 @@
+import { ArrowRight } from "lucide-react";
+
 import Link from "next/link";
 
 import { ImageSlot } from "@/components/image-slot";
+import { MotionIcon } from "@/components/icons/motion-icon";
 import { Reveal } from "@/components/reveal";
 import { ButtonLink } from "@/components/ui/button";
 import type { Project } from "@/lib/wix/projects";
@@ -29,18 +32,9 @@ export function FeaturedWork({ projects }: { projects: Project[] }) {
         </Reveal>
         <span className="flex items-center gap-2 text-[12.5px] text-migss-text/55">
           Swipe to explore
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
+          <MotionIcon motion="nudge">
+            <ArrowRight size={16} strokeWidth={2} />
+          </MotionIcon>
         </span>
       </div>
 

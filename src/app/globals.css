@@ -325,6 +325,227 @@
   animation-delay: 360ms;
 }
 
+/*
+ * Icon motion (TKT-106). See components/icons/motion-icon.tsx.
+ *
+ * Each motion sets --mi (applied to the svg) or --mi-child (applied to each
+ * stroke inside it). The triggers below are shared: hover or keyboard focus
+ * of the nearest `.group` on devices that can hover, and `data-play` (set
+ * once in view on touch devices, or by `autoplay`). Only transform, opacity
+ * and stroke-dashoffset animate, so nothing shifts the layout.
+ */
+.mi {
+  display: inline-flex;
+  flex: none;
+  --mi-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --mi-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.mi > svg {
+  overflow: visible;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.mi > svg > * {
+  transform-box: fill-box;
+}
+
+.mi-draw {
+  --mi-child: mi-draw 0.6s var(--mi-ease) both;
+}
+.mi-spin {
+  --mi: mi-spin 0.7s var(--mi-ease) both;
+}
+.mi-bob {
+  --mi: mi-bob 0.55s var(--mi-ease) both;
+}
+.mi-beat {
+  --mi: mi-beat 0.75s ease-in-out both;
+}
+.mi-nudge {
+  --mi: mi-nudge 0.45s var(--mi-ease) both;
+}
+.mi-ring {
+  --mi: mi-ring 0.6s ease-in-out both;
+}
+.mi-shake {
+  --mi: mi-shake 0.5s ease-in-out both;
+}
+.mi-pop {
+  --mi: mi-pop 0.45s var(--mi-spring) both;
+}
+.mi-star {
+  --mi: mi-star 0.45s var(--mi-spring) both;
+}
+
+@media (hover: hover) {
+  :is(.group:hover, .group:focus-visible) .mi > svg,
+  .mi:hover > svg {
+    animation: var(--mi, none);
+    animation-delay: var(--mi-delay, 0ms);
+  }
+  :is(.group:hover, .group:focus-visible) .mi > svg > *,
+  .mi:hover > svg > * {
+    animation: var(--mi-child, none);
+    animation-delay: var(--mi-delay, 0ms);
+  }
+}
+.mi[data-play] > svg {
+  animation: var(--mi, none);
+  animation-delay: calc(var(--mi-delay, 0ms) + 120ms);
+}
+.mi[data-play] > svg > * {
+  animation: var(--mi-child, none);
+  animation-delay: calc(var(--mi-delay, 0ms) + 120ms);
+}
+
+/* Held states rather than one-shots. */
+.mi-twirl > svg {
+  transition: transform 0.3s var(--mi-ease);
+}
+@media (hover: hover) {
+  :is(.group:hover, .group:focus-visible) .mi-twirl > svg {
+    transform: rotate(90deg);
+  }
+}
+.mi-menu > svg > * {
+  transition: transform 0.3s var(--mi-ease);
+}
+.mi-menu > svg > :first-child {
+  transform-origin: left center;
+}
+.mi-menu > svg > :last-child {
+  transform-origin: right center;
+}
+@media (hover: hover) {
+  :is(.group:hover, .group:focus-visible) .mi-menu > svg > :first-child,
+  :is(.group:hover, .group:focus-visible) .mi-menu > svg > :last-child {
+    transform: scaleX(0.7);
+  }
+}
+.mi-plus > svg {
+  transition: transform 0.35s var(--mi-ease);
+}
+.mi-plus > svg > :last-child {
+  transform-origin: center;
+  transition:
+    transform 0.35s var(--mi-ease),
+    opacity 0.2s ease-out;
+}
+[aria-expanded="true"] .mi-plus > svg {
+  transform: rotate(180deg);
+}
+[aria-expanded="true"] .mi-plus > svg > :last-child {
+  transform: scaleY(0);
+  opacity: 0;
+}
+/* The menu's close button turns in as the menu opens, so the hamburger
+   appears to become the X. */
+.mi-enter > svg {
+  animation: mi-enter 0.4s var(--mi-ease) 0.08s both;
+}
+
+@keyframes mi-draw {
+  from {
+    stroke-dasharray: 64;
+    stroke-dashoffset: 64;
+  }
+  to {
+    stroke-dasharray: 64;
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes mi-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes mi-bob {
+  40% {
+    transform: translateY(-3px);
+  }
+  70% {
+    transform: translateY(1px);
+  }
+}
+@keyframes mi-beat {
+  20%,
+  60% {
+    transform: scale(1.18);
+  }
+  40%,
+  80% {
+    transform: scale(1);
+  }
+}
+@keyframes mi-nudge {
+  45% {
+    transform: translateX(4px);
+  }
+}
+@keyframes mi-ring {
+  15% {
+    transform: rotate(-14deg);
+  }
+  30% {
+    transform: rotate(12deg);
+  }
+  45% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(8deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+}
+@keyframes mi-shake {
+  20% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(8deg);
+  }
+  60% {
+    transform: rotate(-6deg);
+  }
+  80% {
+    transform: rotate(3deg);
+  }
+}
+@keyframes mi-pop {
+  40% {
+    transform: scale(1.18);
+  }
+  70% {
+    transform: scale(0.96);
+  }
+}
+@keyframes mi-star {
+  from {
+    transform: scale(0.4);
+    opacity: 0.3;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+@keyframes mi-enter {
+  from {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mi > svg,
+  .mi > svg > * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

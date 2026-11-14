@@ -4,6 +4,7 @@ import { Cormorant_Garamond, Instrument_Sans } from "next/font/google";
 import { AttributionCapture } from "@/components/attribution-capture";
 import { EnquiryDialog } from "@/components/enquiry/enquiry-dialog";
 import { GoogleAnalytics } from "@/components/google-analytics";
+import { MotionIconsObserver } from "@/components/motion-icons-observer";
 import { NavMenuProvider } from "@/components/nav-menu";
 import { ScrollReset } from "@/components/scroll-reset";
 import { SITE_URL } from "@/lib/seo";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="bg-migss-bg text-migss-text font-body flex min-h-full flex-col overflow-x-hidden">
         <ScrollReset />
         <NavMenuProvider>{children}</NavMenuProvider>
+        <MotionIconsObserver />
         {/* Describes the business rather than the page, so it is emitted once
             here rather than repeated on every route. */}
         <script
