@@ -19,6 +19,8 @@ export type LegalBlock =
 export type LegalSection = {
   /** Omitted for the opening blocks of a document that starts with prose. */
   heading?: string;
+  /** Anchor for in-page links, e.g. the landing pages' "#terms" link. */
+  id?: string;
   blocks: LegalBlock[];
 };
 
@@ -648,6 +650,59 @@ export const LEGAL_DOCS: LegalDoc[] = [
             kind: "p",
             content:
               "This warranty is in addition to, and does not affect, your statutory rights under the Consumer Rights Act 2015 and the Consumer Protection Act 1987.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "finance",
+    title: "Finance",
+    description:
+      "0% finance is available for up to 5 years on Migss Interiors renovations, through Ideal4Finance. Subject to status.",
+    lastUpdated: "13th November 2026",
+    sections: [
+      {
+        blocks: [
+          {
+            kind: "p",
+            content:
+              "0% finance is available for up to 5 years, so you can spread the cost of your renovation. Many of our clients use finance to spread the cost of installation, and it can let them raise the specification of the products they choose.",
+          },
+        ],
+      },
+      {
+        heading: "How it works",
+        blocks: [
+          {
+            kind: "ol",
+            items: [
+              "Tell us you are interested in finance when you enquire.",
+              "We introduce you to Ideal4Finance, a credit broker and not a lender, or pass on their details so you can contact them directly.",
+              "Finance is available subject to status. Ideal4Finance will confirm what is available to you.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Terms and conditions",
+        id: "terms",
+        blocks: [
+          {
+            kind: "p",
+            content: "[Finance terms and conditions to be supplied]",
+          },
+          {
+            kind: "p",
+            content: FINANCE_DISCLAIMER,
+          },
+          {
+            kind: "p",
+            content: (
+              <>
+                See also our <Internal href="/terms-of-use">Website Terms of Use</Internal>.
+              </>
+            ),
           },
         ],
       },

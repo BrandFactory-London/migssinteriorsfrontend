@@ -40,7 +40,8 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
             {doc.sections.map((section, index) => (
               <section
                 key={section.heading ?? `section-${index}`}
-                className="mb-[clamp(24px,3.5vw,40px)] last:mb-0"
+                id={section.id}
+                className="mb-[clamp(24px,3.5vw,40px)] scroll-mt-24 last:mb-0"
               >
                 {section.heading ? (
                   <h2 className="mb-[13.8px] text-[clamp(21px,3.4vw,27px)] leading-[1.2] font-normal tracking-[-0.01em]">

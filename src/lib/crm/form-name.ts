@@ -8,6 +8,8 @@
  * change if the naming ever needs to.
  */
 
+import { landingFormName } from "@/lib/landing-pages";
+
 const SERVICE_NAMES: Record<string, string> = {
   bathroom: "Bathroom page enquiry",
   kitchen: "Kitchen page enquiry",
@@ -52,6 +54,12 @@ export function enquiryFormName(path: string): string {
   if (clean === "/") return "Homepage enquiry";
 
   const [section, item] = clean.slice(1).split("/");
+
+  // Meta ads landing pages (TKT-103): one name per page, for attribution.
+  if (section === "lp" && item) {
+    const name = landingFormName(item);
+    if (name) return name;
+  }
 
   if (section === "renovation-services" && item && SERVICE_NAMES[item]) {
     return SERVICE_NAMES[item];

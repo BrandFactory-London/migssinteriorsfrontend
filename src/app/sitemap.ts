@@ -35,6 +35,7 @@ const STATIC_ROUTES: [path: string, priority: number][] = [
   ["/about", 0.6],
   ["/join-the-team", 0.5],
   ["/contact", 0.6],
+  ["/finance", 0.4],
   ["/terms-of-use", 0.3],
   ["/privacy-policy", 0.3],
   ["/labour-guarantee", 0.3],
