@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown, ChevronRight, MessageCircle, X } from "lucide-react";
 import * as React from "react";
 
 import { WHATSAPP_URL } from "@/lib/site";
@@ -183,12 +184,12 @@ export function EnquiryDock() {
       role="status"
       // Full width on phones (16px gutters), capped on wider screens so
       // it still reads as part of the dock rather than a page banner.
-      className="dock-nudge mb-2.5 flex w-[min(560px,calc(100vw-32px))] items-center rounded-[16px] bg-migss-neutral-900 text-migss-neutral-100 shadow-[0_10px_28px_-10px_color-mix(in_srgb,#2d2b2b_60%,transparent)]"
+      className="dock-nudge mb-2.5 flex w-[min(560px,calc(100vw-32px))] items-center md:w-auto md:max-w-[calc(100vw-32px)] rounded-[16px] bg-migss-neutral-900 text-migss-neutral-100 shadow-[0_10px_28px_-10px_color-mix(in_srgb,#2d2b2b_60%,transparent)]"
     >
       <button
         type="button"
         onClick={(event) => open(event.detail === 0)}
-        className="flex min-w-0 flex-1 items-center gap-3 rounded-[16px] py-3 pr-2 pl-4 text-left text-[13.5px] leading-[1.4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent"
+        className="flex min-w-0 flex-1 items-center gap-3 rounded-[16px] py-3 pr-2 pl-4 text-left text-[13.5px] leading-[1.4] md:py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent"
       >
         {/* The same breathing "we are here" dot as the expanded dock, in
                 the same place: before the text. */}
@@ -196,8 +197,8 @@ export function EnquiryDock() {
           aria-hidden="true"
           className="dock-dot relative size-2.5 flex-none rounded-full bg-[#4caf68]"
         />
-        <span className="min-w-0 flex-1">
-          <span className="block font-medium text-migss-accent-300">
+        <span className="min-w-0 flex-1 md:flex md:items-baseline md:gap-2 md:whitespace-nowrap">
+          <span className="block font-medium text-migss-accent-300 md:inline">
             Get in touch now
           </span>
           Free renovation consultations and advice
@@ -209,18 +210,7 @@ export function EnquiryDock() {
         onClick={() => setNudge(false)}
         className="mr-1.5 flex size-9 flex-none items-center justify-center rounded-full text-migss-neutral-400 transition-colors focus-visible:outline-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:text-migss-neutral-100"
       >
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          aria-hidden="true"
-        >
-          <path d="M6 6l12 12M18 6L6 18" />
-        </svg>
+        <X size={14} strokeWidth={1.5} aria-hidden="true" />
       </button>
     </div>
   ) : null;
@@ -241,19 +231,7 @@ export function EnquiryDock() {
           onClick={(event) => open(event.detail === 0)}
           className="dock-fab fixed right-[calc(14px+env(safe-area-inset-right))] bottom-[calc(14px+env(safe-area-inset-bottom))] z-50 flex size-14 items-center justify-center rounded-full bg-migss-accent-ink text-white shadow-[0_10px_28px_-8px_color-mix(in_srgb,#2d2b2b_55%,transparent)] transition-[background-color,transform] duration-300 active:scale-[0.94] active:bg-migss-accent-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent-800"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.7"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M3 20l1.3-3.9A8.5 8.5 0 1 1 7.9 19.7L3 20" />
-          </svg>
+          <MessageCircle size={24} strokeWidth={1.5} aria-hidden="true" />
           <span
             aria-hidden="true"
             className="dock-dot absolute top-1 right-1 size-2.5 rounded-full bg-[#4caf68] ring-2 ring-migss-bg"
@@ -280,12 +258,12 @@ export function EnquiryDock() {
           role="status"
           // Full width on phones (16px gutters), capped on wider screens so
           // it still reads as part of the dock rather than a page banner.
-          className="dock-nudge mb-2.5 flex w-[min(560px,calc(100vw-32px))] items-center rounded-[16px] bg-migss-neutral-900 text-migss-neutral-100 shadow-[0_10px_28px_-10px_color-mix(in_srgb,#2d2b2b_60%,transparent)]"
+          className="dock-nudge mb-2.5 flex w-[min(560px,calc(100vw-32px))] items-center md:w-auto md:max-w-[calc(100vw-32px)] rounded-[16px] bg-migss-neutral-900 text-migss-neutral-100 shadow-[0_10px_28px_-10px_color-mix(in_srgb,#2d2b2b_60%,transparent)]"
         >
           <button
             type="button"
             onClick={(event) => expand(event.detail === 0)}
-            className="flex min-w-0 flex-1 items-center gap-3 rounded-[16px] py-3 pr-2 pl-4 text-left text-[13.5px] leading-[1.4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent"
+            className="flex min-w-0 flex-1 items-center gap-3 rounded-[16px] py-3 pr-2 pl-4 text-left text-[13.5px] leading-[1.4] md:py-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent"
           >
             {/* The same breathing "we are here" dot as the expanded dock, in
                 the same place: before the text. */}
@@ -293,8 +271,8 @@ export function EnquiryDock() {
               aria-hidden="true"
               className="dock-dot relative size-2.5 flex-none rounded-full bg-[#4caf68]"
             />
-            <span className="min-w-0 flex-1">
-              <span className="block font-medium text-migss-accent-300">
+            <span className="min-w-0 flex-1 md:flex md:items-baseline md:gap-2 md:whitespace-nowrap">
+              <span className="block font-medium text-migss-accent-300 md:inline">
                 Get in touch now
               </span>
               Free renovation consultations and advice
@@ -306,18 +284,7 @@ export function EnquiryDock() {
             onClick={() => setNudge(false)}
             className="mr-1.5 flex size-9 flex-none items-center justify-center rounded-full text-migss-neutral-400 transition-colors focus-visible:outline-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:text-migss-neutral-100"
           >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              aria-hidden="true"
-            >
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
+            <X size={14} strokeWidth={1.5} aria-hidden="true" />
           </button>
         </div>
       )}
@@ -333,19 +300,7 @@ export function EnquiryDock() {
             onClick={minimise}
             className="absolute top-1/2 right-full mr-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full bg-migss-bg/60 text-migss-text/55 backdrop-blur-[12px] transition-colors focus-visible:outline-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:text-migss-text"
           >
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.9"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M9 6l6 6-6 6" />
-            </svg>
+            <ChevronRight size={15} strokeWidth={1.5} aria-hidden="true" />
           </button>
         )}
         <div
@@ -399,19 +354,7 @@ export function EnquiryDock() {
                   onClick={collapse}
                   className="-mt-1 -mr-1 flex size-9 flex-none items-center justify-center self-start rounded-full text-migss-text/55 transition-colors focus-visible:outline-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:text-migss-text"
                 >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
+                  <ChevronDown size={16} strokeWidth={1.5} aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -433,12 +376,11 @@ export function EnquiryDock() {
                 expanded ? "flex-none gap-2 px-3" : "w-[50px] flex-none",
               )}
             >
-              {/* The supplied logo, painted through a mask so it takes the
-                accent colour. Prefixed as well: Safari before 15.4 ignores the
-                unprefixed property and would paint a solid square. */}
-              <span
+              <MessageCircle
+                size={21}
+                strokeWidth={1.5}
                 aria-hidden="true"
-                className="block h-[21px] w-[21px] flex-none bg-current [-webkit-mask-image:url(/Brand/whatsapplogo.svg)] [-webkit-mask-position:center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:contain] [mask-image:url(/Brand/whatsapplogo.svg)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
+                className="flex-none"
               />
               {expanded && (
                 <span className="text-[14px] font-semibold whitespace-nowrap">

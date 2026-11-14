@@ -4,6 +4,8 @@ import * as React from "react";
 
 import Link from "next/link";
 
+import { Menu, MessageCircle, Phone } from "lucide-react";
+
 import { SITE, telHref, WHATSAPP_URL } from "@/lib/site";
 import { LogoSplit } from "@/components/logo-split";
 import { DARK_BEHIND_HEADER_SELECTOR } from "@/lib/header-ink";
@@ -205,19 +207,7 @@ export function SiteHeader({
                   : undefined
               }
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M7.2 3.5h-3a1.7 1.7 0 0 0-1.7 1.9c.6 5.3 3 9.6 7 12.9 2.1 1.7 4.2 2.7 6.2 3.1a1.7 1.7 0 0 0 1.9-1.7v-2.9a1.7 1.7 0 0 0-1.4-1.7l-2.5-.4a1.7 1.7 0 0 0-1.5.5l-.9.9a14.5 14.5 0 0 1-4.6-4.6l.9-.9a1.7 1.7 0 0 0 .5-1.5l-.4-2.5a1.7 1.7 0 0 0-1.7-1.4z" />
-              </svg>
+              <Phone size={20} strokeWidth={1.5} aria-hidden="true" />
             </a>
             <a
               href={WHATSAPP_URL}
@@ -239,10 +229,7 @@ export function SiteHeader({
                   : undefined
               }
             >
-              <span
-                aria-hidden="true"
-                className="block h-[20px] w-[20px] bg-current [-webkit-mask-image:url(/Brand/whatsapplogo.svg)] [-webkit-mask-position:center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:contain] [mask-image:url(/Brand/whatsapplogo.svg)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]"
-              />
+              <MessageCircle size={20} strokeWidth={1.5} aria-hidden="true" />
             </a>
           </>
         ) : (
@@ -257,20 +244,12 @@ export function SiteHeader({
             // and the colour would jump instead of easing.
             style={overlay ? { ...fadeStyle("color"), color: ink } : undefined}
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+            <Phone
+              size={16}
+              strokeWidth={1.5}
               aria-hidden="true"
               className={overlay ? undefined : "stroke-migss-accent-700"}
-            >
-              <path d="M7.2 3.5h-3a1.7 1.7 0 0 0-1.7 1.9c.6 5.3 3 9.6 7 12.9 2.1 1.7 4.2 2.7 6.2 3.1a1.7 1.7 0 0 0 1.9-1.7v-2.9a1.7 1.7 0 0 0-1.4-1.7l-2.5-.4a1.7 1.7 0 0 0-1.5.5l-.9.9a14.5 14.5 0 0 1-4.6-4.6l.9-.9a1.7 1.7 0 0 0 .5-1.5l-.4-2.5a1.7 1.7 0 0 0-1.7-1.4z" />
-            </svg>
+            />
             {SITE.phone}
           </a>
         )}
@@ -298,18 +277,7 @@ export function SiteHeader({
                 : undefined
             }
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-              aria-hidden="true"
-            >
-              <path d="M4 8h16M4 16h16" />
-            </svg>
+            <Menu size={20} strokeWidth={1.5} aria-hidden="true" />
           </button>
         ) : null}
       </div>
