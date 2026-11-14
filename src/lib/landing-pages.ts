@@ -294,7 +294,7 @@ export const META_LANDING_PAGES: readonly LandingPage[] = [
       band: {
         project: "versace-wet-room-chigwell",
         media: "8bde49_87961bf90e6a42f3836b94b16d03b7b6",
-        caption: "Versace Wet Room, Chigwell",
+        caption: "Versace Wet Room",
       },
     },
     metaTitle: "Luxury Bathroom Renovation | Migss Interiors",
