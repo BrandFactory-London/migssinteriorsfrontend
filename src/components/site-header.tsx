@@ -208,7 +208,7 @@ export function SiteHeader({
                   : undefined
               }
             >
-              <Phone size={20} strokeWidth={1.5} aria-hidden="true" />
+              <Phone size={20} strokeWidth={2.5} aria-hidden="true" />
             </a>
             <a
               href={WHATSAPP_URL}
@@ -247,7 +247,7 @@ export function SiteHeader({
           >
             <Phone
               size={16}
-              strokeWidth={1.5}
+              strokeWidth={2.5}
               aria-hidden="true"
               className={overlay ? undefined : "stroke-migss-accent-700"}
             />
@@ -278,7 +278,7 @@ export function SiteHeader({
                 : undefined
             }
           >
-            <Menu size={20} strokeWidth={1.5} aria-hidden="true" />
+            <Menu size={20} strokeWidth={2.5} aria-hidden="true" />
           </button>
         ) : null}
       </div>

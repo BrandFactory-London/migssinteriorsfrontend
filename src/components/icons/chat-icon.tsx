@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
  */
 export function ChatIcon({
   size = 20,
-  strokeWidth = 1.5,
+  strokeWidth = 2.5,
   className,
 }: {
   size?: number;
@@ -46,9 +46,9 @@ export function ChatIcon({
       <path className={line} d="M8 8h7" />
       <path className={cn(line, "delay-[40ms]")} d="M8 12h9" />
       <path className={cn(line, "delay-[80ms]")} d="M8 16h5" />
-      <path className={cn(dot, "group-hover:delay-[120ms] group-focus-visible:delay-[120ms]")} d="M8 12h.01" strokeWidth={strokeWidth + 0.75} />
-      <path className={cn(dot, "group-hover:delay-[190ms] group-focus-visible:delay-[190ms]")} d="M12 12h.01" strokeWidth={strokeWidth + 0.75} />
-      <path className={cn(dot, "group-hover:delay-[260ms] group-focus-visible:delay-[260ms]")} d="M16 12h.01" strokeWidth={strokeWidth + 0.75} />
+      <path className={cn(dot, "group-hover:delay-[120ms] group-focus-visible:delay-[120ms]")} d="M8 12h.01" strokeWidth={strokeWidth + 0.5} />
+      <path className={cn(dot, "group-hover:delay-[190ms] group-focus-visible:delay-[190ms]")} d="M12 12h.01" strokeWidth={strokeWidth + 0.5} />
+      <path className={cn(dot, "group-hover:delay-[260ms] group-focus-visible:delay-[260ms]")} d="M16 12h.01" strokeWidth={strokeWidth + 0.5} />
     </svg>
   );
 }
