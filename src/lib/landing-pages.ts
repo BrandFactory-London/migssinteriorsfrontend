@@ -44,8 +44,12 @@ export type LandingPage = {
   heroSlot: string;
   heroPlaceholder: string;
   testimonials: [LandingTestimonial, LandingTestimonial];
-  /** Video testimonial for the first card; null hides the strip. */
-  video: { url: string | null; label: string; duration: string };
+  /**
+   * Video testimonial for the first card, filmed portrait. `url` is a Wix
+   * Media Manager MP4; `poster` is the thumbnail frame. Null url shows the
+   * placeholder viewer.
+   */
+  video: { url: string | null; poster: string | null; label: string; duration: string };
   otherRoom: { label: string; href: string };
   otherArea: { label: string; href: string };
 };
@@ -73,6 +77,20 @@ function placeholderTestimonials(
   ];
 }
 
+/*
+ * Real bathroom testimonials (supplied by Amir, 14 Nov 2026, with the
+ * customers' permission for ads and the site). Quoted verbatim; the hero
+ * card carries one sentence of each and the reviews section the full text.
+ */
+const BILAL_FULL =
+  "We are over-the-moon with how the bathroom has turned out, it is exactly how we envisioned it. The project went as planned to the millimetre so we can definitely recommend Migss for your renovation.";
+const BILAL_SHORT =
+  "The project went as planned to the millimetre so we can definitely recommend Migss for your renovation.";
+const DUANE_FULL =
+  "I had a really strong vision of how I wanted the rooms to look, and Migss truly helped us bring that idea to life. We collaborated back and forth on paper designs, and they brought some incredible, creative suggestions to the table that we hadn't even considered. The quality of the work is simply outstanding. Having previously done renovations in high-end properties, I thought I knew what top-tier quality looked like, but this is on an entirely different level.";
+const DUANE_SHORT =
+  "Having previously done renovations in high-end properties, I thought I knew what top-tier quality looked like, but this is on an entirely different level.";
+
 export const LANDING_PAGES: readonly LandingPage[] = [
   {
     slug: "bathrooms-north-london",
@@ -88,8 +106,16 @@ export const LANDING_PAGES: readonly LandingPage[] = [
       "Luxury bathroom renovation from Hampstead to Cockfosters, designed, built and guaranteed by our own in-house team. Book a design consultation.",
     heroSlot: "lp-bathrooms-north-london-hero",
     heroPlaceholder: "Hero: finished luxury bathroom, north London",
-    testimonials: placeholderTestimonials("bathroom", ["Highgate", "Muswell Hill"]),
-    video: { url: null, label: "[First name], Highgate", duration: "[1:30]" },
+    testimonials: [
+      { quote: BILAL_SHORT, name: "Bilal", area: "Hampstead Garden Suburb" },
+      { quote: BILAL_FULL, name: "Bilal", area: "Hampstead Garden Suburb" },
+    ],
+    video: {
+      url: "https://video.wixstatic.com/video/8bde49_09edd105f09e45f5954004ae63cc15da/1080p/mp4/file.mp4",
+      poster: "https://static.wixstatic.com/media/8bde49_a8188e05f9b04292be51d8d8ede1e0df~mv2.jpg",
+      label: "Bilal, Hampstead Garden Suburb",
+      duration: "0:27",
+    },
     otherRoom: { label: "Interested in kitchens?", href: "/lp/kitchens-north-london" },
     otherArea: {
       label: "In east London or Essex? See Chigwell bathrooms",
@@ -111,7 +137,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     heroSlot: "lp-kitchens-north-london-hero",
     heroPlaceholder: "Hero: finished luxury kitchen, north London",
     testimonials: placeholderTestimonials("kitchen", ["Highgate", "Muswell Hill"]),
-    video: { url: null, label: "[First name], Highgate", duration: "[1:30]" },
+    video: { url: null, poster: null, label: "[First name], Highgate", duration: "[1:30]" },
     otherRoom: { label: "Interested in bathrooms?", href: "/lp/bathrooms-north-london" },
     otherArea: {
       label: "In east London or Essex? See Chigwell kitchens",
@@ -132,8 +158,16 @@ export const LANDING_PAGES: readonly LandingPage[] = [
       "Luxury bathroom renovation across Chigwell, east London and the Essex forest towns, designed, built and guaranteed by our own team. Book a design consultation.",
     heroSlot: "lp-bathrooms-chigwell-essex-hero",
     heroPlaceholder: "Hero: finished luxury bathroom, Chigwell",
-    testimonials: placeholderTestimonials("bathroom", ["Buckhurst Hill", "Loughton"]),
-    video: { url: null, label: "[First name], Buckhurst Hill", duration: "[1:30]" },
+    testimonials: [
+      { quote: DUANE_SHORT, name: "Duane", area: "Chigwell" },
+      { quote: DUANE_FULL, name: "Duane", area: "Chigwell" },
+    ],
+    video: {
+      url: "https://video.wixstatic.com/video/8bde49_becbec327f3e4db893c4da89389f46ae/1080p/mp4/file.mp4",
+      poster: "https://static.wixstatic.com/media/8bde49_8d9ed3028b13411cb0d0f7c35100fc63~mv2.jpg",
+      label: "Duane, Chigwell",
+      duration: "0:54",
+    },
     otherRoom: { label: "Interested in kitchens?", href: "/lp/kitchens-chigwell-essex" },
     otherArea: {
       label: "In north London? See north London bathrooms",
@@ -155,7 +189,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     heroSlot: "lp-kitchens-chigwell-essex-hero",
     heroPlaceholder: "Hero: finished luxury kitchen, Chigwell",
     testimonials: placeholderTestimonials("kitchen", ["Buckhurst Hill", "Loughton"]),
-    video: { url: null, label: "[First name], Buckhurst Hill", duration: "[1:30]" },
+    video: { url: null, poster: null, label: "[First name], Buckhurst Hill", duration: "[1:30]" },
     otherRoom: { label: "Interested in bathrooms?", href: "/lp/bathrooms-chigwell-essex" },
     otherArea: {
       label: "In north London? See north London kitchens",

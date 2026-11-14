@@ -111,7 +111,12 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
         </p>
         <Testimonial {...first} />
       </div>
-      <VideoStrip url={page.video.url} label={page.video.label} duration={page.video.duration} />
+      <VideoStrip
+        url={page.video.url}
+        poster={page.video.poster}
+        label={page.video.label}
+        duration={page.video.duration}
+      />
     </div>
   );
 

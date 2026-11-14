@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 
-import { Check, CirclePlay, Plus } from "lucide-react";
+import { Check, CirclePlay, Plus, X } from "lucide-react";
 
 import { submitLandingEnquiry } from "@/app/actions/landing-enquiry";
 import { MotionIcon } from "@/components/icons/motion-icon";
@@ -184,64 +185,125 @@ export function ToggleList({
  * "Listen to one of our happy customers". Tapping opens a 16:9 player inside
  * the card, so the video never takes over the screen.
  */
+/**
+ * The video testimonial under the first review card. The strip shows a
+ * thumbnail; tapping it opens the video in a full-screen viewer, because the
+ * testimonials are filmed portrait for social and would be a thin strip in a
+ * landscape box. On phones the video fills the screen; on desktop it plays
+ * centred over the dimmed page. Escape, the close button or a tap on the
+ * backdrop closes it, and focus returns to the strip. The viewer is portalled
+ * to <body> so a transformed ancestor (scroll reveals, parallax) cannot trap
+ * its fixed positioning inside the card.
+ */
 export function VideoStrip({
   url,
+  poster,
   label,
   duration,
 }: {
   url: string | null;
+  poster: string | null;
   label: string;
   duration: string;
 }) {
   const [open, setOpen] = React.useState(false);
+  const trigger = React.useRef<HTMLButtonElement>(null);
+  const close = React.useRef<HTMLButtonElement>(null);
 
-  if (open) {
-    return (
-      <div className="border-t border-[var(--migss-divider)] bg-migss-neutral-900 p-3">
-        {url ? (
-          <video
-            src={url}
-            controls
-            autoPlay
-            playsInline
-            className="block aspect-video w-full rounded-[3px] bg-migss-neutral-800"
-          />
-        ) : (
-          <div className="grid aspect-video w-full place-items-center rounded-[3px] bg-migss-neutral-800 text-xs text-migss-neutral-400">
-            [Video testimonial plays here]
-          </div>
-        )}
-        <button
-          type="button"
-          onClick={() => setOpen(false)}
-          className="mt-2.5 min-h-[44px] cursor-pointer border-0 bg-transparent p-0 text-[13px] text-migss-neutral-300"
-        >
-          Close video
-        </button>
-      </div>
-    );
-  }
+  React.useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    close.current?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    const triggerNode = trigger.current;
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+      triggerNode?.focus();
+    };
+  }, [open]);
 
   return (
-    <button
-      type="button"
-      onClick={() => setOpen(true)}
-      className="group flex w-full cursor-pointer items-center gap-3 border-0 border-t border-[var(--migss-divider)] bg-migss-surface px-5 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-migss-accent"
-    >
-      <span className="grid h-12 w-[76px] flex-none place-items-center rounded-[3px] bg-migss-neutral-700">
-        <MotionIcon motion="pop" className="text-migss-neutral-100">
-          <CirclePlay size={28} strokeWidth={2} />
-        </MotionIcon>
-      </span>
-      <span className="flex min-w-0 flex-col gap-0.5">
-        <span className="text-sm font-medium text-migss-text">
-          Listen to one of our happy customers
+    <>
+      <button
+        ref={trigger}
+        type="button"
+        onClick={() => setOpen(true)}
+        className="group flex w-full cursor-pointer items-center gap-3 border-0 border-t border-[var(--migss-divider)] bg-migss-surface px-5 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-migss-accent"
+      >
+        <span className="relative grid h-[68px] w-[48px] flex-none place-items-center overflow-hidden rounded-[3px] bg-migss-neutral-700">
+          {poster ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={poster}
+              alt=""
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 [@media(hover:hover)]:group-hover:scale-105"
+            />
+          ) : null}
+          <span aria-hidden="true" className="absolute inset-0 bg-migss-neutral-900/25" />
+          <MotionIcon motion="pop" className="relative text-migss-neutral-100">
+            <CirclePlay size={24} strokeWidth={2} />
+          </MotionIcon>
         </span>
-        <span className="text-xs text-migss-text/65">
-          {label} · {duration}
+        <span className="flex min-w-0 flex-col gap-0.5">
+          <span className="text-sm font-medium text-migss-text">
+            Listen to one of our happy customers
+          </span>
+          <span className="text-xs text-migss-text/65">
+            {label} · {duration}
+          </span>
         </span>
-      </span>
-    </button>
+      </button>
+
+      {open
+        ? createPortal(
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Video testimonial from ${label}`}
+          className="fixed inset-0 z-[200] grid place-items-center bg-migss-neutral-900/92 p-0 sm:p-6"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setOpen(false);
+          }}
+          style={{ animation: "migss-fade 0.25s ease-out both" }}
+        >
+          <div className="relative h-full w-full sm:h-auto sm:w-auto">
+            {url ? (
+              <video
+                src={url}
+                poster={poster ?? undefined}
+                controls
+                autoPlay
+                playsInline
+                className="block h-full w-full bg-black object-contain sm:h-[min(86svh,860px)] sm:w-auto sm:rounded-[4px]"
+              />
+            ) : (
+              <div className="grid aspect-[9/16] h-full place-items-center bg-migss-neutral-800 text-xs text-migss-neutral-400 sm:h-[min(86svh,860px)]">
+                [Video testimonial plays here]
+              </div>
+            )}
+            <button
+              ref={close}
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Close video"
+              className="group absolute top-[max(12px,env(safe-area-inset-top))] right-3 grid size-11 cursor-pointer place-items-center rounded-full border-0 bg-migss-neutral-900/70 text-migss-neutral-100 focus-visible:outline-2 focus-visible:outline-migss-accent sm:-top-1 sm:-right-14"
+            >
+              <MotionIcon motion="twirl">
+                <X size={20} strokeWidth={2} />
+              </MotionIcon>
+            </button>
+          </div>
+        </div>,
+            document.body,
+          )
+        : null}
+    </>
   );
 }
 
