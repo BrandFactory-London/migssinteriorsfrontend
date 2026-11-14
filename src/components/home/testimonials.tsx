@@ -1,19 +1,16 @@
+import { ArrowRight, Phone, Star as LucideStar } from "lucide-react";
+
 import { ImageSlot } from "@/components/image-slot";
+import { MotionIcon } from "@/components/icons/motion-icon";
 import { Reveal } from "@/components/reveal";
 import { ButtonLink } from "@/components/ui/button";
 import { mdTelHref } from "@/lib/site";
 
-function Star() {
+function Star({ index }: { index: number }) {
   return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z" />
-    </svg>
+    <MotionIcon motion="star" delay={index * 70}>
+      <LucideStar size={18} strokeWidth={2} fill="currentColor" />
+    </MotionIcon>
   );
 }
 
@@ -32,14 +29,12 @@ export function Testimonials() {
             5.0
           </p>
           <div
-            className="flex gap-1 text-migss-accent-ink"
+            className="group flex gap-1 text-migss-accent-ink"
             aria-label="5 out of 5 stars"
           >
-            <Star />
-            <Star />
-            <Star />
-            <Star />
-            <Star />
+            {[0, 1, 2, 3, 4].map((index) => (
+              <Star key={index} index={index} />
+            ))}
           </div>
           <p className="text-[13.5px] leading-[1.65] text-migss-text/70">
             Rated by homeowners across north London and Chigwell. Read every review on
@@ -90,9 +85,15 @@ export function Testimonials() {
             href={mdTelHref}
             variant="outlineAccent"
             size="md"
-            className="font-body self-start font-medium"
+            className="group font-body self-start gap-2 font-medium"
           >
-            Call the MD directly →
+            <MotionIcon motion="ring">
+              <Phone size={16} strokeWidth={2} />
+            </MotionIcon>
+            Call the MD directly
+            <MotionIcon motion="nudge">
+              <ArrowRight size={16} strokeWidth={2} />
+            </MotionIcon>
           </ButtonLink>
         </Reveal>
       </div>

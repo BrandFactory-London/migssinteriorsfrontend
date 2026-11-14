@@ -1,39 +1,23 @@
+import {
+  Award,
+  BadgePercent,
+  HeartHandshake,
+  ShieldCheck,
+  type LucideIcon,
+} from "lucide-react";
+
+import { MotionIcon, type IconMotion } from "@/components/icons/motion-icon";
 import { Reveal } from "@/components/reveal";
 
-const POINTS = [
-  {
-    label: "10 Year Labour Guarantee",
-    path: (
-      <>
-        <path d="M12 21s7-3.6 7-9V5.4L12 3 5 5.4V12c0 5.4 7 9 7 9z" />
-        <path d="m9 11.8 2.1 2.1L15 10" />
-      </>
-    ),
-  },
-  {
-    label: "0% Interest Finance Available",
-    path: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M8 16 16 8" />
-        <circle cx="9.2" cy="9.2" r="1.6" />
-        <circle cx="14.8" cy="14.8" r="1.6" />
-      </>
-    ),
-  },
-  {
-    label: "Over 25 Years of Experience",
-    path: (
-      <>
-        <circle cx="12" cy="9" r="5" />
-        <path d="M8.6 13.6 7.5 21l4.5-2.4 4.5 2.4-1.1-7.4" />
-      </>
-    ),
-  },
-  {
-    label: "Aftercare Packages Available",
-    path: <path d="M12 20.5s-7-4.2-7-9.5a4 4 0 0 1 7-2.6 4 4 0 0 1 7 2.6c0 5.3-7 9.5-7 9.5z" />,
-  },
+const POINTS: {
+  label: string;
+  Icon: LucideIcon;
+  motion: IconMotion;
+}[] = [
+  { label: "10 Year Labour Guarantee", Icon: ShieldCheck, motion: "draw" },
+  { label: "0% Interest Finance Available", Icon: BadgePercent, motion: "spin" },
+  { label: "Over 25 Years of Experience", Icon: Award, motion: "bob" },
+  { label: "Aftercare Packages Available", Icon: HeartHandshake, motion: "beat" },
 ];
 
 /** Overlaps the hero's lower edge, per the design's negative top margin. */
@@ -45,22 +29,11 @@ export function AssuranceBar() {
           <Reveal
             key={point.label}
             delay={index * 70}
-            className="flex items-center gap-3 border-b border-[var(--migss-divider)] px-[clamp(14px,2vw,24px)] py-[18.4px]"
+            className="group flex items-center gap-3 border-b border-[var(--migss-divider)] px-[clamp(14px,2vw,24px)] py-[18.4px]"
           >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="var(--color-migss-accent)"
-              strokeWidth="1.25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              className="flex-none"
-            >
-              {point.path}
-            </svg>
+            <MotionIcon motion={point.motion} className="text-migss-accent">
+              <point.Icon size={22} strokeWidth={2} />
+            </MotionIcon>
             <span className="text-[14.5px] leading-tight font-medium">
               {point.label}
             </span>

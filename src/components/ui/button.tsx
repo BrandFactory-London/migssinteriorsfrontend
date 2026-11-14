@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
  * 44px+ target so every control is tappable without a separate mobile pass.
  */
 const buttonVariants = cva(
-  "font-heading inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-[4px] border text-center leading-tight font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent disabled:cursor-not-allowed disabled:opacity-45",
+  "font-heading inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-[4px] border text-center leading-tight font-semibold transition-[color,background-color,border-color,transform] duration-200 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent disabled:cursor-not-allowed disabled:opacity-45",
   {
     variants: {
       variant: {

@@ -1,3 +1,4 @@
+import { Lock } from "lucide-react";
 import Link from "next/link";
 
 import {
@@ -7,6 +8,7 @@ import {
   CLIENT_LOGIN_PATH,
   FINANCE_DISCLAIMER,
 } from "@/lib/site";
+import { MotionIcon } from "@/components/icons/motion-icon";
 import { Logo } from "@/components/logo";
 import { DARK_BEHIND_HEADER } from "@/lib/header-ink";
 
@@ -60,22 +62,11 @@ export function SiteFooter() {
               either place. */}
           <Link
             href={CLIENT_LOGIN_PATH}
-            className="mt-[18.4px] inline-flex min-h-[40px] items-center gap-2 rounded-full border border-migss-accent-400 bg-migss-accent-300/12 px-4 text-[11px] font-medium tracking-[0.24em] text-migss-accent-300 uppercase no-underline transition-colors active:bg-migss-accent-300/20 [@media(hover:hover)]:hover:bg-migss-accent-300/20"
+            className="group mt-[18.4px] inline-flex min-h-[40px] items-center gap-2 rounded-full border border-migss-accent-400 bg-migss-accent-300/12 px-4 text-[11px] font-medium tracking-[0.24em] text-migss-accent-300 uppercase no-underline transition-colors active:bg-migss-accent-300/20 [@media(hover:hover)]:hover:bg-migss-accent-300/20"
           >
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <rect x="4.5" y="10.5" width="15" height="10" rx="1.5" />
-              <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" />
-            </svg>
+            <MotionIcon motion="shake">
+              <Lock size={13} strokeWidth={2} />
+            </MotionIcon>
             Client Login
           </Link>
         </div>
