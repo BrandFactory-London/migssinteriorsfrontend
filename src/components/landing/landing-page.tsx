@@ -178,7 +178,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           <div className="text-[#fbf6f1]">
             <p className="mb-4 flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.2em] text-[#e6cdb6] uppercase">
               <span className="block h-px w-[28px] bg-[#e6cdb6]" />
-              {page.roomPlural} · {page.clusterLabel}
+              {page.roomPlural} · {page.kicker ?? page.clusterLabel}
             </p>
             <h1 className="mb-4 max-w-[16ch] text-[clamp(38px,8.4vw,72px)] leading-[1.02] font-normal tracking-[-0.025em] text-balance">
               {page.headline}
@@ -257,7 +257,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                 >
                   <div className={cn(card, "relative aspect-[4/5] overflow-hidden")}>
                     <ImageSlot
-                      placeholder={`[${page.clusterLabel} project ${n}: add in Wix Projects]`}
+                      placeholder={`[${page.clusterLabel ?? page.roomPlural} project ${n}: add in Wix Projects]`}
                     />
                   </div>
                 </li>
@@ -519,7 +519,11 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           <ul className="m-0 grid list-none gap-3 p-0">
             {[
               { label: "Other rooms", text: page.otherRoom.label, href: page.otherRoom.href },
-              { label: "Other locations", text: page.otherArea.label, href: page.otherArea.href },
+              {
+                label: page.otherArea.kicker ?? "Other locations",
+                text: page.otherArea.label,
+                href: page.otherArea.href,
+              },
               { label: "General advice", text: "Read our renovation guides", href: "/resources" },
             ].map((row) => (
               <li key={row.label}>

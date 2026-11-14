@@ -12,11 +12,11 @@ import {
   type LandingValues,
   normalisePostcode,
 } from "@/lib/landing-enquiry";
-import { getLandingPage } from "@/lib/landing-pages";
+import { getLandingPage, landingLabel } from "@/lib/landing-pages";
 
 /**
- * Saves a Meta ads landing page enquiry (TKT-103) as a Lead in the Contacts
- * CRM. The Form value comes from the page path ("Meta LP: Bathrooms, North
+ * Saves an ads landing page enquiry (TKT-103) as a Lead in the Contacts
+ * CRM. The Form value comes from the page path ("Google LP: Bathrooms, North
  * London"), so each page's leads can be told apart. Validation repeats the
  * browser's, because the browser can be bypassed.
  */
@@ -40,8 +40,9 @@ export async function submitLandingEnquiry(
   if (step) return { status: "error", fieldErrors, step };
 
   const pagePath = read("pagePath", 300) || "/";
-  const slug = pagePath.replace(/\/+$/, "").split("/").pop() ?? "";
-  const page = getLandingPage(slug);
+  const segments = pagePath.replace(/\/+$/, "").split("/").filter(Boolean);
+  const slug = segments.at(-1) ?? "";
+  const page = getLandingPage(slug, segments[0] === "lpm" ? "meta" : "google");
   const submissionId = submissionIdOrNew(read("submissionId", 60));
 
   const result = await saveLead(
@@ -55,7 +56,7 @@ export async function submitLandingEnquiry(
         ["Renovating", page?.room],
         ["Hoping to start", values.timing],
         ["Postcode", normalisePostcode(values.postcode)],
-        ["Landing page", page ? `${page.roomPlural}, ${page.clusterLabel}` : pagePath],
+        ["Landing page", page ? `${landingLabel(page)} (${page.channel === "meta" ? "Meta" : "Google"})` : pagePath],
       ]),
       notes: formatNotes({
         submissionId,

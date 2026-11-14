@@ -8,7 +8,7 @@ import { ogImage } from "@/lib/wix/og-image";
 /**
  * The finance page (TKT-103): 0% finance for up to 5 years, how it works,
  * and the finance terms with the verbatim Ideal4Finance disclaimer. Linked
- * from the Meta ads landing pages' "Find out more" and "terms and
+ * from the ads landing pages' "Find out more" and "terms and
  * conditions" (#terms).
  */
 const doc = getLegalDoc("finance");

@@ -7,7 +7,12 @@ import {
   firstLandingStepWithError,
   normalisePostcode,
 } from "@/lib/landing-enquiry";
-import { LANDING_PAGES, landingFormName } from "@/lib/landing-pages";
+import {
+  LANDING_PAGES,
+  landingFormName,
+  landingPath,
+  META_LANDING_PAGES,
+} from "@/lib/landing-pages";
 
 const valid = {
   timing: "3 to 6 months",
@@ -69,12 +74,27 @@ describe("landing pages", () => {
 
   it("names each page's leads for the CRM", () => {
     expect(landingFormName("bathrooms-chigwell-essex")).toBe(
-      "Meta LP: Bathrooms, Chigwell & Essex",
+      "Google LP: Bathrooms, Chigwell & Essex",
     );
     expect(landingFormName("nope")).toBeNull();
   });
 
   it("never puts a pound sign in landing copy", () => {
     expect(JSON.stringify(LANDING_PAGES)).not.toContain("£");
+    expect(JSON.stringify(META_LANDING_PAGES)).not.toContain("£");
+  });
+
+  it("keeps the Meta pages to two, room only, with no area in their copy", () => {
+    expect(META_LANDING_PAGES.map((page) => page.slug)).toEqual(["bathrooms", "kitchens"]);
+    for (const page of META_LANDING_PAGES) {
+      expect(page.channel).toBe("meta");
+      expect(page.clusterLabel).toBeNull();
+      const copy = [page.headline, page.subline, page.projectsHeading, page.metaTitle].join(" ");
+      for (const town of ["Chigwell", "Hampstead", "Finchley", "Loughton", "Cockfosters"]) {
+        expect(copy).not.toContain(town);
+      }
+      expect(landingPath(page)).toBe(`/lpm/${page.slug}`);
+      expect(landingFormName(page.slug, "meta")).toBe(`Meta LP: ${page.roomPlural}`);
+    }
   });
 });

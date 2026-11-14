@@ -1,7 +1,8 @@
 /**
- * The four Meta ads landing pages (TKT-103), one per room and area cluster.
+ * The ads landing pages (TKT-103): four Google Ads search pages under /lp, one
+ * per room and area cluster, and two Meta pages under /lpm, one per room.
  *
- * These pages exist only as destinations for paid social ads. They are not
+ * These pages exist only as destinations for paid ads (search and social). They are not
  * linked from the menu, footer or any other site page, carry `noindex`, and
  * are left out of the sitemap, so every visit and lead on them came from an
  * ad (Locked decision, 13 Nov 2026). They are deliberately not blocked in
@@ -26,14 +27,26 @@ export type LandingTestimonial = {
   area: string;
 };
 
+/**
+ * Which ads a page serves (14 Nov 2026, Amir): "google" pages under /lp are
+ * room plus area, for Google Ads search campaigns with tight local
+ * targeting; "meta" pages under /lpm are room only, with no town, for Meta
+ * (Facebook and Instagram), whose targeting is broader.
+ */
+export type LandingChannel = "google" | "meta";
+
 export type LandingPage = {
   slug: string;
+  channel: LandingChannel;
   room: LandingRoom;
   /** "Bathrooms" / "Kitchens", for the kicker and form. */
   roomPlural: string;
-  cluster: LandingClusterSlug;
-  /** Area label for the kicker and form name. */
-  clusterLabel: string;
+  /** Null on the Meta pages, which name no area. */
+  cluster: LandingClusterSlug | null;
+  /** Area label for the kicker and form name; null on the Meta pages. */
+  clusterLabel: string | null;
+  /** Hero kicker after the room; defaults to the area label. */
+  kicker?: string;
   /** Repeats the ad headline: keep the ads in step with this. */
   headline: string;
   subline: string;
@@ -67,7 +80,8 @@ export type LandingPage = {
    */
   video: { url: string | null; poster: string | null; label: string; duration: string };
   otherRoom: { label: string; href: string };
-  otherArea: { label: string; href: string };
+  /** The second "Explore more" row; `kicker` defaults to "Other locations". */
+  otherArea: { label: string; href: string; kicker?: string };
 };
 
 const SUB_NORTH =
@@ -125,6 +139,7 @@ export const CONSULTANT_PHOTO: string | null = null;
 export const LANDING_PAGES: readonly LandingPage[] = [
   {
     slug: "bathrooms-north-london",
+    channel: "google",
     room: "Bathroom",
     roomPlural: "Bathrooms",
     cluster: "north-london",
@@ -156,6 +171,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
   },
   {
     slug: "kitchens-north-london",
+    channel: "google",
     room: "Kitchen",
     roomPlural: "Kitchens",
     cluster: "north-london",
@@ -179,6 +195,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
   },
   {
     slug: "bathrooms-chigwell-essex",
+    channel: "google",
     room: "Bathroom",
     roomPlural: "Bathrooms",
     cluster: "essex-forest",
@@ -219,6 +236,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
   },
   {
     slug: "kitchens-chigwell-essex",
+    channel: "google",
     room: "Kitchen",
     roomPlural: "Kitchens",
     cluster: "essex-forest",
@@ -245,14 +263,127 @@ export const LANDING_PAGES: readonly LandingPage[] = [
 /** False until real testimonials replace the placeholders above. */
 export const testimonialsReady = false;
 
-export function getLandingPage(slug: string): LandingPage | undefined {
-  return LANDING_PAGES.find((page) => page.slug === slug);
+/*
+ * Meta (Facebook and Instagram) landing pages under /lpm: the same layout,
+ * room only, no town in the copy. The service area is mentioned once, the
+ * way the rest of the site does, without limiting the offer.
+ */
+const SUB_META =
+  "Designed, built and guaranteed by our own in-house team, across north London, east London and Essex.";
+
+export const META_LANDING_PAGES: readonly LandingPage[] = [
+  {
+    slug: "bathrooms",
+    channel: "meta",
+    room: "Bathroom",
+    roomPlural: "Bathrooms",
+    cluster: null,
+    clusterLabel: null,
+    kicker: "Design and build",
+    headline: "Luxury bathroom renovation, designed and built by one team",
+    subline: SUB_META,
+    projectsHeading: "Recent renovations",
+    projects: [
+      "versace-wet-room-chigwell",
+      "family-bathroom-hampstead-garden-suburb",
+      "main-bathroom-theydon-bois",
+    ],
+    imagery: {
+      why: { project: "versace-wet-room-chigwell", media: "8bde49_eff1643aab2a4cc99efef058c80bd34d" },
+      whyDetail: { project: "versace-wet-room-chigwell", media: "8bde49_864c0bdc8dec48a186c6df6f1f7aa48f" },
+      band: {
+        project: "versace-wet-room-chigwell",
+        media: "8bde49_87961bf90e6a42f3836b94b16d03b7b6",
+        caption: "Versace Wet Room, Chigwell",
+      },
+    },
+    metaTitle: "Luxury Bathroom Renovation | Migss Interiors",
+    metaDescription:
+      "Luxury bathroom renovation designed, built and guaranteed by our own in-house team, across north London, east London and Essex. Book a design consultation.",
+    heroSlot: "lpm-bathrooms-hero",
+    heroPlaceholder: "Hero: finished luxury bathroom",
+    testimonials: [
+      { quote: DUANE_SHORT, name: "Duane", area: "Chigwell" },
+      { quote: BILAL_FULL, name: "Bilal", area: "Hampstead Garden Suburb" },
+    ],
+    video: {
+      url: "https://video.wixstatic.com/video/8bde49_becbec327f3e4db893c4da89389f46ae/1080p/mp4/file.mp4",
+      poster: "https://static.wixstatic.com/media/8bde49_8d9ed3028b13411cb0d0f7c35100fc63~mv2.jpg",
+      label: "Duane, Chigwell",
+      duration: "0:54",
+    },
+    otherRoom: { label: "Interested in kitchens?", href: "/lpm/kitchens" },
+    otherArea: { kicker: "Our work", label: "See all our projects", href: "/our-projects" },
+  },
+  {
+    slug: "kitchens",
+    channel: "meta",
+    room: "Kitchen",
+    roomPlural: "Kitchens",
+    cluster: null,
+    clusterLabel: null,
+    kicker: "Design and build",
+    headline: "Luxury kitchen renovation, designed and built by one team",
+    subline: SUB_META,
+    projectsHeading: "Recent renovations",
+    projects: ["kitchen-extension-grays"],
+    metaTitle: "Luxury Kitchen Renovation | Migss Interiors",
+    metaDescription:
+      "Luxury kitchen renovation designed, built and guaranteed by our own in-house team, across north London, east London and Essex. Book a design consultation.",
+    heroSlot: "lpm-kitchens-hero",
+    heroPlaceholder: "Hero: finished luxury kitchen",
+    testimonials: [
+      {
+        quote: "[Short, specific kitchen testimonial]",
+        name: "[First name]",
+        area: "[Area]",
+      },
+      {
+        quote: "[Second kitchen testimonial, outcome focused]",
+        name: "[First name]",
+        area: "[Area]",
+      },
+    ],
+    video: { url: null, poster: null, label: "[First name], [Area]", duration: "[1:30]" },
+    otherRoom: { label: "Interested in bathrooms?", href: "/lpm/bathrooms" },
+    otherArea: { kicker: "Our work", label: "See all our projects", href: "/our-projects" },
+  },
+];
+
+/** The URL folder for each channel. */
+export const LANDING_BASE: Record<LandingChannel, "/lp" | "/lpm"> = {
+  google: "/lp",
+  meta: "/lpm",
+};
+
+export function landingPath(page: LandingPage): string {
+  return `${LANDING_BASE[page.channel]}/${page.slug}`;
 }
 
-/** The CRM "Form" value, e.g. "Meta LP: Bathrooms, North London". */
-export function landingFormName(slug: string): string | null {
-  const page = getLandingPage(slug);
-  return page ? `Meta LP: ${page.roomPlural}, ${page.clusterLabel}` : null;
+export function getLandingPage(
+  slug: string,
+  channel: LandingChannel = "google",
+): LandingPage | undefined {
+  const pages = channel === "meta" ? META_LANDING_PAGES : LANDING_PAGES;
+  return pages.find((page) => page.slug === slug);
+}
+
+/** "Bathrooms, North London" on /lp; "Bathrooms" on /lpm. */
+export function landingLabel(page: LandingPage): string {
+  return page.clusterLabel ? `${page.roomPlural}, ${page.clusterLabel}` : page.roomPlural;
+}
+
+/**
+ * The CRM "Form" value: "Google LP: Bathrooms, North London" for /lp pages,
+ * "Meta LP: Bathrooms" for /lpm pages, so leads show which channel sent them.
+ */
+export function landingFormName(
+  slug: string,
+  channel: LandingChannel = "google",
+): string | null {
+  const page = getLandingPage(slug, channel);
+  if (!page) return null;
+  return `${channel === "meta" ? "Meta" : "Google"} LP: ${landingLabel(page)}`;
 }
 
 export const FINANCE_LINE =

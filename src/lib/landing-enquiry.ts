@@ -1,5 +1,5 @@
 /**
- * The inline form on the Meta ads landing pages (TKT-103).
+ * The inline form on the ads landing pages (TKT-103).
  *
  * Three short steps, cheapest answer first: when they hope to start (a tap),
  * their postcode, then name and phone. Email is optional here; the phone is

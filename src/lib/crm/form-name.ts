@@ -55,9 +55,10 @@ export function enquiryFormName(path: string): string {
 
   const [section, item] = clean.slice(1).split("/");
 
-  // Meta ads landing pages (TKT-103): one name per page, for attribution.
-  if (section === "lp" && item) {
-    const name = landingFormName(item);
+  // Ads landing pages (TKT-103): one name per page, for attribution.
+  // /lp serves Google Ads search, /lpm serves Meta.
+  if ((section === "lp" || section === "lpm") && item) {
+    const name = landingFormName(item, section === "lpm" ? "meta" : "google");
     if (name) return name;
   }
 
