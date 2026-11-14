@@ -242,7 +242,9 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
       {/* Local projects: the homepage carousel, hand-picked per page */}
       <section id="projects" className={`order-4 scroll-mt-24 ${gap}`}>
         <div className={wrap}>
-          <p className={kicker}>Recently completed nearby</p>
+          <p className={kicker}>
+            {page.channel === "meta" ? "Our work" : "Recently completed nearby"}
+          </p>
           <h2 className={h2}>{page.projectsHeading}</h2>
         </div>
         <ul
