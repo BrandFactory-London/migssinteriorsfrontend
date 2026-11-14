@@ -211,7 +211,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
             </li>
           ))}
         </ul>
-        <p className={`${wrap} mt-1 mb-0 flex items-center gap-1.5 text-xs tracking-[0.06em] text-migss-accent-ink`}>
+        <p className={`${wrap} mt-1 mb-0 flex items-center gap-1.5 text-xs tracking-[0.06em] text-migss-accent-ink ${projects.length <= 3 ? "lg:hidden" : ""}`}>
           Swipe to explore
           <MotionIcon motion="nudge">
             <ArrowRight size={14} strokeWidth={2} />
