@@ -158,7 +158,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
       <section
         id="lp-hero"
         {...DARK_BEHIND_HEADER}
-        className="relative order-1 flex min-h-[clamp(540px,76svh,820px)] items-end overflow-hidden lg:min-h-[clamp(560px,88svh,880px)]"
+        className="relative order-1 flex min-h-[clamp(540px,76svh,820px)] items-end overflow-hidden lg:min-h-[clamp(560px,80svh,860px)]"
       >
         <HeroMedia
           slotId={page.heroSlot}

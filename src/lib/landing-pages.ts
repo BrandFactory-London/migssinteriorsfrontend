@@ -188,11 +188,11 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     projectsHeading: "Recently completed in Chigwell and Essex",
     projects: ["versace-wet-room-chigwell", "main-bathroom-theydon-bois", "basement-home-cinema-chigwell"],
     imagery: {
-      why: { project: "versace-wet-room-chigwell", media: "8bde49_864c0bdc8dec48a186c6df6f1f7aa48f" },
-      whyDetail: { project: "versace-wet-room-chigwell", media: "8bde49_f4551fed826e43699de20b3b5ee8cffa" },
+      why: { project: "versace-wet-room-chigwell", media: "8bde49_eff1643aab2a4cc99efef058c80bd34d" },
+      whyDetail: { project: "versace-wet-room-chigwell", media: "8bde49_864c0bdc8dec48a186c6df6f1f7aa48f" },
       band: {
         project: "versace-wet-room-chigwell",
-        media: "8bde49_0a9c3ce12712464f99eb888b5fe88b54",
+        media: "8bde49_87961bf90e6a42f3836b94b16d03b7b6",
         caption: "Versace Wet Room, Chigwell",
       },
     },
