@@ -44,6 +44,16 @@ export type LandingPage = {
    * placeholders.
    */
   projects: string[];
+  /**
+   * Photos for the "Why Migss" pair and the full-width band, picked from a
+   * Wix project's gallery by media id. Optional: without them the sections
+   * render without photos (the band is left out).
+   */
+  imagery?: {
+    why?: ShotRef;
+    whyDetail?: ShotRef;
+    band?: ShotRef & { caption: string };
+  };
   metaTitle: string;
   metaDescription: string;
   /** HeroMedia slot, filled from the Wix dashboard. */
@@ -96,6 +106,21 @@ const DUANE_FULL =
   "I had a really strong vision of how I wanted the rooms to look, and Migss truly helped us bring that idea to life. We collaborated back and forth on paper designs, and they brought some incredible, creative suggestions to the table that we hadn't even considered. The quality of the work is simply outstanding. Having previously done renovations in high-end properties, I thought I knew what top-tier quality looked like, but this is on an entirely different level.";
 const DUANE_SHORT =
   "Having previously done renovations in high-end properties, I thought I knew what top-tier quality looked like, but this is on an entirely different level.";
+
+/** A gallery photo of a Wix project: the project's slug and the photo's media id. */
+export type ShotRef = { project: string; media: string };
+
+/*
+ * Facts the warmer layout (TKT-103, 14 Nov 2026) can show once Migss confirms
+ * them. Null hides the wording that depends on them, so nothing unverified
+ * goes live:
+ * - the Google review count ("5.0 from N Google reviews"; else "Google rating")
+ * - the callback time under the form ("usually <time>"; else no time given)
+ * - a photo of whoever does the consultations, beside the hero line
+ */
+export const GOOGLE_REVIEW_COUNT: number | null = null;
+export const CALLBACK_TIME: string | null = null;
+export const CONSULTANT_PHOTO: string | null = null;
 
 export const LANDING_PAGES: readonly LandingPage[] = [
   {
@@ -162,6 +187,15 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     subline: SUB_EAST,
     projectsHeading: "Recently completed in Chigwell and Essex",
     projects: ["versace-wet-room-chigwell", "main-bathroom-theydon-bois", "basement-home-cinema-chigwell"],
+    imagery: {
+      why: { project: "versace-wet-room-chigwell", media: "8bde49_864c0bdc8dec48a186c6df6f1f7aa48f" },
+      whyDetail: { project: "versace-wet-room-chigwell", media: "8bde49_f4551fed826e43699de20b3b5ee8cffa" },
+      band: {
+        project: "versace-wet-room-chigwell",
+        media: "8bde49_0a9c3ce12712464f99eb888b5fe88b54",
+        caption: "Versace Wet Room, Chigwell",
+      },
+    },
     metaTitle: "Luxury Bathroom Renovation in Chigwell & Essex | Migss Interiors",
     metaDescription:
       "Luxury bathroom renovation across Chigwell, east London and the Essex forest towns, designed, built and guaranteed by our own team. Book a design consultation.",

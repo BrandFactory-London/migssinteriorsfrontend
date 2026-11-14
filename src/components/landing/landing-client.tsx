@@ -81,7 +81,7 @@ export function ProgressRail({
     <nav
       aria-label="Page sections"
       className={cn(
-        "fixed top-1/2 right-2 z-30 flex -translate-y-1/2 flex-col items-end gap-0.5 transition-opacity duration-300",
+        "fixed top-1/2 right-2 z-30 hidden -translate-y-1/2 lg:flex flex-col items-end gap-0.5 transition-opacity duration-300",
         shown ? "opacity-100" : "pointer-events-none opacity-0",
       )}
     >
@@ -233,9 +233,9 @@ export function VideoStrip({
         ref={trigger}
         type="button"
         onClick={() => setOpen(true)}
-        className="group flex w-full cursor-pointer items-center gap-3 border-0 border-t border-[var(--migss-divider)] bg-migss-surface px-5 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-migss-accent"
+        className="group flex w-full cursor-pointer items-center gap-3.5 border-0 bg-[#f3e6da] px-5 py-3.5 text-left lg:px-7 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-migss-accent"
       >
-        <span className="relative grid h-[68px] w-[48px] flex-none place-items-center overflow-hidden rounded-[3px] bg-migss-neutral-700">
+        <span className="relative grid h-[68px] w-[48px] flex-none place-items-center overflow-hidden rounded-[6px] bg-migss-neutral-700 shadow-[0_6px_14px_-6px_rgba(42,30,22,0.5)]">
           {poster ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -254,7 +254,7 @@ export function VideoStrip({
           <span className="text-sm font-medium text-migss-text">
             Listen to one of our happy customers
           </span>
-          <span className="text-xs text-migss-text/65">
+          <span className="text-xs text-[#6b5d51]">
             {label} · {duration}
           </span>
         </span>
@@ -318,7 +318,7 @@ const STEP_HEADINGS: Record<LandingStep, string> = {
 };
 
 const inputClass =
-  "mt-1.5 block min-h-[50px] w-full rounded-[4px] border border-[var(--migss-divider)] bg-migss-bg px-3.5 text-base text-migss-text caret-migss-accent placeholder:text-migss-text/40 focus-visible:border-migss-accent focus-visible:outline-none aria-[invalid=true]:border-migss-error";
+  "mt-1.5 block min-h-[50px] w-full rounded-[8px] border border-migss-accent-200 bg-[#fffdfb] px-3.5 text-base text-migss-text caret-migss-accent placeholder:text-migss-text/40 focus-visible:border-migss-accent focus-visible:outline-none aria-[invalid=true]:border-migss-error";
 
 /**
  * The landing pages' own three-step form (Locked decision, 13 Nov 2026):
@@ -417,8 +417,8 @@ export function LandingForm({ roomPlural }: { roomPlural: string }) {
           <span
             key={n}
             className={cn(
-              "h-[3px]",
-              n <= step ? "bg-migss-accent-700" : "bg-migss-neutral-300",
+              "h-[3px] rounded-full",
+              n <= step ? "bg-migss-accent-ink" : "bg-migss-accent-200",
             )}
           />
         ))}
@@ -442,10 +442,10 @@ export function LandingForm({ roomPlural }: { roomPlural: string }) {
                   <label
                     key={timing}
                     className={cn(
-                      "flex min-h-[48px] cursor-pointer items-center justify-between gap-3 rounded-[4px] border px-3.5 text-sm transition-[background-color,border-color,transform] duration-200 active:scale-[0.99]",
+                      "flex min-h-[52px] cursor-pointer items-center justify-between gap-3 rounded-[8px] border px-4 text-[15px] transition-[background-color,border-color,box-shadow,transform] duration-200 active:scale-[0.99] [@media(hover:hover)]:hover:border-migss-accent-400",
                       checked
-                        ? "border-migss-accent-700 bg-migss-accent-100"
-                        : "border-[var(--migss-divider)] bg-migss-bg",
+                        ? "border-migss-accent-ink bg-migss-accent-100 shadow-[inset_0_0_0_1px_var(--color-migss-accent-ink)]"
+                        : "border-migss-accent-200 bg-[#fffdfb]",
                     )}
                   >
                     <input
@@ -548,7 +548,7 @@ export function LandingForm({ roomPlural }: { roomPlural: string }) {
           <button
             type="button"
             onClick={() => setStep((step - 1) as LandingStep)}
-            className="font-heading min-h-[56px] cursor-pointer rounded-[4px] border border-[var(--migss-divider)] bg-transparent px-4 text-[17px] font-semibold text-migss-text"
+            className="font-heading min-h-[56px] cursor-pointer rounded-[6px] border border-migss-accent-200 bg-transparent px-4 text-[17px] font-semibold text-migss-text"
           >
             Back
           </button>
@@ -556,7 +556,7 @@ export function LandingForm({ roomPlural }: { roomPlural: string }) {
         <button
           type="submit"
           disabled={pending}
-          className="font-heading min-h-[56px] flex-1 cursor-pointer rounded-[4px] border border-migss-accent-700 bg-migss-accent-700 px-4 text-[17px] font-semibold text-migss-text disabled:opacity-60"
+          className="font-heading min-h-[56px] flex-1 cursor-pointer rounded-[6px] border-0 bg-migss-accent-ink px-4 text-[18px] font-semibold text-white shadow-[0_1px_2px_rgba(114,84,59,0.2),0_12px_26px_-12px_rgba(114,84,59,0.6)] transition-[background-color,transform] duration-200 active:scale-[0.98] disabled:opacity-60 [@media(hover:hover)]:hover:bg-migss-accent-900"
         >
           {step < 3 ? "Continue" : pending ? "Sending…" : "Book my design consultation"}
         </button>
