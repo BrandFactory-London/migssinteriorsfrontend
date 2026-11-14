@@ -135,12 +135,16 @@ export function SiteHeader({
    *
    * The logo is exempt. It is a single tan (#b08a6c, the brand accent), chosen
    * so one file carries both tones, and it needs no help from either side.
+   *
+   * Since 14 Nov 2026 (TKT-103) the controls match it on light backgrounds:
+   * gold over the page, white over the hero, instead of black and white.
+   * The solid bar uses the gold throughout.
    */
   const ink = overlay
     ? overDark
       ? "var(--color-migss-neutral-100, #f8f4f4)"
-      : "var(--color-migss-text, #201f1d)"
-    : undefined;
+      : "var(--color-migss-accent, #b08a6c)"
+    : "var(--color-migss-accent, #b08a6c)";
 
   // The hover wash is not structural — nothing breaks if it never arrives —
   // so it stays a class.
@@ -155,14 +159,22 @@ export function SiteHeader({
       className={cn(
         "z-40",
         overlay
-          ? "pointer-events-none fixed inset-x-0 top-0 text-migss-neutral-100"
-          : "sticky top-0 border-b border-[var(--migss-divider)] bg-migss-bg text-migss-text",
+          ? "pointer-events-none fixed inset-x-0 top-0 text-migss-neutral-100 backdrop-blur-[10px]"
+          : "sticky top-0 border-b border-[var(--migss-divider)] bg-migss-bg/80 backdrop-blur-[10px] text-migss-text",
       )}
       // On `solid` the whole bar is what comes and goes, so it wears the fade
       // itself — and travels its own height rather than the group's nudge.
+      // A very light frost behind the bar (TKT-103): a faint dark tint over
+      // the hero, a faint light one over the page, eased as it crosses.
       style={
         overlay
-          ? undefined
+          ? {
+              backgroundColor: overDark
+                ? "rgb(32 31 29 / 0.08)"
+                : "rgb(248 244 244 / 0.55)",
+              transitionProperty: "background-color",
+              transitionDuration: reducedMotion ? "0ms" : "300ms",
+            }
           : { ...fadeStyle(), translate: hidden ? "0 -100%" : undefined }
       }
     >
@@ -199,15 +211,9 @@ export function SiteHeader({
                 !overlay && "[@media(hover:hover)]:hover:bg-migss-text/7",
                 inkHover,
               )}
-              style={
-                overlay
-                  ? {
-                      color: ink,
-                      transitionProperty: "color",
-                      transitionDuration: reducedMotion ? "0ms" : "300ms",
-                    }
-                  : undefined
-              }
+              // Comes and goes with the wordmark, so both sides of the bar
+              // stay balanced; the menu button is the fixture on this side.
+              style={overlay ? { ...fadeStyle("color"), color: ink } : { color: ink }}
             >
               <MotionIcon motion="ring">
                 <Phone size={20} strokeWidth={2} aria-hidden="true" />
@@ -223,15 +229,7 @@ export function SiteHeader({
                 !overlay && "[@media(hover:hover)]:hover:bg-migss-text/7",
                 inkHover,
               )}
-              style={
-                overlay
-                  ? {
-                      color: ink,
-                      transitionProperty: "color",
-                      transitionDuration: reducedMotion ? "0ms" : "300ms",
-                    }
-                  : undefined
-              }
+              style={overlay ? { ...fadeStyle("color"), color: ink } : { color: ink }}
             >
               <ChatIcon size={20} />
             </a>
@@ -278,7 +276,7 @@ export function SiteHeader({
                     transitionProperty: "color",
                     transitionDuration: reducedMotion ? "0ms" : "300ms",
                   }
-                : undefined
+                : { color: ink }
             }
           >
             <MotionIcon motion="menu">

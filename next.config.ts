@@ -50,6 +50,13 @@ const nextConfig: NextConfig = {
         destination: "/renovation-services/kitchen",
         statusCode: 301,
       },
+      // Bilal's project was filed under Barking by mistake; it is in
+      // Hampstead Garden Suburb (corrected in Wix, 14 Nov 2026, TKT-103).
+      {
+        source: "/our-projects/family-bathroom-barking",
+        destination: "/our-projects/family-bathroom-hampstead-garden-suburb",
+        statusCode: 301,
+      },
     ];
   },
 };
