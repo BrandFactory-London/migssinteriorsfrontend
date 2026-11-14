@@ -211,7 +211,7 @@ export function EnquiryDock() {
         onClick={() => setNudge(false)}
         className="mr-1.5 flex size-9 flex-none items-center justify-center rounded-full text-migss-neutral-400 transition-colors focus-visible:outline-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:text-migss-neutral-100"
       >
-        <X size={14} strokeWidth={2.5} aria-hidden="true" />
+        <X size={14} strokeWidth={2} aria-hidden="true" />
       </button>
     </div>
   ) : null;
@@ -285,7 +285,7 @@ export function EnquiryDock() {
             onClick={() => setNudge(false)}
             className="mr-1.5 flex size-9 flex-none items-center justify-center rounded-full text-migss-neutral-400 transition-colors focus-visible:outline-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:text-migss-neutral-100"
           >
-            <X size={14} strokeWidth={2.5} aria-hidden="true" />
+            <X size={14} strokeWidth={2} aria-hidden="true" />
           </button>
         </div>
       )}
@@ -301,7 +301,7 @@ export function EnquiryDock() {
             onClick={minimise}
             className="absolute top-1/2 right-full mr-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full bg-migss-bg/60 text-migss-text/55 backdrop-blur-[12px] transition-colors focus-visible:outline-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:text-migss-text"
           >
-            <ChevronRight size={15} strokeWidth={2.5} aria-hidden="true" />
+            <ChevronRight size={15} strokeWidth={2} aria-hidden="true" />
           </button>
         )}
         <div
@@ -355,7 +355,7 @@ export function EnquiryDock() {
                   onClick={collapse}
                   className="-mt-1 -mr-1 flex size-9 flex-none items-center justify-center self-start rounded-full text-migss-text/55 transition-colors focus-visible:outline-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:text-migss-text"
                 >
-                  <ChevronDown size={16} strokeWidth={2.5} aria-hidden="true" />
+                  <ChevronDown size={16} strokeWidth={2} aria-hidden="true" />
                 </button>
               </div>
             </div>

@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
  */
 export function ChatIcon({
   size = 20,
-  strokeWidth = 2.5,
+  strokeWidth = 2,
   className,
 }: {
   size?: number;
