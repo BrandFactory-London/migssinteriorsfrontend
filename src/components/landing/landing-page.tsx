@@ -110,7 +110,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
   );
 
   return (
-    <main className="pb-28">
+    <main>
       <EnquiryPageContext focus={page.room === "Bathroom" ? "bathroom" : "kitchen"} />
 
       {/* Hero: copy on the left; on desktop the first testimonial sits on
@@ -344,7 +344,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
 
       {/* Minimal footer: finance disclaimer and legal links only */}
       <footer {...DARK_BEHIND_HEADER} className="mt-[clamp(40px,6vw,72px)] bg-migss-neutral-900 text-migss-neutral-400">
-        <div className={`${wrap} pt-7 pb-28 text-[11px] leading-[1.6] lg:flex lg:items-start lg:justify-between lg:gap-12`}>
+        <div className={`${wrap} pt-7 pb-28 text-[11px] leading-[1.6] lg:flex lg:pb-24 lg:items-start lg:justify-between lg:gap-12`}>
           <p className="m-0 mb-3 max-w-[90ch] lg:mb-0">{FINANCE_DISCLAIMER}</p>
           <p className="m-0 flex flex-none gap-3.5">
             <Link href="/privacy-policy" className="text-migss-neutral-300">Privacy</Link>
