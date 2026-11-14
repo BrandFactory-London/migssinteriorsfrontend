@@ -2,6 +2,7 @@ import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 
 import { HeroMedia } from "@/components/hero-media";
+import { FeaturedProjectCard } from "@/components/projects/featured-project-card";
 import { MotionIcon } from "@/components/icons/motion-icon";
 import { ImageSlot } from "@/components/image-slot";
 import { EnquiryPageContext } from "@/components/enquiry/page-context";
@@ -20,7 +21,6 @@ import {
   RAIL_SECTIONS,
   WHY_MIGSS,
 } from "@/lib/landing-pages";
-import { getCluster, clusterTowns } from "@/lib/locations";
 import { FINANCE_DISCLAIMER } from "@/lib/site";
 import { getProjects, type Project } from "@/lib/wix/projects";
 
@@ -41,26 +41,14 @@ const h2 =
 const cta =
   "font-heading flex min-h-[56px] items-center justify-center rounded-[4px] border border-migss-accent-700 bg-migss-accent-700 px-6 text-[17px] font-semibold text-migss-text no-underline transition-[color,background-color,border-color,transform] duration-200 active:scale-[0.98] [@media(hover:hover)]:hover:bg-migss-accent-800 [@media(hover:hover)]:hover:border-migss-accent-800";
 
-/**
- * Projects for the rail: this room in this cluster first, then other rooms
- * in the cluster. Nothing from outside the cluster; with no cluster projects
- * the rail shows labelled placeholders until some are added in Wix. Area
- * names only, never street lines.
- */
+/** This page's hand-picked projects, in the order listed in its config. */
 async function projectsFor(page: LandingPageData): Promise<Project[]> {
-  const cluster = getCluster(page.cluster);
-  const towns = cluster ? clusterTowns(cluster) : { core: [], surrounding: [] };
-  const names = new Set(
-    [...towns.core, ...towns.surrounding].map((town) => town.name.toLowerCase()),
-  );
+  if (page.projects.length === 0) return [];
   const all = await getProjects();
-  const inCluster = all.filter((project) =>
-    names.has(project.location?.trim().toLowerCase() ?? ""),
-  );
-  const sameRoom = inCluster.filter((project) => project.category === page.room);
-  const others = inCluster.filter((project) => project.category !== page.room);
-  // Never pad with work from outside the cluster: the heading names the area.
-  return [...sameRoom, ...others].slice(0, 6);
+  const bySlug = new Map(all.map((project) => [project.slug, project]));
+  return page.projects
+    .map((slug) => bySlug.get(slug))
+    .filter((project): project is Project => Boolean(project));
 }
 
 function Testimonial({
@@ -186,44 +174,44 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
         <div className="max-w-[640px]">{firstCard}</div>
       </section>
 
-      {/* Local projects: a swipe rail on phones, a grid on desktop */}
+      {/* Local projects: the homepage carousel, hand-picked per page */}
       <section id="projects" className={`scroll-mt-24 ${gap}`}>
         <div className={wrap}>
           <p className={kicker}>Recently completed nearby</p>
           <h2 className={h2}>{page.projectsHeading}</h2>
         </div>
+        {/* The homepage carousel's track and cards, so a tap opens the
+            same project page. */}
         <ul
-          className={`${wrap} migss-scroll mt-6 flex list-none snap-x snap-proximity gap-3 overflow-x-auto overscroll-x-contain pb-2 lg:mt-8 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:pb-0`}
+          className="migss-scroll mx-auto mt-7 flex max-w-[1280px] list-none items-start gap-[clamp(14px,2.5vw,28px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,4.5vw,48px)] snap-x snap-proximity px-[clamp(16px,4.5vw,48px)] pb-[18.4px]"
           aria-label={page.projectsHeading}
         >
           {projects.length === 0
             ? [1, 2, 3].map((n) => (
-                <li key={n} className="w-[min(72vw,260px)] flex-none snap-start lg:w-auto">
-                  <div className="migss-plate relative aspect-[4/5] overflow-hidden lg:aspect-[4/3]">
+                <li
+                  key={n}
+                  className={`w-[min(82vw,360px)] flex-none snap-start ${n === 2 ? "mt-[clamp(0px,4vw,44px)]" : ""}`}
+                >
+                  <div className="relative aspect-[4/5]">
                     <ImageSlot
                       placeholder={`[${page.clusterLabel} project ${n}: add in Wix Projects]`}
+                      shape="rounded"
+                      className="migss-plate h-full w-full"
                     />
                   </div>
                 </li>
               ))
             : null}
-          {projects.map((project) => (
-            <li key={project.slug} className="w-[min(72vw,260px)] flex-none snap-start lg:w-auto">
-              <div className="migss-plate relative aspect-[4/5] overflow-hidden lg:aspect-[4/3]">
-                <ImageSlot
-                  placeholder={`${project.location ?? "Recent work"}: ${project.title}`}
-                  src={project.cardUrl ?? undefined}
-                  alt={`${project.title}${project.location ? `, ${project.location}` : ""}`}
-                  captionHidden
-                />
-              </div>
-              <p className="mt-2.5 mb-0 text-[13px] text-migss-text/70">
-                {project.location ?? project.title}
-              </p>
+          {projects.map((project, index) => (
+            <li
+              key={project.slug}
+              className={`w-[min(82vw,360px)] flex-none snap-start ${index % 2 === 1 ? "mt-[clamp(0px,4vw,44px)]" : ""}`}
+            >
+              <FeaturedProjectCard project={project} index={index} areaOnly />
             </li>
           ))}
         </ul>
-        <p className={`${wrap} mt-3 mb-0 flex items-center gap-1.5 text-xs tracking-[0.06em] text-migss-accent-ink lg:hidden`}>
+        <p className={`${wrap} mt-1 mb-0 flex items-center gap-1.5 text-xs tracking-[0.06em] text-migss-accent-ink`}>
           Swipe to explore
           <MotionIcon motion="nudge">
             <ArrowRight size={14} strokeWidth={2} />

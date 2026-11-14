@@ -1,9 +1,7 @@
 import { ArrowRight } from "lucide-react";
 
-import Link from "next/link";
-
-import { ImageSlot } from "@/components/image-slot";
 import { MotionIcon } from "@/components/icons/motion-icon";
+import { FeaturedProjectCard } from "@/components/projects/featured-project-card";
 import { Reveal } from "@/components/reveal";
 import { ButtonLink } from "@/components/ui/button";
 import type { Project } from "@/lib/wix/projects";
@@ -52,40 +50,7 @@ export function FeaturedWork({ projects }: { projects: Project[] }) {
               index % 2 === 1 ? "mt-[clamp(0px,4vw,44px)]" : ""
             }`}
           >
-            <Link
-              href={`/our-projects/${project.slug}`}
-              className="group block text-inherit no-underline transition-transform active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-migss-accent"
-            >
-              <div className="relative aspect-[4/5]">
-                <ImageSlot
-                  placeholder={`Project ${index + 1}: ${project.location ?? project.title}`}
-                  src={project.cardUrl ?? undefined}
-                  alt={project.title}
-                  shape="rounded"
-                  className="migss-plate h-full w-full transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-[1.02]"
-                />
-                {(project.addressLine ?? project.location) ? (
-                  <span className="absolute top-3 left-3 rounded-[2px] border border-[var(--migss-divider)] bg-migss-bg px-2.5 py-[5px] text-[10px] font-medium tracking-[0.14em] uppercase text-migss-accent-ink">
-                    {project.addressLine ?? project.location}
-                  </span>
-                ) : null}
-              </div>
-              <div className="mt-[13.8px] flex gap-3">
-                <span className="font-heading pt-1 text-[13px] text-migss-accent-ink tabular-nums">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="mb-1.5 text-[23px] font-normal tracking-[-0.01em] transition-colors duration-300 [@media(hover:hover)]:group-hover:text-migss-accent-ink">
-                    {project.title}
-                  </h3>
-                  {project.summary ? (
-                    <p className="text-sm leading-[1.65] text-migss-text/72">
-                      {project.summary}
-                    </p>
-                  ) : null}
-                </div>
-              </div>
-            </Link>
+            <FeaturedProjectCard project={project} index={index} />
           </Reveal>
         ))}
       </ul>

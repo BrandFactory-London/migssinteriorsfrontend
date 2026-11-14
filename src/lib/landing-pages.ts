@@ -38,6 +38,12 @@ export type LandingPage = {
   headline: string;
   subline: string;
   projectsHeading: string;
+  /**
+   * Wix Projects slugs shown in this page's carousel, in order. Chosen by
+   * hand per page; slugs not found in Wix are skipped. Empty shows labelled
+   * placeholders.
+   */
+  projects: string[];
   metaTitle: string;
   metaDescription: string;
   /** HeroMedia slot, filled from the Wix dashboard. */
@@ -101,6 +107,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     headline: "Luxury bathroom renovation in north London",
     subline: SUB_NORTH,
     projectsHeading: "Recently completed in north London",
+    projects: [],
     metaTitle: "Luxury Bathroom Renovation in North London | Migss Interiors",
     metaDescription:
       "Luxury bathroom renovation from Hampstead to Cockfosters, designed, built and guaranteed by our own in-house team. Book a design consultation.",
@@ -131,6 +138,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     headline: "Luxury kitchen renovation in north London",
     subline: SUB_NORTH,
     projectsHeading: "Recently completed in north London",
+    projects: [],
     metaTitle: "Luxury Kitchen Renovation in North London | Migss Interiors",
     metaDescription:
       "Luxury kitchen renovation from Hampstead to Cockfosters, designed, built and guaranteed by our own in-house team. Book a design consultation.",
@@ -153,6 +161,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     headline: "Luxury bathroom renovation in Chigwell and Essex",
     subline: SUB_EAST,
     projectsHeading: "Recently completed in Chigwell and Essex",
+    projects: ["versace-wet-room-chigwell", "main-bathroom-theydon-bois", "basement-home-cinema-chigwell"],
     metaTitle: "Luxury Bathroom Renovation in Chigwell & Essex | Migss Interiors",
     metaDescription:
       "Luxury bathroom renovation across Chigwell, east London and the Essex forest towns, designed, built and guaranteed by our own team. Book a design consultation.",
@@ -183,6 +192,7 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     headline: "Luxury kitchen renovation in Chigwell and Essex",
     subline: SUB_EAST,
     projectsHeading: "Recently completed in Chigwell and Essex",
+    projects: ["basement-home-cinema-chigwell", "versace-wet-room-chigwell", "main-bathroom-theydon-bois"],
     metaTitle: "Luxury Kitchen Renovation in Chigwell & Essex | Migss Interiors",
     metaDescription:
       "Luxury kitchen renovation across Chigwell, east London and the Essex forest towns, designed, built and guaranteed by our own team. Book a design consultation.",
