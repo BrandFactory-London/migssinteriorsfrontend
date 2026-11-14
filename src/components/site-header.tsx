@@ -4,8 +4,9 @@ import * as React from "react";
 
 import Link from "next/link";
 
-import { Menu, MessageCircle, Phone } from "lucide-react";
+import { Menu, Phone } from "lucide-react";
 
+import { ChatIcon } from "@/components/icons/chat-icon";
 import { SITE, telHref, WHATSAPP_URL } from "@/lib/site";
 import { LogoSplit } from "@/components/logo-split";
 import { DARK_BEHIND_HEADER_SELECTOR } from "@/lib/header-ink";
@@ -77,13 +78,13 @@ const INK_PROBE = { top: 38, bottom: 42 };
  */
 export function SiteHeader({
   variant = "overlay",
-  contactIcons = false,
+  contactIcons = true,
 }: {
   variant?: "overlay" | "solid";
   /**
-   * Shows call and WhatsApp as two icon buttons in place of the typed phone
-   * number. Used on the Meta ads landing pages (TKT-103), where the two
-   * glyphs sit beside the menu button and stay put with it.
+   * Shows call and WhatsApp as two icon buttons beside the menu button, in
+   * place of the typed phone number. The default on every page since
+   * 14 Nov 2026 (first built for the Meta ads landing pages, TKT-103).
    */
   contactIcons?: boolean;
 }) {
@@ -215,7 +216,7 @@ export function SiteHeader({
               rel="noopener noreferrer"
               aria-label="Message us on WhatsApp"
               className={cn(
-                "pointer-events-auto grid h-[44px] w-[44px] flex-none place-items-center rounded-[4px] text-inherit no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
+                "group pointer-events-auto grid h-[44px] w-[44px] flex-none place-items-center rounded-[4px] text-inherit no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent",
                 !overlay && "[@media(hover:hover)]:hover:bg-migss-text/7",
                 inkHover,
               )}
@@ -229,7 +230,7 @@ export function SiteHeader({
                   : undefined
               }
             >
-              <MessageCircle size={20} strokeWidth={1.5} aria-hidden="true" />
+              <ChatIcon size={20} />
             </a>
           </>
         ) : (

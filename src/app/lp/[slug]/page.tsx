@@ -53,7 +53,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <SiteHeader contactIcons />
+      <SiteHeader />
       <LandingPage page={page} />
       <SiteChrome />
     </>

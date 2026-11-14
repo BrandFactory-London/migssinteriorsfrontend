@@ -1,8 +1,9 @@
 "use client";
 
-import { ChevronDown, ChevronRight, MessageCircle, X } from "lucide-react";
+import { ChevronDown, ChevronRight, X } from "lucide-react";
 import * as React from "react";
 
+import { ChatIcon } from "@/components/icons/chat-icon";
 import { WHATSAPP_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -229,9 +230,9 @@ export function EnquiryDock() {
           aria-label="Contact us: WhatsApp or the enquiry form"
           // detail is 0 for Enter or Space: only then move focus into the dock.
           onClick={(event) => open(event.detail === 0)}
-          className="dock-fab fixed right-[calc(14px+env(safe-area-inset-right))] bottom-[calc(14px+env(safe-area-inset-bottom))] z-50 flex size-14 items-center justify-center rounded-full bg-migss-accent-ink text-white shadow-[0_10px_28px_-8px_color-mix(in_srgb,#2d2b2b_55%,transparent)] transition-[background-color,transform] duration-300 active:scale-[0.94] active:bg-migss-accent-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent-800"
+          className="dock-fab group fixed right-[calc(14px+env(safe-area-inset-right))] bottom-[calc(14px+env(safe-area-inset-bottom))] z-50 flex size-14 items-center justify-center rounded-full bg-migss-accent-ink text-white shadow-[0_10px_28px_-8px_color-mix(in_srgb,#2d2b2b_55%,transparent)] transition-[background-color,transform] duration-300 active:scale-[0.94] active:bg-migss-accent-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent-800"
         >
-          <MessageCircle size={24} strokeWidth={1.5} aria-hidden="true" />
+          <ChatIcon size={24} />
           <span
             aria-hidden="true"
             className="dock-dot absolute top-1 right-1 size-2.5 rounded-full bg-[#4caf68] ring-2 ring-migss-bg"
@@ -372,16 +373,11 @@ export function EnquiryDock() {
               tabIndex={expanded ? 0 : -1}
               aria-label="Message us on WhatsApp"
               className={cn(
-                "flex h-[46px] items-center justify-center rounded-full text-migss-accent-ink no-underline transition-[background-color,transform] duration-300 active:scale-[0.95] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/12",
+                "group flex h-[46px] items-center justify-center rounded-full text-migss-accent-ink no-underline transition-[background-color,transform] duration-300 active:scale-[0.95] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-migss-accent [@media(hover:hover)]:hover:bg-migss-accent/12",
                 expanded ? "flex-none gap-2 px-3" : "w-[50px] flex-none",
               )}
             >
-              <MessageCircle
-                size={21}
-                strokeWidth={1.5}
-                aria-hidden="true"
-                className="flex-none"
-              />
+              <ChatIcon size={21} />
               {expanded && (
                 <span className="text-[14px] font-semibold whitespace-nowrap">
                   WhatsApp
