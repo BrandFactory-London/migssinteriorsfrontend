@@ -673,3 +673,55 @@
 html {
   scroll-padding-top: 92px;
 }
+
+/* Crossed off (landing pages, "What you won't have to manage"): a thin red
+   line draws through each title as its item scrolls up the page, and the
+   title softens. Without scroll timelines, or with reduced motion, the
+   lines simply show. */
+.lp-xo-t {
+  position: relative;
+  display: inline-block;
+  color: #201f1d;
+}
+.lp-xo-t::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  top: 56%;
+  height: 1.5px;
+  background: #b3261e;
+  transform-origin: left center;
+}
+@supports (animation-timeline: view()) {
+  .lp-xo {
+    view-timeline: --lp-xo block;
+  }
+  .lp-xo-t,
+  .lp-xo-t::after {
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --lp-xo;
+    animation-range: cover 30% cover 52%;
+  }
+  .lp-xo-t {
+    animation-name: lp-xo-fade;
+  }
+  .lp-xo-t::after {
+    animation-name: lp-xo-line;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-xo-t,
+  .lp-xo-t::after {
+    animation: none !important;
+  }
+}
+@keyframes lp-xo-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes lp-xo-fade {
+  from { color: #201f1d; }
+  to { color: #8a7c70; }
+}
