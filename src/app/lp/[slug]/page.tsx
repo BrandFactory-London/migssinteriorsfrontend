@@ -9,10 +9,11 @@ import { pageMetadata } from "@/lib/seo";
 import { ogImage } from "@/lib/wix/og-image";
 
 /**
- * Meta ads landing pages (TKT-103). Reached only from ads: not linked from
- * the site, not in the sitemap, and marked noindex so search engines leave
- * them out. Not disallowed in robots.txt, because Meta crawls ad
- * destinations during review.
+ * Google Ads search landing pages (TKT-103): room plus area, for tightly
+ * targeted search campaigns. The Meta pages, room only, live under /lpm.
+ * Reached only from ads: not linked from the site, not in the sitemap, and
+ * marked noindex so search engines leave them out. Not disallowed in
+ * robots.txt, because ad platforms crawl destinations during review.
  */
 
 type Props = { params: Promise<{ slug: string }> };

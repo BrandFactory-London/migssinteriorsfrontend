@@ -65,8 +65,11 @@ describe("enquiryFormName", () => {
     ["/resources/bathroom", "Resources page enquiry: Bathroom"],
     ["/blog", "Blog enquiry"],
     ["/blog/wet-room-costs", "Blog post enquiry: Wet Room Costs"],
-    ["/lp/bathrooms-north-london", "Meta LP: Bathrooms, North London"],
-    ["/lp/kitchens-chigwell-essex/", "Meta LP: Kitchens, Chigwell & Essex"],
+    ["/lp/bathrooms-north-london", "Google LP: Bathrooms, North London"],
+    ["/lp/kitchens-chigwell-essex/", "Google LP: Kitchens, Chigwell & Essex"],
+    ["/lpm/bathrooms", "Meta LP: Bathrooms"],
+    ["/lpm/kitchens/", "Meta LP: Kitchens"],
+    ["/lpm/bathrooms-north-london", "Website enquiry: /lpm/bathrooms-north-london"],
     ["/lp/not-a-page", "Website enquiry: /lp/not-a-page"],
     ["/something-new", "Website enquiry: /something-new"],
   ])("%s -> %s", (path, expected) => {

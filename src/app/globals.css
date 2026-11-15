@@ -538,6 +538,113 @@
   }
 }
 
+
+/*
+ * Herringbone texture (TKT-103). See components/landing/herringbone.tsx.
+ * Each patch is its own view timeline: its sixteen plank groups are laid
+ * in turn as it scrolls into view and lifted in the same order as it
+ * scrolls out, while the pattern drifts slightly slower than the page.
+ */
+.lp-tx {
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.12;
+  view-timeline: --lp-tx block;
+}
+.lp-tx svg {
+  position: absolute;
+  left: 0;
+  top: -40px;
+  width: 100%;
+  height: calc(100% + 80px);
+}
+@supports (animation-timeline: view()) {
+  .lp-tx .lp-b {
+    animation: lp-brick linear both;
+    animation-timeline: --lp-tx;
+  }
+  .lp-tx .lp-b0 {
+    animation-range: cover 6% cover 58%;
+  }
+  .lp-tx .lp-b1 {
+    animation-range: cover 8% cover 60%;
+  }
+  .lp-tx .lp-b2 {
+    animation-range: cover 10% cover 62%;
+  }
+  .lp-tx .lp-b3 {
+    animation-range: cover 12% cover 64%;
+  }
+  .lp-tx .lp-b4 {
+    animation-range: cover 14% cover 66%;
+  }
+  .lp-tx .lp-b5 {
+    animation-range: cover 16% cover 68%;
+  }
+  .lp-tx .lp-b6 {
+    animation-range: cover 18% cover 70%;
+  }
+  .lp-tx .lp-b7 {
+    animation-range: cover 20% cover 72%;
+  }
+  .lp-tx .lp-b8 {
+    animation-range: cover 22% cover 74%;
+  }
+  .lp-tx .lp-b9 {
+    animation-range: cover 24% cover 76%;
+  }
+  .lp-tx .lp-b10 {
+    animation-range: cover 26% cover 78%;
+  }
+  .lp-tx .lp-b11 {
+    animation-range: cover 28% cover 80%;
+  }
+  .lp-tx .lp-b12 {
+    animation-range: cover 30% cover 82%;
+  }
+  .lp-tx .lp-b13 {
+    animation-range: cover 32% cover 84%;
+  }
+  .lp-tx .lp-b14 {
+    animation-range: cover 34% cover 86%;
+  }
+  .lp-tx .lp-b15 {
+    animation-range: cover 36% cover 88%;
+  }
+  .lp-tx svg {
+    animation: lp-drift linear both;
+    animation-timeline: --lp-tx;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-tx .lp-b,
+  .lp-tx svg {
+    animation: none !important;
+  }
+}
+@keyframes lp-brick {
+  0% {
+    opacity: 0;
+  }
+  4%,
+  96% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes lp-drift {
+  from {
+    transform: translateY(-36px);
+  }
+  to {
+    transform: translateY(36px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mi > svg,
   .mi > svg > * {

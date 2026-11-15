@@ -7,7 +7,7 @@ import type { Project } from "@/lib/wix/projects";
 /**
  * The project card from the homepage's "Recent renovations" carousel: a 4:5
  * photo with the area badge, a running number, title and summary, linking to
- * the project page. Shared with the Meta ads landing pages (TKT-103) so both
+ * the project page. Shared with the ads landing pages (TKT-103) so both
  * show the same cards and lead to the same projects.
  *
  * `areaOnly` shows the town without the street line, for the landing pages,

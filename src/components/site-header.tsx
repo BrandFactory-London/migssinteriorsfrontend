@@ -180,7 +180,11 @@ export function SiteHeader({
     >
       <div
         className={cn(
-          "relative flex items-center px-[clamp(16px,7.2vw,100px)]",
+          // Desktop: the logo sits 50px from the left edge and the menu icon
+          // 50px from the right (the 44px button insets its 20px icon by
+          // 12px, hence 38px), so the bar hugs both edges symmetrically.
+          // Phones and tablets keep the fluid gutter.
+          "relative flex items-center px-[clamp(16px,7.2vw,100px)] lg:pr-[38px] lg:pl-[50px]",
           contactIcons ? "gap-1" : "gap-4",
           overlay ? "py-[18px]" : "py-3.5",
         )}
