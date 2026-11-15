@@ -53,8 +53,13 @@ import { getProjects, type Project } from "@/lib/wix/projects";
  *   while desktop keeps the reviews beside it lower down.
  */
 
-/** The site's container: 1280px max, the same fluid gutters as every page. */
-const wrap = "mx-auto w-full max-w-[1280px] px-[clamp(16px,4.5vw,48px)]";
+/**
+ * The landing pages' container: the header's own gutters (7.2vw, up to
+ * 100px) and up to 1920px wide, so the content lines up with the logo and the
+ * menu instead of floating in a narrow 1280px column on large screens.
+ */
+const gutter = "px-[clamp(16px,7.2vw,100px)]";
+const wrap = `mx-auto w-full max-w-[1920px] ${gutter}`;
 const gap = "pt-[clamp(52px,8vw,112px)]";
 const kicker =
   "m-0 text-[11px] font-semibold tracking-[0.18em] text-migss-accent-ink uppercase";
@@ -207,7 +212,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
               </p>
             </div>
           </div>
-          <div className="hidden lg:block">{firstCard}</div>
+          <div className="hidden w-full max-w-[600px] justify-self-end lg:block">{firstCard}</div>
         </div>
       </section>
 
@@ -216,7 +221,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
         <dl
           className={cn(
             wrap,
-            "m-0 grid grid-cols-2 gap-x-4 gap-y-4 py-5 lg:py-7",
+            "my-0 grid grid-cols-2 gap-x-4 gap-y-4 py-5 lg:py-7",
             isBathroom ? "sm:grid-cols-5" : "sm:grid-cols-4",
           )}
         >
@@ -248,14 +253,20 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           <h2 className={h2}>{page.projectsHeading}</h2>
         </div>
         <ul
-          className="migss-scroll mx-auto mt-8 flex max-w-[1280px] list-none items-start gap-[clamp(14px,2.5vw,28px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,4.5vw,48px)] snap-x snap-proximity px-[clamp(16px,4.5vw,48px)] pt-1 pb-10"
+          className={cn(
+            "migss-scroll mx-auto mt-8 flex max-w-[1920px] list-none items-start gap-[clamp(14px,2vw,32px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,7.2vw,100px)] snap-x snap-proximity pt-1 pb-10",
+            gutter,
+          )}
           aria-label={page.projectsHeading}
         >
           {projects.length === 0
             ? [1, 2, 3].map((n) => (
                 <li
                   key={n}
-                  className={`w-[min(82vw,360px)] flex-none snap-start ${n === 2 ? "mt-[clamp(0px,4vw,44px)]" : ""}`}
+                  className={cn(
+                    "w-[min(82vw,360px)] flex-none snap-start lg:w-auto lg:max-w-[600px] lg:flex-1",
+                    n === 2 && "mt-[clamp(0px,4vw,44px)]",
+                  )}
                 >
                   <div className={cn(card, "relative aspect-[4/5] overflow-hidden")}>
                     <ImageSlot
@@ -268,7 +279,11 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           {projects.map((project, index) => (
             <li
               key={project.slug}
-              className={`w-[min(82vw,360px)] flex-none snap-start ${index % 2 === 1 ? "mt-[clamp(0px,4vw,44px)]" : ""}`}
+              className={cn(
+                "w-[min(82vw,360px)] flex-none snap-start",
+                projects.length <= 3 && "lg:w-auto lg:max-w-[600px] lg:flex-1",
+                index % 2 === 1 && "mt-[clamp(0px,4vw,44px)]",
+              )}
             >
               <FeaturedProjectCard project={project} index={index} areaOnly raised />
             </li>
@@ -430,7 +445,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           (display: contents) so the form can sit straight after the
           projects and the full review after the photo band. */}
       <div
-        className={`contents lg:order-9 lg:mx-auto lg:grid lg:w-full lg:max-w-[1280px] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-8 lg:px-[clamp(16px,4.5vw,48px)] lg:pt-[112px]`}
+        className={`contents lg:order-9 lg:mx-auto lg:grid lg:w-full lg:max-w-[1920px] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-10 lg:px-[clamp(16px,7.2vw,100px)] lg:pt-[112px]`}
       >
         <section id="reviews" className={`${wrap} order-9 scroll-mt-24 pt-10 lg:order-none lg:mx-0 lg:max-w-none lg:px-0 lg:pt-0 lg:sticky lg:top-28`}>
           <div
