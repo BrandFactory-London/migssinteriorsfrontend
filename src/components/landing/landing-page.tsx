@@ -55,12 +55,14 @@ import { getProjects, type Project } from "@/lib/wix/projects";
 
 /**
  * The landing pages' container: the header's own gutters (fluid on phones
- * and tablets, 75px on desktop) at any screen width, so the content lines
+ * and tablets, 50px on desktop) at any screen width, so the content lines
  * up with the logo and the menu icon instead of floating in a narrow column
  * on large screens.
  */
-const gutter = "px-[clamp(16px,7.2vw,100px)] lg:px-[75px]";
+const gutter = "px-[clamp(16px,7.2vw,100px)] lg:px-[50px]";
 const wrap = `mx-auto w-full ${gutter}`;
+/** The hero keeps its original centred 1280px column (Amir, 15 Nov 2026). */
+const heroWrap = "mx-auto w-full max-w-[1280px] px-[clamp(16px,4.5vw,48px)]";
 const gap = "pt-[clamp(52px,8vw,112px)]";
 const kicker =
   "m-0 text-[11px] font-semibold tracking-[0.18em] text-migss-accent-ink uppercase";
@@ -164,7 +166,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
       <section
         id="lp-hero"
         {...DARK_BEHIND_HEADER}
-        className="relative order-1 flex min-h-[clamp(540px,76svh,820px)] items-end overflow-hidden lg:min-h-[clamp(560px,74svh,820px)]"
+        className="relative order-1 flex min-h-[clamp(540px,76svh,820px)] items-end overflow-hidden lg:min-h-[clamp(560px,80svh,860px)]"
       >
         <HeroMedia
           slotId={page.heroSlot}
@@ -179,7 +181,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           className="absolute inset-0 bg-[linear-gradient(to_top,rgba(42,30,22,0.92)_0%,rgba(42,30,22,0.6)_42%,rgba(42,30,22,0.2)_100%)] lg:bg-[linear-gradient(to_right,rgba(42,30,22,0.86)_0%,rgba(42,30,22,0.6)_48%,rgba(42,30,22,0.22)_100%)]"
         />
         <div
-          className={`relative z-2 ${wrap} grid items-center gap-12 pt-[clamp(112px,16vh,160px)] pb-[clamp(30px,7vw,88px)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16`}
+          className={`relative z-2 ${heroWrap} grid items-center gap-12 pt-[clamp(112px,16vh,160px)] pb-[clamp(30px,7vw,88px)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16`}
         >
           <div className="text-[#fbf6f1]">
             <p className="mb-4 flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.2em] text-[#e6cdb6] uppercase">
@@ -213,7 +215,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
               </p>
             </div>
           </div>
-          <div className="hidden w-full max-w-[600px] justify-self-end lg:block">{firstCard}</div>
+          <div className="hidden lg:block">{firstCard}</div>
         </div>
       </section>
 
@@ -255,7 +257,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
         </div>
         <ul
           className={cn(
-            "migss-scroll mx-auto mt-8 flex list-none items-start gap-[clamp(14px,2vw,32px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,7.2vw,100px)] lg:scroll-p-[75px] snap-x snap-proximity pt-1 pb-10",
+            "migss-scroll mx-auto mt-8 flex list-none items-start gap-[clamp(14px,2vw,32px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,7.2vw,100px)] lg:scroll-p-[50px] snap-x snap-proximity pt-1 pb-10",
             gutter,
           )}
           aria-label={page.projectsHeading}
@@ -446,7 +448,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           (display: contents) so the form can sit straight after the
           projects and the full review after the photo band. */}
       <div
-        className={`contents lg:order-9 lg:mx-auto lg:grid lg:w-full lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-10 lg:px-[75px] lg:pt-[112px]`}
+        className={`contents lg:order-9 lg:mx-auto lg:grid lg:w-full lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-10 lg:px-[50px] lg:pt-[112px]`}
       >
         <section id="reviews" className={cn(wrap, "order-9 scroll-mt-24 pt-10 lg:sticky lg:top-28 lg:order-none lg:mx-0 lg:px-0 lg:pt-0")}>
           <div
