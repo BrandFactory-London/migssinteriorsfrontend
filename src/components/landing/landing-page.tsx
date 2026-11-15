@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 
 import { HeroMedia } from "@/components/hero-media";
+import { Herringbone } from "@/components/landing/herringbone";
 import { FeaturedProjectCard } from "@/components/projects/featured-project-card";
 import { MotionIcon } from "@/components/icons/motion-icon";
 import { ImageSlot } from "@/components/image-slot";
@@ -248,7 +249,8 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
       </section>
 
       {/* Local projects: the homepage carousel, hand-picked per page */}
-      <section id="projects" className={`order-4 scroll-mt-24 ${gap}`}>
+      <section id="projects" className={`relative isolate order-4 scroll-mt-24 ${gap}`}>
+        <Herringbone width={760} height={400} className="top-0 right-0 h-[400px] w-[56%]" />
         <div className={wrap}>
           <p className={kicker}>
             {page.channel === "meta" ? "Our work" : "Recently completed nearby"}
@@ -330,10 +332,11 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
         className={cn(
           wrap,
           gap,
-          "order-6 grid scroll-mt-24 items-center gap-10",
+          "relative isolate order-6 grid scroll-mt-24 items-center gap-10",
           whyPhoto && "lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-[72px]",
         )}
       >
+        <Herringbone width={560} height={540} seed={11} className="top-1/2 right-0 -mt-[270px] h-[540px] w-[42%]" />
         {whyPhoto ? (
           <div className="relative lg:mr-9 lg:mb-9">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -397,7 +400,8 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
       </section>
 
       {/* How it works: the four steps, open */}
-      <section id="process" className={`${wrap} ${gap} order-7 scroll-mt-24`}>
+      <section id="process" className={`${wrap} ${gap} relative isolate order-7 scroll-mt-24`}>
+        <Herringbone width={760} height={360} seed={19} className="top-0 right-0 h-[360px] w-[56%]" />
         <p className={kicker}>How it works</p>
         <h2 className={h2}>How your renovation runs</h2>
         <ol className="mt-8 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
@@ -448,8 +452,9 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           (display: contents) so the form can sit straight after the
           projects and the full review after the photo band. */}
       <div
-        className={`contents lg:order-9 lg:mx-auto lg:grid lg:w-full lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-10 lg:px-[50px] lg:pt-[112px]`}
+        className={`contents lg:relative lg:isolate lg:order-9 lg:mx-auto lg:grid lg:w-full lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-10 lg:px-[50px] lg:pt-[112px]`}
       >
+        <Herringbone width={880} height={240} seed={23} className="top-[-40px] left-[18%] h-[240px] w-[64%]" />
         <section id="reviews" className={cn(wrap, "order-9 scroll-mt-24 pt-10 lg:sticky lg:top-28 lg:order-none lg:mx-0 lg:px-0 lg:pt-0")}>
           <div
             {...DARK_BEHIND_HEADER}
@@ -522,7 +527,8 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
       </div>
 
       {/* FAQs and the explore strip, side by side on desktop */}
-      <div className={`${wrap} ${gap} order-10 grid gap-x-[clamp(40px,6vw,96px)] gap-y-[clamp(40px,7.5vw,96px)] lg:grid-cols-2`}>
+      <div className={`${wrap} ${gap} relative isolate order-10 grid gap-x-[clamp(40px,6vw,96px)] gap-y-[clamp(40px,7.5vw,96px)] lg:grid-cols-2`}>
+        <Herringbone width={880} height={260} seed={29} className="top-[-40px] left-[18%] h-[260px] w-[64%]" />
         <section id="faqs" className="scroll-mt-24">
           <p className={kicker}>Questions</p>
           <h2 className={`${h2} mb-6`}>Before you book</h2>
@@ -573,7 +579,8 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
       </div>
 
       {/* Finance and the closing call to action */}
-      <section className={`${wrap} ${gap} order-11 pb-[clamp(48px,7vw,104px)]`}>
+      <section className={`${wrap} ${gap} relative isolate order-11 pb-[clamp(48px,7vw,104px)]`}>
+        <Herringbone width={880} height={240} seed={31} className="top-[-40px] left-[18%] h-[240px] w-[64%]" />
         <div className="grid items-center gap-6 rounded-[12px] bg-migss-accent-200 px-5 py-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-10 lg:px-10 lg:py-9">
           <div className="flex gap-4">
             <span className="hidden size-10 flex-none place-items-center rounded-full bg-[#fffaf5] text-migss-accent-ink sm:grid">
