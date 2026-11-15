@@ -208,10 +208,12 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
             </p>
             <h1
               className={cn(
-                "mb-4 leading-[1.02] font-normal tracking-[-0.025em] text-balance",
+                "mb-4 font-normal tracking-[-0.025em] text-balance",
+                // Leading after the size: tailwind-merge drops a line height
+                // that comes before a font size.
                 page.headline.length > 60
                   ? "max-w-[22ch] text-[clamp(34px,6.6vw,58px)] leading-[1.05]"
-                  : "max-w-[16ch] text-[clamp(38px,8.4vw,72px)]",
+                  : "max-w-[16ch] text-[clamp(38px,8.4vw,72px)] leading-[1.02]",
               )}
             >
               {page.headline}
