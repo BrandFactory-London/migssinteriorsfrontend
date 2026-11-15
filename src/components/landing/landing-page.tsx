@@ -55,12 +55,12 @@ import { getProjects, type Project } from "@/lib/wix/projects";
 
 /**
  * The landing pages' container: the header's own gutters (fluid on phones
- * and tablets, 75px on desktop) and up to 1920px wide, so the content lines
+ * and tablets, 75px on desktop) at any screen width, so the content lines
  * up with the logo and the menu icon instead of floating in a narrow column
  * on large screens.
  */
 const gutter = "px-[clamp(16px,7.2vw,100px)] lg:px-[75px]";
-const wrap = `mx-auto w-full max-w-[1920px] ${gutter}`;
+const wrap = `mx-auto w-full ${gutter}`;
 const gap = "pt-[clamp(52px,8vw,112px)]";
 const kicker =
   "m-0 text-[11px] font-semibold tracking-[0.18em] text-migss-accent-ink uppercase";
@@ -255,7 +255,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
         </div>
         <ul
           className={cn(
-            "migss-scroll mx-auto mt-8 flex max-w-[1920px] list-none items-start gap-[clamp(14px,2vw,32px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,7.2vw,100px)] lg:scroll-p-[75px] snap-x snap-proximity pt-1 pb-10",
+            "migss-scroll mx-auto mt-8 flex list-none items-start gap-[clamp(14px,2vw,32px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,7.2vw,100px)] lg:scroll-p-[75px] snap-x snap-proximity pt-1 pb-10",
             gutter,
           )}
           aria-label={page.projectsHeading}
@@ -446,7 +446,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           (display: contents) so the form can sit straight after the
           projects and the full review after the photo band. */}
       <div
-        className={`contents lg:order-9 lg:mx-auto lg:grid lg:w-full lg:max-w-[1920px] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-10 lg:px-[75px] lg:pt-[112px]`}
+        className={`contents lg:order-9 lg:mx-auto lg:grid lg:w-full lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-10 lg:px-[75px] lg:pt-[112px]`}
       >
         <section id="reviews" className={`${wrap} order-9 scroll-mt-24 pt-10 lg:order-none lg:mx-0 lg:max-w-none lg:px-0 lg:pt-0 lg:sticky lg:top-28`}>
           <div
