@@ -17,6 +17,7 @@ import { Herringbone } from "@/components/landing/herringbone";
 import { FeaturedProjectCard } from "@/components/projects/featured-project-card";
 import { MotionIcon } from "@/components/icons/motion-icon";
 import { ImageSlot } from "@/components/image-slot";
+import { Reveal } from "@/components/reveal";
 import { EnquiryPageContext } from "@/components/enquiry/page-context";
 import {
   LandingForm,
@@ -245,7 +246,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
 
       {/* Testimonial 1 on phones and tablets (in the hero on desktop) */}
       <section className={`${wrap} order-3 pt-8 lg:hidden`}>
-        <div className="max-w-[640px]">{firstCard}</div>
+        <Reveal className="max-w-[640px]">{firstCard}</Reveal>
       </section>
 
       {/* Local projects: the homepage carousel, hand-picked per page */}
@@ -266,8 +267,10 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
         >
           {projects.length === 0
             ? [1, 2, 3].map((n) => (
-                <li
+                <Reveal
+                  as="li"
                   key={n}
+                  delay={(n - 1) * 90}
                   className={cn(
                     "w-[min(82vw,360px)] flex-none snap-start lg:w-auto lg:max-w-[600px] lg:flex-1",
                     n === 2 && "mt-[clamp(0px,4vw,44px)]",
@@ -278,12 +281,14 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                       placeholder={`[${page.clusterLabel ?? page.roomPlural} project ${n}: add in Wix Projects]`}
                     />
                   </div>
-                </li>
+                </Reveal>
               ))
             : null}
           {projects.map((project, index) => (
-            <li
+            <Reveal
+              as="li"
               key={project.slug}
+              delay={index * 90}
               className={cn(
                 "w-[min(82vw,360px)] flex-none snap-start",
                 projects.length <= 3 && "lg:w-auto lg:max-w-[600px] lg:flex-1",
@@ -291,7 +296,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
               )}
             >
               <FeaturedProjectCard project={project} index={index} areaOnly raised />
-            </li>
+            </Reveal>
           ))}
         </ul>
         <p
@@ -305,7 +310,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
 
         {/* Desktop: a nudge to book while the work is on screen. On phones
             the form itself comes next, so this is left out. */}
-        <div className={`${wrap} mt-12 hidden lg:block`}>
+        <Reveal className={`${wrap} mt-12 hidden lg:block`}>
           <div
             className={cn(
               card,
@@ -323,7 +328,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
               Book a design consultation
             </a>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* Why Migss: a photo pair beside the reasons, when the page has photos */}
@@ -364,7 +369,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
             {WHY_MIGSS.map((row, index) => {
               const Icon = WHY_ICONS[index] ?? ClipboardCheck;
               return (
-                <li key={row.title} className="flex gap-4">
+                <Reveal as="li" key={row.title} delay={index * 80} className="flex gap-4">
                   <span className="grid size-10 flex-none place-items-center rounded-full bg-[#f3e6da] text-migss-accent-ink">
                     <Icon size={19} strokeWidth={2} aria-hidden="true" />
                   </span>
@@ -374,10 +379,10 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                       {row.body}
                     </p>
                   </div>
-                </li>
+                </Reveal>
               );
             })}
-            <li className="flex gap-4">
+            <Reveal as="li" delay={WHY_MIGSS.length * 80} className="flex gap-4">
               <span className="grid size-10 flex-none place-items-center rounded-full bg-[#f3e6da] text-migss-accent-ink">
                 <BadgePercent size={19} strokeWidth={2} aria-hidden="true" />
               </span>
@@ -391,7 +396,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                   .
                 </p>
               </div>
-            </li>
+            </Reveal>
           </ul>
           <a href="#book" className={`${cta} mt-8 w-full sm:w-auto`}>
             Book a design consultation
@@ -406,8 +411,10 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
         <h2 className={h2}>How your renovation runs</h2>
         <ol className="mt-8 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {PROCESS_STEPS.map((step, index) => (
-            <li
+            <Reveal
+              as="li"
               key={step.title}
+              delay={index * 90}
               className={cn(card, "flex gap-4 px-5 py-5 lg:flex-col lg:gap-0 lg:px-6 lg:pt-6.5 lg:pb-7")}
             >
               <span className="font-heading w-5 flex-none text-[32px] leading-none text-migss-accent-700 lg:w-auto lg:text-[40px]">
@@ -417,7 +424,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                 <p className="m-0 text-[15.5px] font-semibold lg:mt-3.5">{step.title}</p>
                 <p className={cn("mt-1 mb-0 text-[14px] leading-[1.55]", muted)}>{step.body}</p>
               </div>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </section>
@@ -456,7 +463,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
       >
         <Herringbone width={880} height={240} seed={23} className="top-[-40px] left-[18%] h-[240px] w-[64%]" />
         <section id="reviews" className={cn(wrap, "order-9 scroll-mt-24 pt-10 lg:sticky lg:top-28 lg:order-none lg:mx-0 lg:px-0 lg:pt-0")}>
-          <div
+          <Reveal
             {...DARK_BEHIND_HEADER}
             className="relative overflow-hidden rounded-[12px] text-[#fbf6f1] shadow-[0_30px_60px_-30px_rgba(42,30,22,0.7)]"
             style={{ backgroundColor: espresso }}
@@ -486,11 +493,11 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                 {second.name}, {second.area}
               </p>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         <section id="book" className={cn(wrap, "order-5 scroll-mt-24 pt-12 lg:order-none lg:mx-0 lg:px-0 lg:pt-0")}>
-          <div className={cn(card, "px-5 py-6 lg:px-9 lg:py-9")}>
+          <Reveal delay={120} className={cn(card, "px-5 py-6 lg:px-9 lg:py-9")}>
             <p className={kicker}>Book a design consultation</p>
             <LandingForm roomPlural={page.roomPlural} />
             <p className={cn("mt-4 mb-0 flex items-center justify-center gap-2 text-center text-[13.5px]", muted)}>
@@ -522,7 +529,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                 </Link>
               </p>
             </div>
-          </div>
+          </Reveal>
         </section>
       </div>
 
@@ -532,11 +539,11 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
         <section id="faqs" className="scroll-mt-24">
           <p className={kicker}>Questions</p>
           <h2 className={`${h2} mb-6`}>Before you book</h2>
-          <div className={cn(card, "px-5 lg:px-6 [&>ul]:border-t-0 [&>ul>li:last-child]:border-b-0")}>
+          <Reveal className={cn(card, "px-5 lg:px-6 [&>ul]:border-t-0 [&>ul>li:last-child]:border-b-0")}>
             <ToggleList
               items={landingFaqs(page.room).map((faq) => ({ title: faq.q, body: faq.a }))}
             />
-          </div>
+          </Reveal>
         </section>
 
         <section id="explore" className="scroll-mt-24">
@@ -552,7 +559,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
               },
               { label: "General advice", text: "Read our renovation guides", href: "/resources" },
             ].map((row) => (
-              <li key={row.label}>
+              <Reveal as="li" key={row.label} delay={["Other rooms", "Other locations", "Our work", "General advice"].indexOf(row.label) * 90}>
                 <Link
                   href={row.href}
                   className={cn(
@@ -572,7 +579,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                     <ArrowRight size={20} strokeWidth={2} />
                   </MotionIcon>
                 </Link>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </section>
@@ -581,7 +588,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
       {/* Finance and the closing call to action */}
       <section className={`${wrap} ${gap} relative isolate order-11 pb-[clamp(48px,7vw,104px)]`}>
         <Herringbone width={880} height={240} seed={31} className="top-[-40px] left-[18%] h-[240px] w-[64%]" />
-        <div className="grid items-center gap-6 rounded-[12px] bg-migss-accent-200 px-5 py-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-10 lg:px-10 lg:py-9">
+        <Reveal className="grid items-center gap-6 rounded-[12px] bg-migss-accent-200 px-5 py-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-10 lg:px-10 lg:py-9">
           <div className="flex gap-4">
             <span className="hidden size-10 flex-none place-items-center rounded-full bg-[#fffaf5] text-migss-accent-ink sm:grid">
               <BadgePercent size={19} strokeWidth={2} aria-hidden="true" />
@@ -609,7 +616,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           <a href="#book" className={`${cta} w-full lg:w-auto lg:min-w-[320px]`}>
             Book a design consultation
           </a>
-        </div>
+        </Reveal>
       </section>
 
       {/* Minimal footer: finance disclaimer and legal links only */}
