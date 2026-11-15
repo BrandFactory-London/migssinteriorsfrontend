@@ -132,9 +132,11 @@ export type ShotRef = { project: string; media: string };
  * - the callback time under the form ("usually <time>"; else no time given)
  * - a photo of whoever does the consultations, beside the hero line
  */
-export const GOOGLE_REVIEW_COUNT: number | null = null;
+/** "100+" confirmed by Amir, 15 Nov 2026 (verified claims doc). */
+export const GOOGLE_REVIEW_COUNT: string | null = "100+";
 export const CALLBACK_TIME: string | null = null;
-export const CONSULTANT_PHOTO: string | null = null;
+/** Mo, supplied by Amir 15 Nov 2026. Not named on the page. */
+export const CONSULTANT_PHOTO: string | null = "/images/landing/consultant.jpg";
 
 export const LANDING_PAGES: readonly LandingPage[] = [
   {
@@ -144,13 +146,15 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     roomPlural: "Bathrooms",
     cluster: "north-london",
     clusterLabel: "North London",
-    headline: "Luxury bathroom renovation in north London",
-    subline: SUB_NORTH,
+    // Copy option B (15 Nov 2026): local proof in the headline.
+    headline: "Luxury bathroom renovation in north London, recently completed in Hampstead Garden Suburb",
+    subline:
+      "Designed, built and guaranteed by our own team since 2001, from Hampstead to Cockfosters. Rated 5.0 from 100+ Google reviews.",
     projectsHeading: "Recently completed in north London",
     projects: ["family-bathroom-hampstead-garden-suburb"],
     metaTitle: "Luxury Bathroom Renovation in North London | Migss Interiors",
     metaDescription:
-      "Luxury bathroom renovation from Hampstead to Cockfosters, designed, built and guaranteed by our own in-house team. Book a design consultation.",
+      "Recently completed in Hampstead Garden Suburb. Luxury bathroom renovation by our own team since 2001, rated 5.0 on Google. Book a design consultation.",
     heroSlot: "lp-bathrooms-north-london-hero",
     heroPlaceholder: "Hero: finished luxury bathroom, north London",
     testimonials: [
@@ -200,8 +204,10 @@ export const LANDING_PAGES: readonly LandingPage[] = [
     roomPlural: "Bathrooms",
     cluster: "essex-forest",
     clusterLabel: "Chigwell & Essex",
-    headline: "Luxury bathroom renovation in Chigwell and Essex",
-    subline: SUB_EAST,
+    // Copy option B (15 Nov 2026): local proof in the headline.
+    headline: "Luxury bathroom renovation in Chigwell and Essex, recently completed in Chigwell and Theydon Bois",
+    subline:
+      "Designed, built and guaranteed by our own team since 2001, across the Essex forest towns and the commuter belt. Rated 5.0 from 100+ Google reviews.",
     projectsHeading: "Recently completed in Chigwell and Essex",
     projects: ["versace-wet-room-chigwell", "main-bathroom-theydon-bois", "basement-home-cinema-chigwell"],
     imagery: {
@@ -213,9 +219,9 @@ export const LANDING_PAGES: readonly LandingPage[] = [
         caption: "Versace Wet Room, Chigwell",
       },
     },
-    metaTitle: "Luxury Bathroom Renovation in Chigwell & Essex | Migss Interiors",
+    metaTitle: "Luxury Bathroom Renovation in Chigwell & Essex | Migss",
     metaDescription:
-      "Luxury bathroom renovation across Chigwell, east London and the Essex forest towns, designed, built and guaranteed by our own team. Book a design consultation.",
+      "Recently completed in Chigwell. Luxury bathroom renovation by our own team since 2001, rated 5.0 on Google. Book a design consultation.",
     heroSlot: "lp-bathrooms-chigwell-essex-hero",
     heroPlaceholder: "Hero: finished luxury bathroom, Chigwell",
     testimonials: [
@@ -279,9 +285,11 @@ export const META_LANDING_PAGES: readonly LandingPage[] = [
     roomPlural: "Bathrooms",
     cluster: null,
     clusterLabel: null,
-    kicker: "Design and build",
-    headline: "Luxury bathroom renovation, designed and built by one team",
-    subline: SUB_META,
+    // Copy option D (15 Nov 2026): A's headline, C's proof in the hero card.
+    kicker: "Luxury renovation",
+    headline: "The room you start every day in, finished properly",
+    subline:
+      "Bespoke bathrooms designed, built and guaranteed by our own in-house team, across north London, east London, the Essex forest towns and the commuter belt.",
     projectsHeading: "Recent renovations",
     projects: [
       "versace-wet-room-chigwell",
@@ -299,7 +307,7 @@ export const META_LANDING_PAGES: readonly LandingPage[] = [
     },
     metaTitle: "Luxury Bathroom Renovation | Migss Interiors",
     metaDescription:
-      "Luxury bathroom renovation designed, built and guaranteed by our own in-house team, across north London, east London and Essex. Book a design consultation.",
+      "Luxury bathrooms designed, built and guaranteed by our own team across north London, east London and Essex. 5.0 on Google. Book a design consultation.",
     heroSlot: "lpm-bathrooms-hero",
     heroPlaceholder: "Hero: finished luxury bathroom",
     testimonials: [
@@ -428,7 +436,81 @@ export const PROCESS_STEPS = [
   },
 ] as const;
 
+/*
+ * Bathroom copy approved 15 Nov 2026 (copy doc "Migss bathroom landing
+ * pages: copy options"; claims added to the verified claims doc the same
+ * day). Kitchen pages keep WHY_MIGSS until their copy is done.
+ */
+export const WHY_MIGSS_BATHROOM = [
+  {
+    title: "One firm, one contract, in-house only",
+    body: "One accountable team from specification to handover, and every fitter is on our own payroll. We never use subcontractors, so the team that starts your bathroom finishes it.",
+  },
+  {
+    title: "A client portal, updated daily",
+    body: "Follow your project at any time: daily updates with photos, a direct line to each fitter, and a schedule of which trades are booked in, so you always know who is in your home.",
+  },
+  {
+    title: "Specified before we start",
+    body: "Materials, fittings and layout are agreed before a tile is cut, so there are no surprises halfway through.",
+  },
+  {
+    title: "Guaranteed for ten years",
+    body: "All our labour carries a 10-year guarantee. Product failure is covered by the manufacturer's own warranty.",
+  },
+] as const;
+
+/** "What you won't have to manage": crossed off one by one on scroll. */
+export const NOT_MANAGED = [
+  {
+    title: "Coordinating trades",
+    body: "One team runs the whole job. Our own fitters do every stage, so there is one source of responsibility and nothing gets lost between trades who don't talk to each other.",
+  },
+  {
+    title: "Decisions made on site",
+    body: "Every tile, fitting and finish is agreed before work starts. Nothing waits on a late choice, which is what usually pushes a renovation into the long grass.",
+  },
+  {
+    title: "Chasing for updates",
+    body: "Your client portal shows progress every day, with photos from site. You also have the director's number for the whole project, to call whenever you need.",
+  },
+  {
+    title: "Sourcing the products",
+    body: "Supply and fit is optional. We order through our luxury bathroom and tile partners at trade rates, and deal with any supply or product issues. Once you sign off the specification, it is all handled.",
+  },
+  {
+    title: "Protecting your home",
+    body: "Floors are covered, door handles protected and furniture kept under dust sheets from the first day. We look after the rest of your home as carefully as the room we are building.",
+  },
+  {
+    title: "Worrying about it later",
+    body: "Our labour is guaranteed for ten years, and the director's personal number stays yours for all of it. He stands behind every installation we do. Product failure is covered by the manufacturer's own warranty.",
+  },
+] as const;
+
+/** Finance wording for the bathroom pages: installation is the point. */
+export const FINANCE_INSTALL_TITLE = "0% finance, including installation";
+export const FINANCE_INSTALL_BODY =
+  "0% finance available for up to 5 years, on installation as well as products. Spreading the cost of installation can let you choose a higher specification.";
+
 export function landingFaqs(room: LandingRoom) {
+  if (room === "Bathroom") {
+    return [
+      {
+        q: "Which areas do you cover?",
+        a: "North London from Hampstead to Cockfosters, and east London and Essex, including Chigwell, Buckhurst Hill, Woodford Green, Theydon Bois, Brentwood and Hornchurch.",
+      },
+      ...baseFaqs(room),
+      {
+        q: "What happens after you finish?",
+        a: "We walk through the room with you, hand over the documents for everything we have installed, and aftercare is available after completion.",
+      },
+    ];
+  }
+  return baseFaqs(room);
+}
+
+function baseFaqs(room: LandingRoom) {
   return [
     {
       q: "Do you use subcontractors?",

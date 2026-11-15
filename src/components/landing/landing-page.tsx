@@ -6,6 +6,8 @@ import {
   Clock,
   PencilRuler,
   Ruler,
+  ShieldCheck,
+  Smartphone,
   Star,
   Users,
   type LucideIcon,
@@ -29,14 +31,18 @@ import { DARK_BEHIND_HEADER } from "@/lib/header-ink";
 import {
   CALLBACK_TIME,
   CONSULTANT_PHOTO,
+  FINANCE_INSTALL_BODY,
+  FINANCE_INSTALL_TITLE,
   FINANCE_TERMS_HREF,
   GOOGLE_REVIEW_COUNT,
   type LandingPage as LandingPageData,
   landingFaqs,
+  NOT_MANAGED,
   PROCESS_STEPS,
   RAIL_SECTIONS,
   type ShotRef,
   WHY_MIGSS,
+  WHY_MIGSS_BATHROOM,
 } from "@/lib/landing-pages";
 import { FINANCE_DISCLAIMER } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -78,6 +84,7 @@ const cta =
 const espresso = "#2a1e16";
 
 const WHY_ICONS: LucideIcon[] = [ClipboardCheck, Users, Ruler, PencilRuler];
+const WHY_ICONS_BATHROOM: LucideIcon[] = [Users, Smartphone, Ruler, ShieldCheck];
 
 /** Every project, and this page's hand-picked ones in config order. */
 async function loadProjects(page: LandingPageData) {
@@ -125,12 +132,21 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
   const whyDetail = shot(bySlug, page.imagery?.whyDetail);
   const band = shot(bySlug, page.imagery?.band);
   const isBathroom = page.room === "Bathroom";
+  const isMeta = page.channel === "meta";
+  const why = isBathroom ? WHY_MIGSS_BATHROOM : WHY_MIGSS;
+  const whyIcons = isBathroom ? WHY_ICONS_BATHROOM : WHY_ICONS;
+  const financeTitle = isBathroom ? FINANCE_INSTALL_TITLE : "0% finance available";
+  const financeBody = isBathroom
+    ? FINANCE_INSTALL_BODY
+    : "0% finance available for up to 5 years.";
 
   const proof: { value: string; label: string; phone?: boolean }[] = [
     { value: "5.0", label: ratingLabel },
     { value: "2001", label: "Established", phone: !isBathroom },
     { value: "600+", label: "Projects completed" },
-    { value: "10 years", label: "Labour guarantee" },
+    isBathroom && isMeta
+      ? { value: "70%", label: "Of our work comes from referrals" }
+      : { value: "10 years", label: "Labour guarantee" },
     ...(isBathroom
       ? [{ value: "2 to 4 weeks", label: "Most bathrooms, start to finish" }]
       : []),
@@ -190,25 +206,41 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
               <span className="block h-px w-[28px] bg-[#e6cdb6]" />
               {page.roomPlural} · {page.kicker ?? page.clusterLabel}
             </p>
-            <h1 className="mb-4 max-w-[16ch] text-[clamp(38px,8.4vw,72px)] leading-[1.02] font-normal tracking-[-0.025em] text-balance">
+            <h1
+              className={cn(
+                "mb-4 leading-[1.02] font-normal tracking-[-0.025em] text-balance",
+                page.headline.length > 60
+                  ? "max-w-[22ch] text-[clamp(34px,6.6vw,58px)] leading-[1.05]"
+                  : "max-w-[16ch] text-[clamp(38px,8.4vw,72px)]",
+              )}
+            >
               {page.headline}
             </h1>
             <p className="mb-6 max-w-[46ch] text-[clamp(15px,4vw,17px)] leading-[1.6] text-[#efe2d6]">
               {page.subline}
             </p>
-            <a href="#book" className={`${cta} w-full sm:w-auto sm:min-w-[300px]`}>
-              Book a design consultation
-              <MotionIcon motion="nudge" className="hidden sm:inline-flex">
-                <ArrowRight size={18} strokeWidth={2} />
-              </MotionIcon>
-            </a>
+            <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
+              <a href="#book" className={`${cta} w-full sm:w-auto sm:min-w-[300px]`}>
+                {/* Hero only (Amir, 15 Nov 2026): visitors may already have a design. */}
+                {isBathroom ? "Book a no-obligation consultation" : "Book a design consultation"}
+                <MotionIcon motion="nudge" className="hidden sm:inline-flex">
+                  <ArrowRight size={18} strokeWidth={2} />
+                </MotionIcon>
+              </a>
+              {isBathroom && isMeta ? (
+                <p className="m-0 inline-flex items-center gap-2 text-[14.5px] text-[#efe2d6]">
+                  <ShieldCheck size={18} strokeWidth={2} aria-hidden="true" className="text-[#e6cdb6]" />
+                  All labour guaranteed for 10 years
+                </p>
+              ) : null}
+            </div>
             <div className="mt-4.5 flex max-w-[46ch] items-center gap-3">
               {CONSULTANT_PHOTO ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={CONSULTANT_PHOTO}
                   alt=""
-                  className="size-11 flex-none rounded-full border-2 border-[#fbf6f1] object-cover"
+                  className="size-[52px] flex-none rounded-full border-2 border-[#fbf6f1] bg-white object-cover"
                 />
               ) : null}
               <p className="m-0 text-[13px] leading-[1.5] text-[#e9dbcd]">
@@ -308,6 +340,29 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           </MotionIcon>
         </p>
 
+        {isBathroom && isMeta ? (
+          <Reveal className={`${wrap} mt-4 lg:mt-6`}>
+            <div className="flex flex-col gap-4 rounded-[12px] bg-[#2a1e16] px-5 py-6 text-[#fbf6f1] shadow-[0_24px_50px_-28px_rgba(42,30,22,0.7)] sm:flex-row sm:items-center sm:gap-6 lg:px-9 lg:py-8">
+              <span className="grid size-12 flex-none place-items-center rounded-full bg-[#3d2c20] text-[#e6cdb6]">
+                <BadgePercent size={21} strokeWidth={2} aria-hidden="true" />
+              </span>
+              <div>
+                <p className="font-heading m-0 text-[clamp(24px,3vw,30px)] leading-[1.15]">
+                  0% finance on installation, as well as your bathroom products
+                </p>
+                <p className="mt-2 mb-0 text-[15px] leading-[1.55] text-[#e6cdb6]">
+                  Available for up to 5 years. Spreading the cost of installation means you
+                  can raise the specification of your bathroom. See{" "}
+                  <Link href={FINANCE_TERMS_HREF} className="text-[#fbf6f1]">
+                    terms and conditions
+                  </Link>
+                  .
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        ) : null}
+
         {/* Desktop: a nudge to book while the work is on screen. On phones
             the form itself comes next, so this is left out. */}
         <Reveal className={`${wrap} mt-12 hidden lg:block`}>
@@ -366,8 +421,8 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           <p className={kicker}>Why Migss</p>
           <h2 className={h2}>One team, from first visit to handover</h2>
           <ul className="mt-7 flex list-none flex-col gap-5 p-0">
-            {WHY_MIGSS.map((row, index) => {
-              const Icon = WHY_ICONS[index] ?? ClipboardCheck;
+            {why.map((row, index) => {
+              const Icon = whyIcons[index] ?? ClipboardCheck;
               return (
                 <Reveal as="li" key={row.title} delay={index * 80} className="flex gap-4">
                   <span className="grid size-10 flex-none place-items-center rounded-full bg-[#f3e6da] text-migss-accent-ink">
@@ -382,14 +437,14 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                 </Reveal>
               );
             })}
-            <Reveal as="li" delay={WHY_MIGSS.length * 80} className="flex gap-4">
+            <Reveal as="li" delay={why.length * 80} className="flex gap-4">
               <span className="grid size-10 flex-none place-items-center rounded-full bg-[#f3e6da] text-migss-accent-ink">
                 <BadgePercent size={19} strokeWidth={2} aria-hidden="true" />
               </span>
               <div>
-                <p className="m-0 text-[15.5px] font-semibold">0% finance available</p>
+                <p className="m-0 text-[15.5px] font-semibold">{financeTitle}</p>
                 <p className={cn("mt-1 mb-0 text-[14.5px] leading-[1.55]", muted)}>
-                  0% finance available for up to 5 years. See{" "}
+                  {financeBody} See{" "}
                   <Link href={FINANCE_TERMS_HREF} className="text-migss-accent-ink">
                     terms and conditions
                   </Link>
@@ -403,6 +458,41 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           </a>
         </div>
       </section>
+
+      {/* What you won't have to manage (bathrooms): each title is crossed off
+          with a thin red line as it scrolls up the page (globals.css, lp-xo). */}
+      {isBathroom ? (
+        <section
+          id="handled"
+          className={cn(
+            wrap,
+            gap,
+            "order-6 grid scroll-mt-24 gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-[72px]",
+          )}
+        >
+          <div className="lg:sticky lg:top-[120px]">
+            <p className={kicker}>Handled by one team</p>
+            <h2 className={h2}>What you won&rsquo;t have to manage</h2>
+            <p className={cn("mt-4 mb-0 max-w-[38ch] text-[15.5px] leading-[1.6]", muted)}>
+              The parts of a renovation that usually fall to you. Here, they don&rsquo;t.
+            </p>
+          </div>
+          <ul className="m-0 list-none border-b border-[#e6d6c8] p-0">
+            {NOT_MANAGED.map((row) => (
+              <li key={row.title} className="lp-xo border-t border-[#e6d6c8] pt-6 pb-7">
+                <p className="m-0">
+                  <span className="lp-xo-t font-heading text-[clamp(26px,3vw,34px)] leading-[1.1]">
+                    {row.title}
+                  </span>
+                </p>
+                <p className="mt-2.5 mb-0 max-w-[62ch] text-[15.5px] leading-[1.6] text-[#4d433b]">
+                  {row.body}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       {/* How it works: the four steps, open */}
       <section id="process" className={`${wrap} ${gap} relative isolate order-7 scroll-mt-24`}>
@@ -594,9 +684,9 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
               <BadgePercent size={19} strokeWidth={2} aria-hidden="true" />
             </span>
             <div>
-              <p className="font-heading m-0 mb-1.5 text-[26px] leading-[1.15]">0% finance available</p>
-              <p className="m-0 mb-2.5 text-[14.5px] leading-[1.6] text-[#4d433b]">
-                0% finance available for up to 5 years. See{" "}
+              <p className="font-heading m-0 mb-1.5 text-[26px] leading-[1.15]">{financeTitle}</p>
+              <p className="m-0 mb-2.5 max-w-[68ch] text-[14.5px] leading-[1.6] text-[#4d433b]">
+                {financeBody} See{" "}
                 <Link href={FINANCE_TERMS_HREF} className="text-migss-accent-ink">
                   terms and conditions
                 </Link>
