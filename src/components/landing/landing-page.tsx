@@ -448,7 +448,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
       <div
         className={`contents lg:order-9 lg:mx-auto lg:grid lg:w-full lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-10 lg:px-[75px] lg:pt-[112px]`}
       >
-        <section id="reviews" className={`${wrap} order-9 scroll-mt-24 pt-10 lg:order-none lg:mx-0 lg:max-w-none lg:px-0 lg:pt-0 lg:sticky lg:top-28`}>
+        <section id="reviews" className={cn(wrap, "order-9 scroll-mt-24 pt-10 lg:sticky lg:top-28 lg:order-none lg:mx-0 lg:px-0 lg:pt-0")}>
           <div
             {...DARK_BEHIND_HEADER}
             className="relative overflow-hidden rounded-[12px] text-[#fbf6f1] shadow-[0_30px_60px_-30px_rgba(42,30,22,0.7)]"
@@ -482,7 +482,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           </div>
         </section>
 
-        <section id="book" className={`${wrap} order-5 scroll-mt-24 pt-12 lg:order-none lg:mx-0 lg:max-w-none lg:px-0 lg:pt-0`}>
+        <section id="book" className={cn(wrap, "order-5 scroll-mt-24 pt-12 lg:order-none lg:mx-0 lg:px-0 lg:pt-0")}>
           <div className={cn(card, "px-5 py-6 lg:px-9 lg:py-9")}>
             <p className={kicker}>Book a design consultation</p>
             <LandingForm roomPlural={page.roomPlural} />
