@@ -294,9 +294,10 @@ export const META_LANDING_PAGES: readonly LandingPage[] = [
     roomPlural: "Bathrooms",
     cluster: null,
     clusterLabel: null,
-    // Copy option D (15 Nov 2026): A's headline, C's proof in the hero card.
+    // Copy option D (15 Nov 2026), headline replaced 16 Nov 2026 (Amir):
+    // say what the page is in the first second.
     kicker: "Luxury renovation",
-    headline: "The room you start every day in, finished properly",
+    headline: "Luxury bathroom renovations, designed, supplied and fitted. Guaranteed for 10 years.",
     subline:
       "Bespoke bathrooms designed, built and guaranteed by our own in-house team, across north London, east London, the Essex forest towns and the commuter belt.",
     projectsHeading: "Recent renovations",
