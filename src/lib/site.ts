@@ -57,6 +57,9 @@ export const telHref = `tel:${SITE.phone.replace(/\s+/g, "")}`;
 export const MD_PHONE = "+447920091309";
 
 export const mdTelHref = `tel:${MD_PHONE}`;
+
+/** The MD's personal WhatsApp: click-to-chat on the same mobile number. */
+export const MD_WHATSAPP_URL = `https://wa.me/${MD_PHONE.replace(/^\+/, "")}`;
 export const mailHref = `mailto:${SITE.email}`;
 
 /**
