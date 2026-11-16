@@ -20,6 +20,7 @@ import { FeaturedProjectCard } from "@/components/projects/featured-project-card
 import { MotionIcon } from "@/components/icons/motion-icon";
 import { ImageSlot } from "@/components/image-slot";
 import { Reveal } from "@/components/reveal";
+import { CarouselDots } from "@/components/landing/carousel-dots";
 import { EnquiryPageContext } from "@/components/enquiry/page-context";
 import {
   LandingForm,
@@ -309,20 +310,24 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
           </p>
           <h2 className={h2}>{page.projectsHeading}</h2>
           {/* Above the cards (Amir, 16 Nov 2026), so it is read before the swipe. */}
-          <p
-            className={`mt-5 mb-0 flex items-center gap-1.5 text-xs tracking-[0.06em] text-migss-accent-ink ${projects.length <= 3 ? "lg:hidden" : ""}`}
+          <div
+            className={`mt-5 flex items-center justify-between gap-4 ${projects.length <= 3 ? "lg:hidden" : ""}`}
           >
-            Swipe to explore
-            <MotionIcon motion="nudge">
-              <ArrowRight size={14} strokeWidth={2} />
-            </MotionIcon>
-          </p>
+            <p className="m-0 flex items-center gap-1.5 text-xs tracking-[0.06em] text-migss-accent-ink">
+              Swipe to explore
+              <MotionIcon motion="nudge">
+                <ArrowRight size={14} strokeWidth={2} />
+              </MotionIcon>
+            </p>
+            <CarouselDots targetId="lp-projects-list" count={projects.length || 3} />
+          </div>
         </div>
         <ul
           className={cn(
             "migss-scroll mx-auto mt-4 flex list-none items-start gap-[clamp(14px,2vw,32px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,7.2vw,100px)] lg:scroll-p-[50px] snap-x snap-proximity pt-1 pb-10",
             gutter,
           )}
+          id="lp-projects-list"
           aria-label={page.projectsHeading}
         >
           {projects.length === 0
@@ -331,8 +336,9 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
                   as="li"
                   key={n}
                   delay={(n - 1) * 90}
+                  threshold={0}
                   className={cn(
-                    "w-[min(82vw,360px)] flex-none snap-start lg:w-auto lg:max-w-[600px] lg:flex-1",
+                    "w-[min(78vw,360px)] flex-none snap-start lg:w-auto lg:max-w-[600px] lg:flex-1",
                     n === 2 && "mt-[clamp(0px,4vw,44px)]",
                   )}
                 >
@@ -349,8 +355,9 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
               as="li"
               key={project.slug}
               delay={index * 90}
+              threshold={0}
               className={cn(
-                "w-[min(82vw,360px)] flex-none snap-start",
+                "w-[min(78vw,360px)] flex-none snap-start",
                 projects.length <= 3 && "lg:w-auto lg:max-w-[600px] lg:flex-1",
                 index % 2 === 1 && "mt-[clamp(0px,4vw,44px)]",
               )}
