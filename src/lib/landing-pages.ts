@@ -136,6 +136,10 @@ export type ShotRef = { project: string; media: string };
 export const GOOGLE_REVIEW_COUNT: string | null = "100+";
 export const CALLBACK_TIME: string | null = null;
 /** Mo, supplied by Amir 15 Nov 2026. Not named on the page. */
+/** The line beside the MD's photo in every landing hero (draft, 16 Nov 2026). */
+export const MD_LINE =
+  "Speak to our managing director on his personal line about your project and specification. No obligation.";
+
 export const CONSULTANT_PHOTO: string | null = "/images/landing/consultant.jpg";
 
 export const LANDING_PAGES: readonly LandingPage[] = [

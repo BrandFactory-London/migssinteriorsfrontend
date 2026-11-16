@@ -725,3 +725,27 @@ html {
   from { color: #201f1d; }
   to { color: #8a7c70; }
 }
+
+/* Landing hero: the "available" dot on the managing director's photo. */
+.lp-live {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #2fb35a;
+  border: 2px solid #fbf6f1;
+}
+.lp-live::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: #2fb35a;
+  animation: lp-live 2s ease-out infinite;
+}
+@keyframes lp-live {
+  from { transform: scale(1); opacity: 0.6; }
+  to { transform: scale(2.4); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-live::after { animation: none; }
+}

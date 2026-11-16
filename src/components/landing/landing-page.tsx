@@ -5,6 +5,7 @@ import {
   ClipboardCheck,
   Clock,
   PencilRuler,
+  Phone,
   Ruler,
   ShieldCheck,
   Smartphone,
@@ -38,13 +39,14 @@ import {
   type LandingPage as LandingPageData,
   landingFaqs,
   NOT_MANAGED,
+  MD_LINE,
   PROCESS_STEPS,
   RAIL_SECTIONS,
   type ShotRef,
   WHY_MIGSS,
   WHY_MIGSS_BATHROOM,
 } from "@/lib/landing-pages";
-import { FINANCE_DISCLAIMER } from "@/lib/site";
+import { FINANCE_DISCLAIMER, mdTelHref } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { getProjects, type Project } from "@/lib/wix/projects";
 
@@ -238,17 +240,27 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
             </div>
             <div className="mt-4.5 flex max-w-[46ch] items-center gap-3">
               {CONSULTANT_PHOTO ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={CONSULTANT_PHOTO}
-                  alt=""
-                  className="size-[52px] flex-none rounded-full border-2 border-[#fbf6f1] bg-white object-cover"
-                />
+                <span className="relative flex-none">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={CONSULTANT_PHOTO}
+                    alt=""
+                    className="size-[52px] rounded-full border-2 border-[#fbf6f1] bg-white object-cover"
+                  />
+                  {/* Available: a small pulsing green dot, bottom right. */}
+                  <span aria-hidden="true" className="lp-live absolute right-0 bottom-0.5" />
+                </span>
               ) : null}
-              <p className="m-0 text-[13px] leading-[1.5] text-[#e9dbcd]">
-                A senior member of our team visits your home to talk through the
-                space, the specification and timing. No obligation.
-              </p>
+              <div className="min-w-0">
+                <p className="m-0 text-[13px] leading-[1.5] text-[#e9dbcd]">{MD_LINE}</p>
+                <a
+                  href={mdTelHref}
+                  className="mt-1 inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#fbf6f1] underline decoration-[#e6cdb6]/60 underline-offset-4 hover:decoration-[#fbf6f1]"
+                >
+                  <Phone size={14} strokeWidth={2} aria-hidden="true" />
+                  Call 07920 091309
+                </a>
+              </div>
             </div>
           </div>
           <div className="hidden lg:block">{firstCard}</div>
@@ -291,10 +303,19 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
             {page.channel === "meta" ? "Our work" : "Recently completed nearby"}
           </p>
           <h2 className={h2}>{page.projectsHeading}</h2>
+          {/* Above the cards (Amir, 16 Nov 2026), so it is read before the swipe. */}
+          <p
+            className={`mt-5 mb-0 flex items-center gap-1.5 text-xs tracking-[0.06em] text-migss-accent-ink ${projects.length <= 3 ? "lg:hidden" : ""}`}
+          >
+            Swipe to explore
+            <MotionIcon motion="nudge">
+              <ArrowRight size={14} strokeWidth={2} />
+            </MotionIcon>
+          </p>
         </div>
         <ul
           className={cn(
-            "migss-scroll mx-auto mt-8 flex list-none items-start gap-[clamp(14px,2vw,32px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,7.2vw,100px)] lg:scroll-p-[50px] snap-x snap-proximity pt-1 pb-10",
+            "migss-scroll mx-auto mt-4 flex list-none items-start gap-[clamp(14px,2vw,32px)] overflow-x-auto overscroll-x-contain scroll-p-[clamp(16px,7.2vw,100px)] lg:scroll-p-[50px] snap-x snap-proximity pt-1 pb-10",
             gutter,
           )}
           aria-label={page.projectsHeading}
@@ -333,14 +354,6 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
             </Reveal>
           ))}
         </ul>
-        <p
-          className={`${wrap} -mt-4 mb-0 flex items-center gap-1.5 text-xs tracking-[0.06em] text-migss-accent-ink ${projects.length <= 3 ? "lg:hidden" : ""}`}
-        >
-          Swipe to explore
-          <MotionIcon motion="nudge">
-            <ArrowRight size={14} strokeWidth={2} />
-          </MotionIcon>
-        </p>
 
         {isBathroom && isMeta ? (
           <Reveal className={`${wrap} mt-4 lg:mt-6`}>
