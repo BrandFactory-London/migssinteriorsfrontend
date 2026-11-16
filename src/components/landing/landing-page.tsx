@@ -314,7 +314,7 @@ export async function LandingPage({ page }: { page: LandingPageData }) {
             className={`mt-5 flex items-center justify-between gap-4 ${projects.length <= 3 ? "lg:hidden" : ""}`}
           >
             <p className="m-0 flex items-center gap-1.5 text-xs tracking-[0.06em] text-migss-accent-ink">
-              Swipe to explore
+              Swipe to explore our work
               <MotionIcon motion="nudge">
                 <ArrowRight size={14} strokeWidth={2} />
               </MotionIcon>
