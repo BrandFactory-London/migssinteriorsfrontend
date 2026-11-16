@@ -9,6 +9,9 @@ type RevealProps = React.ComponentProps<"div"> & {
   delay?: number;
   /** Render as a different element (section, article, li…). */
   as?: React.ElementType;
+  /** Share of the element that must be on screen to reveal it (default 0.1).
+   *  Carousel cards use 0, so a card peeking in from the edge shows. */
+  threshold?: number;
 };
 
 /**
@@ -29,6 +32,7 @@ export function Reveal({
   className,
   delay = 0,
   as: Tag = "div",
+  threshold = 0.1,
   ...props
 }: RevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -57,12 +61,12 @@ export function Reveal({
           }
         }
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.1 },
+      { rootMargin: "0px 0px -12% 0px", threshold },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [threshold]);
 
   return (
     <Tag
