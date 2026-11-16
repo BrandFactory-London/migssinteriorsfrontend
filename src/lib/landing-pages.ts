@@ -136,6 +136,15 @@ export type ShotRef = { project: string; media: string };
 export const GOOGLE_REVIEW_COUNT: string | null = "100+";
 export const CALLBACK_TIME: string | null = null;
 /** Mo, supplied by Amir 15 Nov 2026. Not named on the page. */
+/**
+ * The line beside the MD's photo in every landing hero (Amir, 16 Nov 2026):
+ * "Our managing director takes messages on his personal WhatsApp. No
+ * obligation." Split so the WhatsApp words carry the underline.
+ */
+export const MD_LINE_LEAD = "Our managing director takes messages on";
+export const MD_LINE_LINK = "his personal WhatsApp";
+export const MD_LINE_TAIL = ". No obligation.";
+
 export const CONSULTANT_PHOTO: string | null = "/images/landing/consultant.jpg";
 
 export const LANDING_PAGES: readonly LandingPage[] = [
@@ -285,9 +294,10 @@ export const META_LANDING_PAGES: readonly LandingPage[] = [
     roomPlural: "Bathrooms",
     cluster: null,
     clusterLabel: null,
-    // Copy option D (15 Nov 2026): A's headline, C's proof in the hero card.
+    // Copy option D (15 Nov 2026), headline replaced 16 Nov 2026 (Amir):
+    // say what the page is in the first second.
     kicker: "Luxury renovation",
-    headline: "The room you start every day in, finished properly",
+    headline: "Luxury bathroom renovations, designed, supplied and fitted. Guaranteed for 10 years.",
     subline:
       "Bespoke bathrooms designed, built and guaranteed by our own in-house team, across north London, east London, the Essex forest towns and the commuter belt.",
     projectsHeading: "Recent renovations",
